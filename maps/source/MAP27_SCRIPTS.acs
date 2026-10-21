@@ -1,0 +1,1463 @@
+#include"Zcommon.acs"
+
+script 80 ENTER
+{
+	SetActorPitch(1337, 0);
+	SetActorAngle(1337, 0.25);
+	SetPlayerProperty(1, 0, PROP_TOTALLYFROZEN);
+	SetPlayerProperty(1, 0, PROP_FROZEN);
+	Thing_ChangeTID (0, 1337+PlayerNumber());
+	fadeto(0, 0, 0, 1.0, 0.0);
+	ChangeSky("CMP_DSRT", "CMP_DSRT");
+	DELAY(40);
+	SetMusic("CPN_LDOT", 0);
+	fadeto(0, 0, 0, 0, 1.0);
+}
+
+script 14 (void)//PLAYERS CURSOR MOVE LIMIT//
+{
+
+    SetPlayerProperty(1, 1, PROP_FROZEN);
+    
+    while (True)
+    {
+        If(GetActorAngle(1337)>0.5 && GetActorAngle(1337)<0.8)
+        {
+            SetActorAngle(1337,0.5);
+        }
+        Else If(GetActorAngle(1337)<0.9999 && GetActorAngle(1337)>0.8)
+        {
+            SetActorAngle(1337,0.0);
+        }
+        Delay (1);
+    }
+}
+
+//////////////
+//LOAD-OUT///
+////////////
+
+Script 13 (void) //Exit Load-Out Menu//
+{
+	ACS_Terminate(14,0);
+	SetPlayerProperty(1, 0, PROP_TOTALLYFROZEN);
+	SetPlayerProperty(1, 0, PROP_FROZEN);
+	TakeInventory("Cursor" ,255);
+	Thing_Move(1337, 1, 1);
+	ChangeCamera(0,0,0); 
+	SetActorPitch(1337, 0);
+	SetActorAngle(1337, 0.25);
+}
+
+Script 12 (void) //Exit PowerGums Menu//
+{
+	ACS_Terminate(14,0);
+	SetPlayerProperty(1, 0, PROP_TOTALLYFROZEN);
+	SetPlayerProperty(1, 0, PROP_FROZEN);
+	TakeInventory("Cursor" ,255);
+	Thing_Move(1337, 22, 1);
+	ChangeCamera(0,0,0); 
+	SetActorPitch(1337, 0);
+	SetActorAngle(1337, 0.5);
+}
+
+Script 15 (void) //Initiate Load-Out Menu//
+{
+	Thing_move(1337, 10, 1);
+	ACS_Execute(14,0,0,0,0);
+	ACS_Terminate(1,0);
+	SetPlayerProperty(1, 0, PROP_TOTALLYFROZEN);
+	SetPlayerProperty(1, 1, PROP_FROZEN);
+	ACS_Execute(14,0,0,0,0);
+	ChangeCamera(3, 1, 0);
+	SetActorPitch(1337, 0);
+	SetActorAngle(1337, 0.25);
+	GiveInventory("Cursor", 1);
+	SetWeapon("Cursor");
+	SetMusic("CPN_LDOT", 0);
+}
+
+script 16 (void) //Main Load-Out Menu//
+{
+	AmbientSound("sound/SELECT", 127);
+	SetPlayerProperty(1, 0, PROP_FROZEN);
+	SetPlayerProperty(1, 1, PROP_TOTALLYFROZEN);
+	changecamera(3, 1, 0);
+	delay(3);
+	Thing_move(1337, 10, 1);
+	SetPlayerProperty(1, 0, PROP_TOTALLYFROZEN);
+	SetPlayerProperty(1, 1, PROP_FROZEN);
+}
+
+script 17 (void)  //INITIATES PRIMARY WEAPONS MENU//
+{
+	AmbientSound("sound/SELECT", 127);
+	SetPlayerProperty(1, 0, PROP_FROZEN);
+	SetPlayerProperty(1, 1, PROP_TOTALLYFROZEN);
+	changecamera(11, 1, 0);
+	delay(3);
+	Thing_move(1337, 4, 1);
+	SetPlayerProperty(1, 0, PROP_TOTALLYFROZEN);
+	SetPlayerProperty(1, 1, PROP_FROZEN);
+
+}
+
+script 18 (void)  //INITIATES ASSAULT WEAPONS MENU//
+{
+	AmbientSound("sound/SELECT", 127);
+	SetPlayerProperty(1, 0, PROP_FROZEN);
+	SetPlayerProperty(1, 1, PROP_TOTALLYFROZEN);
+	changecamera(12, 1, 0);
+	delay(3);
+	Thing_move(1337, 5, 1);
+	SetPlayerProperty(1, 0, PROP_TOTALLYFROZEN);
+	SetPlayerProperty(1, 1, PROP_FROZEN);
+}
+
+script 19 (void)  //INITIATES SUB MACHINEGUN MENU//
+{
+	AmbientSound("sound/SELECT", 127);
+	SetPlayerProperty(1, 0, PROP_FROZEN);
+	SetPlayerProperty(1, 1, PROP_TOTALLYFROZEN);
+	changecamera(13, 1, 0);
+	delay(3);
+	Thing_move(1337, 6, 1);
+	SetPlayerProperty(1, 0, PROP_TOTALLYFROZEN);
+	SetPlayerProperty(1, 1, PROP_FROZEN);
+}
+
+script 20 (void)  //INITIATES SHOTGUN WEAPONS MENU//
+{
+	AmbientSound("sound/SELECT", 127);
+	SetPlayerProperty(1, 0, PROP_FROZEN);
+	SetPlayerProperty(1, 1, PROP_TOTALLYFROZEN);
+	changecamera(14, 1, 0);
+	delay(3);
+	Thing_move(1337, 8, 1);
+	SetPlayerProperty(1, 0, PROP_TOTALLYFROZEN);
+	SetPlayerProperty(1, 1, PROP_FROZEN);
+}
+
+script 21 (void)  //INITIATES SNIPER WEAPONS MENU//
+{
+	AmbientSound("sound/SELECT", 127);
+	SetPlayerProperty(1, 0, PROP_FROZEN);
+	SetPlayerProperty(1, 1, PROP_TOTALLYFROZEN);
+	changecamera(15, 1, 0);
+	delay(3);
+	Thing_move(1337, 9, 1);
+	SetPlayerProperty(1, 0, PROP_TOTALLYFROZEN);
+	SetPlayerProperty(1, 1, PROP_FROZEN);
+}
+
+script 25 (void)  //INITIATES LIGHT MACHINE GUNS WEAPONS MENU//
+{
+	AmbientSound("sound/SELECT", 127);
+	SetPlayerProperty(1, 0, PROP_FROZEN);
+	SetPlayerProperty(1, 1, PROP_TOTALLYFROZEN);
+	changecamera(21, 1, 0);
+	delay(3);
+	Thing_move(1337, 7, 1);
+	SetPlayerProperty(1, 0, PROP_TOTALLYFROZEN);
+	SetPlayerProperty(1, 1, PROP_FROZEN);
+}
+
+script 22 (void)  //INITIATES SECONDARIES WEAPONS MENU//
+{
+	AmbientSound("sound/SELECT", 127);
+	SetPlayerProperty(1, 0, PROP_FROZEN);
+	SetPlayerProperty(1, 1, PROP_TOTALLYFROZEN);
+	changecamera(2, 1, 0);
+	delay(3);
+	Thing_move(1337, 16, 1);
+	SetPlayerProperty(1, 0, PROP_TOTALLYFROZEN);
+	SetPlayerProperty(1, 1, PROP_FROZEN);
+}
+
+script 23 (void)  //INITIATES EQUIPMENT MENU//
+{
+	AmbientSound("sound/SELECT", 127);
+	SetPlayerProperty(1, 0, PROP_FROZEN);
+	SetPlayerProperty(1, 1, PROP_TOTALLYFROZEN);
+	changecamera(17, 1, 0);
+	delay(3);
+	Thing_move(1337, 18, 1);
+	SetPlayerProperty(1, 0, PROP_TOTALLYFROZEN);
+	SetPlayerProperty(1, 1, PROP_FROZEN);
+}
+
+script 24 (void)  //INITIATES POWERGUMS MENU//
+{
+	AmbientSound("sound/SELECT", 127);
+	SetPlayerProperty(1, 0, PROP_FROZEN);
+	SetPlayerProperty(1, 1, PROP_TOTALLYFROZEN);
+	changecamera(19, 1, 0);
+	SetActorPitch(1337, 0);
+	SetActorAngle(1337, 0.25);
+	GiveInventory("Cursor", 1);
+	SetWeapon("Cursor");
+	Thing_move(1337, 20, 1);
+	SetPlayerProperty(1, 0, PROP_TOTALLYFROZEN);
+	SetPlayerProperty(1, 1, PROP_FROZEN);
+}
+
+Script 74 (void) //INITIATES MISSION START//
+{
+	GiveInventory("Knife", 1);
+	SetPlayerProperty(1, 1, PROP_TOTALLYFROZEN);
+	DELAY(20);
+	fadeto(255, 255, 255, 1.0, 1.0);
+	delay(70);
+	fadeto(0, 0, 0, 0, 1.0);
+        SetPlayerProperty(1, 0, PROP_TOTALLYFROZEN);
+        SetPlayerProperty(1, 0, PROP_FROZEN);
+		ACS_Execute(2,0,0,0,0);
+}
+
+//Select Your Load-Out//
+
+//Assault Rifles//
+//AK-12//
+Script 30 (void)
+{
+if(CheckWeapon("Cursor"))
+{
+	AmbientSound("sound/SELECT", 127);
+GiveInventory("AK-12", 255);
+TakeInventory("SightsAK-12", 255);
+TakeInventory("M-14", 255);
+TakeInventory("SightsM-14", 255);
+TakeInventory("AN-94", 255);
+TakeInventory("SightsAN-94", 255);
+TakeInventory("GALIL", 255);
+TakeInventory("SightsGALIL", 255);
+TakeInventory("SWAT557", 255);
+TakeInventory("SightsSWAT557", 255);
+TakeInventory("G36-C", 255);
+TakeInventory("SightsG36-C", 255);
+TakeInventory("UZI", 255);
+TakeInventory("SightsUZI", 255);
+TakeInventory("MP5", 255);
+TakeInventory("SightsMP5", 255);
+TakeInventory("KS-23", 255);
+TakeInventory("SightsKS-23", 255);
+TakeInventory("M3Super", 255);
+TakeInventory("SightsM3Super", 255);
+TakeInventory("Carbon-26", 255);
+TakeInventory("SightsCarbon-26", 255);
+TakeInventory("M-24", 255);
+TakeInventory("SightsM-24", 255);
+TakeInventory("M-82", 255);
+TakeInventory("SightsM-82", 255);
+TakeInventory("M-82", 255);
+TakeInventory("SightsM-82", 255);
+TakeInventory("SKS", 255);
+TakeInventory("SightsSKS", 255);
+TakeInventory("StormPRX", 255);
+TakeInventory("SightsStormPRX", 255);
+TakeInventory("OHM", 255);
+TakeInventory("SightsOHM", 255);
+TakeInventory("BianchiFA-6", 255);
+TakeInventory("SightsBianchiFA-6", 255);
+hudmessage(s:"AK-12 Selected";
+HUDMSG_FADEINOUT, 3, CR_White, 3.0, 0.6, 3.1);
+
+}
+	else if(CheckWeapon("Cursor_Info"))
+	{
+		HudMessage(s:"[AK-12]\nDamage: +++++-----\nAccuracy: ++++++----\nFire Rate: +++++++---\nFire Mode: Automatic";
+		HUDMSG_FADEINOUT, 103, CR_WHITE, 3.0, 0.9, 10.6);
+	}
+}
+//M-14//
+Script 31 (void)
+{
+	If(CheckWeapon("Cursor"))
+	{
+	AmbientSound("sound/SELECT", 127);
+TakeInventory("AK-12", 255);
+TakeInventory("SightsAK-12", 255);
+GiveInventory("M-14", 255);
+TakeInventory("SightsM-14", 255);
+TakeInventory("AN-94", 255);
+TakeInventory("SightsAN-94", 255);
+TakeInventory("GALIL", 255);
+TakeInventory("SightsGALIL", 255);
+TakeInventory("SWAT557", 255);
+TakeInventory("SightsSWAT557", 255);
+TakeInventory("G36-C", 255);
+TakeInventory("SightsG36-C", 255);
+TakeInventory("UZI", 255);
+TakeInventory("SightsUZI", 255);
+TakeInventory("MP5", 255);
+TakeInventory("SightsMP5", 255);
+TakeInventory("KS-23", 255);
+TakeInventory("SightsKS-23", 255);
+TakeInventory("M3Super", 255);
+TakeInventory("SightsM3Super", 255);
+TakeInventory("Carbon-26", 255);
+TakeInventory("SightsCarbon-26", 255);
+TakeInventory("M-24", 255);
+TakeInventory("SightsM-24", 255);
+TakeInventory("M-82", 255);
+TakeInventory("SightsM-82", 255);
+TakeInventory("M-82", 255);
+TakeInventory("SightsM-82", 255);
+TakeInventory("SKS", 255);
+TakeInventory("SightsSKS", 255);
+TakeInventory("StormPRX", 255);
+TakeInventory("SightsStormPRX", 255);
+TakeInventory("OHM", 255);
+TakeInventory("SightsOHM", 255);
+TakeInventory("BianchiFA-6", 255);
+TakeInventory("SightsBianchiFA-6", 255);
+hudmessage(s:"M-14 Selected";
+HUDMSG_FADEINOUT, 3, CR_White, 3.0, 0.6, 3.1);
+
+}
+	else if(CheckWeapon("Cursor_Info"))
+	{
+		HudMessage(s:"[M-14]\nDamage: +++++++---\nAccuracy: +++++++\nFire Rate: ++++------\nFire Mode: Semi-Auto";
+		HUDMSG_FADEINOUT, 103, CR_WHITE, 3.0, 0.9, 10.6);
+	}
+}
+
+//AN-94//
+Script 32 (void)
+{
+	If(CheckWeapon("Cursor"))
+	{
+	AmbientSound("sound/SELECT", 127);
+TakeInventory("AK-12", 255);
+TakeInventory("SightsAK-12", 255);
+TakeInventory("M-14", 255);
+TakeInventory("SightsM-14", 255);
+GiveInventory("AN-94", 255);
+TakeInventory("SightsAN-94", 255);
+TakeInventory("GALIL", 255);
+TakeInventory("SightsGALIL", 255);
+TakeInventory("SWAT557", 255);
+TakeInventory("SightsSWAT557", 255);
+TakeInventory("G36-C", 255);
+TakeInventory("SightsG36-C", 255);
+TakeInventory("UZI", 255);
+TakeInventory("SightsUZI", 255);
+TakeInventory("MP5", 255);
+TakeInventory("SightsMP5", 255);
+TakeInventory("KS-23", 255);
+TakeInventory("SightsKS-23", 255);
+TakeInventory("M3Super", 255);
+TakeInventory("SightsM3Super", 255);
+TakeInventory("Carbon-26", 255);
+TakeInventory("SightsCarbon-26", 255);
+TakeInventory("M-24", 255);
+TakeInventory("SightsM-24", 255);
+TakeInventory("M-82", 255);
+TakeInventory("SightsM-82", 255);
+TakeInventory("M-82", 255);
+TakeInventory("SightsM-82", 255);
+TakeInventory("SKS", 255);
+TakeInventory("SightsSKS", 255);
+TakeInventory("StormPRX", 255);
+TakeInventory("SightsStormPRX", 255);
+TakeInventory("OHM", 255);
+TakeInventory("SightsOHM", 255);
+TakeInventory("BianchiFA-6", 255);
+TakeInventory("SightsBianchiFA-6", 255);
+hudmessage(s:"AN-94 Selected";
+HUDMSG_FADEINOUT, 3, CR_White, 3.0, 0.6, 3.1);
+
+}
+	else if(CheckWeapon("Cursor_Info"))
+	{
+		HudMessage(s:"[AN-94]\nDamage: ++++++++--\nAccuracy: +++++-----\nFire Rate: +++++-----\nFire Mode: Automatic";
+		HUDMSG_FADEINOUT, 103, CR_WHITE, 3.0, 0.9, 10.6);
+	}
+}
+
+//Galil//
+Script 33 (void)
+{
+	if(CheckWeapon("Cursor"))
+	{
+	AmbientSound("sound/SELECT", 127);
+TakeInventory("AK-12", 255);
+TakeInventory("SightsAK-12", 255);
+TakeInventory("M-14", 255);
+TakeInventory("SightsM-14", 255);
+TakeInventory("AN-94", 255);
+TakeInventory("SightsAN-94", 255);
+GiveInventory("GALIL", 255);
+TakeInventory("SightsGALIL", 255);
+TakeInventory("SWAT557", 255);
+TakeInventory("SightsSWAT557", 255);
+TakeInventory("G36-C", 255);
+TakeInventory("SightsG36-C", 255);
+TakeInventory("UZI", 255);
+TakeInventory("SightsUZI", 255);
+TakeInventory("MP5", 255);
+TakeInventory("SightsMP5", 255);
+TakeInventory("KS-23", 255);
+TakeInventory("SightsKS-23", 255);
+TakeInventory("M3Super", 255);
+TakeInventory("SightsM3Super", 255);
+TakeInventory("Carbon-26", 255);
+TakeInventory("SightsCarbon-26", 255);
+TakeInventory("M-24", 255);
+TakeInventory("SightsM-24", 255);
+TakeInventory("M-82", 255);
+TakeInventory("SightsM-82", 255);
+TakeInventory("M-82", 255);
+TakeInventory("SightsM-82", 255);
+TakeInventory("SKS", 255);
+TakeInventory("SightsSKS", 255);
+TakeInventory("StormPRX", 255);
+TakeInventory("SightsStormPRX", 255);
+TakeInventory("OHM", 255);
+TakeInventory("SightsOHM", 255);
+TakeInventory("BianchiFA-6", 255);
+TakeInventory("SightsBianchiFA-6", 255);
+hudmessage(s:"Galil Selected";
+HUDMSG_FADEINOUT, 3, CR_White, 3.0, 0.6, 3.1);
+
+}
+	else if(CheckWeapon("Cursor_Info"))
+	{
+		HudMessage(s:"[Galil]\nDamage: +++++++---\nAccuracy: +++++++---\nFire Rate: +++++++---\nFire Mode: Automatic";
+		HUDMSG_FADEINOUT, 103, CR_WHITE, 3.0, 0.9, 10.6);
+	}
+}
+
+//SWAT557//
+Script 34 (void)
+{
+	if(CheckWeapon("Cursor"))
+{
+	AmbientSound("sound/SELECT", 127);
+TakeInventory("AK-12", 255);
+TakeInventory("SightsAK-12", 255);
+TakeInventory("M-14", 255);
+TakeInventory("SightsM-14", 255);
+TakeInventory("AN-94", 255);
+TakeInventory("SightsAN-94", 255);
+TakeInventory("GALIL", 255);
+TakeInventory("SightsGALIL", 255);
+GiveInventory("SWAT557", 255);
+TakeInventory("SightsSWAT557", 255);
+TakeInventory("G36-C", 255);
+TakeInventory("SightsG36-C", 255);
+TakeInventory("UZI", 255);
+TakeInventory("SightsUZI", 255);
+TakeInventory("MP5", 255);
+TakeInventory("SightsMP5", 255);
+TakeInventory("KS-23", 255);
+TakeInventory("SightsKS-23", 255);
+TakeInventory("M3Super", 255);
+TakeInventory("SightsM3Super", 255);
+TakeInventory("Carbon-26", 255);
+TakeInventory("SightsCarbon-26", 255);
+TakeInventory("M-24", 255);
+TakeInventory("SightsM-24", 255);
+TakeInventory("M-82", 255);
+TakeInventory("SightsM-82", 255);
+TakeInventory("M-82", 255);
+TakeInventory("SightsM-82", 255);
+TakeInventory("SKS", 255);
+TakeInventory("SightsSKS", 255);
+TakeInventory("StormPRX", 255);
+TakeInventory("SightsStormPRX", 255);
+TakeInventory("OHM", 255);
+TakeInventory("SightsOHM", 255);
+TakeInventory("BianchiFA-6", 255);
+TakeInventory("SightsBianchiFA-6", 255);
+hudmessage(s:"SWAT-557 Selected";
+HUDMSG_FADEINOUT, 3, CR_White, 3.0, 0.6, 3.1);
+}
+	else if(CheckWeapon("Cursor_Info"))
+	{
+		HudMessage(s:"[SWAT-557]\nDamage: +++++-----\nAccuracy: +++++-----\nFire Rate: ++++------\nFire Mode: Automatic";
+		HUDMSG_FADEINOUT, 103, CR_WHITE, 3.0, 0.9, 10.6);
+	}
+}
+//Sub Machineguns//
+//G36-C//
+Script 35 (void)
+{
+	if(CheckWeapon("Cursor"))
+	{
+	AmbientSound("sound/SELECT", 127);
+TakeInventory("AK-12", 255);
+TakeInventory("SightsAK-12", 255);
+TakeInventory("M-14", 255);
+TakeInventory("SightsM-14", 255);
+TakeInventory("AN-94", 255);
+TakeInventory("SightsAN-94", 255);
+TakeInventory("GALIL", 255);
+TakeInventory("SightsGALIL", 255);
+TakeInventory("SWAT557", 255);
+TakeInventory("SightsSWAT557", 255);
+GiveInventory("G36-C", 255);
+TakeInventory("SightsG36-C", 255);
+TakeInventory("UZI", 255);
+TakeInventory("SightsUZI", 255);
+TakeInventory("MP5", 255);
+TakeInventory("SightsMP5", 255);
+TakeInventory("KS-23", 255);
+TakeInventory("SightsKS-23", 255);
+TakeInventory("M3Super", 255);
+TakeInventory("SightsM3Super", 255);
+TakeInventory("Carbon-26", 255);
+TakeInventory("SightsCarbon-26", 255);
+TakeInventory("M-24", 255);
+TakeInventory("SightsM-24", 255);
+TakeInventory("M-82", 255);
+TakeInventory("SightsM-82", 255);
+TakeInventory("M-82", 255);
+TakeInventory("SightsM-82", 255);
+TakeInventory("SKS", 255);
+TakeInventory("SightsSKS", 255);
+TakeInventory("StormPRX", 255);
+TakeInventory("SightsStormPRX", 255);
+TakeInventory("OHM", 255);
+TakeInventory("SightsOHM", 255);
+TakeInventory("BianchiFA-6", 255);
+TakeInventory("SightsBianchiFA-6", 255);
+hudmessage(s:"G36-C Selected";
+HUDMSG_FADEINOUT, 3, CR_White, 3.0, 0.6, 3.1);
+}
+	else if(CheckWeapon("Cursor_Info"))
+	{
+		HudMessage(s:"[G36-C]\nDamage: ++++++----\nAccuracy: ++++++++--\nFire Rate: +++++++---\nFire Mode: Automatic";
+		HUDMSG_FADEINOUT, 103, CR_WHITE, 3.0, 0.9, 10.6);
+	}
+}
+
+//UZI//
+Script 36 (void)
+{
+	IF(CheckWeapon("Cursor"))
+	{
+	AmbientSound("sound/SELECT", 127);
+TakeInventory("AK-12", 255);
+TakeInventory("SightsAK-12", 255);
+TakeInventory("M-14", 255);
+TakeInventory("SightsM-14", 255);
+TakeInventory("AN-94", 255);
+TakeInventory("SightsAN-94", 255);
+TakeInventory("GALIL", 255);
+TakeInventory("SightsGALIL", 255);
+TakeInventory("SWAT557", 255);
+TakeInventory("SightsSWAT557", 255);
+TakeInventory("G36-C", 255);
+TakeInventory("SightsG36-C", 255);
+GiveInventory("UZI", 255);
+TakeInventory("SightsUZI", 255);
+TakeInventory("MP5", 255);
+TakeInventory("SightsMP5", 255);
+TakeInventory("KS-23", 255);
+TakeInventory("SightsKS-23", 255);
+TakeInventory("M3Super", 255);
+TakeInventory("SightsM3Super", 255);
+TakeInventory("Carbon-26", 255);
+TakeInventory("SightsCarbon-26", 255);
+TakeInventory("M-24", 255);
+TakeInventory("SightsM-24", 255);
+TakeInventory("M-82", 255);
+TakeInventory("SightsM-82", 255);
+TakeInventory("M-82", 255);
+TakeInventory("SightsM-82", 255);
+TakeInventory("SKS", 255);
+TakeInventory("SightsSKS", 255);
+TakeInventory("StormPRX", 255);
+TakeInventory("SightsStormPRX", 255);
+TakeInventory("OHM", 255);
+TakeInventory("SightsOHM", 255);
+TakeInventory("BianchiFA-6", 255);
+TakeInventory("SightsBianchiFA-6", 255);
+hudmessage(s:"Uzi Selected";
+HUDMSG_FADEINOUT, 3, CR_White, 3.0, 0.6, 3.1);
+
+}
+	else if(CheckWeapon("Cursor_Info"))
+	{
+		HudMessage(s:"[UZI]\nDamage: +++++-----\nAccuracy: ++++------\nFire Rate: ++++++++++\nFire Mode: Automatic";
+		HUDMSG_FADEINOUT, 103, CR_WHITE, 3.0, 0.9, 10.6);
+	}
+}
+
+//MP5//
+Script 37 (void)
+{
+	If(CheckWeapon("Cursor"))
+	{
+	AmbientSound("sound/SELECT", 127);
+TakeInventory("AK-12", 255);
+TakeInventory("SightsAK-12", 255);
+TakeInventory("M-14", 255);
+TakeInventory("SightsM-14", 255);
+TakeInventory("AN-94", 255);
+TakeInventory("SightsAN-94", 255);
+TakeInventory("GALIL", 255);
+TakeInventory("SightsGALIL", 255);
+TakeInventory("SWAT557", 255);
+TakeInventory("SightsSWAT557", 255);
+TakeInventory("G36-C", 255);
+TakeInventory("SightsG36-C", 255);
+TakeInventory("UZI", 255);
+TakeInventory("SightsUZI", 255);
+GiveInventory("MP5", 255);
+TakeInventory("SightsMP5", 255);
+TakeInventory("KS-23", 255);
+TakeInventory("SightsKS-23", 255);
+TakeInventory("M3Super", 255);
+TakeInventory("SightsM3Super", 255);
+TakeInventory("Carbon-26", 255);
+TakeInventory("SightsCarbon-26", 255);
+TakeInventory("M-24", 255);
+TakeInventory("SightsM-24", 255);
+TakeInventory("M-82", 255);
+TakeInventory("SightsM-82", 255);
+TakeInventory("M-82", 255);
+TakeInventory("SightsM-82", 255);
+TakeInventory("SKS", 255);
+TakeInventory("SightsSKS", 255);
+TakeInventory("StormPRX", 255);
+TakeInventory("SightsStormPRX", 255);
+TakeInventory("OHM", 255);
+TakeInventory("SightsOHM", 255);
+TakeInventory("BianchiFA-6", 255);
+TakeInventory("SightsBianchiFA-6", 255);
+hudmessage(s:"MP5 Selected";
+HUDMSG_FADEINOUT, 3, CR_White, 3.0, 0.6, 3.1);
+
+}
+	else if(CheckWeapon("Cursor_Info"))
+	{
+		HudMessage(s:"[MP5]\nDamage: +++++-----\nAccuracy: ++++++----\nFire Rate: +++++++---\nFire Mode: Automatic";
+		HUDMSG_FADEINOUT, 103, CR_WHITE, 3.0, 0.9, 10.6);
+	}
+}
+
+//Shotguns//
+//KS-23//
+Script 38 (void)
+{
+	If(CheckWeapon("Cursor"))
+	{
+	AmbientSound("sound/SELECT", 127);
+TakeInventory("AK-12", 255);
+TakeInventory("SightsAK-12", 255);
+TakeInventory("M-14", 255);
+TakeInventory("SightsM-14", 255);
+TakeInventory("AN-94", 255);
+TakeInventory("SightsAN-94", 255);
+TakeInventory("GALIL", 255);
+TakeInventory("SightsGALIL", 255);
+TakeInventory("SWAT557", 255);
+TakeInventory("SightsSWAT557", 255);
+TakeInventory("G36-C", 255);
+TakeInventory("SightsG36-C", 255);
+TakeInventory("UZI", 255);
+TakeInventory("SightsUZI", 255);
+TakeInventory("MP5", 255);
+TakeInventory("SightsMP5", 255);
+GiveInventory("KS-23", 255);
+TakeInventory("SightsKS-23", 255);
+TakeInventory("M3Super", 255);
+TakeInventory("SightsM3Super", 255);
+TakeInventory("Carbon-26", 255);
+TakeInventory("SightsCarbon-26", 255);
+TakeInventory("M-24", 255);
+TakeInventory("SightsM-24", 255);
+TakeInventory("M-82", 255);
+TakeInventory("SightsM-82", 255);
+TakeInventory("M-82", 255);
+TakeInventory("SightsM-82", 255);
+TakeInventory("SKS", 255);
+TakeInventory("SightsSKS", 255);
+TakeInventory("StormPRX", 255);
+TakeInventory("SightsStormPRX", 255);
+TakeInventory("OHM", 255);
+TakeInventory("SightsOHM", 255);
+TakeInventory("BianchiFA-6", 255);
+TakeInventory("SightsBianchiFA-6", 255);
+hudmessage(s:"KS-23 Selected";
+HUDMSG_FADEINOUT, 3, CR_White, 3.0, 0.6, 3.1);
+
+}
+	else if(CheckWeapon("Cursor_Info"))
+	{
+		HudMessage(s:"[KS-23]\nDamage: ++++++++--\nAccuracy: +++-------\nFire Rate: ++--------\nFire Mode: Pump-Action";
+		HUDMSG_FADEINOUT, 103, CR_WHITE, 3.0, 0.9, 10.6);
+	}
+}
+
+//M3SUPER//
+Script 39 (void)
+{
+	if(CheckWeapon("Cursor"))
+	{
+	AmbientSound("sound/SELECT", 127);
+TakeInventory("AK-12", 255);
+TakeInventory("SightsAK-12", 255);
+TakeInventory("M-14", 255);
+TakeInventory("SightsM-14", 255);
+TakeInventory("AN-94", 255);
+TakeInventory("SightsAN-94", 255);
+TakeInventory("GALIL", 255);
+TakeInventory("SightsGALIL", 255);
+TakeInventory("SWAT557", 255);
+TakeInventory("SightsSWAT557", 255);
+TakeInventory("G36-C", 255);
+TakeInventory("SightsG36-C", 255);
+TakeInventory("UZI", 255);
+TakeInventory("SightsUZI", 255);
+TakeInventory("MP5", 255);
+TakeInventory("SightsMP5", 255);
+TakeInventory("KS-23", 255);
+TakeInventory("SightsKS-23", 255);
+GiveInventory("M3Super", 255);
+TakeInventory("SightsM3Super", 255);
+TakeInventory("Carbon-26", 255);
+TakeInventory("SightsCarbon-26", 255);
+TakeInventory("M-24", 255);
+TakeInventory("SightsM-24", 255);
+TakeInventory("M-82", 255);
+TakeInventory("SightsM-82", 255);
+TakeInventory("M-82", 255);
+TakeInventory("SightsM-82", 255);
+TakeInventory("SKS", 255);
+TakeInventory("SightsSKS", 255);
+TakeInventory("StormPRX", 255);
+TakeInventory("SightsStormPRX", 255);
+TakeInventory("OHM", 255);
+TakeInventory("SightsOHM", 255);
+TakeInventory("BianchiFA-6", 255);
+TakeInventory("SightsBianchiFA-6", 255);
+hudmessage(s:"M3SUPER Selected";
+HUDMSG_FADEINOUT, 3, CR_White, 3.0, 0.6, 3.1);
+
+}
+	else if(CheckWeapon("Cursor_Info"))
+	{
+		HudMessage(s:"[M3Super]\nDamage: +++++++++-\nAccuracy: ++++-------\nFire Rate: +++-------\nFire Mode: Semi-Auto";
+		HUDMSG_FADEINOUT, 103, CR_WHITE, 3.0, 0.9, 10.6);
+	}
+}
+
+//Carbon-26//
+Script 56 (void)
+{
+	if(CheckWeapon("Cursor"))
+	{
+	AmbientSound("sound/SELECT", 127);
+TakeInventory("AK-12", 255);
+TakeInventory("SightsAK-12", 255);
+TakeInventory("M-14", 255);
+TakeInventory("SightsM-14", 255);
+TakeInventory("AN-94", 255);
+TakeInventory("SightsAN-94", 255);
+TakeInventory("GALIL", 255);
+TakeInventory("SightsGALIL", 255);
+TakeInventory("SWAT557", 255);
+TakeInventory("SightsSWAT557", 255);
+TakeInventory("G36-C", 255);
+TakeInventory("SightsG36-C", 255);
+TakeInventory("UZI", 255);
+TakeInventory("SightsUZI", 255);
+TakeInventory("MP5", 255);
+TakeInventory("SightsMP5", 255);
+TakeInventory("KS-23", 255);
+TakeInventory("SightsKS-23", 255);
+TakeInventory("M3Super", 255);
+TakeInventory("SightsM3Super", 255);
+GiveInventory("Carbon-26", 255);
+TakeInventory("SightsCarbon-26", 255);
+TakeInventory("M-24", 255);
+TakeInventory("SightsM-24", 255);
+TakeInventory("M-82", 255);
+TakeInventory("SightsM-82", 255);
+TakeInventory("M-82", 255);
+TakeInventory("SightsM-82", 255);
+TakeInventory("SKS", 255);
+TakeInventory("SightsSKS", 255);
+TakeInventory("StormPRX", 255);
+TakeInventory("SightsStormPRX", 255);
+TakeInventory("OHM", 255);
+TakeInventory("SightsOHM", 255);
+TakeInventory("BianchiFA-6", 255);
+TakeInventory("SightsBianchiFA-6", 255);
+hudmessage(s:"Carbon-26 Selected";
+HUDMSG_FADEINOUT, 3, CR_White, 3.0, 0.6, 3.1);
+
+}
+	else if(CheckWeapon("Cursor_Info"))
+	{
+		HudMessage(s:"[Carbon-26]\nDamage: ++++++++--\nAccuracy: +++-------\nFire Rate: +++++-----\nFire Mode: Automatic";
+		HUDMSG_FADEINOUT, 103, CR_WHITE, 3.0, 0.9, 10.6);
+	}
+}
+
+//Sniper Rifles//
+//M-24//
+Script 40 (void)
+{
+If(CheckWeapon("Cursor"))	
+{
+	AmbientSound("sound/SELECT", 127);
+TakeInventory("AK-12", 255);
+TakeInventory("SightsAK-12", 255);
+TakeInventory("M-14", 255);
+TakeInventory("SightsM-14", 255);
+TakeInventory("AN-94", 255);
+TakeInventory("SightsAN-94", 255);
+TakeInventory("GALIL", 255);
+TakeInventory("SightsGALIL", 255);
+TakeInventory("SWAT557", 255);
+TakeInventory("SightsSWAT557", 255);
+TakeInventory("G36-C", 255);
+TakeInventory("SightsG36-C", 255);
+TakeInventory("UZI", 255);
+TakeInventory("SightsUZI", 255);
+TakeInventory("MP5", 255);
+TakeInventory("SightsMP5", 255);
+TakeInventory("KS-23", 255);
+TakeInventory("SightsKS-23", 255);
+TakeInventory("M3Super", 255);
+TakeInventory("SightsM3Super", 255);
+TakeInventory("Carbon-26", 255);
+TakeInventory("SightsCarbon-26", 255);
+GiveInventory("M-24", 255);
+TakeInventory("SightsM-24", 255);
+TakeInventory("M-82", 255);
+TakeInventory("SightsM-82", 255);
+TakeInventory("M-82", 255);
+TakeInventory("SightsM-82", 255);
+TakeInventory("SKS", 255);
+TakeInventory("SightsSKS", 255);
+TakeInventory("StormPRX", 255);
+TakeInventory("SightsStormPRX", 255);
+TakeInventory("OHM", 255);
+TakeInventory("SightsOHM", 255);
+TakeInventory("BianchiFA-6", 255);
+TakeInventory("SightsBianchiFA-6", 255);
+hudmessage(s:"M-24 Selected";
+HUDMSG_FADEINOUT, 3, CR_White, 3.0, 0.6, 3.1);
+
+}
+	else if(CheckWeapon("Cursor_Info"))
+	{
+		HudMessage(s:"[M-24]\nDamage: +++++++++-\nAccuracy: +++++-----\nFire Rate: +---------\nFire Mode: Bolt-Action";
+		HUDMSG_FADEINOUT, 103, CR_WHITE, 3.0, 0.9, 10.6);
+	}
+}
+
+//M-82//
+Script 41 (void)
+{
+If(CheckWeapon("Cursor"))
+	{
+	AmbientSound("sound/SELECT", 127);
+TakeInventory("AK-12", 255);
+TakeInventory("SightsAK-12", 255);
+TakeInventory("M-14", 255);
+TakeInventory("SightsM-14", 255);
+TakeInventory("AN-94", 255);
+TakeInventory("SightsAN-94", 255);
+TakeInventory("GALIL", 255);
+TakeInventory("SightsGALIL", 255);
+TakeInventory("SWAT557", 255);
+TakeInventory("SightsSWAT557", 255);
+TakeInventory("G36-C", 255);
+TakeInventory("SightsG36-C", 255);
+TakeInventory("UZI", 255);
+TakeInventory("SightsUZI", 255);
+TakeInventory("MP5", 255);
+TakeInventory("SightsMP5", 255);
+TakeInventory("KS-23", 255);
+TakeInventory("SightsKS-23", 255);
+TakeInventory("M3Super", 255);
+TakeInventory("SightsM3Super", 255);
+TakeInventory("Carbon-26", 255);
+TakeInventory("SightsCarbon-26", 255);
+TakeInventory("M-24", 255);
+TakeInventory("SightsM-24", 255);
+TakeInventory("M-82", 255);
+TakeInventory("SightsM-82", 255);
+GiveInventory("M-82", 255);
+TakeInventory("SightsM-82", 255);
+TakeInventory("SKS", 255);
+TakeInventory("SightsSKS", 255);
+TakeInventory("StormPRX", 255);
+TakeInventory("SightsStormPRX", 255);
+TakeInventory("OHM", 255);
+TakeInventory("SightsOHM", 255);
+TakeInventory("BianchiFA-6", 255);
+TakeInventory("SightsBianchiFA-6", 255);
+hudmessage(s:"M-82 Selected"; 
+HUDMSG_FADEINOUT, 3, CR_White, 3.0, 0.6, 3.1);
+
+}
+	else if(CheckWeapon("Cursor_Info"))
+	{
+		HudMessage(s:"[M-82]\nDamage:++++++++--\nAccuracy: +++++-----\nFire Rate: ++++------\nFire Mode: Semi-Auto";
+		HUDMSG_FADEINOUT, 103, CR_WHITE, 3.0, 0.9, 10.6);
+	}
+}
+
+//SKS//
+Script 57 (void)
+{
+	If(CheckWeapon("Cursor"))
+	{
+	AmbientSound("sound/SELECT", 127);
+TakeInventory("AK-12", 255);
+TakeInventory("SightsAK-12", 255);
+TakeInventory("M-14", 255);
+TakeInventory("SightsM-14", 255);
+TakeInventory("AN-94", 255);
+TakeInventory("SightsAN-94", 255);
+TakeInventory("GALIL", 255);
+TakeInventory("SightsGALIL", 255);
+TakeInventory("SWAT557", 255);
+TakeInventory("SightsSWAT557", 255);
+TakeInventory("G36-C", 255);
+TakeInventory("SightsG36-C", 255);
+TakeInventory("UZI", 255);
+TakeInventory("SightsUZI", 255);
+TakeInventory("MP5", 255);
+TakeInventory("SightsMP5", 255);
+TakeInventory("KS-23", 255);
+TakeInventory("SightsKS-23", 255);
+TakeInventory("M3Super", 255);
+TakeInventory("SightsM3Super", 255);
+TakeInventory("Carbon-26", 255);
+TakeInventory("SightsCarbon-26", 255);
+TakeInventory("M-24", 255);
+TakeInventory("SightsM-24", 255);
+TakeInventory("M-82", 255);
+TakeInventory("SightsM-82", 255);
+TakeInventory("M-82", 255);
+TakeInventory("SightsM-82", 255);
+GiveInventory("SKS", 255);
+TakeInventory("SightsSKS", 255);
+TakeInventory("StormPRX", 255);
+TakeInventory("SightsStormPRX", 255);
+TakeInventory("OHM", 255);
+TakeInventory("SightsOHM", 255);
+TakeInventory("BianchiFA-6", 255);
+TakeInventory("SightsBianchiFA-6", 255);
+hudmessage(s:"SKS Selected"; 
+HUDMSG_FADEINOUT, 3, CR_White, 3.0, 0.6, 3.1);
+
+}
+	else if(CheckWeapon("Cursor_Info"))
+	{
+		HudMessage(s:"[SKS]\nDamage: ++++++----\nAccuracy: +++++-----\nFire Rate: ++++++----\nFire Mode: Semi-Auto";
+		HUDMSG_FADEINOUT, 103, CR_WHITE, 3.0, 0.9, 10.6);
+	}
+}
+
+//Light Machine Guns//
+//StormPRX//
+Script 58 (void)
+{
+	If(CheckWeapon("Cursor"))
+	{
+	AmbientSound("sound/SELECT", 127);
+TakeInventory("AK-12", 255);
+TakeInventory("SightsAK-12", 255);
+TakeInventory("M-14", 255);
+TakeInventory("SightsM-14", 255);
+TakeInventory("AN-94", 255);
+TakeInventory("SightsAN-94", 255);
+TakeInventory("GALIL", 255);
+TakeInventory("SightsGALIL", 255);
+TakeInventory("SWAT557", 255);
+TakeInventory("SightsSWAT557", 255);
+TakeInventory("G36-C", 255);
+TakeInventory("SightsG36-C", 255);
+TakeInventory("UZI", 255);
+TakeInventory("SightsUZI", 255);
+TakeInventory("MP5", 255);
+TakeInventory("SightsMP5", 255);
+TakeInventory("KS-23", 255);
+TakeInventory("SightsKS-23", 255);
+TakeInventory("M3Super", 255);
+TakeInventory("SightsM3Super", 255);
+TakeInventory("Carbon-26", 255);
+TakeInventory("SightsCarbon-26", 255);
+TakeInventory("M-24", 255);
+TakeInventory("SightsM-24", 255);
+TakeInventory("M-82", 255);
+TakeInventory("SightsM-82", 255);
+TakeInventory("M-82", 255);
+TakeInventory("SightsM-82", 255);
+TakeInventory("SKS", 255);
+TakeInventory("SightsSKS", 255);
+GiveInventory("StormPRX", 255);
+TakeInventory("SightsStormPRX", 255);
+TakeInventory("OHM", 255);
+TakeInventory("SightsOHM", 255);
+TakeInventory("BianchiFA-6", 255);
+TakeInventory("SightsBianchiFA-6", 255);
+hudmessage(s:"Storm PRX Selected"; 
+HUDMSG_FADEINOUT, 3, CR_White, 3.0, 0.6, 3.1);
+
+}
+	else if(CheckWeapon("Cursor_Info"))
+	{
+		HudMessage(s:"[Storm PRX]\nDamage: +++++++++-\nAccuracy: +++++++---\nFire Rate: +++++-----\nFire Mode: Automatic";
+		HUDMSG_FADEINOUT, 103, CR_WHITE, 3.0, 0.9, 10.6);
+	}
+}
+
+//OHM//
+Script 59 (void)
+{
+If(CheckWeapon("Cursor"))
+	{
+	AmbientSound("sound/SELECT", 127);
+TakeInventory("AK-12", 255);
+TakeInventory("SightsAK-12", 255);
+TakeInventory("M-14", 255);
+TakeInventory("SightsM-14", 255);
+TakeInventory("AN-94", 255);
+TakeInventory("SightsAN-94", 255);
+TakeInventory("GALIL", 255);
+TakeInventory("SightsGALIL", 255);
+TakeInventory("SWAT557", 255);
+TakeInventory("SightsSWAT557", 255);
+TakeInventory("G36-C", 255);
+TakeInventory("SightsG36-C", 255);
+TakeInventory("UZI", 255);
+TakeInventory("SightsUZI", 255);
+TakeInventory("MP5", 255);
+TakeInventory("SightsMP5", 255);
+TakeInventory("KS-23", 255);
+TakeInventory("SightsKS-23", 255);
+TakeInventory("M3Super", 255);
+TakeInventory("SightsM3Super", 255);
+TakeInventory("Carbon-26", 255);
+TakeInventory("SightsCarbon-26", 255);
+TakeInventory("M-24", 255);
+TakeInventory("SightsM-24", 255);
+TakeInventory("M-82", 255);
+TakeInventory("SightsM-82", 255);
+TakeInventory("M-82", 255);
+TakeInventory("SightsM-82", 255);
+TakeInventory("SKS", 255);
+TakeInventory("SightsSKS", 255);
+TakeInventory("StormPRX", 255);
+TakeInventory("SightsStormPRX", 255);
+GiveInventory("OHM", 255);
+TakeInventory("SightsOHM", 255);
+TakeInventory("BianchiFA-6", 255);
+TakeInventory("SightsBianchiFA-6", 255);
+hudmessage(s:"OHM Selected"; 
+HUDMSG_FADEINOUT, 3, CR_White, 3.0, 0.6, 3.1);
+
+}
+	else if(CheckWeapon("Cursor_Info"))
+	{
+		HudMessage(s:"[OHM]\nDamage: ++++++++++\nAccuracy: ++++------\nFire Rate: +++++-----\nFire Mode: Automatic";
+		HUDMSG_FADEINOUT, 103, CR_WHITE, 3.0, 0.9, 10.6);
+	}
+}
+
+//BianchiFA-6//
+Script 60 (void)
+{
+	if(CheckWeapon("Cursor"))
+	{
+	AmbientSound("sound/SELECT", 127);
+TakeInventory("AK-12", 255);
+TakeInventory("SightsAK-12", 255);
+TakeInventory("M-14", 255);
+TakeInventory("SightsM-14", 255);
+TakeInventory("AN-94", 255);
+TakeInventory("SightsAN-94", 255);
+TakeInventory("GALIL", 255);
+TakeInventory("SightsGALIL", 255);
+TakeInventory("SWAT557", 255);
+TakeInventory("SightsSWAT557", 255);
+TakeInventory("G36-C", 255);
+TakeInventory("SightsG36-C", 255);
+TakeInventory("UZI", 255);
+TakeInventory("SightsUZI", 255);
+TakeInventory("MP5", 255);
+TakeInventory("SightsMP5", 255);
+TakeInventory("KS-23", 255);
+TakeInventory("SightsKS-23", 255);
+TakeInventory("M3Super", 255);
+TakeInventory("SightsM3Super", 255);
+TakeInventory("Carbon-26", 255);
+TakeInventory("SightsCarbon-26", 255);
+TakeInventory("M-24", 255);
+TakeInventory("SightsM-24", 255);
+TakeInventory("M-82", 255);
+TakeInventory("SightsM-82", 255);
+TakeInventory("M-82", 255);
+TakeInventory("SightsM-82", 255);
+TakeInventory("SKS", 255);
+TakeInventory("SightsSKS", 255);
+TakeInventory("StormPRX", 255);
+TakeInventory("SightsStormPRX", 255);
+TakeInventory("OHM", 255);
+TakeInventory("SightsOHM", 255);
+GiveInventory("BianchiFA-6", 255);
+TakeInventory("SightsBianchiFA-6", 255);
+hudmessage(s:"Bianchi FA-6 Selected"; 
+HUDMSG_FADEINOUT, 3, CR_White, 3.0, 0.6, 3.1);
+
+}
+	else if(CheckWeapon("Cursor_Info"))
+	{
+		HudMessage(s:"[Bianchi FA-6]\nDamage: ++++++++--\nAccuracy: +++-------\nFire Rate: +++++-----\nFire Mode: Automatic";
+		HUDMSG_FADEINOUT, 103, CR_WHITE, 3.0, 0.9, 10.6);
+	}
+}
+
+//Secondaries//
+//Colt M1911//
+Script 42 (void)
+{
+	if(CheckWeapon("Cursor"))
+	{
+	AmbientSound("sound/SELECT", 127);
+GiveInventory("ColtM1911", 255);
+TakeInventory("SightsColtM1911", 255);
+TakeInventory("P226", 255);
+TakeInventory("SightsP226", 255);
+TakeInventory("RagingBull", 255);
+TakeInventory("SightsRagingBull", 255);
+TakeInventory("Glock20", 255);
+TakeInventory("SightsGlock20", 255);
+hudmessage(s:"Colt M1911 Selected";
+HUDMSG_FADEINOUT, 3, CR_White, 3.0, 0.6, 3.1);
+
+}
+	else if(CheckWeapon("Cursor_Info"))
+	{
+		HudMessage(s:"[Colt M1911]\nDamage: +++-------\nAccuracy: ++++++----\nFire Rate: ++++++----\nFire Mode: Semi-Auto";
+		HUDMSG_FADEINOUT, 103, CR_WHITE, 3.0, 0.9, 10.6);
+	}
+}
+//P226//
+Script 43 (void)
+{
+	if(CheckWeapon("Cursor"))
+	{
+	AmbientSound("sound/SELECT", 127);
+TakeInventory("ColtM1911", 255);
+TakeInventory("SightsColtM1911", 255);
+GiveInventory("P226", 255);
+TakeInventory("SightsP226", 255);
+TakeInventory("RagingBull", 255);
+TakeInventory("SightsRagingBull", 255);
+TakeInventory("Glock20", 255);
+TakeInventory("SightsGlock20", 255);
+hudmessage(s:"P226 Selected";
+HUDMSG_FADEINOUT, 3, CR_White, 3.0, 0.6, 3.1);
+
+}
+	else if(CheckWeapon("Cursor_Info"))
+	{
+		HudMessage(s:"[P226]\nDamage: +++++-----\nAccuracy: +++++++++-\nFire Rate: ++++++----\nFire Mode: Semi-Auto";
+		HUDMSG_FADEINOUT, 103, CR_WHITE, 3.0, 0.9, 10.6);
+	}
+}
+//Raging Bull//
+Script 44 (void)
+{
+	If(CheckWeapon("Cursor"))
+	{
+	AmbientSound("sound/SELECT", 127);
+TakeInventory("ColtM1911", 255);
+TakeInventory("SightsColtM1911", 255);
+TakeInventory("P226", 255);
+TakeInventory("SightsP226", 255);
+GiveInventory("RagingBull", 255);
+TakeInventory("SightsRagingBull", 255);
+TakeInventory("Glock20", 255);
+TakeInventory("SightsGlock20", 255);
+hudmessage(s:"Raging Bull Selected";
+HUDMSG_FADEINOUT, 3, CR_White, 3.0, 0.6, 3.1);
+
+}
+	else if(CheckWeapon("Cursor_Info"))
+	{
+		HudMessage(s:"[Raging Bull]\nDamage: ++++++----\nAccuracy: ++--------\nFire Rate: ++++------\nFire Mode: Semi-Auto";
+		HUDMSG_FADEINOUT, 103, CR_WHITE, 3.0, 0.9, 10.6);
+	}
+}
+//Glock 20//
+Script 45 (void)
+{
+	If(CheckWeapon("Cursor"))
+	{
+	AmbientSound("sound/SELECT", 127);
+TakeInventory("ColtM1911", 255);
+TakeInventory("SightsColtM1911", 255);
+TakeInventory("P226", 255);
+TakeInventory("SightsP226", 255);
+TakeInventory("RagingBull", 255);
+TakeInventory("SightsRagingBull", 255);
+GiveInventory("Glock20", 255);
+TakeInventory("SightsGlock20", 255);
+hudmessage(s:"Glock 20 Selected";
+HUDMSG_FADEINOUT, 3, CR_White, 3.0, 0.6, 3.1);
+
+}
+	else if(CheckWeapon("Cursor_Info"))
+	{
+		HudMessage(s:"[Glock 20]\nDamage: ++++------\nAccuracy: +++++++++-\nFire Rate: ++++++----\nFire Mode: Semi-Auto";
+		HUDMSG_FADEINOUT, 103, CR_WHITE, 3.0, 0.9, 10.6);
+	}
+}
+//Eqipment//
+//Frag Grenade//
+Script 46 (void)
+{
+	If(CheckWeapon("Cursor"))
+	{
+	AmbientSound("sound/SELECT", 127);
+GiveInventory("FragGrenade", 255);
+TakeInventory("PlasmaGrenade", 255);
+TakeInventory("Swarmers", 255);
+TakeInventory("DeployableShield", 255);
+hudmessage(s:"Frag Grenade Selected";
+HUDMSG_FADEINOUT, 3, CR_White, 3.0, 0.6, 3.1);
+
+}
+	else if(CheckWeapon("Cursor_Info"))
+	{
+		HudMessage(s:"[Frag Grenade]\nProduces lethal radius damage upon detonation. Explodes on Human Contact\nTrigger: Pull Pin\nFire Mode: Thrown";
+		HUDMSG_FADEINOUT, 103, CR_WHITE, 3.0, 0.9, 10.6);
+	}
+}
+//Plamsa Grenade//
+Script 47 (void)
+{
+	If(CheckWeapon("Cursor"))
+	{
+	AmbientSound("sound/SELECT", 127);
+TakeInventory("FragGrenade", 255);
+GiveInventory("PlasmaGrenade", 255);
+TakeInventory("Swarmers", 255);
+TakeInventory("DeployableShield", 255);
+hudmessage(s:"Plasma Grenade Selected";
+HUDMSG_FADEINOUT, 3, CR_White, 3.0, 0.6, 3.1);
+}
+	else if(CheckWeapon("Cursor_Info"))
+	{
+		HudMessage(s:"[Plasma Grenade]\nReleases Small Plasma Projetiles in Random Directions Dealing High Damage. Explodes on Impact\nTrigger:Pull Pin\nFire Mode: Thrown";
+		HUDMSG_FADEINOUT, 103, CR_WHITE, 3.0, 0.9, 10.6);
+	}
+}
+//Swarmers//
+Script 48 (void)
+{
+	if(CheckWeapon("Cursor"))
+	{
+	AmbientSound("sound/SELECT", 127);
+TakeInventory("FragGrenade", 255);
+TakeInventory("PlasmaGrenade", 255);
+GiveInventory("Swarmers", 255);
+TakeInventory("DeployableShield", 255);
+hudmessage(s:"Swarmers Selected";
+HUDMSG_FADEINOUT, 3, CR_White, 3.0, 0.6, 3.1);
+}
+	else if(CheckWeapon("Cursor_Info"))
+	{
+		HudMessage(s:"[Swarmers]\nReleases Small Razorz Mites That Slice Through Enemies Dealing Small Damage. Explodes On Impact\nTrigger: Pull Pin\nFire Mode: Thrown";
+		HUDMSG_FADEINOUT, 103, CR_WHITE, 3.0, 0.9, 10.6);
+	}
+}
+//Deployable Shield//
+Script 49 (void)
+{
+	IF(CheckWeapon("Cursor"))
+	{
+	AmbientSound("sound/SELECT", 127);
+TakeInventory("FragGrenade", 255);
+TakeInventory("PlasmaGrenade", 255);
+TakeInventory("Swarmers", 255);
+GiveInventory("DeployableShield", 255);
+hudmessage(s:"DeployableShield Selected";
+HUDMSG_FADEINOUT, 3, CR_White, 3.0, 0.6, 3.1);
+}
+	else if(CheckWeapon("Cursor_Info"))
+	{
+		HudMessage(s:"[Deployable Shield]\nHolographic Shield That Blocks Bullets And Projectiles. Lasts For 35 Seconds\nTrigger: Charges\nFire Mode: Placed";
+		HUDMSG_FADEINOUT, 103, CR_WHITE, 3.0, 0.9, 10.6);
+	}
+}
+//PowerGums//
+//Out Of Sight//
+Script 50 (void)
+
+{
+	if(CheckWeapon("Cursor"))
+	{
+	AmbientSound("sound/SELECT", 127);
+GiveInventory("CP_OutOfSight", 2);
+TakeInventory("CP_LightsOn", 255);
+TakeInventory("CP_ConcealedFighter", 255);
+TakeInventory("CP_WalkingTank", 255);
+TakeInventory("CP_Vampirism", 255);
+TakeInventory("CP_LimitlessClip", 255);
+hudmessage(s:"Out Of Sight Selected";
+HUDMSG_FADEINOUT, 3, CR_White, 3.0, 0.6, 3.1);
+}
+	else if(CheckWeapon("Cursor_Info"))
+	{
+		HudMessage(s:"[Out of Sight]\nActivation: 2x Player Activated\nDuration: 20 Seconds Each\nEffect: All Enemies Run Away From You";
+		HUDMSG_FADEINOUT, 103, CR_WHITE, 3.0, 0.9, 10.6);
+	}
+}
+//Lights On//
+Script 51 (void)
+
+{
+	if(CheckWeapon("Cursor"))
+	{
+	AmbientSound("sound/SELECT", 127);
+TakeInventory("CP_OutOfSight", 255);
+GiveInventory("CP_LightsOn", 2);
+TakeInventory("CP_ConcealedFighter", 255);
+TakeInventory("CP_WalkingTank", 255);
+TakeInventory("CP_Vampirism", 255);
+TakeInventory("CP_LimitlessClip", 255);
+hudmessage(s:"Lights On Selected";
+HUDMSG_FADEINOUT, 3, CR_White, 3.0, 0.6, 3.1);
+}
+	else if(CheckWeapon("Cursor_Info"))
+	{
+		HudMessage(s:"[Lights On]\nActivation: 2x Player Activated\nDuration: 1 Minute Each\nEffect: Lights Up The Entire Map";
+		HUDMSG_FADEINOUT, 103, CR_WHITE, 3.0, 0.9, 10.6);
+	}
+}
+//Concealed Fighter//
+Script 52 (void)
+
+{
+	if(CheckWeapon("Cursor"))
+	{
+	AmbientSound("sound/SELECT", 127);
+TakeInventory("CP_OutOfSight", 255);
+TakeInventory("CP_LightsOn", 255);
+GiveInventory("CP_ConcealedFighter", 2);
+TakeInventory("CP_WalkingTank", 255);
+TakeInventory("CP_Vampirism", 255);
+TakeInventory("CP_LimitlessClip", 255);
+hudmessage(s:"Concealed Fighter Selected";
+HUDMSG_FADEINOUT, 3, CR_White, 3.0, 0.6, 3.1);
+}
+	else if(CheckWeapon("Cursor_Info"))
+	{
+		HudMessage(s:"[Concealed Fighter]\nActivation: 2x Player Activated\nDuration: 30 Seconds Each\nEffect: Enemy Accuracy Becomes Diminished";
+		HUDMSG_FADEINOUT, 103, CR_WHITE, 3.0, 0.9, 10.6);
+	}
+}
+//Walking Tank//
+Script 53 (void)
+
+{
+	if(CheckWeapon("Cursor"))
+	{
+	AmbientSound("sound/SELECT", 127);
+TakeInventory("CP_OutOfSight", 255);
+TakeInventory("CP_LightsOn", 255);
+TakeInventory("CP_ConcealedFighter", 255);
+GiveInventory("CP_WalkingTank", 2);
+TakeInventory("CP_Vampirism", 255);
+TakeInventory("CP_LimitlessClip", 255);
+hudmessage(s:"Walking Tank Selected";
+HUDMSG_FADEINOUT, 3, CR_White, 3.0, 0.6, 3.1);
+}
+	else if(CheckWeapon("Cursor_Info"))
+	{
+		HudMessage(s:"[Walking Tank]\nActivation: 2x Player Activation\nDuration: 30 Seconds Each\nEffect: All Damage You Take Is Reduced to 1.5";
+		HUDMSG_FADEINOUT, 103, CR_WHITE, 3.0, 0.9, 10.6);
+	}
+}
+//Vampirism//
+Script 54 (void)
+
+{
+	if(CheckWeapon("Cursor"))
+	{
+	AmbientSound("sound/SELECT", 127);
+TakeInventory("CP_OutOfSight", 255);
+TakeInventory("CP_LightsOn", 255);
+TakeInventory("CP_ConcealedFighter", 255);
+TakeInventory("CP_WalkingTank", 255);
+GiveInventory("CP_Vampirism", 2);
+TakeInventory("CP_LimitlessClip", 255);
+hudmessage(s:"Vampirism Selected";
+HUDMSG_FADEINOUT, 3, CR_White, 3.0, 0.6, 3.1);
+}
+	else if(CheckWeapon("Cursor_Info"))
+	{
+		HudMessage(s:"[Vampirism]\nActivation: 2x Player Activated\nDuration: 30 Seconds\nEffect: Regenerate Health By Damaging Enemies";
+		HUDMSG_FADEINOUT, 103, CR_WHITE, 3.0, 0.9, 10.6);
+	}
+}
+//Limitless Clip//
+Script 55 (void)
+
+{
+	if(CheckWeapon("Cursor"))
+	{
+	AmbientSound("sound/SELECT", 127);
+TakeInventory("CP_OutOfSight", 255);
+TakeInventory("CP_LightsOn", 255);
+TakeInventory("CP_ConcealedFighter", 255);
+TakeInventory("CP_WalkingTank", 255);
+TakeInventory("CP_Vampirism", 255);
+GiveInventory("CP_LimitlessClip", 2);
+hudmessage(s:"Limitless Clip Selected";
+HUDMSG_FADEINOUT, 3, CR_White, 3.0, 0.6, 3.1);
+}
+	else if(CheckWeapon("Cursor_Info"))
+	{
+		HudMessage(s:"[Limitless Clip]\nActivation: 2x Player Activated\nDuration: 1 Minute\nEffect: Unlimited Ammo For All Weapons and Equipment";
+		HUDMSG_FADEINOUT, 103, CR_WHITE, 3.0, 0.9, 10.6);
+	}
+}
+
+Script 2 (void)//Select the next mission
+{
+	if (CheckInventory("mission_confirmation") == 1)
+	{
+		ChangeLevel("Map03", 0, CHANGELEVEL_NOINTERMISSION, -1);//Chapter 1 Mission 2
+	}
+	else if (CheckInventory("mission_confirmation") == 2)
+	{
+		ChangeLevel("Map04", 0, CHANGELEVEL_NOINTERMISSION, -1);//Chapter 1 Mission 3
+	}
+	else if (CheckInventory("mission_confirmation") == 3)
+	{
+		ChangeLevel("Map05", 0, CHANGELEVEL_NOINTERMISSION, -1);//Chapter 1 Mission 4
+	}
+}
+
+Script 3 (void)//Save your game 
+
+{
+	HudMessage(s:"\cuPress \ck", k:"+use", s:" \cu to Save Progress";
+	HUDMSG_FADEINOUT, 6, CR_White, 3.0, 0.7, 5.0);
+}
+
+Script 4 (void)
+
+{
+	HudMessage(s:"Saving..";
+	HUDMSG_FADEINOUT, 6, CR_White, 3.0, 0.7, 5.0);
+	delay(4);
+	Autosave();
+	delay(1);
+	HudMessage(s:"Game Saved!";
+	HUDMSG_FADEOUT, 6, CR_White, 3.0, 0.7, 3.0);
+}

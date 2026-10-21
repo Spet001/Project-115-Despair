@@ -1,0 +1,166 @@
+#include "zcommon.acs"
+
+int stage = 1;
+int shots_fired = 0;
+
+Script 1 ENTER
+{
+	SetActorPitch(1337, 0);
+	SetActorAngle(1337, 0.25);
+	GiveInventory("ARCJasper", 999);
+	SetWeapon("ARCJasper");
+	ChangeCamera(1,1,0);
+	delay(1);
+	restart;
+}
+
+Script 2 ENTER
+{
+		SetMusic("ARCMUS3");
+	Thing_ChangeTID(0, 1337);
+}
+
+script 7 (void)
+{
+	AmbientSound("sound/ARCFIRE", 127);
+	shots_fired ++;
+}
+
+int tic = 20;
+Script 3 enter
+{
+SpawnSpotForced("ARC3Zombie", 2, 100, 0);
+delay(tic);
+SpawnSpotForced("ARC3Zombie", 2, 100, 0);
+delay(tic);
+SpawnSpotForced("ARC3Zombie", 2, 100, 0);
+delay(tic);
+SpawnSpotForced("ARC3Zombie", 2, 100, 0);
+delay(tic);
+SpawnSpotForced("ARC3Zombie", 2, 100, 0);
+delay(tic);
+SpawnSpotForced("ARC3Zombie", 2, 100, 0);
+delay(tic);
+SpawnSpotForced("ARC3Zombie", 2, 100, 0);
+delay(tic);
+SpawnSpotForced("ARC3Zombie", 2, 100, 0);
+delay(tic);
+SpawnSpotForced("ARC3Zombie", 2, 100, 0);
+delay(tic);
+SpawnSpotForced("ARC3Zombie", 2, 100, 0);
+delay(tic);
+SpawnSpotForced("ARC3Zombie", 2, 100, 0);
+delay(tic);
+SpawnSpotForced("ARC3Zombie", 2, 100, 0);
+delay(tic);
+SpawnSpotForced("ARC3Zombie", 2, 100, 0);
+delay(tic);
+SpawnSpotForced("ARC3Zombie", 2, 100, 0);
+delay(tic);
+SpawnSpotForced("ARC3Zombie", 2, 100, 0);
+delay(tic);
+SpawnSpotForced("ARC3Zombie", 2, 100, 0);
+delay(tic);
+SpawnSpotForced("ARC3Zombie", 2, 100, 0);
+delay(tic);
+SpawnSpotForced("ARC3Zombie", 2, 100, 0);
+delay(tic);
+SpawnSpotForced("ARC3Zombie", 2, 100, 0);
+delay(tic);
+SpawnSpotForced("ARC3Zombie", 2, 100, 0);
+delay(tic);
+SpawnSpotForced("ARC3Zombie", 2, 100, 0);
+delay(tic);
+SpawnSpotForced("ARC3Zombie", 2, 100, 0);
+delay(tic);
+SpawnSpotForced("ARC3Zombie", 2, 100, 0);
+delay(tic);
+SpawnSpotForced("ARC3Zombie", 2, 100, 0);
+delay(tic);
+SpawnSpotForced("ARC3Zombie", 2, 100, 0);
+delay(tic);
+SpawnSpotForced("ARC3Zombie", 2, 100, 0);
+delay(tic);
+SpawnSpotForced("ARC3Zombie", 2, 100, 0);
+delay(tic);
+SpawnSpotForced("ARC3Zombie", 2, 100, 0);
+delay(tic);
+SpawnSpotForced("ARC3Zombie", 2, 100, 0);
+delay(tic);
+SpawnSpotForced("ARC3Zombie", 2, 100, 0);
+delay(tic);
+SpawnSpotForced("ARC3Zombie", 2, 100, 0);
+delay(tic);
+SpawnSpotForced("ARC3Zombie", 2, 100, 0);
+delay(tic);
+SpawnSpotForced("ARC3Zombie", 2, 100, 0);
+delay(tic);
+SpawnSpotForced("ARC3Zombie", 2, 100, 0);
+delay(tic);
+SpawnSpotForced("ARC3Zombie", 2, 100, 0);
+delay(tic);
+SpawnSpotForced("ARC3Zombie", 2, 100, 0);
+delay(tic);
+SpawnSpotForced("ARC3Zombie", 2, 100, 0);
+delay(tic);
+SpawnSpotForced("ARC3Zombie", 2, 100, 0);
+delay(tic);
+SpawnSpotForced("ARC3Zombie", 2, 100, 0);
+delay(tic);
+SpawnSpotForced("ARC3Zombie", 2, 100, 0);
+delay(tic);
+stage ++;
+AmbientSound("sound/STAGE", 127);
+Tic --;
+restart;
+}
+
+Script 6 ENTER
+{
+	delay(50);
+	SpawnSpot("Prop_Skulls", Random(26, 60), 0, 0);
+	restart;
+}
+
+script 8 ENTER
+    
+{
+	if(PlayerNumber()==0)
+        {
+            If(GetActorProperty(1337,APROP_Health)>0)
+			SetFont("BigFont");
+			HudMessageBold(s:"Score";
+			HUDMSG_PLAIN, 3, CR_WHITE, 0.9, 0.1, 1.0);
+			HudMessageBold(d: CheckactorInventory(1337, "money");
+			HUDMSG_PLAIN, 1, CR_PURPLE, 0.9, 0.2, 1.0);
+			HudMessageBold(s:"Stage";
+			HUDMSG_PLAIN, 4, CR_WHITE, 0.9, 0.3, 1.0);
+			HudMessageBold(d: Stage;
+			HUDMSG_PLAIN, 2, CR_Green, 0.9, 0.4, 1.0);
+			HudMessageBold(s:"Shots Fired";
+			HUDMSG_PLAIN, 5, CR_White, 0.9, 0.5, 1.0);
+			HudMessageBold(d: shots_fired;
+			HUDMSG_PLAIN, 6, CR_RED, 0.9, 0.6, 1.0);
+				{
+					delay(1);
+					{
+					restart;
+			}
+		}
+	}
+}
+
+Script 9 DEATH
+{
+	SetMusic("");
+	AmbientSound("sound/ARCDETH", 127);
+	delay(140);
+	AmbientSound("sound/ARCDTMU", 127);
+	SetFont("BigFont");
+	HudMessageBold(s:"Game\nOVER!";
+	HUDMSG_PLAIN, 0, CR_WHITE, 3.0, 0.2, 7.0);
+	delay(200);
+	FadeTo(0,0,0,1.0,0.1);
+	delay(3);
+	ChangeLevel("Map01", 0, CHANGELEVEL_NOINTERMISSION, -1);
+}

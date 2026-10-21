@@ -1,0 +1,190 @@
+#include "zcommon.acs"
+
+script 1 enter
+{
+	ChangeSky("", "");
+	SetMusic("MUS_ARC1");
+    Thing_ChangeTID (0, 1337+PlayerNumber());
+	ClearInventory();
+	delay(1);
+	SetActorState(1337, "SEE", TRUE);
+	GiveActorInventory(1337, "BianchiFA-6", 1);
+	SetActorProperty(1337, APROP_JumpZ, 100);
+	delay(26);
+		SetFont("BigFont");
+	HudMessageBold(s:"You're not alone on this highway!";
+	HUDMSG_FADEINOUT, 0, CR_RED, 3.0, 0.30, 10.0);
+	Delay(40);
+	SetFont("SmallFont");
+	HudMessageBold(s:"\cj'\ci", k:"+MOVELEFT", s:"\cj'\cl to move left and \cj'\ci", k:"+moveright", s:"\cj'\cl to move right";
+	HUDMSG_FADEINOUT, 0, CR_RED, 3.0, 0.40, 7.0);
+	HudMessageBold(s:"\cj'\ci",k:"+attack", s:"\cj'\cl To fire your weapon";
+	HUDMSG_FADEINOUT, 0, CR_RED, 3.0, 0.46, 7.0);
+	delay(350);
+	SetFont("SmallFont");
+	HudMessageBold(s:"Be careful on how close you kill zombies. They Explode!";
+	HUDMSG_FADEINOUT, 0, CR_RED, 3.0, 0.30, 5.0);
+	delay(230);
+	SetFont("BigFont");
+	HudMessageBold(s:"Good Luck!";
+	HUDMSG_FADEINOUT, 0, CR_RED, 3.0, 0.30, 3.0);
+	delay(200);
+	ACS_Execute(5,0,0,0,0);
+	ACS_Execute(6,0,0,0,0);
+}
+
+script 2 ENTER
+{
+ int buttons;
+
+ while (TRUE)
+ {
+   buttons = GetPlayerInput(-1, INPUT_BUTTONS);
+
+   if (buttons & BT_MOVERIGHT && (ThingCountSector(T_NONE, 1337, 3) == 1))
+   {
+     Thing_Move(1337, 2, 1);
+	 Thing_Move(4, 6, 1);
+   }
+   if (buttons & BT_MOVERIGHT && (ThingCountSector(T_NONE, 1337, 2) == 1))
+   {
+     Thing_Move(1337, 2, 1);
+	 Thing_Move(4, 6, 1);
+   }
+   if (buttons & BT_MOVELEFT && (ThingCountSector(T_NONE, 1337, 2) == 1))
+   {
+     Thing_Move(1337, 3, 1);
+	 Thing_Move(4, 5, 1);
+   }
+   if (buttons & BT_MOVELEFT && (ThingCountSector(T_NONE, 1337, 3) == 1))
+   {
+     Thing_Move(1337, 3, 1);
+	 Thing_Move(4, 5, 1);
+   }
+   delay(1);
+ }
+}
+
+Script 3 ENTER
+{
+	ChangeCamera(4, 1, 0);
+delay(1);
+restart;
+}
+
+int ScrollSpeed = -400;
+Script 4 ENTER
+{
+	Scroll_Floor(1, 0, ScrollSpeed, SCROLL_AND_CARRY);
+	Scroll_Floor(2, 0, ScrollSpeed, SCROLL_AND_CARRY);
+	Scroll_Floor(3, 0, ScrollSpeed, SCROLL_AND_CARRY);
+	Scroll_Floor(8, 0, ScrollSpeed, SCROLL_AND_CARRY);
+	delay(10);
+	ScrollSpeed --;
+	restart;
+}
+int t;
+script 5 (void)
+{
+	while(TRUE)
+	{
+		t = Timer() / 35;
+		SetFont("BigFont");
+		HudMessage(d:t/60, s:":", d:(t%60)/10, d:t%10;
+			HUDMSG_PLAIN, 1, CR_White, 0.95, 0.95, 2.0);
+	HudMessage(s:"Kills";
+   HUDMSG_PLAIN,10,CR_RED,0.95, 0.75,2.0);
+   HudMessage(s:"Points";
+   HUDMSG_PLAIN,11,CR_RED,0.80, 0.75,2.0);
+   HudMessage(d: CheckactorInventory(1337, "Kills");HUDMSG_PLAIN,12,CR_WHITE,0.95, 0.81,2.0);
+   HudMessage(d: CheckactorInventory(1337, "Points");HUDMSG_PLAIN,13,CR_WHITE,0.80, 0.81,2.0);
+		Delay(35);
+	}
+}
+int DelaySpeed = 30;
+Script 6 (void)
+{
+	SpawnSpotFacingForced("Highyway_FastZombie1", Random(9, 10), 100);
+	delay(DelaySpeed);
+	SpawnSpotFacingForced("HighWay_FastZombie2", Random(9, 10), 100);
+	delay(DelaySpeed);
+	delay(1);
+	DelaySpeed --;
+	delay(34);
+	restart;
+}
+
+Script 7 ENTER
+{
+	Thing_SetGoal(100, 11, 0, 0);
+	SetActorPitch(1337, 0);
+	SetActorAngle(1337, 0.25);
+	GiveActorInventory(1337, "BianchiFA-6Ammo", 999);
+	delay(1);
+	restart;
+}
+
+Script 8 (void)
+{
+	if(ThingCountSector(T_NONE, 1337, 3) == 1)
+	{
+		Thing_Destroy(1337, 999, 0);
+	}
+}
+
+Script 9 (void)
+{
+	if(ThingCountSector(T_NONE, 1337, 2) == 1)
+	{
+		Thing_Destroy(1337, 999, 0);
+	}
+}
+
+script 10 death
+
+{
+If(GetActorProperty(1337,APROP_Health)<=0)
+   {
+	   SetActorState(1337, "Death", TRUE);
+		ACS_Terminate(5,0);
+		SetMusic("ARC_GO");
+	SetFont("BigFont");
+		HudMessageBold(s:"Game Over\nYou Survived For ", d:t/60, s:":", d:(t%60)/10, d:t%10;
+		HUDMSG_FADEINOUT, 0, CR_RED, 3.0, 0.25, 6.0);
+		SetFont("SmallFont");
+		   HudMessage(s:"Kills";
+   HUDMSG_FADEINOUT,10,CR_RED,1.35, 0.4,6.0);
+   HudMessage(s:"Points";
+   HUDMSG_FADEINOUT,11,CR_RED,1.65, 0.4,6.0);
+   HudMessage(d: CheckactorInventory(1337, "Kills");HUDMSG_FADEINOUT,12,CR_WHITE,1.35, 0.46,6.0);
+   HudMessage(d: CheckactorInventory(1337, "Points");HUDMSG_FADEINOUT,13,CR_WHITE,1.65, 0.46,6.0);
+		delay(200);
+		FadeTo(0,0,0,1.0, 4.0);
+		delay(200);
+		ChangeLevel("Map01", 0, CHANGELEVEL_NOINTERMISSION, -1);
+}
+}
+
+
+Script 12 (void)
+{
+Thing_Hate(100, 1337, 0);
+Thing_ChangeTID(100, 101);
+delay(300);
+Thing_ChangeTID(101, 102);
+delay(1);
+Thing_Remove(102);
+}
+
+Script 13 enter
+{
+	SpawnSpotFacingForced("PLANT1", Random(12, 17), 100);
+	delay(25);
+	SpawnSpotFacingForced("PLANT2", Random(12, 17), 100);
+	delay(25);
+	SpawnSpotFacingForced("PLANT3", Random(12, 17), 100);
+	delay(25);
+	SpawnSpotFacingForced("PLANT4", Random(12, 17), 100);
+	delay(25);
+	restart;
+}

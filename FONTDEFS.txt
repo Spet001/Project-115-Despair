@@ -1,0 +1,5 @@
+// SmallFont
+SmallFont
+{
+  Template DLGFN%03d
+}

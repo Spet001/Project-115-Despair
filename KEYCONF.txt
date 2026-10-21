@@ -1,0 +1,22 @@
+weaponsection Project 115 Weapons
+setslot 0 Knife FragGrenade PlasmaGrenade Swarmers RadiationGrenade DeployableShield AssaultShield VoidSword
+setslot 1 ColtM1911	PAPColtM1911 GLOCK20 PAPGLOCK20 P226 PAPP226 RagingBull PAPRagingBull B23R PAPB23R
+setslot 2 AK-12 PAPAK-12 M-14 PAPM-14 AN-94 PAPAN-94 GALIL PAPGALIL SWAT557 PAPSWAT M8A5 PAPM8A5
+setslot 3 G36-C PAPG36-C UZI PAPUZI MP5 PAPMP5 OS-40 PAPOS-40
+setslot 4 Olympia PAPOlympia KS-23 PAPKS-23 M3SUPER PAPM3SUPER Carbon-26 PAPCarbon-26
+setslot 5 M-24 PAPM-24 M-82	PAPM-82 SKS PAPSKS
+setslot 6 STORMPRX PAPSTORMPRX OHM PAPOHM BianchiFA-6 PAPBianchiFA-6
+setslot 7 RPG PAPRPG MX-GL PAPMX-GL
+setslot 8 RayGun PAPRayGun RaygunMarkII PAPRaygunMarkII X4-Jasper PAPX4-Jasper NavajoCyclerRifle PAPNavajoCyclerRifle StaffofFire StaffofIce StaffofLightning
+
+clearplayerclasses
+
+// Add your player class to the list
+//Campaign
+addplayerclass Jason
+//Survival
+addplayerclass Zachery
+addplayerclass Faith
+addplayerclass Darwin
+addplayerclass Evan
+addplayerclass Otekah

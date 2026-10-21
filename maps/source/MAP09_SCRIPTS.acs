@@ -1,0 +1,423 @@
+#include"Zcommon.acs"
+script 80 ENTER
+{
+	Thing_ChangeTID (0, 1337+PlayerNumber());
+	ChangeSky("CMP_AGAR", "CMP_AGAR");
+}
+
+script 998 ENTER
+{//HEALTH REGENERATION
+    int health = GetActorProperty(1337, APROP_Health);
+
+    While(True)
+    {
+        {
+            //Constantly work while health is under 100
+            While(GetActorProperty(1337,APROP_Health)<100 && GetActorProperty(1337,APROP_Health)>=1)
+            {
+                //After each hit you take, wait for regeneration
+                If(GetActorProperty(1337,APROP_Health)<health)
+                {
+                HudMessage(s:"";HUDMSG_FADEOUT, 101, CR_RED, 240.0, 180.0, 0.1, 0.1);
+                }
+                health = GetActorProperty(1337, APROP_Health);
+                SetActorProperty(1337, APROP_Health, health + 1);
+                Delay(3);
+            }
+        }
+    Delay(1);
+    }
+}
+
+script 997 ENTER
+{//Indicate critial health level
+    While(True)
+	{
+            //Constantly work while health is under 30
+            if(GetActorProperty(1337,APROP_Health)<40 && GetActorProperty(1337,APROP_Health)>=1)
+                {
+                HudMessage(s:"Critical Health Level!";HUDMSG_FADEOUT, 1, CR_RED, 3.0, 0.2, 0.5);
+            }
+			 Delay(1);
+
+        }
+	}
+	
+script 996 ENTER
+{//Critical Health Sound
+    While(True)
+	{
+            //Constantly work while health is under 30
+            if(GetActorProperty(1337,APROP_Health)<40 && GetActorProperty(1337,APROP_Health)>=1)
+                {
+				ThingSound(1337, "sound/HLTHCRIT", 127);
+            }
+			 Delay(6);
+
+        }
+	}
+		
+
+script 995 death
+
+{
+
+If(GetActorProperty(1337,APROP_Health)<=0)
+
+    {
+    TakeActorInventory(1337, "HUD_ON", 1);
+setmusic("ZM_DEATH", 0, 0);
+AmbientSound("sound/SUITDIE", 127);
+fadeto(0, 0, 0, 1.0, 6.9);
+DELAY(380);
+setmusic("BOTKIL8", 0, 0);
+}
+}
+
+script 1 ENTER
+{
+	SetMusic("", 0);
+	GiveInventory("CP_MaxAmmo", 1);
+		SetActorPitch(1337, 0);
+	SetActorAngle(1337, 0.25);
+  Thing_Activate(1);
+ ChangeCamera(1,1,0);
+ delay(20);
+ AmbientSound("sound/SUITRGN", 80);
+ Delay(50);
+ AmbientSound("sound/PAIN_JAS", 80);
+ delay(100);
+ 	hudmessageBold(s:"[Jason]\n\cjI survived his shot.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 4.0);
+	AmbientSound("quote/C3M1Q1", 127);
+	delay(140);
+	hudmessageBold(s:"[Jason]\n\cjGlad I took the Exo-Resistance ability from a defective Exo-Suit and put in in my own.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 7.0);
+	AmbientSound("quote/C3M1Q2", 127);
+	delay(260);
+	hudmessageBold(s:"[Savion]\n\cjBut doesn't that heal wounds? Not dead people?.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 6.0);
+	AmbientSound("quote/C3M1Q3", 127);
+	delay(180);
+	hudmessageBold(s:"[Jason]\n\cjIt does, but seeing how I barely held on, it worked out just fine.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 6.5);
+	AmbientSound("quote/C3M1Q4", 127);
+         SetPlayerProperty(1, 0, PROP_TOTALLYFROZEN);
+        SetPlayerProperty(1, 0, PROP_FROZEN);
+            SetMusic("CMC_MUS", 0);
+    GiveInventory("HUD_ON", 1);
+	hudmessage(s:"Vengeance\nLocation: Ogrodolan\nJason Milito\nDate: June 5, 2019";
+	HUDMSG_TYPEON, 0, CR_GREEN, 2, 0.8, 7.0);
+	changecamera(0, 1, 0);
+     	SetPlayerProperty(1, OFF, PROP_TOTALLYFROZEN);
+}
+
+Script 200 (void)
+{
+	GiveInventory("CP_MaxAmmo", 1);
+	AmbientSound("sound/REAMMO", 127);
+}
+
+Script 201 (void)
+{
+hudmessage(s:"Press '",k:"+use", s:"' To Refill Ammo";
+HUDMSG_Fadeinout, 11, CR_WHITE, 3.0, 0.80, 5.4);
+}
+
+bool Teleport_Confirm;
+Script 2 (void)
+
+{
+	if (Teleport_Confirm == True)
+	{
+
+	}
+	else if (Teleport_Confirm == FALSE)
+	{
+		Teleport_Confirm = TRUE;
+		SetMusic("Action5", 0);
+	Thing_Remove(38);
+	hudmessageBold(s:"[Jason]\n\cjThere were switches that I needed to press to open the gateway to The Source.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 5.0);
+	AmbientSound("quote/C3M1Q5", 127);
+	delay(130);
+		hudmessage(s:"Location: Agartha";
+	HUDMSG_TYPEON, 0, CR_GREEN, 2, 0.8, 7.0);	
+	}
+}
+
+
+int switches = 0;
+Script 3 (void)
+{
+	switches ++;
+	AmbientSound("sound/SWITCH", 90);
+	Acs_Execute(4,0,0,0,0);
+}
+
+Script 4 (void)
+{
+	delay(3);
+If (Switches == 3)
+{
+	ACS_Execute(5,0,0,0,0);
+}
+}
+
+script 5 (void)
+{
+		Floor_LowerToLowest(37, 30);
+	AmbientSound("sound/ESTR_EN", 90);
+	delay(30);
+	hudmessageBold(s:"[Jason]\n\cjAll the switches were pressed. I returned back to were I came from, but there was something else opened.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 5.0);
+	AmbientSound("quote/C3M1Q6", 127);
+}
+
+script 6 (void)
+{
+	SetMusic("CMC_MUS", 0);
+}
+
+script 7 (void)
+{
+delay(6);
+SetActorAngle(1337, 0.75);
+SetActorPitch(1337, 0);
+delay(1);
+Thing_Move(1337, 50, 1);
+ACS_Execute(8,0,0,0,0);
+//ADS the weapons//
+	If(CheckInventory("ColtM1911"))
+	{
+		Setweapon("ColtM1911");
+		delay(35);
+		GiveInventory("CP_sightsColtM1911", 1);
+		Setweapon("CP_sightsColtM1911");
+		SetActorAngle(1337, 0.75);
+		SetActorPitch(1337, 0);
+		delay(1);
+		Thing_Move(1337, 50, 1);
+		ACS_Execute(8,0,0,0,0);
+		SetPlayerProperty(1,1,PROP_TOTALLYFROZEN);
+	}
+	else If(CheckInventory("P226"))
+	{
+		Setweapon("P226");
+		delay(35);
+		GiveInventory("CP_sightsP226", 1);
+		Setweapon("CP_sightsP226");
+		SetActorAngle(1337, 0.75);
+		SetActorPitch(1337, 0);
+		delay(1);
+		Thing_Move(1337, 50, 1);
+		ACS_Execute(8,0,0,0,0);
+		SetPlayerProperty(1,1,PROP_TOTALLYFROZEN);
+	}
+	else If(CheckInventory("RagingBull"))
+	{
+		Setweapon("RagingBull");
+		delay(35);
+		GiveInventory("CP_sightsRagingBull", 1);
+		Setweapon("CP_sightsRagingBull");
+		SetActorAngle(1337, 0.75);
+		SetActorPitch(1337, 0);
+		delay(1);
+		Thing_Move(1337, 50, 1);
+		ACS_Execute(8,0,0,0,0);
+		SetPlayerProperty(1,1,PROP_TOTALLYFROZEN);
+	}
+	else If(CheckInventory("GLOCK20"))
+	{
+		Setweapon("GLOCK20");
+		delay(35);
+		GiveInventory("CP_sightsGLOCK20", 1);
+		Setweapon("CP_sightsGLOCK20");
+		SetActorAngle(1337, 0.75);
+		SetActorPitch(1337, 0);
+		delay(1);
+		Thing_Move(1337, 50, 1);
+		ACS_Execute(8,0,0,0,0);
+		SetPlayerProperty(1,1,PROP_TOTALLYFROZEN);
+	}
+
+}
+
+script 8 (void)
+{
+    int buttons;
+    Delay(25);
+	Thing_Move(1337, 50, 1);
+	ACS_Execute(10,0,0,0,0);
+	SetActorAngle(1337, 0.75);
+	SetActorPitch(1337, 0);
+    While (true)
+    {
+        buttons = GetPlayerInput(-1, INPUT_BUTTONS);
+
+        if(buttons == BT_ATTACK)
+        {
+			GiveInventory("CP_AmmoFireTrue", 1);
+			Thing_Activate(52);
+			Thing_Damage(52, 500, MOD_EXIT);
+			delay(35);
+			Autosave();
+            SetPlayerProperty(1,1,PROP_TOTALLYFROZEN);
+			ACS_Execute(9,0,0,0,0);
+        }
+		else if(buttons == BT_USE)
+        {
+			Autosave();
+			ACS_Execute(11,0,0,0,0);
+			ACS_Terminate(10,0);
+			SetLineBlocking(2, BLOCK_NOTHING);
+			delay(6);
+			SetActorAngle(52, 0.75);
+			delay(6);
+			SetActorAngle(52, 1.0);
+			delay(6);
+			SetActorAngle(52, 0.25);
+			delay(6);
+			delay(6);
+			delay(35);
+            SetPlayerProperty(1,1,PROP_TOTALLYFROZEN);
+			delay(1);
+			ACS_Execute(20,0,0,0,0); //Try to find a way to make the player move forward
+			delay(120);
+			SetActorState(1337, "See", False);
+			ACS_Execute(12,0,0,0,0);
+        }
+        else
+        {
+            HudMessage(s:"Press \ci'",k:"+attack", s:"'\cj To Kill Danny\n\nPress \ci'",k:"+use", s:"'\cj To Spare Danny"; HUDMSG_PLAIN, 1, CR_WHITE, 3.0, 0.7, 0.1);
+        }
+        delay(1);
+    }
+
+}
+
+Script 9 (void)
+{
+		ACS_Terminate(10,0);
+		ACS_Terminate(8,0);
+		SetLineBlocking(2, BLOCK_NOTHING);
+		//Gonna have to make a different actor where it fires instantly
+		delay(35);
+		ACS_Execute(21,0,0,0,0);
+			hudmessageBold(s:"[Jason]\n\cjEasy kill. The Void Sword was mine.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 5.0);
+	AmbientSound("quote/C3M1Q7", 127);
+	TakeInventory("CP_sightsColtM1911", 999);
+	TakeInventory("CP_sightsP226", 999);
+	TakeInventory("CP_sightsRagingBull", 999);
+	TakeInventory("CP_sightsGlock20", 999);
+}
+
+Script 10 (void)
+{
+		SetActorAngle(1337, 0.75);
+		SetActorPitch(1337, 0);
+		Thing_Move(1337, 50, 1);
+		delay(1);
+		restart;
+}
+
+Script 11 (void)
+{
+		SetActorAngle(1337, 0.75);
+		SetActorPitch(1337, 0);
+		delay(1);
+		restart;
+}
+
+Script 12 (void)
+{
+	Acs_Terminate(8,0);
+	hudmessageBold(s:"[Jason]\n\cjI couldn't risk firing and missing. Either way, he knew I was there.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 5.0);
+	AmbientSound("quote/C3M1Q8", 127);
+	delay(170);
+	SetActorState(52, "TALKING", TRUE);
+	hudmessageBold(s:"[Jason]\n\cjDanny was surprised to see I survived. Even made me into a fool that I placed the necklace. All hell will break loose.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 7.0);
+	AmbientSound("quote/C3M1Q9", 127);
+	delay(280);
+	hudmessageBold(s:"[Jason]\n\cjA brief silence...";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 3.0);
+	AmbientSound("quote/C3M1Q10", 127);
+	delay(90);
+	SetActorState(52, "NOTALK", TRUE);
+	SetActorState(52, "RaiseWeapon", TRUE);
+	delay(71);
+	GiveInventory("CP_AmmoFireTrue", 1);//Gonna have to make a different actor where it fires instantly
+	delay(1);
+	Thing_Activate(52);
+	Thing_Damage(52, 500, MOD_EXIT);
+	delay(201);
+	hudmessageBold(s:"[Savion]\n\cjSo the Void Sword was now yours?";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 4.0);
+	AmbientSound("quote/C3M1Q11", 127);
+	delay(160);
+	//Move Forward
+	ACS_Execute(21,0,0,0,0);
+	TakeInventory("CP_sightsColtM1911", 999);
+	TakeInventory("CP_sightsP226", 999);
+	TakeInventory("CP_sightsRagingBull", 999);
+	TakeInventory("CP_sightsGlock20", 999);
+	hudmessageBold(s:"[Jason]\n\cjIndeed it was. Now..to fight The Source.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 4.0);
+	AmbientSound("quote/C3M1Q12", 127);
+	delay(70);
+	SetPlayerProperty(1,0,PROP_TOTALLYFROZEN);
+	AmbientSound("sound/REAMMO", 90);
+	ACS_Terminate(11,0);
+	SetWeapon("VoidSword");
+}
+
+script 13 (void)
+{
+		If(CheckInventory("VoidSword") == 1)
+	{
+		SetPlayerProperty(1, ON, PROP_TOTALLYFROZEN);
+			AmbientSound("sound/TELEPORT", 127);
+			fadeto(0,134,200, 1.0, 1.0);
+			GiveInventory("Mission_Confirmation", 1);
+			delay(150);
+			SetPlayerProperty(1, OFF, PROP_TOTALLYFROZEN);
+			ChangeLevel("Map29", 0, CHANGELEVEL_NOINTERMISSION, -1);
+	}
+	else If(CheckInventory("VoidSword") == 0)
+	{
+		hudmessage(s:"You need the Void Sword to continue";
+		HUDMSG_Fadeinout, 11, CR_WHITE, 3.0, 0.80, 3.0);
+	}
+}
+
+//First Movement//
+int Move = 0;
+Script 20 (void)
+{
+	While(True)
+	{
+		if(Move < 40)
+		{
+			ThrustThing(192, 1, 0, 1337);
+			Move ++;
+		}
+	delay(3);
+	}
+}
+
+//Second Movement//
+Script 21 (void)
+{
+	ThrustThing(192, 3, 0, 1337);
+	delay(3);
+	restart;
+}
+
+Script 22 (void)
+{
+	ACS_Terminate(21,0);
+	SetPlayerProperty(1, OFF, PROP_TOTALLYFROZEN);
+}

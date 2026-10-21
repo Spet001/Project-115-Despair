@@ -1,0 +1,300 @@
+
+//Dynamic Lights
+
+Pointlight ArchonComet1
+{
+Color 0.0 0.6 0.1
+Size 64
+}
+
+Pointlight ArchonComet2
+{
+Color 0.0 0.8 0.2
+Size 128
+}
+
+Pointlight ArchonComet3
+{
+Color 0.0 0.75 0.15
+Size 112
+}
+
+Pointlight ArchonComet4
+{
+Color 0.0 0.5 0.05
+Size 104
+}
+
+Pointlight ArchonComet5
+{
+Color 0.0 0.5 0.05
+Size 96
+}
+
+Pointlight ArchonComet6
+{
+Color 0.0 0.5 0.05
+Size 64
+}
+
+Object ArchonComet
+{
+Frame ARCBA { Light ArchonComet1 }
+Frame ARCBB { Light ArchonComet1 }
+Frame ARCBC { Light ArchonComet1 }
+Frame ARCBJ { Light ArchonComet2 }
+Frame ARCBK { Light ArchonComet3 }
+Frame ARCBL { Light ArchonComet4 }
+Frame ARCBM { Light ArchonComet5 }
+Frame ARCBN { Light ArchonComet6 }
+}
+
+Pointlight ArchonSoul1
+{
+Color 0.0 1.0 0.3
+Size 64
+}
+
+Pointlight ArchonSoul2
+{
+Color 0.0 1.0 0.3
+Size 56
+}
+
+Pointlight ArchonSoul3
+{
+Color 0.0 1.0 0.3
+Size 48
+}
+
+Pointlight ArchonSoul4
+{
+Color 0.0 1.0 0.3
+Size 40
+}
+
+Object ArchonSoul
+{
+Frame BFX1A { Light ArchonSoul1 }
+Frame BFX1B { Light ArchonSoul2 }
+Frame BFX1C { Light ArchonSoul3 }
+Frame BFX1D { Light ArchonSoul4 }
+}
+
+Pointlight UNMNBALRT
+{
+Color 1.0 0.2 0.0
+Size 35
+Offset 0 48 32
+}
+
+Pointlight UNMNBALLF
+{
+Color 1.0 0.2 0.0
+Size 35
+Offset 0 48 -32
+}
+
+PointLight UNMNRALR
+{
+color 1.0 0.0 0.0
+size 35
+offset 0 48 32
+}
+
+PointLight UNMNRALL
+{
+color 1.0 0.0 0.0
+size 35
+offset 0 48 -32
+}
+
+
+FlickerLight2 FallenLight
+{
+Color 1.0 0.5 0.2
+Size 128
+SecondarySize 64
+Interval 8
+}
+
+Pointlight FallenLight2
+{
+Color 1.0 0.5 0.2
+Size 96
+}
+
+Pointlight FallenLight3
+{
+Color 1.0 0.5 0.2
+Size 64
+}
+
+Pointlight FallenLight4
+{
+Color 1.0 0.5 0.2
+Size 32
+}
+
+Object Scarecrow
+{
+Frame FALNA { Light FallenLight }
+Frame FALNB { Light FallenLight }
+Frame FALNC { Light FallenLight }
+Frame FALND { Light FallenLight }
+Frame FALNE { Light FallenLight }
+Frame FALNF { Light FallenLight }
+Frame FALNG { Light FallenLight }
+Frame FALNH { Light FallenLight2 }
+Frame FALNI { Light FallenLight3 }
+Frame FALNJ { Light FallenLight4 }
+}
+
+
+Pointlight FallenShot
+{
+Color 0.8 0.4 0.2
+Size 32
+}
+
+Pointlight FallenShot2
+{
+Color 1.0 0.5 0.3
+Size 48
+}
+
+Pointlight FallenShot3
+{
+Color 0.8 0.4 0.2
+Size 40
+}
+
+Pointlight FallenShot4
+{
+Color 0.5 0.2 0.0
+Size 24
+}
+
+Pointlight FallenShot5
+{
+Color 0.3 0.15 0.0
+Size 16
+}
+
+Object FallenShot
+{
+Frame BALFA { Light FallenShot }
+Frame BALFB { Light FallenShot }
+Frame BALFC { Light FallenShot2 }
+Frame BALFD { Light FallenShot3 }
+Frame BALFE { Light FallenShot4 }
+Frame BALFF { Light FallenShot5 }
+}
+
+Flickerlight2 WickedballA
+{
+ Color 1.0 0.0 0.0
+ Offset 0 4 0
+ Size 20
+ SecondarySize 25
+ Interval 0.005
+}
+
+Flickerlight2 WickedballB
+{
+ Color 1.0 0.0 0.0
+ Offset 0 4 0
+ Size 30
+ SecondarySize 35
+ Interval 0.005
+}
+
+Flickerlight2 WickedballJ
+{
+ Color 0.9 0.0 0.0
+ Offset 0 4 0
+ Size 50
+ SecondarySize 55
+ Interval 0.005
+}
+
+Flickerlight2 WickedballK
+{
+ Color 0.8 0.0 0.0
+ Offset 0 4 0
+ Size 55
+ SecondarySize 60
+ Interval 0.005
+}
+
+Flickerlight2 WickedballL
+{
+ Color 0.4 0.0 0.0
+ Offset 0 4 0
+ Size 58
+ SecondarySize 64
+ Interval 0.005
+}
+
+Flickerlight2 WickedballM
+{
+ Color 0.2 0.0 0.0
+ Offset 0 4 0
+ Size 60
+ SecondarySize 66
+ Interval 0.005
+}
+
+Flickerlight2 WickedballN
+{
+ Color 0.1 0.0 0.0
+ Offset 0 4 0
+ Size 61
+ SecondarySize 67
+ Interval 0.005
+}
+
+Object Wickedshot
+{
+ Frame WIBLA { Light WickedballA }
+ Frame WIBLB { Light WickedballB }
+ Frame WIBLC { Light WickedballA }
+ Frame WIBLD { Light WickedballB }
+ Frame WIBLJ { Light WickedballJ }
+ Frame WIBLK { Light WickedballK }
+ Frame WIBLL { Light WickedballL }
+ Frame WIBLM { Light WickedballM }
+ Frame WIBLN { Light WickedballN }
+}
+
+pointlight Rail
+{
+    color 1.0 0.7 0.0
+    size 24
+}
+
+object railtrail
+{
+    frame MISLB { light Rail }
+    frame MISLC { light Rail }
+    frame MISLD { light Rail }
+}
+
+object railpow
+{
+    frame MISLB { light Rail }
+    frame MISLC { light Rail }
+    frame MISLD { light Rail }
+}
+
+Object Grenade_Radiation
+
+{
+Frame NDE3E { Light Radiation_Light }
+}
+
+Pointlight Radiation_Light
+{
+Color 0.0 1.0 0.2
+Size 95
+}

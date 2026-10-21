@@ -1,0 +1,35 @@
+
+warp2 texture HYWATER
+warp2 texture HYNUKE
+
+switch SW1STNE1 on pic SW2STNE1 tics 0
+switch SW1STNE2 on pic SW2STNE2 tics 0
+switch SW1SKUL2 on pic SW2SKUL2 tics 0
+
+flat fan1
+	pic fan1 tics 1
+	pic fan2 tics 1
+	pic fan3 tics 1
+	pic fan4 tics 1
+
+flat bwater1
+	pic bwater1 tics 8
+	pic bwater2 tics 8
+	pic bwater3 tics 8
+	pic bwater4 tics 8
+
+texture bbfall1
+	pic bbfall1 tics 8
+	pic bbfall2 tics 8
+	pic bbfall3 tics 8
+	pic bbfall4 tics 8
+
+texture snuke1
+	pic snuke1 tics 8
+	pic snuke2 tics 8
+	pic snuke3 tics 8
+
+warp flat wslime01
+warp flat wblood1
+warp flat wfwater1
+warp flat wqlava

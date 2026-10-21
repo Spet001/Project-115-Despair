@@ -1,0 +1,1105 @@
+//Weapon Sounds//
+weapon/AK-12	AK-12
+weapon/AN-94	AN-94
+weapon/COLTM19	COLTM19
+weapon/G36-C	G36-C
+weapon/GALIL	GALIL
+weapon/GLOCK20	GLOCK20
+weapon/KS-23	KS-23
+weapon/M3SUPER	M3SUPER
+weapon/M14	M14
+weapon/M24	M24
+weapon/M82	M82
+weapon/UZI	UZI
+weapon/SWAT	SWAT
+weapon/STORMPRX	STORMPRX
+weapon/OHM	OHM
+weapon/BIAN	BIAN
+weapon/MP5	MP5
+weapon/P226	P226
+weapon/BULL	BULL
+weapon/CARB	CARB	
+weapon/SKS	SKS
+weapon/CYCLER	CYCLER
+weapon/raygunmark2		RAYM2FIR
+weapon/X4-Jasper	X4JSP
+weapon/OS-40	OS-40
+weapon/OLYMP	OLYMP
+weapon/M8A5	M8A5
+weapons/RPG		RPG
+weapon/MX-GL	MX-GL
+weapon/B23R		B23R
+weapon/Rayshot	Rayshot
+weapons/BOOM	BOOM
+sound/RPGREL	RPGREL
+
+//PowerUp Sounds//
+powerup/MAXAMMO		 	MAXAMMO
+powerup/NUKEBOOM		NUKEBOOM
+powerup/BPOINTS			BPOINTS
+powerup/DEATHMAC		DEATHMAC
+powerup/HAMMER			HAMMER
+powerup/FLOAT		 	FLOAT
+powerup/POWPICK		 	POWPICK
+$random powerup/SPAWN { POW/SPAWN1 POW/SPAWN2 POW/SPAWN3 }
+
+POW/SPAWN1	PWRSPWN1
+POW/SPAWN2	PWRSPWN2
+POW/SPAWN3 	PWRSPWN3
+
+
+//Knife Sounds
+$random weapons/SLASH { SLSH1/SLSH1 SLSH2/SLSH2 }
+
+SLSH1/SLSH1	SLASH1
+SLSH2/SLSH2 SLASH2
+
+$random weapons/SWING { SWNG1/SWNG1 SWNG2/SWNG2 SWNG3/SWNG3 }
+
+SWNG1/SWNG1	SWING1
+SWNG2/SWNG2 SWING2
+SWNG3/SWNG3 SWING3
+
+
+$random weapons/WALLHIT { WHIT1/WHIT1 WHIT2/WHIT2 WHIT3/WHIT3 }
+
+WHIT1/WHIT1	WALLHIT1
+WHIT2/WHIT2 WALLHIT2
+WHIT3/WHIT3 WALLHIT3
+
+//Powerful Explosion Sounds
+$random sound/EXPL { EXPL/EXPL1 EXPL/EXPL2 EXPL/EXPL3 }
+
+EXPL/EXPL1	EXPL1
+EXPL/EXPL2 	EXPL2
+EXPL/EXPL2 	EXPL3
+
+
+//Assault Shield Sounds
+$random shield/SLASH { ALSH1/ALSH1 ALSH2/ALSH2 ALSH3/ALSH3 ALSH4/ALSH4}
+
+ALSH1/ALSH1		ALASH1
+ALSH2/ALSH2 	ALASH2
+ALSH3/ALSH3 	ALASH3
+ALSH4/ALSH4 	ALASH4
+
+$random shield/SWING { AWNG1/AWNG1 AWNG2/AWNG2}
+
+AWNG1/AWNG1		AWING1
+AWNG2/AWNG2 	AWING2
+
+
+
+shield/WALLHIT	AALLHIT
+
+//Void Sword Sounds//
+$random void/SLASH { VDSH1/VDSH1 VDSH2/VDSH2 VDSH3/VDSH3 VDSH4/VDSH4 VDSH5/VDSH5 }
+
+VDSH1/VDSH1	VOIDHIT1
+VDSH2/VDSH2 VOIDHIT2
+VDSH3/VDSH3	VOIDHIT3
+VDSH4/VDSH4 VOIDHIT4
+VDSH5/VDSH5 VOIDHIT5
+
+$random void/SWING { VWNG1/VWNG1 VWNG2/VWNG2 VWNG3/VWNG3 VWNG4/VWNG4 VWNG5/VWNG5 }
+
+VWNG1/VWNG1	VOIDSWN1
+VWNG2/VWNG2 VOIDSWN2
+VWNG3/VWNG3 VOIDSWN3
+VWNG2/VWNG4 VOIDSWN4
+VWNG3/VWNG5 VOIDSWN5
+
+void/LOOP	VOIDLOOP
+void/EGNITE	VOID_EGN
+void/BLOOM	VOIDBLOO
+
+sound/RADIATION	RADIUS
+
+//Elemental Staff Sounds//
+//Fire Staff//
+sound/FIRESTAF	FIRESTAF
+sound/FIREBALL	FIREBALL
+
+//Ice Staff//
+sound/ICESTAF	ICESTAF
+sound/ICEBALL	ICEBALL
+
+//Lightning Staff//
+sound/LIGTSTAF	LIGTSTAF
+sound/LIGTBALL	LIGTBALL
+
+//Grenade Sounds
+Sound/NadeThrow	NADETHRW
+Sound/NadePin	NADEPIN
+
+$random GRENADE/FLOOR { NADE1/NADE1 NADE2/NADE2 NADE3/NADE3 NADE4/NADE4 NADE5/NADE5 }
+
+NADE1/NADE1	NADEHIT1
+NADE2/NADE2 NADEHIT2
+NADE3/NADE3 NADEHIT3
+NADE4/NADE4 NADEHIT4
+NADE5/NADE5 NADEHIT5
+
+ForceBarrier/On		DSFRCON
+ForceBarrier/Off	DSFRCOFF
+ForceBarrier/Loop	DSFRCLOP
+
+DSZAPHT1	DSZAPHT1
+DSZAPHT2	DSZAPHT2
+DSZAPHT3	DSZAPHT3
+
+$RANDOM Weapons/PSMDTH { weapons/PSMDTH1 weapons/PSMDTH2 weapons/PSMDTH4 weapons/PSMDTH5 weapons/PSMDTH6 weapons/PSMDTH7 weapons/PSMDTH8 weapons/PSMDTH9 }
+
+weapons/PSMDTH1		PSMDTH1
+weapons/PSMDTH2		PSMDTH2
+weapons/PSMDTH4 	PSMDTH4
+weapons/PSMDTH5 	PSMDTH5
+weapons/PSMDTH6 	PSMDTH6
+weapons/PSMDTH7 	PSMDTH7
+weapons/PSMDTH8 	PSMDTH8
+weapons/PSMDTH9 	PSMDTH9
+weapons/PSMSEE 		PSMSEE
+
+
+$random ForceBarrier/Hit	{ DSZAPHT1 DSZAPHT2 DSZAPHT3 }
+$limit ForceBarrier/Hit	0
+
+SHPODEXP SHPODEXP
+$Limit SHPODEXP	0
+
+SHDPFLY	SHDPFLY
+//$Limit SHDPFLY	0
+
+SHDPHIT SHDPHIT
+$Limit SHDPHIT	0
+
+SHDPDIE SHDPDIE
+$Limit SHDPDIE	0
+
+SHPODGET SHPODGET
+
+
+$RANDOM sound/BULLETIM { sound/IMPA1 sound/IMPA2 sound/IMPA3 sound/IMPA4 }
+
+sound/IMPA1	IMPA1
+sound/IMPA2	IMPA2
+sound/IMPA3	IMPA3
+sound/IMPA4	IMPA4
+
+sound/SELECT	SELECT
+
+
+//Upgraded Weapon Sounds//
+weapon/PAPAK-12	PAPAK-12
+weapon/PAPAN-94	PAPAN-94
+weapon/PAPCOLTM	PAPCOLTM
+weapon/PAPG36-C	PAPG36-C
+weapon/PAPGALIL	PAPGALIL
+weapon/PAPGLOCK20	PAPGLOCK
+weapon/PAPKS-23	PAPKS-23
+weapon/PAPM3SUP	PAPM3SUP
+weapon/PAPM14	PAPM14
+weapon/PAPM24	PAPM24
+weapon/PAPM82	PAPM82
+weapon/PAPUZI	PAPUZI
+weapon/PAPSWAT	PAPSWAT
+weapon/PAPSTORM	PAPSTORM
+weapon/PAPOHM	PAPOHM
+weapon/PAPBIAN	PAPBIAN
+weapon/PAPMP5	PAPMP5
+weapon/PAPP226	PAPP226
+weapon/PAPBULL	PAPBULL
+weapon/PAPCARB	PAPCARB
+weapon/PAPSKS	PAPSKS
+weapon/PAPCYCLE	PAPCYCLE
+weapon/PAPraygunmark2		RAYM2FIP
+weapon/PAPX4-Jasper	PAPX4JSP
+weapon/PAPOS-40	PAPOS-40
+weapon/PAPOLYMP	PAPOLYMP
+weapon/PAPM8A5	PAPM8A5
+weapon/PAPB23R	PAPB23R
+
+$RANDOM sound/RAYHIT { weapons/RAYHIT1 weapons/RAYHIT2 weapons/RAYHIT3 }
+
+weapons/RAYHIT1		RAYHIT1
+weapons/RAYHIT2		RAYHIT2
+weapons/RAYHIT3		RAYHIT3
+
+sound/Rayhit1 RayHIT1
+
+//Miscellaneous Sounds//
+Ambient/Rain	AMBRAIN
+sound/PWRGMCLK	PWRGMCLK
+sound/ROUND_ST	ROUND_ST
+sound/ROUND_EN	ROUND_EN
+sound/NACHT_ST	NACHT_ST
+sound/NACHT_EN	NACHT_EN
+sound/ROUNDAS	ROUNDAS
+sound/ROUNDAE	ROUNDAE
+sound/ROUNDTS	ROUNDTS
+sound/ROUNDTE	ROUNDTE
+sound/ROUNDNS	ROUNDNS
+sound/ROUNDNE	ROUNDNE
+sound/ROUNDSS	ROUNDSS
+sound/ROUNDSE	ROUNDSE
+sound/ROUNDGS	ROUNDGS
+sound/ROUNDGE	ROUNDGE
+sound/PAPSHOT	PAPSHOT
+sound/BUY	BUY
+sound/NEWBUY	NEWBUY
+sound/GUMBUY	GUMBUY
+sound/GUMPICK	GUMPICK
+sound/GUMPOP	GUMPOP
+sound/GUMFLASH	GUMFLASH
+sound/GUMDISP	GUMDISP
+sound/BURP	BURP
+sound/GLSBRK	GLSBRK
+sound/PRKDSPN	PRKDSPN
+sound/DRINK	DRINK
+sound/NUKEALRM NUKEALRM
+sound/ALRTAREA ALRTAREA
+sound/BOSSINCO BOSSINCO
+sound/GHOSTSND GHOSTSND
+sound/CHEERING CHEERING
+sound/LAUGH	LAUGH
+sound/INTRO	INTRO
+weapon/MORS	MORS
+weapon/SNPR		SNPR_SHT
+sound/HLTHCRIT	HLTHCRIT
+sound/SUITDIE	SUITDIE
+sound/SUITRGN	SUITRGN
+sound/METALFL	METALFL
+sound/LEPHIT	LEPHIT
+sound/MELEEHT	MELEEHT
+sound/JSN_WPFR	JSN_WPFR
+sound/SNPIMPA	SNPIMPA
+sound/METAL1	METAL1
+sound/METAL2	METAL2
+sound/METAL3	METAL3
+sound/TRAM		TRAM
+sound/QKRVM		QUIKRMUS
+sound/JUGGM		JUGRMUS
+sound/SWFTM		SWFTMUS
+sound/DEADM		DSHOTMUS
+sound/FLAKM		FLAKM
+sound/BOXWEPGN	BOXWEPGN
+sound/BOXWEPSL	BOXWEPSL
+sound/BOXWEPCY	BOXWEPCY
+sound/PAPBUY	PAPBUY
+sound/ESTR_ST	ESTR_ST
+sound/ESTR_STP	ESTR_STP
+sound/ESTR_EN	ESTR_EN
+sound/REAMMO	REAMMO
+sound/DRIVING	DRIVING
+sound/HONK		HONK
+sound/STARTMOV	STARTMOV
+sound/STARTUP	STARTUP
+radio/SCAN1		SCAN1
+radio/SCAN2		SCAN2
+radio/SCAN3		SCAN3
+radio/SCAN4		SCAN4
+radio/SCAN5		SCAN5
+sound/DOOR		DOOROPEN
+sound/ALRM		ALR_LOOP
+sound/JUGALARM	JUGSCWR
+sound/CYCBOOM	CYCBOOM
+sound/SWITCH	SWITCH
+sound/OUTRO1	OUTRO1
+sound/OUTRO2	OUTRO2
+sound/PREOUTRO	PREOUTRO
+sound/IMPALE	IMPALE
+sound/SHOVE		SHOVE
+sound/ARCFIRE	ARCFIRE
+sound/ARCDEAD	ARCDEAD
+sound/ARCDETH	ARCDETH
+sound/ARCDTMU	ARCDTMU
+sound/STAGE		STAGE
+sound/POWERON	POWERON
+sound/ZAPBOOM	ZAPBOOM
+sound/ZAPFADE	ZAPFADE
+sound/RADIO1	RADIO1
+sound/RADIO2	RADIO2
+sound/RADIO3	RADIO3
+sound/PANALARM	PANALARM
+sound/Message	DSRADIO
+
+$random sound/PA { sound/PA1 sound/PA2 sound/PA3 sound/PA4 sound/PA5 }
+
+sound/PA1	PA1
+sound/PA2	PA2
+sound/PA3	PA3
+sound/PA4	PA4
+sound/PA5	PA5
+
+//campaign//
+sound/INCOMING	INCOMING
+sound/TELEPORT	TELEPORT
+sound/GEMPLACE	GEMPLACE
+sound/WARNING 	WARNING
+sound/M14REV	M14REV
+sound/PAINREV	PAINREV
+sound/ATTCKREV	ATTCKREV
+sound/RUNNREV	RUNNREV
+sound/PAIN_JAS	PAIN_JAS
+
+//Zombie Sounds//
+$RANDOM zombie/running { game/nosound zombie/spr1 zombie/spr2 zombie/spr3 zombie/spr4 zombie/spr5 zombie/spr6 }
+zombie/spr1 	RUNNER1
+zombie/spr2 	RUNNER2
+zombie/spr3 	RUNNER3
+zombie/spr4 	RUNNER4
+zombie/spr5 	RUNNER5
+zombie/spr6 	RUNNER6
+
+$RANDOM zombie/death { zombie/die1 zombie/die2 zombie/die3 zombie/die4 zombie/die5 zombie/die6 zombie/die7 zombie/die8 zombie/die9 zombie/die10 zombie/die11 }
+zombie/die1 	DEATH_01
+zombie/die2 	DEATH_02
+zombie/die3 	DEATH_03
+zombie/die4 	DEATH_04
+zombie/die5 	DEATH_05
+zombie/die6 	DEATH_06
+zombie/die7 	DEATH_07
+zombie/die8 	DEATH_08
+zombie/die9 	DEATH_09
+zombie/die10 	DEATH_10
+zombie/die11	DEATH_11
+
+$RANDOM zombie/attack { zombie/atk1 zombie/atk2 zombie/atk3 zombie/atk4 zombie/atk5 }
+zombie/atk1 	ATTACK1
+zombie/atk2 	ATTACK2
+zombie/atk3 	ATTACK3
+zombie/atk4 	ATTACK4
+zombie/atk5 	ATTACK5
+
+$RANDOM zombie/pain { zombie/pain1 zombie/pain2 }
+zombie/pain1 	ZMBPAIN1
+zombie/pain2 	ZMBPAIN2
+
+//Zombie Sounds (Project 115)//
+$RANDOM zombie1/running { game/nosound zombie1/spr1 zombie1/spr2 zombie1/spr3 zombie1/spr4 zombie1/spr5 zombie1/spr6 zombie1/spr7 zombie1/spr8 zombie1/spr9 zombie1/spr10 zombie1/spr11 zombie1/spr12 zombie1/spr13 zombie1/spr14 zombie1/spr15 }
+zombie1/spr1 	RUN1_1
+zombie1/spr2 	RUN1_2
+zombie1/spr3 	RUN1_3
+zombie1/spr4 	RUN1_4
+zombie1/spr5 	RUN1_5
+zombie1/spr6 	RUN1_6
+zombie1/spr7 	RUN1_7
+zombie1/spr8 	RUN1_8
+zombie1/spr9 	RUN1_9
+zombie1/spr10 	RUN1_10
+zombie1/spr11 	RUN1_11
+zombie1/spr12 	RUN1_12
+zombie1/spr13 	RUN1_13
+zombie1/spr14 	RUN1_14
+zombie1/spr15 	RUN1_15
+
+$RANDOM zombie1/death { zombie1/die1 zombie1/die2 zombie1/die3 zombie1/die4 zombie1/die5 zombie1/die6 zombie1/die7 zombie1/die8 }
+zombie1/die1 	DEATH1_1
+zombie1/die2 	DEATH1_2
+zombie1/die3 	DEATH1_3
+zombie1/die4 	DEATH1_4
+zombie1/die5 	DEATH1_5
+zombie1/die6 	DEATH1_6
+zombie1/die7 	DEATH1_7
+zombie1/die8 	DEATH1_8
+
+$RANDOM zombie1/attack { zombie1/atk1 zombie1/atk2 zombie1/atk3 zombie1/atk4 zombie1/atk5 zombie1/atk6 zombie1/atk7 zombie1/atk8 }
+zombie1/atk1 	ATT1_1
+zombie1/atk2 	ATT1_2
+zombie1/atk3 	ATT1_3
+zombie1/atk4 	ATT1_4
+zombie1/atk5 	ATT1_5
+zombie1/atk6 	ATT1_6
+zombie1/atk7 	ATT1_7
+zombie1/atk8 	ATT1_8
+
+//Zombie Sounds (Project 115 - A New Threat)//
+
+//Normal and Exo-Zombies//
+$RANDOM zombie2/running { game/nosound zombie2/spr1 zombie2/spr2 zombie2/spr3 zombie2/spr4 zombie2/spr5 zombie2/spr6 }
+zombie2/spr1 	RUN2_1
+zombie2/spr2 	RUN2_2
+zombie2/spr3 	RUN2_3
+zombie2/spr4 	RUN2_4
+zombie2/spr5 	RUN2_5
+zombie2/spr6 	RUN2_6
+
+$RANDOM zombie2/death { zombie2/die1 zombie2/die2 zombie2/die3 zombie2/die4 zombie2/die5 zombie2/die6 zombie2/die7 zombie2/die8 }
+zombie2/die1 	DEATH2_1
+zombie2/die2 	DEATH2_2
+zombie2/die3 	DEATH2_3
+zombie2/die4 	DEATH2_4
+zombie2/die5 	DEATH2_5
+zombie2/die6 	DEATH2_6
+zombie2/die7 	DEATH2_7
+zombie2/die8 	DEATH2_8
+
+$RANDOM zombie2/attack { zombie2/atk1 zombie2/atk2 zombie2/atk3 zombie2/atk4 }
+zombie2/atk1 	ATT2_1
+zombie2/atk2 	ATT2_2
+zombie2/atk3 	ATT2_3
+zombie2/atk4 	ATT2_4
+
+//Red Zombies//
+
+$RANDOM zombie3/running { game/nosound zombie3/spr1 zombie3/spr2 zombie3/spr3 zombie3/spr4 zombie3/spr5 zombie3/spr6 zombie3/spr7 zombie3/spr7 }
+zombie3/spr1 	RUNN3_1
+zombie3/spr2 	RUNN3_2
+zombie3/spr3 	RUNN3_3
+zombie3/spr4 	RUNN3_4
+zombie3/spr5 	RUNN3_5
+zombie3/spr6 	RUNN3_6
+zombie3/spr7 	RUNN3_7
+zombie3/spr8 	RUNN3_8
+
+$RANDOM zombie3/attack { game/nosound zombie3/atk1 zombie3/atk zombie3/atk3 zombie3/atk4 zombie3/atk5 zombie3/atk6 zombie3/atk7 }
+zombie3/atk1 	SCREAM13
+zombie3/atk2 	SCREAM23
+zombie3/atk3 	SCREAM33
+zombie3/atk4 	SCREAM43
+zombie3/atk5 	SCREAM53
+zombie3/atk6 	SCREAM63
+zombie3/atk7 	SCREAM73
+
+$RANDOM zombie3/death { zombie3/die1 zombie3/die2 zombie3/die3 zombie3/die4 zombie3/die5 zombie3/die6 zombie3/die7 zombie3/die8 }
+zombie3/die1 	DEATH3_1
+zombie3/die2 	DEATH3_2
+zombie3/die3 	DEATH3_3
+zombie3/die4 	DEATH3_4
+zombie3/die5 	DEATH3_5
+zombie3/die6 	DEATH3_6
+zombie3/die7 	DEATH3_7
+zombie3/die8 	DEATH3_8
+
+sound/EXOJUMP	EXOJUMP
+
+diablo2/goatman/attack		011att
+diablo2/goatman/death		011deth
+diablo2/goatman/sight		011sit
+$random diablo2/goatman/idle	{ diablo2/goatman/idle1 diablo2/goatman/idle2 diablo2/goatman/idle3 }
+$random diablo2/goatman/pain	{ diablo2/goatman/pain1 diablo2/goatman/pain2 }
+
+diablo2/goatman/idle1		011idle1
+diablo2/goatman/idle2		011idle2
+diablo2/goatman/idle3		011idle3
+diablo2/goatman/pain1		011pain1
+diablo2/goatman/pain2		011pain2
+
+Goat/Attack				goata2
+Goat/death				goatbd2
+Goat/Pain				goath2
+Goat/Madattack			goats2
+
+missile1charge	h20017
+missile2charge	h20016
+
+waitingballsspawn	purfire
+whiteballssee		acidfire
+whiteballsdeth		acidhit
+redballssee		purfire3
+redballsdeth		r_exp3
+
+redballbsee		mmfire
+redballbdeth	explode
+whiteballbsee	scream
+whiteballbdeth	scream2
+
+groundfirestart  flamstrt
+
+//Zombie Menu Sounds//
+$RANDOM zombie/idle { zombie/norm1 zombie/norm2 zombie/norm3 zombie/norm4 zombie/norm5 zombie/norm5 }
+zombie/norm1 	IDLE1
+zombie/norm2 	IDLE2
+zombie/norm3 	IDLE3
+zombie/norm4 	IDLE4
+zombie/norm5 	IDLE5
+zombie/norm6 	IDLE6
+
+//Inferno Seeker Sounds//
+inferno/spawn	INFSPAWN
+
+$RANDOM inferno/step { inferno/step1 inferno/step2 inferno/step3 inferno/step4 inferno/step5 inferno/step5 }
+inferno/step1 	INFSTP1
+inferno/step2 	INFSTP2
+inferno/step3 	INFSTP3
+inferno/step4 	INFSTP4
+inferno/step5 	INFSTP5
+
+$RANDOM inferno/death { inferno/die1 inferno/die2 inferno/die3 inferno/die4 inferno/die5 inferno/die5 }
+inferno/die1 	INFDIE1
+inferno/die2 	INFDIE2
+inferno/die3 	INFDIE3
+inferno/die4 	INFDIE4
+inferno/die5 	INFDIE5
+inferno/die6 	INFDIE6
+
+$RANDOM inferno/yell { inferno/yel1 inferno/yel2 inferno/yel3 inferno/yel4 inferno/yel5 inferno/yel5 }
+inferno/yel1 	INFYEL1
+inferno/yel2 	INFYEL2
+inferno/yel3 	INFYEL3
+inferno/yel4 	INFYEL4
+inferno/yel5 	INFYEL5
+
+//Red Division Juggernaut Sounds//
+$RANDOM JUGGER/step { JUGGER/step1 JUGGER/step2 JUGGER/step3 JUGGER/step4 JUGGER/step5 JUGGER/step5 }
+JUGGER/step1 	JUGWLK1
+JUGGER/step2 	JUGWLK2
+JUGGER/step3 	JUGWLK3
+JUGGER/step4 	JUGWLK4
+JUGGER/step5 	JUGWLK5
+
+$RANDOM JUGGER/pain { JUGGER/pain1 JUGGER/pain2 JUGGER/pain3 }
+JUGGER/pain1 	JUGPAN1
+JUGGER/pain2 	JUGPAN2
+JUGGER/pain3 	JUGPAN3
+
+$RANDOM JUGGER/BOOM { JUGGER/BOOM1 JUGGER/BOOM2 JUGGER/BOOM3 JUGGER/BOOM4 }
+JUGGER/BOOM1 	JUGBOOM1
+JUGGER/BOOM2 	JUGBOOM2
+JUGGER/BOOM3 	JUGBOOM3
+JUGGER/BOOM4	JUGBOOM4
+
+JUGGER/death	JUGDIE
+JUGGER/activate	JUGSEE
+JUGGER/sight	JUGSEE
+JUGGER/attack	JUGFIRE
+JUGGER/Plasma	JUGPLBM
+JUGGER/ALERT	JUGALERT
+
+//Guardian Sounds//
+UNMNROAM UNMNROAM
+UNMNPAIN UNMNPAIN
+UNMNDYIN UNMNDYIN
+UNMNRAIL UNMNRAIL
+UNMBWOSH UNMBWOSH
+UNMBFIR2 UNMBFIR2
+UNMBMACX UNMBMACX
+UNMBMACI UNMBMACI
+UNMBOOOM UNMBOOOM
+sound/ALARM	ALARM
+
+//Scarecrow Sounds//
+monster/falsit dsfalsit
+monster/falpai dsfalpai
+monster/faldth dsfaldth
+monster/falact dsfalact
+monster/falwng dsfalwng
+weapons/firmfi SCAREFIR
+weapons/firex5 SCAREEXP
+
+//Panzer Soldat Sounds//
+monster/termsit tsight
+monster/termpin tpain1
+monster/termdth tdeath
+monster/brufir dsbrufir
+weapons/hellex dshellex
+Terminator/tershotB DSTSHOT2
+
+$random Terminator/termact { BCHRSI1 BCHRSI2 BCHRSI3 }
+BCHRSI1		BCHRSI1
+BCHRSI2		BCHRSI2
+BCHRSI3		BCHRSI3
+$random Terminator/terstepA { BCHRSTP1 BCHRSTP2 BCHRSTP3 }
+BCHRSTP1	BCHRSTP1
+BCHRSTP2	BCHRSTP2
+BCHRSTP3	BCHRSTP3
+
+//The Source Sounds//
+monster/wiksit                  dswiksit
+$random monster/wikact		{ monster/wikac1    monster/wikac2 }
+monster/wikac1                  dswikac1
+monster/wikac2                  dswikac2
+monster/wikatk                  dswikatk
+monster/wikpai                  dswikpai
+monster/wikdth                  dswikdth
+weapons/firmfi                  dsfirmfi
+weapons/firex5                  dsfirex5
+monster/tenpn1                  dstenpn1
+monster/tenpn2                  dstenpn2
+source/ZAP	ZAP
+
+//Player Sounds//
+//Zachery Lewis//
+$random player1_kill { player1/kill1 player1/kill2 player1/kill3 player1/kill4 player1/kill5 player1/kill6 player1/kill7 player1/kill8 player1/kill9 player1/kill10 player1/kill11 player1/kill12 player1/kill13 player1/kill14 player1/kill15 NOSOUND1/NSND1 NOSOUND1/NSND2 NOSOUND1/NSND3 NOSOUND1/NSND4 NOSOUND1/NSND5 NOSOUND1/NSND6 NOSOUND1/NSND7 NOSOUND1/NSND8 NOSOUND1/NSND9 NOSOUND1/NSND10 NOSOUND1/NSND11 NOSOUND1/NSND12 NOSOUND1/NSND13 NOSOUND1/NSND14 NOSOUND1/NSND15}
+
+player1/kill1 pl1kil1
+player1/kill2 pl1kil2
+player1/kill3 pl1kil3
+player1/kill4 pl1kil4
+player1/kill5 pl1kil5
+player1/kill6 pl1kil6
+player1/kill7 pl1kil7
+player1/kill8 pl1kil8
+player1/kill9 pl1kil9
+player1/kill10 pl1kil10
+player1/kill11 pl1kil11
+player1/kill12 pl1kil12
+player1/kill13 pl1kil13
+player1/kill14 pl1kil14
+player1/kill15 pl1kil15
+NOSOUND1/NSND1 plrNSND
+NOSOUND1/NSND2 plrNSND
+NOSOUND1/NSND3 plrNSND
+NOSOUND1/NSND4 plrNSND
+NOSOUND1/NSND5 plrNSND
+NOSOUND1/NSND6 plrNSND
+NOSOUND1/NSND7 plrNSND
+NOSOUND1/NSND8 plrNSND
+NOSOUND1/NSND9 plrNSND
+NOSOUND1/NSND10 plrNSND
+NOSOUND1/NSND11 plrNSND
+NOSOUND1/NSND12 plrNSND
+NOSOUND1/NSND13 plrNSND
+NOSOUND1/NSND14 plrNSND
+NOSOUND1/NSND15 plrNSND
+
+$random player1_pain { player1/pain1 player1/pain2 player1/pain3 player1/pain4 player1/pain5 player1/pain6 player1/pain7 player1/pain8 player1/pain9 player1/pain10 }
+
+player1/pain1 pl1pan1
+player1/pain2 pl1pan2
+player1/pain3 pl1pan3
+player1/pain4 pl1pan4
+player1/pain5 pl1pan5
+player1/pain6 pl1pan6
+player1/pain7 pl1pan7
+player1/pain8 pl1pan8
+player1/pain9 pl1pan9
+player1/pain10 pl1pan10
+
+//Faith Ortega//
+$random player2_kill { player2/kill1 player2/kill2 player2/kill3 player2/kill4 player2/kill5 player2/kill6 player2/kill7 player2/kill8 player2/kill9 player2/kill10 player2/kill11 player2/kill12 player2/kill13 player2/kill14 player2/kill15 NOSOUND2/NSND1 NOSOUND2/NSND2 NOSOUND2/NSND3 NOSOUND2/NSND4 NOSOUND2/NSND5 NOSOUND2/NSND6 NOSOUND2/NSND7 NOSOUND2/NSND8 NOSOUND2/NSND9 NOSOUND2/NSND10 NOSOUND2/NSND11 NOSOUND2/NSND12 NOSOUND2/NSND13 NOSOUND2/NSND14 NOSOUND2/NSND15}
+
+player2/kill1 pl2kil1
+player2/kill2 pl2kil2
+player2/kill3 pl2kil3
+player2/kill4 pl2kil4
+player2/kill5 pl2kil5
+player2/kill6 pl2kil6
+player2/kill7 pl2kil7
+player2/kill8 pl2kil8
+player2/kill9 pl2kil9
+player2/kill10 pl2kil10
+player2/kill11 pl2kil11
+player2/kill12 pl2kil12
+player2/kill13 pl2kil13
+player2/kill14 pl2kil14
+player2/kill15 pl2kil15
+NOSOUND2/NSND1 plrNSND
+NOSOUND2/NSND2 plrNSND
+NOSOUND2/NSND3 plrNSND
+NOSOUND2/NSND4 plrNSND
+NOSOUND2/NSND5 plrNSND
+NOSOUND2/NSND6 plrNSND
+NOSOUND2/NSND7 plrNSND
+NOSOUND2/NSND8 plrNSND
+NOSOUND2/NSND9 plrNSND
+NOSOUND2/NSND10 plrNSND
+NOSOUND2/NSND11 plrNSND
+NOSOUND2/NSND12 plrNSND
+NOSOUND2/NSND13 plrNSND
+NOSOUND2/NSND14 plrNSND
+NOSOUND2/NSND15 plrNSND
+
+$random player2_pain { player2/pain1 player2/pain2 player2/pain3 player2/pain4 player2/pain5 player2/pain6 player2/pain7 player2/pain8 player2/pain9 player2/pain10 }
+
+player2/pain1 pl2pan1
+player2/pain2 pl2pan2
+player2/pain3 pl2pan3
+player2/pain4 pl2pan4
+player2/pain5 pl2pan5
+player2/pain6 pl2pan6
+player2/pain7 pl2pan7
+player2/pain8 pl2pan8
+player2/pain9 pl2pan9
+player2/pain10 pl2pan10
+
+//Darwin Potter//
+$random player3_kill { player3/kill1 player3/kill2 player3/kill3 player3/kill4 player3/kill5 player3/kill6 player3/kill7 player3/kill8 player3/kill9 player3/kill10 player3/kill11 player3/kill12 player3/kill13 player3/kill14 player3/kill15 NOSOUND3/NSND1 NOSOUND3/NSND2 NOSOUND3/NSND3 NOSOUND3/NSND4 NOSOUND3/NSND5 NOSOUND3/NSND6 NOSOUND3/NSND7 NOSOUND3/NSND8 NOSOUND3/NSND9 NOSOUND3/NSND10 NOSOUND3/NSND11 NOSOUND3/NSND12 NOSOUND3/NSND13 NOSOUND3/NSND14 NOSOUND3/NSND15}
+
+player3/kill1 pl3kil1
+player3/kill2 pl3kil2
+player3/kill3 pl3kil3
+player3/kill4 pl3kil4
+player3/kill5 pl3kil5
+player3/kill6 pl3kil6
+player3/kill7 pl3kil7
+player3/kill8 pl3kil8
+player3/kill9 pl3kil9
+player3/kill10 pl3kil10
+player3/kill11 pl3kil11
+player3/kill12 pl3kil12
+player3/kill13 pl3kil13
+player3/kill14 pl3kil14
+player3/kill15 pl3kil15
+NOSOUND3/NSND1 plrNSND
+NOSOUND3/NSND2 plrNSND
+NOSOUND3/NSND3 plrNSND
+NOSOUND3/NSND4 plrNSND
+NOSOUND3/NSND5 plrNSND
+NOSOUND3/NSND6 plrNSND
+NOSOUND3/NSND7 plrNSND
+NOSOUND3/NSND8 plrNSND
+NOSOUND3/NSND9 plrNSND
+NOSOUND3/NSND10 plrNSND
+NOSOUND3/NSND11 plrNSND
+NOSOUND3/NSND12 plrNSND
+NOSOUND3/NSND13 plrNSND
+NOSOUND3/NSND14 plrNSND
+NOSOUND3/NSND15 plrNSND
+
+$random player3_pain { player3/pain1 player3/pain2 player3/pain3 player3/pain4 }
+
+player3/pain1 pl3pan1
+player3/pain2 pl3pan2
+player3/pain3 pl3pan3
+player3/pain4 pl3pan4
+
+//Evan Durham//
+$random player4_kill { player4/kill1 player4/kill2 player4/kill3 player4/kill4 player4/kill5 player4/kill6 player4/kill7 player4/kill8 player4/kill9 player4/kill10 player4/kill11 player4/kill12 player4/kill13 player4/kill14 player4/kill15 NOSOUND4/NSND1 NOSOUND4/NSND2 NOSOUND4/NSND3 NOSOUND4/NSND4 NOSOUND4/NSND5 NOSOUND4/NSND6 NOSOUND4/NSND7 NOSOUND4/NSND8 NOSOUND4/NSND9 NOSOUND4/NSND10 NOSOUND4/NSND11 NOSOUND4/NSND12 NOSOUND4/NSND13 NOSOUND4/NSND14 NOSOUND4/NSND15}
+
+player4/kill1 pl4kil1
+player4/kill2 pl4kil2
+player4/kill3 pl4kil3
+player4/kill4 pl4kil4
+player4/kill5 pl4kil5
+player4/kill6 pl4kil6
+player4/kill7 pl4kil7
+player4/kill8 pl4kil8
+player4/kill9 pl4kil9
+player4/kill10 pl4kil10
+player4/kill11 pl4kil11
+player4/kill12 pl4kil12
+player4/kill13 pl4kil13
+player4/kill14 pl4kil14
+player4/kill15 pl4kil15
+NOSOUND4/NSND1 plrNSND
+NOSOUND4/NSND2 plrNSND
+NOSOUND4/NSND3 plrNSND
+NOSOUND4/NSND4 plrNSND
+NOSOUND4/NSND5 plrNSND
+NOSOUND4/NSND6 plrNSND
+NOSOUND4/NSND7 plrNSND
+NOSOUND4/NSND8 plrNSND
+NOSOUND4/NSND9 plrNSND
+NOSOUND4/NSND10 plrNSND
+NOSOUND4/NSND11 plrNSND
+NOSOUND4/NSND12 plrNSND
+NOSOUND4/NSND13 plrNSND
+NOSOUND4/NSND14 plrNSND
+NOSOUND4/NSND15 plrNSND
+
+$random player4_pain { player4/pain1 player4/pain2 player4/pain3 player4/pain4 player4/pain5 player4/pain6 player4/pain7 player4/pain8 }
+
+player4/pain1 pl4pan1
+player4/pain2 pl4pan2
+player4/pain3 pl4pan3
+player4/pain4 pl4pan4
+player4/pain5 pl4pan5
+player4/pain6 pl4pan6
+player4/pain7 pl4pan7
+player4/pain8 pl4pan8
+
+//Otekah Shima//
+$random player5_kill { player5/kill1 player5/kill2 player5/kill3 player5/kill4 player5/kill5 player5/kill6 player5/kill7 player5/kill8 player5/kill9 player5/kill10 player5/kill11 NOSOUND4/NSND5 NOSOUND4/NSND6 NOSOUND4/NSND7 NOSOUND4/NSND8 NOSOUND4/NSND9 NOSOUND4/NSND10 NOSOUND4/NSND11 NOSOUND4/NSND12 NOSOUND4/NSND13 NOSOUND4/NSND14 NOSOUND4/NSND15}
+
+player5/kill1 pl5kil1
+player5/kill2 pl5kil2
+player5/kill3 pl5kil3
+player5/kill4 pl5kil4
+player5/kill5 pl5kil5
+player5/kill6 pl5kil6
+player5/kill7 pl5kil7
+player5/kill8 pl5kil8
+player5/kill9 pl5kil9
+player5/kill10 pl5kil0
+player5/kill11 pl5kil11
+NOSOUND4/NSND1 plrNSND
+NOSOUND4/NSND2 plrNSND
+NOSOUND4/NSND3 plrNSND
+NOSOUND4/NSND4 plrNSND
+NOSOUND4/NSND5 plrNSND
+NOSOUND4/NSND6 plrNSND
+NOSOUND4/NSND7 plrNSND
+NOSOUND4/NSND8 plrNSND
+NOSOUND4/NSND9 plrNSND
+NOSOUND4/NSND10 plrNSND
+NOSOUND4/NSND11 plrNSND
+NOSOUND4/NSND12 plrNSND
+NOSOUND4/NSND13 plrNSND
+NOSOUND4/NSND14 plrNSND
+NOSOUND4/NSND15 plrNSND
+
+$random player5_pain { player5/pain1 player5/pain2 player5/pain3 player5/pain4 player5/pain5 }
+
+player5/pain1 pl5pan1
+player5/pain2 pl5pan2
+player5/pain3 pl5pan3
+player5/pain4 pl5pan4
+player5/pain5 pl5pan5
+
+//Unknown Survivor//
+$random bot_kill { bot/kill1 bot/kill2 bot/kill3 bot/kill4 bot/kill5 bot/kill6 bot/kill7 bot/kill8 bot/kill9 bot/kill10 bot/kill11 bot/kill12 bot/kill13 bot/kill14 bot/kill15}
+
+bot/kill1 botkil1
+bot/kill2 botkil2
+bot/kill3 botkil3
+bot/kill4 botkil4
+bot/kill5 botkil5
+bot/kill6 botkil6
+bot/kill7 botkil7
+bot/kill8 NOSOUND
+bot/kill9 NOSOUND
+bot/kill10 NOSOUND
+bot/kill11 NOSOUND
+bot/kill12 NOSOUND
+bot/kill13 NOSOUND
+bot/kill14 NOSOUND
+bot/kill15 NOSOUND
+
+$random bot_pain { bot/pain1 bot/pain2 bot/pain3 bot/pain4}
+
+bot/pain1 botpan1
+bot/pain2 botpan2
+bot/pain3 botpan3
+bot/pain4 botpan4
+
+$random bot_die { bot/die1 bot/die2 bot/die3 bot/die4}
+
+bot/die1 botdie1
+bot/die2 botdie2
+bot/die3 botdie3
+bot/die4 botdie4
+
+//Round Music//
+ROUND/ROUND_ST ROUND_ST
+ROUND/ROUND_EN ROUND_EN
+ROUNDMED/ROUNDMS ROUNDMS
+ROUNDMED/ROUNDME ROUNDME
+ROUNDBUR/ROUNDBB ROUNDBB
+ROUNDBUR/ROUNDBS ROUNDBS
+ROUNDBUR/ROUNDBE ROUNDBE
+ROUNDASY/ASYREN ASYREN
+ROUNDASY/ASYRST ASYRST
+
+//Explosive Sounds
+$random weapon/BOOM { EXP1/BOOM1 EXP2/BOOM2 EXP3/BOOM3 }
+
+EXP1/BOOM1  BOOM1
+EXP2/BOOM2	BOOM2
+EXP3/BOOM3	BOOM3
+
+//Slap Sounds
+$random bot_hit { HURT1/HURT1 HURT2/HURT2 HURT3/HURT3 }
+
+HURT1/HURT1 HURT1
+HURT2/HURT2	HURT2
+HURT3/HURT3	HURT3
+
+//Buildable Sounds
+
+craft/BUILT	BUILT
+craft/PART	PART
+
+
+//Walking Sounds
+$random floor/walk { floor/walk01 floor/walk02 floor/walk03 floor/walk04 floor/walk05 floor/walk06 }
+
+floor/walk01	WALK01
+floor/walk02	WALK02
+floor/walk03	WALK03
+floor/walk04	WALK04
+floor/walk05	WALK05
+floor/walk06	WALK06
+
+//Asylum Sounds//
+$random sound/horror { horror/scare1 horror/scare2 horror/scare3 horror/scare4 horror/scare5 horror/scare6 horror/scare7 horror/scare8 horror/scare9 horror/scare10 horror/scare11 horror/scare12 horror/scare13 }
+horror/scare1	HORROR1
+horror/scare2	HORROR2
+horror/scare3	HORROR3
+horror/scare4	HORROR4
+horror/scare5	HORROR5
+horror/scare6	HORROR6
+horror/scare7	HORROR7
+horror/scare8	HORROR8
+horror/scare9	HORROR9
+horror/scare10	HORROR10
+horror/scare11	HORROR11
+horror/scare12	HORROR12
+horror/scare13	HORROR13
+
+//Characters 
+REBDIE1 REBDIE1
+REBDIE2 REBDIE2
+$random NewRebelDeath { REBDIE1 REBDIE2 }
+REBPAIN1 REBPAIN1
+REBPAIN2 REBPAIN2
+REBPAIN3 REBPAIN3
+$random NewRebelPain { REBPAIN1 REBPAIN2 REBPAIN3 }
+
+DANN/pain DSDNWPAI
+DANN/death DSDNWDTH
+
+//Campaign Quotes (Narrator) (Jason Milito)
+//Chapter 1
+//Post-Chapter
+quote/PSTQ1	PSTQ1
+quote/PSTQ2	PSTQ2
+quote/PSTQ3	PSTQ3
+quote/PSTQ4	PSTQ4
+quote/PSTQ5	PSTQ5
+quote/PSTQ6	PSTQ6
+quote/PSTQ7	PSTQ7
+quote/PSTQ8	PSTQ8
+quote/PSTQ9	PSTQ9
+quote/PSTQ10	PSTQ10
+quote/PSTQ11	PSTQ11
+quote/PSTQ12	PSTQ12
+//Mission 1
+quote/C1M1Q1	C1M1Q1
+quote/C1M1Q2	C1M1Q2
+quote/C1M1Q3	C1M1Q3
+quote/C1M1Q4	C1M1Q4
+quote/C1M1Q5	C1M1Q5
+quote/C1M1Q6	C1M1Q6
+quote/C1M1Q7	C1M1Q7
+quote/C1M1Q8	C1M1Q8
+quote/C1M1Q9	C1M1Q9
+quote/C1M1Q10	C1M1Q10
+quote/C1M1Q11	C1M1Q11
+quote/C1M1Q12	C1M1Q12
+//Mission 2
+quote/C1M2Q1	C1M2Q1
+quote/C1M2Q2	C1M2Q2
+quote/C1M2Q3	C1M2Q3
+quote/C1M2Q4	C1M2Q4
+quote/C1M2Q5	C1M2Q5
+quote/C1M2Q6	C1M2Q6
+quote/C1M2Q7	C1M2Q7
+quote/C1M2Q8	C1M2Q8
+quote/C1M2Q9	C1M2Q9
+quote/C1M2Q10	C1M2Q10
+quote/C1M2Q11	C1M2Q11
+quote/C1M2Q12	C1M2Q12
+quote/C1M2Q13	C1M2Q13
+quote/C1M2Q14	C1M2Q14
+quote/C1M2Q15	C1M2Q15
+quote/C1M2Q16	C1M2Q16
+quote/C1M2Q17	C1M2Q17
+quote/C1M2Q18	C1M2Q18
+quote/C1M2Q19	C1M2Q19
+quote/C1M2Q20	C1M2Q20
+quote/C1M2Q21	C1M2Q21
+quote/C1M2Q22	C1M2Q22
+quote/C1M2Q23	C1M2Q23
+quote/C1M2Q24	C1M2Q24
+quote/C1M2Q25	C1M2Q25
+quote/C1M2Q26	C1M2Q26
+quote/C1M2Q27	C1M2Q27
+quote/C1M2Q28	C1M2Q28
+quote/C1M2Q29	C1M2Q29
+//Mission 3
+quote/C1M3Q1	C1M3Q1
+quote/C1M3Q2	C1M3Q2
+quote/C1M3Q3	C1M3Q3
+quote/C1M3Q4	C1M3Q4
+quote/C1M3Q5	C1M3Q5
+quote/C1M3Q6	C1M3Q6
+quote/C1M3Q7	C1M3Q7
+quote/C1M3Q8	C1M3Q8
+quote/C1M3Q9	C1M3Q9
+quote/C1M3Q10	C1M3Q10
+quote/C1M3Q11	C1M3Q11
+quote/C1M3Q12	C1M3Q12
+quote/C1M3Q13	C1M3Q13
+quote/C1M3Q14	C1M3Q14
+quote/C1M3Q15	C1M3Q15
+quote/C1M3Q16	C1M3Q16
+quote/C1M3Q17	C1M3Q17
+quote/C1M3Q18	C1M3Q18
+quote/C1M3Q19	C1M3Q19
+//Mission 4
+quote/C1M4Q1	C1M4Q1
+quote/C1M4Q2	C1M4Q2
+quote/C1M4Q3	C1M4Q3
+quote/C1M4Q4	C1M4Q4
+quote/C1M4Q5	C1M4Q5
+quote/C1M4Q6	C1M4Q6
+quote/C1M4Q7	C1M4Q7
+quote/C1M4Q8	C1M4Q8
+quote/C1M4Q9	C1M4Q9
+quote/C1M4Q10	C1M4Q10
+
+//Chapter 2
+//Mission 1
+quote/C2M1Q1	C2M1Q1
+quote/C2M1Q2	C2M1Q2
+quote/C2M1Q3	C2M1Q3
+quote/C2M1Q4	C2M1Q4
+quote/C2M1Q5	C2M1Q5
+quote/C2M1Q6	C2M1Q6
+quote/C2M1Q7	C2M1Q7
+quote/C2M1Q8	C2M1Q8
+quote/C2M1Q9	C2M1Q9
+quote/C2M1Q10	C2M1Q10
+quote/C2M1Q11	C2M1Q11
+quote/C2M1Q12	C2M1Q12
+quote/C2M1Q13	C2M1Q13
+quote/C2M1Q14	C2M1Q14
+quote/C2M1Q15	C2M1Q15
+quote/C2M1Q16	C2M1Q16
+quote/C2M1Q17	C2M1Q17
+quote/C2M1Q18	C2M1Q18
+quote/C2M1Q19	C2M1Q19
+//Mission 2
+quote/C2M2Q1	C2M2Q1
+quote/C2M2Q2	C2M2Q2
+quote/C2M2Q3	C2M2Q3
+quote/C2M2Q4	C2M2Q4
+quote/C2M2Q5	C2M2Q5
+//Mission 3
+quote/C2M3Q1	C2M3Q1
+quote/C2M3Q2	C2M3Q2
+quote/C2M3Q3	C2M3Q3
+quote/C2M3Q4	C2M3Q4
+quote/C2M3Q5	C2M3Q5
+quote/C2M3Q6	C2M3Q6
+quote/C2M3Q7	C2M3Q7
+quote/C2M3Q8	C2M3Q8
+
+//Chapter 3
+//Mission 1
+quote/C3M1Q1	C3M1Q1
+quote/C3M1Q2	C3M1Q2
+quote/C3M1Q3	C3M1Q3
+quote/C3M1Q4	C3M1Q4
+quote/C3M1Q5	C3M1Q5
+quote/C3M1Q6	C3M1Q6
+quote/C3M1Q7	C3M1Q7
+quote/C3M1Q8	C3M1Q8
+quote/C3M1Q9	C3M1Q9
+quote/C3M1Q10	C3M1Q10
+quote/C3M1Q11	C3M1Q11
+quote/C3M1Q12	C3M1Q12
+//Mission 2
+quote/C3M2Q1	C3M2Q1
+quote/C3M2Q2	C3M2Q2
+quote/C3M2Q3	C3M2Q3
+quote/C3M2Q4	C3M2Q4
+quote/C3M2Q5	C3M2Q5
+quote/C3M2Q6	C3M2Q6
+quote/C3M2Q7	C3M2Q7
+//The Source Quotes//
+quote/BOSSQ1	BOSSQ1
+quote/BOSSQ2	BOSSQ2
+quote/BOSSQ3	BOSSQ3
+quote/BOSSQ4	BOSSQ4
+quote/BOSSQ5	BOSSQ5
+quote/BOSSQ6	BOSSQ6
+quote/BOSSAT1	BOSSAT1
+quote/BOSSAT2	BOSSAT2
+quote/BOSSAT3	BOSSAT3
+quote/BOSSAT4	BOSSAT4
+quote/BOSSAT5	BOSSAT5
+quote/BOSSAT6	BOSSAT6
+quote/BOSSAT7	BOSSAT7
+quote/BOSSDIE	BOSSDIE

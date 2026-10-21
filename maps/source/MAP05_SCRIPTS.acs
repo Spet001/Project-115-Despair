@@ -1,0 +1,452 @@
+#include"Zcommon.acs"
+Bool NecklacePlace;
+script 80 ENTER
+{
+	Thing_ChangeTID (0, 1337+PlayerNumber());
+	GiveActorInventory(1337, "HUD_ON", 1);
+	ChangeSky("CMP_DSRT", "CMP_DSRT");
+	fadeto(0, 0, 0, 0, 1.0);
+		NecklacePlace = False;
+}
+
+
+
+script 993 (void)
+
+{//Tell the player that the Danny Kaain has died 
+
+TakeActorInventory(1337, "HUD_ON", 1);
+		hudmessage(s:"The Danny Kain was killed.";
+	HUDMSG_FADEINOUT, 0, CR_Red, 3.0, 0.4, 6.0);
+	    GiveInventory("HUD_ON", 1);
+setmusic("ZM_DEATH", 0, 0);
+fadeto(0, 0, 0, 1.0, 6.9);
+DELAY(380);
+setmusic("BOTKIL8", 0, 0);
+TakeInventory("HUD_ON", 1);
+	}
+
+script 998 ENTER
+{//HEALTH REGENERATION
+    int health = GetActorProperty(1337, APROP_Health);
+
+    While(True)
+    {
+        {
+            //Constantly work while health is under 100
+            While(GetActorProperty(1337,APROP_Health)<100 && GetActorProperty(1337,APROP_Health)>=1)
+            {
+                //After each hit you take, wait for regeneration
+                If(GetActorProperty(1337,APROP_Health)<health)
+                {
+                HudMessage(s:"";HUDMSG_FADEOUT, 101, CR_RED, 240.0, 180.0, 0.1, 0.1);
+                }
+                health = GetActorProperty(1337, APROP_Health);
+                SetActorProperty(1337, APROP_Health, health + 1);
+                Delay(3);
+            }
+        }
+    Delay(1);
+    }
+}
+
+script 997 ENTER
+{//Indicate critial health level
+    While(True)
+	{
+            //Constantly work while health is under 30
+            if(GetActorProperty(1337,APROP_Health)<40 && GetActorProperty(1337,APROP_Health)>=1)
+                {
+                HudMessage(s:"Critical Health Level!";HUDMSG_FADEOUT, 1, CR_RED, 3.0, 0.2, 0.5);
+            }
+			 Delay(1);
+
+        }
+	}
+	
+script 996 ENTER
+{//Critical Health Sound
+    While(True)
+	{
+            //Constantly work while health is under 30
+            if(GetActorProperty(1337,APROP_Health)<40 && GetActorProperty(1337,APROP_Health)>=1)
+                {
+				ThingSound(1337, "sound/HLTHCRIT", 127);
+            }
+			 Delay(6);
+
+        }
+	}
+		
+
+script 995 death
+
+{
+
+If(GetActorProperty(1337,APROP_Health)<=0)
+
+    {
+    TakeInventory("HUD_ON", 1);
+setmusic("ZM_DEATH", 0, 0);
+AmbientSound("sound/SUITDIE", 127);
+fadeto(0, 0, 0, 1.0, 6.9);
+DELAY(380);
+setmusic("BOTKIL8", 0, 0);
+TakeInventory("HUD_ON", 1);
+}
+}
+
+Script 1 Enter
+{
+		SetActorPitch(1337, 0);
+	SetActorAngle(1337, 0.25);
+	Elevator_LowerToNearest(6, 20);
+	Delay(3);
+		hudmessage(s:"[Jason]\n\cjThe final floor underground. Further ahead, the Red Division knew we were coming.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 4.0);
+	AmbientSound("quote/C1M4Q1", 127);
+	delay(170);
+	Door_Open(5, 32, 0);
+	delay(3);
+	Thing_SetGoal(44, 45, 0, 0);
+}
+
+Script 2 (void)//The player falls through the false floor
+{
+	Floor_LowerByValue(25, 53, 174);
+	Ceiling_LowerByValue(25, 53, 174);
+	delay(20);
+	hudmessage(s:"[Jason]\n\cjThe left side may have been a bad idea. A broken floor. Good thing it was not a trap.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 4.0);
+	AmbientSound("quote/C1M4Q3", 127);
+}
+
+int DoorOpen = 0;
+script 3 (void)//Let the player choose which door to OPEN
+{
+	if (DoorOpen == 1)
+	{
+		print(s:"");
+	}
+	else if (DoorOpen == 0)
+	{
+	Thing_Remove(38);
+	Door_Open(37, 35, 0);
+	DoorOpen ++;
+}
+}
+
+script 4 (void)
+{
+	if (DoorOpen == 1)
+	{
+		print(s:"");
+	}
+	else if (DoorOpen == 0)
+	{
+	Thing_Remove(38);
+	Door_Open(39, 35, 0);
+	DoorOpen ++;
+}
+}
+
+Script 5 (void)
+{
+	SetMusic("Action4");
+			hudmessage(s:"[Jason]\n\cjNothing upon entering the room to the right. Only to know that a door was locked.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 4.0);
+	AmbientSound("quote/C1M4Q4", 127);
+}
+
+Script 6 (void)//Last door if the player goes left
+{
+	Door_Open(40,35,0);
+	Thing_Remove(41);
+	Thing_Remove(43);
+	SetPlayerProperty(1, ON, PROP_TOTALLYFROZEN);
+	SetActorAngle(1337, 1.0);
+	SetActorPitch(1337, 0);
+	Thing_Move(1337, 42, 1);
+	Thing_Move(44, 51, 1);
+	SetActorAngle(44, 0.5);
+	delay(20);
+	hudmessage(s:"[Jason]\n\cjWe both found each other. We continued on.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 4.0);
+	AmbientSound("quote/C1M4Q5", 127);
+	delay(14);
+	Thing_SetGoal(44, 61, 0, 0);
+	Thing_Activate(44);
+	SetPlayerProperty(1, OFF, PROP_TOTALLYFROZEN);
+        delay(135);
+	hudmessage(s:"[Jason]\n\cjThat big thing I mentioned was only moments ahead.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 4.0);
+	AmbientSound("quote/C1M4Q6", 127);
+}
+
+Script 7 (void)//Last door if the player goes right
+{
+	If(CheckInventory("YellowCard") == 1)
+	{
+		TakeInventory("YellowCard", 999);
+	Door_Open(53,35,0);
+	Thing_Remove(54);
+	Thing_Remove(55);
+	SetPlayerProperty(1, ON, PROP_TOTALLYFROZEN);
+	SetActorAngle(1337, 0.25);
+	SetActorPitch(1337, 0);
+	Thing_Move(1337, 56, 1);
+	Thing_Move(44, 57, 1);
+	SetActorAngle(44, 0.75);
+	delay(20);
+	hudmessage(s:"[Jason]\n\cjWe both found each other. We continued on.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 4.0);
+	AmbientSound("quote/C1M4Q5", 127);
+	delay(14);
+	Thing_Activate(44);
+	Thing_SetGoal(44, 61, 0, 0);
+	SetPlayerProperty(1, OFF, PROP_TOTALLYFROZEN);
+        delay(135);
+	hudmessage(s:"[Jason]\n\cjThat big thing I mentioned was only moments ahead.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 4.0);
+	AmbientSound("quote/C1M4Q6", 127);
+}
+}
+
+Script 8 (void)
+{
+		SetMusic("Action4");
+}
+
+Script 9 (void)
+{
+	if(NecklacePlace == True)
+	{
+		Print(s:"");
+	}
+	else if(ThingCountName("EliteScavenger", 75) > 0 && ThingCountName("ShotGunScavenger", 75) > 0)
+{
+Print(s:"Now is not the time..");
+	}
+else if(ThingCountName("EliteScavenger", 75) == 0 && ThingCountName("ShotGunScavenger", 75) == 0)
+	{
+		NecklacePlace = True;
+	Thing_Remove(74);
+	SetPlayerProperty(1, ON, PROP_TOTALLYFROZEN);
+	SetActorAngle(1337, 0.25);
+	SetActorPitch(1337, 0);
+	SpawnSpotForced("Gateway_Necklace_Portal_Prop", 50, 0, 0);
+	ThingSound(50, "craft/part", 127);
+	delay(30);
+	fadeto(255,255,255, 1.0, 0.1);
+	SetLineTexture(49, SIDE_FRONT, TEXTURE_MIDDLE, "FIREBLU1");
+	SetLineTexture(49, SIDE_BACK, TEXTURE_MIDDLE, "FIREBLU1");
+	AmbientSound("sound/GEMPLACE", 127);
+	delay(13);
+	fadeto(0,0,0, 0.0, 5.0);
+	delay(100);
+	AmbientSound("sound/INCOMING", 127);
+	delay(25);
+	AmbientSound("sound/INCOMING", 127);
+	delay(25);
+	fadeto(255,255,255, 1.0, 0.1);
+	SetLineTexture(49, SIDE_FRONT, TEXTURE_MIDDLE, "-");
+	SetLineTexture(49, SIDE_BACK, TEXTURE_MIDDLE, "-");
+	SpawnSpotFacingForced("CP_InfernoSeeker", 58, 100);
+	Thing_Deactivate(100);
+	AmbientSound("sound/INCOMING", 127);
+	AmbientSound("inferno/yell", 127);
+	delay(25);
+		fadeto(0,0,0, 0.0, 5.0);
+	AmbientSound("sound/INCOMING", 127);
+	delay(100);
+	hudmessage(s:"[Jason]\n\cjOut of the portal to Ogrodolan..came the Inferno Seeker.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 4.0);
+	AmbientSound("quote/C1M4Q7", 127);
+	delay(135);
+	SetMusic("BOSS1MUS");
+	Thing_Activate(100);
+	SetPlayerProperty(1, OFF, PROP_TOTALLYFROZEN);
+	Thing_Activate(44);
+	SetActorFlag(44, "AVOIDMELEE", TRUE);
+	SetActorFlag(44, "INVULNERABLE", TRUE);
+	SetActorFlag(44, "SHOOTABLE", FALSE);
+	Thing_SetGoal(44, 65, 0, 1);
+	SetActorProperty(44, APROP_Invulnerable, ON);
+	SetActorProperty(100, APROP_HEALTH, 10000);
+	ACS_Execute(11,0,0,0,0);
+	ACS_Execute(12,0,0,0,0);
+	ACS_Execute(61,0,0,0,0);
+}
+}
+
+
+script 10 (void)
+{
+		HudMessageBold(s:"[Jason]\n\cjThere were two ways we could go through. Danny brought up the idea to split up.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 4.6);
+	AmbientSound("quote/C1M4Q2", 127);
+}
+
+script 11 (void)
+
+{
+	HudMessage(s:"Inferno Seeker";
+	HUDMSG_PLAIN, 998, CR_ORANGE, 3.0, 0.14, 1.0);
+	HudMessage(d: GetActorProperty(100, APROP_Health);
+	HUDMSG_PLAIN, 999, CR_DARKRED, 3.0, 0.19, 1.0);
+	Thing_Hate(1337, 100, 0);
+	delay(1);
+	Restart;
+}
+
+script 12 (void)
+{
+	While(True)
+	{
+		If(GetActorProperty(100, APROP_Health) <= 0)
+		{
+			ACS_Execute(13,0,0,0,0);
+			ACS_Terminate(11,0);
+			ACS_Terminate(61,0);
+		}
+		Delay(1);
+	}
+}
+
+script 61 (void)
+{
+	While(True)
+	{
+		If(ThingCountName("CP_FastZombie1", 101) == 0 && ThingCountName("CP_FastZombie2", 101) == 0)
+		{
+	Delay(40);
+	SpawnSpotFacingForced("CP_FastZombie1", 58, 101);
+	delay(40);
+	SpawnSpotFacingForced("CP_FastZombie2", 58, 101);
+		}
+	If(ThingCountName("CP_FastZombie1", 101) == 5 && ThingCountName("CP_FastZombie2", 101) == 5)
+	{
+		print(s:"");
+	}
+		Delay(1);
+	}
+}
+
+
+script 13 (void)
+
+{
+	Thing_Destroy(101, 9999);
+	delay(1);
+	ACS_Terminate(12,0);
+	delay(100);
+	fadeto(255,255,255, 1.0, 0.1);
+	SetLineTexture(49, SIDE_FRONT, TEXTURE_MIDDLE, "FIREBLU1");
+	SetLineTexture(49, SIDE_BACK, TEXTURE_MIDDLE, "FIREBLU1");
+	AmbientSound("sound/GEMPLACE", 127);
+	Thing_Deactivate(44);
+	delay(13);
+	fadeto(0,0,0, 0.0, 5.0);
+	delay(130);
+	TakeInventory("HUD_ON", 1);
+	CancelFade();
+	delay(1);
+	fadeto(0,134,200, 1.0, 1.0);
+	SetMusic("CMC_MUS");
+	AmbientSound("sound/TELEPORT", 127);
+	SetPlayerProperty(1, ON, PROP_TOTALLYFROZEN);
+TakeInventory("AK-12", 255);
+TakeInventory("SightsAK-12", 255);
+TakeInventory("M-14", 255);
+TakeInventory("SightsM-14", 255);
+TakeInventory("AN-94", 255);
+TakeInventory("SightsAN-94", 255);
+TakeInventory("GALIL", 255);
+TakeInventory("SightsGALIL", 255);
+TakeInventory("SWAT557", 255);
+TakeInventory("SightsSWAT557", 255);
+TakeInventory("G36-C", 255);
+TakeInventory("SightsG36-C", 255);
+TakeInventory("UZI", 255);
+TakeInventory("SightsUZI", 255);
+TakeInventory("MP5", 255);
+TakeInventory("SightsMP5", 255);
+TakeInventory("KS-23", 255);
+TakeInventory("SightsKS-23", 255);
+TakeInventory("M3Super", 255);
+TakeInventory("SightsM3Super", 255);
+TakeInventory("Carbon-26", 255);
+TakeInventory("SightsCarbon-26", 255);
+TakeInventory("M-24", 255);
+TakeInventory("SightsM-24", 255);
+TakeInventory("M-82", 255);
+TakeInventory("SightsM-82", 255);
+TakeInventory("M-82", 255);
+TakeInventory("SightsM-82", 255);
+TakeInventory("SKS", 255);
+TakeInventory("SightsSKS", 255);
+TakeInventory("StormPRX", 255);
+TakeInventory("SightsStormPRX", 255);
+TakeInventory("OHM", 255);
+TakeInventory("SightsOHM", 255);
+TakeInventory("BianchiFA-6", 255);
+TakeInventory("SightsBianchiFA-6", 255);
+TakeInventory("ColtM1911", 255);
+TakeInventory("SightsColtM1911", 255);
+TakeInventory("P226", 255);
+TakeInventory("SightsP226", 255);
+TakeInventory("RagingBull", 255);
+TakeInventory("SightsRagingBull", 255);
+TakeInventory("Glock20", 255);
+TakeInventory("SightsGlock20", 255);
+TakeInventory("FragGrenade", 255);
+TakeInventory("PlasmaGrenade", 255);
+TakeInventory("Swarmers", 255);
+TakeInventory("DeployableShield", 255);
+TakeInventory("CP_OutOfSight", 255);
+TakeInventory("CP_LightsOn", 255);
+TakeInventory("CP_ConcealedFighter", 255);
+TakeInventory("CP_WalkingTank", 255);
+TakeInventory("CP_Vampirism", 255);
+TakeInventory("CP_LimitlessClip", 255);
+	delay(160);
+	fadeto(255,255,255, 1.0, 0.1);
+	delay(1);
+	hudmessage(s:"[Jason]\n\cjThe Inferno Seeker was defeated. We entered the portal. Ogrodolan looked to be empty.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 4.0);
+	AmbientSound("quote/C1M4Q8", 127);
+	delay(210);
+	hudmessage(s:"[Savion]\n\cjCould it be that The Source killed anything there?";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 3.5);
+	AmbientSound("quote/C1M4Q9", 127);
+	delay(150);
+	ChangeCamera(71, 1, 0);
+	Thing_Activate(71);
+	fadeto(0,0,0, 0.0, 5.0);
+	hudmessage(s:"[Jason]\n\cjPossibly. For all I knew..it was going to take awhile to get to the other side. To get to The Source.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 6.0);
+	AmbientSound("quote/C1M4Q10", 127);
+	delay(200);
+	fadeto(0,0,0, 1.0, 5.0);
+	delay(230);
+	//Display the players choices//
+	SetFont("BigFont");
+	HudMessage(s:"Chapter 1 ends here";
+	HUDMSG_FADEINOUT, 997, CR_ORANGE, 3.0, 0.21, 7.0);
+	delay(400);
+	SetPlayerProperty(1, OFF, PROP_TOTALLYFROZEN);
+	ChangeLevel("Map01", 0, CHANGELEVEL_NOINTERMISSION, -1);
+}
+
+Script 200 (void)
+{
+	GiveInventory("CP_MaxAmmo", 1);
+	AmbientSound("sound/REAMMO", 127);
+}
+
+
+Script 201 (void)
+{
+hudmessage(s:"Press '",k:"+use", s:"' To Refill Ammo";
+HUDMSG_Fadeinout, 11, CR_WHITE, 3.0, 0.80, 5.4);
+}

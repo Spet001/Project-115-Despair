@@ -1,0 +1,559 @@
+#include"Zcommon.acs"
+
+script 998 ENTER
+{//HEALTH REGENERATION
+    int health = GetActorProperty(1337, APROP_Health);
+
+    While(True)
+    {
+        {
+            //Constantly work while health is under 100
+            While(GetActorProperty(1337,APROP_Health)<100 && GetActorProperty(1337,APROP_Health)>=1)
+            {
+                //After each hit you take, wait for regeneration
+                If(GetActorProperty(1337,APROP_Health)<health)
+                {
+                HudMessage(s:"";HUDMSG_FADEOUT, 101, CR_RED, 240.0, 180.0, 0.1, 0.1);
+                }
+                health = GetActorProperty(1337, APROP_Health);
+                SetActorProperty(1337, APROP_Health, health + 1);
+                Delay(3);
+            }
+        }
+    Delay(1);
+    }
+}
+
+script 997 ENTER
+{//Indicate critial health level
+    While(True)
+	{
+            //Constantly work while health is under 30
+            if(GetActorProperty(1337,APROP_Health)<40 && GetActorProperty(1337,APROP_Health)>=1)
+                {
+                HudMessage(s:"Critical Health Level!";HUDMSG_FADEOUT, 1, CR_RED, 3.0, 0.2, 0.5);
+            }
+			 Delay(1);
+
+        }
+	}
+	
+script 996 ENTER
+{//Critical Health Sound
+    While(True)
+	{
+            //Constantly work while health is under 30
+            if(GetActorProperty(1337,APROP_Health)<40 && GetActorProperty(1337,APROP_Health)>=1)
+                {
+				ThingSound(1337, "sound/HLTHCRIT", 127);
+            }
+			 Delay(6);
+
+        }
+	}
+		
+
+script 995 death
+
+{
+
+If(GetActorProperty(1337,APROP_Health)<=0)
+
+    {
+TakeActorInventory(1337, "HUD_ON", 1);
+setmusic("ZM_DEATH", 0, 0);
+AmbientSound("sound/SUITDIE", 127);
+fadeto(0, 0, 0, 1.0, 6.9);
+DELAY(380);
+setmusic("BOTKIL8", 0, 0);
+}
+}
+
+
+script 993 (void)
+
+{//Tell the player that the stranger has died 
+TakeActorInventory(1337, "HUD_ON", 1);
+		hudmessage(s:"Danny Kain was killed.";
+	HUDMSG_FADEINOUT, 0, CR_Red, 3.0, 0.4, 6.0);
+setmusic("ZM_DEATH", 0, 0);
+fadeto(0, 0, 0, 1.0, 6.9);
+DELAY(380);
+setmusic("BOTKIL8", 0, 0);
+}
+	
+	script 992 (void)
+
+{//Tell the player that the stranger has died 
+TakeActorInventory(1337, "HUD_ON", 1);
+		hudmessage(s:"Danny Kain was killed.";
+	HUDMSG_FADEINOUT, 0, CR_Red, 3.0, 0.4, 6.0);
+setmusic("ZM_DEATH", 0, 0);
+fadeto(0, 0, 0, 1.0, 6.9);
+DELAY(380);
+setmusic("BOTKIL8", 0, 0);
+	}
+		script 991 (void)
+
+{//Tell the player that the stranger has died 
+TakeActorInventory(1337, "HUD_ON", 1);
+		hudmessage(s:"Danny Kain was killed.";
+	HUDMSG_FADEINOUT, 0, CR_Red, 3.0, 0.4, 6.0);
+setmusic("ZM_DEATH", 0, 0);
+fadeto(0, 0, 0, 1.0, 6.9);
+DELAY(380);
+setmusic("BOTKIL8", 0, 0);
+	}
+
+	//Let Danny Jump Across Objects//
+	
+	Script 90 (void)
+	{
+		SetActorAngle(50, 0.5);
+		ThrustThingZ(50, 30, 0, 0);
+		DELAY(4);
+		ThrustThing(128, 3, 0, 50);
+	}
+		Script 91 (void)
+	{
+		SetActorAngle(50, 0.5);
+		ThrustThingZ(50, 15, 0, 0);
+		delay(4);
+		ThrustThingZ(50, 15, 0, 0);
+		ThrustThing(128, 10, 0, 50);
+	}
+	//Intro//
+	
+Script 100 enter
+{
+    Thing_ChangeTID (0, 1337+PlayerNumber());
+	GiveActorInventory(1337, "HUD_ON", 1);
+	SetActorPitch(1337, 0);
+	SetActorAngle(1337, 0.75);
+	hudmessage(s:"Search\nLocation: Whispering Borderlands (10 Miles From Home)\nJason Milito\nDate: June 5, 2019";
+	HUDMSG_TYPEON, 0, CR_GREEN, 2, 0.8, 7.0);
+	ChangeSky("SkyDusk", "SkyDusk");
+	    If(ChecKInventory("Quest_Danny_Kain_IsHurt") == 1)
+	{
+		SetPlayerProperty(1, On, PROP_TOTALLYFROZEN);
+		ACS_Execute(101,0,0,0,0);
+		Thing_move(1337, 25, 1);
+		Thing_Remove(53);
+		Thing_Remove(49);
+		Thing_Remove(110);
+		Thing_Remove(116);
+	}
+	    else If(ChecKInventory("Quest_Danny_Kain_IsNotHurt") == 1)
+	{
+		SetPlayerProperty(1, On, PROP_TOTALLYFROZEN);
+		ACS_Execute(102,0,0,0,0);
+		Thing_move(1337, 54, 1);
+		Thing_Remove(50);
+		Thing_Remove(112);
+		Thing_Remove(113);
+		Thing_Remove(114);
+		Thing_Remove(115);
+	}
+	 
+}
+
+//IF Danny Kain Is Hurt
+Script 101 (void)
+{
+	ACS_Execute(300,0,0,0,0);
+	SetLineBlocking(140, BLOCK_PLAYERS);
+	hudmessage(s:"[Jason]\n\cjWe had to take a good rest before we left home. Danny was still recovering from his cut.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 6.0);
+	AmbientSound("quote/C1M3Q1", 127);
+	delay(180);
+	SetActorState(50, "Notalk", TRUE);
+	ACS_Terminate(300,0);
+	hudmessage(s:"[Jason]\n\cjWith the Red Division on the search for us, we had to leave.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 5.0);
+	AmbientSound("quote/C1M3Q3", 127);
+	delay(155);
+	ACS_Execute(300,0,0,0,0);
+	hudmessage(s:"[Savion]\n\cjWere you and Danny still hiding from the Red Division?";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 5.0);
+	AmbientSound("quote/C1M3Q4", 127);
+	delay(155);
+	hudmessage(s:"[Jason]\n\cjNot exactly. Danny mentioned that we had to search for the gateway to Ogrodolan. Now that we had the necklace, we couldn't stop now.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 8.0);
+	AmbientSound("quote/C1M3Q5", 127);
+	SetActorState(50, "Notalk", TRUE);
+	ACS_Terminate(300,0);
+	SetActorAngle(50, 0.25);
+	delay(6);
+	SetActorAngle(50, 0.5);
+	delay(300);
+	hudmessage(s:"[Jason]\n\cjStrangely enough, the necklace began to glow where we were at.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 5.0);
+	AmbientSound("quote/C1M3Q6", 127);
+	ACS_Execute(300,0,0,0,0);
+	SetActorAngle(50, 0.5);
+	delay(6);
+	SetActorAngle(50, 0.25);
+	delay(155);
+	ACS_Terminate(300,0);
+	SetActorState(50, "See", TRUE);
+	SetPlayerProperty(1, OFF, PROP_TOTALLYFROZEN);
+	Thing_Activate(50);
+	delay(1);
+	Thing_SetGoal(50, 55, 0, 1);
+	Autosave();
+	delay(100);
+	hudmessage(s:"[Jason]\n\cjThe area was quiet..Too quiet.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 3.0);
+	AmbientSound("quote/C1M3Q7", 127);
+	delay(120);
+	AmbientSound("weapon/SNPR", 70);
+	AmbientSound("sound/SNPIMPA", 70);
+	DELAY(50);
+	hudmessage(s:"[Jason]\n\cjTurns out we were not alone.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 3.0);
+	AmbientSound("quote/C1M3Q8", 127);
+	Thing_Deactivate(50);
+	delay(100);
+	hudmessage(s:"[Jason]\n\cjI couldn't see who was on the other side, so Danny took care of that.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 5.0);
+	AmbientSound("quote/C1M3Q9", 127);
+	delay(130);
+	FadeTo(0,0,0,1.0,3.0);
+	delay(130);
+	GiveActorInventory(1337, "MORS", 999);
+	SpawnSpotForced("Jason_NPC", 112, 8, 64);
+	thing_deactivate(8);
+	Thing_Remove(50);
+	delay(3);
+	FadeTo(0,0,0,0.0,3.0);
+	setweapon("mors");
+	SetMusic("ACTION3");
+	thing_activate(113);
+	Thing_SetGoal(113, 58, 0, 1);
+}
+
+//IF Danny Kain Is Not Hurt
+Script 102 (void)
+{
+	ACS_Execute(300,0,0,0,0);
+	hudmessage(s:"[Jason]\n\cjWe had to take a good rest before we left home.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 5.0);
+	AmbientSound("quote/C1M3Q2", 127);
+	delay(155);
+	hudmessage(s:"[Jason]\n\cjWith the Red Division on the search for us, we had to leave.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 5.0);
+	AmbientSound("quote/C1M3Q3", 127);
+	delay(155);
+	hudmessage(s:"[Savion]\n\cjWere you and Danny still hiding from the Red Division?";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 5.0);
+	AmbientSound("quote/C1M3Q4", 127);
+	delay(155);
+	hudmessage(s:"[Jason]\n\cjNot exactly. Danny mentioned that we had to search for the gateway to Ogrodolan. Now that we had the necklace, we couldn't stop now.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 8.0);
+	AmbientSound("quote/C1M3Q5", 127);
+	SetActorState(50, "Notalk", TRUE);
+	ACS_Terminate(300,0);
+	SetActorAngle(53, 0.25);
+	delay(6);
+	SetActorAngle(53, 1.0);
+	delay(6);
+	SetActorAngle(53, 0.75);
+	delay(305);
+	hudmessage(s:"[Jason]\n\cjStrangely enough, the necklace began to glow where we were at.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 5.0);
+	AmbientSound("quote/C1M3Q6", 127);
+	delay(155);
+	SetActorState(53, "See", TRUE);
+		ACS_Terminate(300,0);
+	SetActorProperty(53, APROP_Speed, 20.0);
+	SetPlayerProperty(1, OFF, PROP_TOTALLYFROZEN);
+	Thing_Activate(53);
+	Thing_SetGoal(53, 1, 0, 1);
+	Autosave();
+	hudmessage(s:"[Jason]\n\cjThe area was quiet..Too quiet.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 3.0);
+	AmbientSound("quote/C1M3Q7", 127);
+	delay(100);
+	Thing_Activate(49);
+	hudmessage(s:"[Jason]\n\cjTurns out we were not alone.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 3.0);
+	AmbientSound("quote/C1M3Q8", 127);
+}
+
+Script 104 (void)
+{
+	Thing_Remove(118);
+	SetPlayerProperty(1, ON, PROP_TOTALLYFROZEN);
+	Fadeto(0,0,0,1.0, 3.0);
+	Delay(60);
+	AmbientSound("sound/METAL1", 127);
+	AmbientSound("sound/TRAM", 127);
+	Delay(37);
+	AmbientSound("sound/METAL2", 127);
+	Delay(37);
+	AmbientSound("sound/TRAM", 127);
+	AmbientSound("sound/METAL3", 127);
+	Delay(37);
+	AmbientSound("sound/METAL1", 127);
+	AmbientSound("sound/TRAM", 127);
+	Delay(37);
+	AmbientSound("sound/METAL2", 127);
+	Delay(37);
+	AmbientSound("sound/TRAM", 127);
+	AmbientSound("sound/METAL3", 127);
+	Delay(37);
+	AmbientSound("sound/METAL1", 127);
+	AmbientSound("sound/TRAM", 127);
+	Delay(37);
+	AmbientSound("sound/METAL2", 127);
+	Delay(37);
+	AmbientSound("sound/TRAM", 127);
+	AmbientSound("sound/METAL3", 127);
+	Delay(37);
+	AmbientSound("sound/METAL1", 127);
+	AmbientSound("sound/TRAM", 127);
+	Delay(37);
+	AmbientSound("sound/METAL2", 127);
+	Delay(37);
+	AmbientSound("sound/TRAM", 127);
+	AmbientSound("sound/METAL3", 127);
+	Thing_Move(1337, 83, 1);
+	delay(50);
+	Fadeto(0,0,0,0, 3.0);
+	hudmessage(s:"Location: Underground (Level 1)";
+	HUDMSG_TYPEON, 0, CR_GREEN, 2, 0.8, 7.0);
+	SetPlayerProperty(1, OFF, PROP_TOTALLYFROZEN);
+	Thing_Activate(82);
+	Thing_SetGoal(82, 84, 0, 1);
+	SetActorProperty(50, APROP_Speed, 20.0);
+	Autosave();
+	ACS_Execute(109,0,0,0,0);
+}
+
+script 105 (void)
+{
+	SetMusic("ACTION2", 0);
+	delay(20);
+		SetActorProperty(82, APROP_Speed, 20.0);
+}
+
+script 106 ENTER
+{
+	IF(CheckActorFloorTexture(82, "STEP2") && CheckActorFloorTexture(1337, "STEP2"))
+	{
+		Floor_LowerToLowest(99, 20);
+		delay(2);
+		ACS_Terminate(106, 0);
+	}
+	delay(2);
+	restart;
+}
+
+
+script 107 ENTER
+{
+	IF(CheckActorFloorTexture(82, "STEP1") && CheckActorFloorTexture(1337, "STEP1"))
+	{
+		Floor_RaiseToNearest(100, 20);
+		delay(20);
+		SetLineBlocking(109, BLOCK_PLAYERS);
+		delay(2);
+		ACS_Terminate(107, 0);
+	}
+	delay(2);
+	restart;
+}
+
+script 108 ENTER
+{
+	IF(CheckActorFloorTexture(82, "05_AL_15") && CheckActorFloorTexture(1337, "05_AL_15"))
+	{
+		Door_close(2, 32, 0);
+		delay(50);
+		Elevator_LowerToNearest(108, 20);
+		delay(140);
+		Door_Open(3, 32, 0);
+		Thing_Activate(82);
+		delay(10);
+		ACS_Terminate(108, 0);
+
+	}
+	delay(2);
+	restart;
+}
+
+script 109 (void)
+{
+	hudmessage(s:"[Jason]\n\cjWe arrived underground. There were more Red Division troops in there.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 5.0);
+	AmbientSound("quote/C1M3Q12", 127);
+	delay(170);
+	hudmessage(s:"[Savion]\n\cjWas it a base for the Red Division?";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 4.0);
+	AmbientSound("quote/C1M3Q13", 127);
+	delay(140);
+	hudmessage(s:"[Jason]\n\cjNot exactly. There were two floors. The first floor was an abandonded laboratory. Perhaps used to disguise their site.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 8.0);
+	AmbientSound("quote/C1M3Q14", 127);
+}
+
+script 110 (void)
+{
+		hudmessage(s:"[Jason]\n\cjThere was tram that lead us further underground. The further we went the more the necklace was glowing.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 7.0);
+	AmbientSound("quote/C1M3Q11", 127);
+}
+
+script 111 ENTER
+{
+	IF(CheckActorFloorTexture(82, "VESATILE") && CheckActorFloorTexture(1337, "VESATILE"))
+	{
+		Door_close(5, 32, 0);
+		delay(50);
+		Elevator_LowerToNearest(6, 20);
+		delay(10);
+		ACS_Execute(112,0,0,0,0);
+
+	}
+	delay(2);
+	restart;
+}
+
+script 112 (void)
+{
+	TakeActorInventory(1337, "HUD_ON", 1);
+	ACS_Terminate(111,0);
+	SetPlayerProperty(1, ON, PROP_TOTALLYFROZEN);
+	fadeto(255, 255, 255, 1.0, 2.0);
+	delay(200);
+	changecamera(132, 1, 0);
+	Thing_Activate(132);
+	delay(50);
+	SetMusic("CMC_MUS");
+	ACS_Execute(987,0,0,0,0);
+	fadeto(0, 0, 0, 0, 2.0);
+	hudmessage(s:"Press '", k:"+attack", s:"' to Skip";
+	HUDMSG_FADEINOUT, 101, CR_White, 2, 0.9, 999.999);
+	hudmessage(s:"[Jason]\n\cjAnd now for the second floor. When Danny and I were going down, the necklace was brighter.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 6.0);
+	AmbientSound("quote/C1M3Q15", 127);
+	delay(200);
+	changecamera(29, 1, 0);
+	Thing_Activate(29);
+	hudmessage(s:"[Savion]\n\cjLooks like you two were getting closer.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 3.0);
+	AmbientSound("quote/C1M3Q16", 127);
+	delay(130);
+	hudmessage(s:"[Savion]\n\cjWas is unsettling be close to enter Ogrodolan?";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 3.5);
+	AmbientSound("quote/C1M3Q17", 127);
+	delay(165);
+	changecamera(137, 1, 0);
+	Thing_Activate(137);
+	hudmessage(s:"[Jason]\n\cjIt sure was. I didn't know what to expect. Danny on the other hand was nervous to return to Ogrodolan.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 7.0);
+	AmbientSound("quote/C1M3Q18", 127);
+	delay(240);
+	hudmessage(s:"[Jason]\n\cjWhat I can say is, there was something big down there.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 3.0);
+	AmbientSound("quote/C1M3Q19", 127);
+	delay(170);
+	fadeto(255, 255, 255, 1.0, 2.0);
+	GiveActorInventory(1337, "Mission_Confirmation", 1);
+	delay(150);
+	ChangeLevel("map27", 0, CHANGELEVEL_NOINTERMISSION, -1);
+	}
+	
+	Script 987 (void)
+	{
+ int buttons;
+
+ while (TRUE)
+ {
+   buttons = GetPlayerInput(-1, INPUT_BUTTONS);
+
+   if (buttons & BT_ATTACK)
+   {
+	GiveActorInventory(1337, "Mission_Confirmation", 1);
+	fadeto(255, 255, 255, 1.0, 2.0);
+	delay(150);
+	ChangeLevel("map27", 0, CHANGELEVEL_NOINTERMISSION, -1);
+   }
+
+   delay(1);
+ }
+}
+
+
+script 133 (void)
+{
+	Thing_Remove(141);
+	delay(20);
+		hudmessage(s:"[Jason]\n\cjAnd the enemy sniper was taken care of. We continued to move forward.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 5.0);
+	AmbientSound("quote/C1M3Q10", 127);
+	delay(160);
+	FadeTo(0,0,0,1.0,3.0);
+	delay(130);
+		Thing_Remove(8);
+	TakeActorInventory(1337, "MORS", 999);
+	Thing_move(131, 112, 1);
+	thing_activate(131);
+	Thing_SetGoal(131, 26, 0, 1);
+	thing_move(1337, 129, 1);
+	delay(3);
+	FadeTo(0,0,0,0.0,3.0);
+	SetMusic("CPN_M3");
+	SetActorProperty(53, APROP_Speed, 20.0);
+	SetActorProperty(131, APROP_Speed, 20.0);
+	SetLineBlocking(140, BLOCK_NOTHING);
+}
+
+Script 200 (void)
+{
+	GiveInventory("CP_MaxAmmo",1);
+	AmbientSound("sound/REAMMO", 127);
+}
+
+Script 201 (void)
+{
+hudmessage(s:"Press '",k:"+use", s:"' To Refill Ammo";
+HUDMSG_Fadeinout, 11, CR_WHITE, 3.0, 0.80, 5.4);
+}
+
+Script 300 (void)
+{
+	SetActorState(53, "Talking", TRUE);
+	SetActorState(50, "Talking", TRUE);
+	Thing_Activate(53);
+	Thing_Activate(50);
+	delay(100);
+	Thing_Deactivate(53);
+	Thing_Deactivate(50);
+	delay(40);
+	Thing_Activate(53);
+	Thing_Activate(50);
+	delay(80);
+	Thing_Deactivate(53);
+	Thing_Activate(50);
+	delay(40);
+	Thing_Deactivate(53);
+	Thing_Activate(50);
+	delay(80);
+	Thing_Deactivate(53);
+	Thing_Activate(50);
+	delay(40);
+	Thing_Deactivate(53);
+	Thing_Activate(50);
+	delay(80);
+	Thing_Deactivate(53);
+	Thing_Activate(50);
+	delay(40);
+	Thing_Deactivate(53);
+	Thing_Activate(50);
+	delay(80);
+	Thing_Deactivate(53);
+	Thing_Activate(50);
+	delay(40);
+	Restart;
+}

@@ -1,0 +1,263 @@
+#include "zcommon.acs"
+
+Script 999 ENTER
+
+{
+	SetFont("DIETLOGFONT");
+	ClearInventory();
+	SetMusic("CPN_M1", 0);
+	SetPlayerProperty(1, ON, PROP_TOTALLYFROZEN);
+	fadeto(0, 0, 0, 1.0, 0);
+	Thing_ChangeTID (0, 1337+PlayerNumber());
+	ChangeSky("CMP_DSRT", "CMP_DSRT");
+	TakeActorInventory(1337, "Pistol", 999);
+	TakeActorInventory(1337, "Fist", 999);
+	delay(200);
+	hudmessage(s:"[Jason]\n\cjMy journey to what lead me here today.";
+	HUDMSG_FADEINOUT, 0, CR_Green, 3.0, 0.7, 2.0);
+	AmbientSound("quote/C1M1Q1", 127);
+	DELAY(100);
+	hudmessage(s:"A Mod by Fabysk";
+	HUDMSG_FADEINOUT, 0, CR_WHITE, 0, 0.3, 4.0);
+	delay(200);
+	hudmessage(s:"[Jason]\n\cjAll began with a theft I did.";
+	HUDMSG_FADEINOUT, 0, CR_Green, 3.0, 0.7, 2.0);
+	AmbientSound("quote/C1M1Q2", 127);
+	DELAY(100);
+	hudmessage(s:"Created with GZDoom Builder, Slade 3, and GIMP 2";
+	HUDMSG_FADEINOUT, 0, CR_WHITE, 2, 0.3, 4.0);
+	DELAY(200);
+	hudmessage(s:"[Jason]\n\cjA necklace that changed my life from a scavenger.";
+	HUDMSG_FADEINOUT, 0, CR_Green, 3.0, 0.7, 3.0);
+	AmbientSound("quote/C1M1Q3", 127);
+	DELAY(200);
+	hudmessage(s:"[Jason]\n\cjTo a brave human being.";
+	HUDMSG_FADEINOUT, 0, CR_Green, 3.0, 0.7, 2.0);
+	AmbientSound("quote/C1M1Q4", 127);
+	DELAY(100);
+	AmbientSound("sound/intro", 50);
+	hudmessage(s:"Project 115 - Despair";
+	HUDMSG_TYPEON, 0, CR_Orange, 3.0, 0.5, 4.0);
+	DELAY(200);
+		hudmessage(s:"[Jason]\n\cjThis is my story of how I survived The Source.";
+	HUDMSG_FADEINOUT, 0, CR_Green, 3.0, 0.7, 3.0);
+	AmbientSound("quote/C1M1Q5", 127);
+	DELAY(150);
+		fadeto(0, 0, 0, 0, 4.0);
+			for(int j=0; j<=999; j++)
+        Sector_SetColor(j,255,255,255,100);
+		GiveActorInventory(1337, "AK-12", 255);
+		GiveActorInventory(1337, "ColtM1911", 255);
+		GiveActorInventory(1337, "FragGrenade", 255);
+		GiveActorInventory(1337, "Knife", 1);
+		GiveActorInventory(1337, "CP_OutOfSight", 255);
+		GiveActorInventory(1337, "HUD_ON", 1);
+		SetPlayerProperty(1, OFF, PROP_TOTALLYFROZEN);
+				hudmessage(s:"Follow the waypoints";
+	HUDMSG_FADEINOUT, 0, CR_WHITE, 3.0, 0.6, 4.0);
+hudmessage(s:"'",k:"+forward", s:"' = move forward\n'", k:"+back", s:"' = move backward\n'", k:"+MOVELEFT", s:"' = strafe left\n'", k:"+moveright", s:"' = strafe right";
+HUDMSG_Fadeinout, 11, CR_WHITE, 3.0, 0.7, 10.4);
+	hudmessage(s:"A New Journey (Tutorial)\nLocation: Whispering Borderlands (5 Miles From Home)\nJason Milito\nDate: June 4, 2019";
+	HUDMSG_TYPEON, 0, CR_GREEN, 2, 0.8, 7.0);
+}
+
+script 998 ENTER
+{//HEALTH REGENERATION
+    int health = GetActorProperty(1337, APROP_Health);
+
+    While(True)
+    {
+        {
+            //Constantly work while health is under 100
+            While(GetActorProperty(1337,APROP_Health)<100 && GetActorProperty(1337,APROP_Health)>=1)
+            {
+                //After each hit you take, wait for regeneration
+                If(GetActorProperty(1337,APROP_Health)<health)
+                {
+                HudMessage(s:"";HUDMSG_FADEOUT, 101, CR_RED, 240.0, 180.0, 0.1, 0.1);
+                }
+                health = GetActorProperty(1337, APROP_Health);
+                SetActorProperty(1337, APROP_Health, health + 1);
+                Delay(3);
+            }
+        }
+    Delay(1);
+    }
+}
+
+script 997 ENTER
+{//Indicate critial health level
+    While(True)
+	{
+            //Constantly work while health is under 30
+            if(GetActorProperty(1337,APROP_Health)<40 && GetActorProperty(1337,APROP_Health)>=1)
+                {
+                HudMessage(s:"Critical Health Level!";HUDMSG_FADEOUT, 1, CR_RED, 3.0, 0.2, 0.5);
+            }
+			 Delay(1);
+
+        }
+	}
+	
+script 996 ENTER
+{//Critical Health Sound
+    While(True)
+	{
+            //Constantly work while health is under 30
+            if(GetActorProperty(1337,APROP_Health)<40 && GetActorProperty(1337,APROP_Health)>=1)
+                {
+				ThingSound(1337, "sound/HLTHCRIT", 127);
+            }
+			 Delay(6);
+
+        }
+	}
+		
+
+script 995 death
+
+{
+
+If(GetActorProperty(1337,APROP_Health)<=0)
+
+    {
+    
+setmusic("ZM_DEATH", 0, 0);
+AmbientSound("sound/SUITDIE", 127);
+fadeto(0, 0, 0, 1.0, 6.9);
+DELAY(380);
+setmusic("BOTKIL8", 0, 0);
+
+}
+}
+
+//Finishing The Level
+
+script 994 (void)
+{
+	TakeActorInventory(1337, "HUD_ON", 1);
+	SetFont("DIETLOGFONT");
+	SetPlayerProperty(1, ON, PROP_TOTALLYFROZEN);
+	SetActorProperty(1337, APROP_Invulnerable, ON);
+	fadeto(255, 255, 255, 1.0, 2.0);
+	delay(200);
+	changecamera(1, 1, 0);
+	Thing_Activate(1);
+	delay(50);
+	ACS_Execute(987,0,0,0,0);
+	fadeto(0, 0, 0, 0, 2.0);
+		hudmessage(s:"Press '", k:"+attack", s:"' to Skip";
+	HUDMSG_FADEINOUT, 101, CR_White, 2, 0.9, 999.999);
+		hudmessage(s:"[Jason]\n\cjJust like that. A Necklace stolen from a posessed militia.";
+	HUDMSG_FADEINOUT, 0, CR_Green, 3.0, 0.7, 3.0);
+	AmbientSound("quote/C1M1Q8", 127);
+	delay(130);
+	hudmessage(s:"[Jason]\n\cjFrom there, I headed back home. If you can call it that.";
+	HUDMSG_FADEINOUT, 0, CR_Green, 3.0, 0.7, 3.0);
+	AmbientSound("quote/C1M1Q9", 127);
+	delay(130);
+	hudmessage(s:"[Savion]\n\cjDid the Red Division knew where you lived?";
+	HUDMSG_FADEINOUT, 0, CR_Green, 3.0, 0.7, 3.0);
+	AmbientSound("quote/C1M1Q10", 127);
+	delay(130);
+	hudmessage(s:"[Jason]\n\cjTo my surprise they did not. For all I know they could have been tracking me down.";
+	HUDMSG_FADEINOUT, 0, CR_Green, 3.0, 0.7, 3.0);
+	AmbientSound("quote/C1M1Q11", 127);
+	delay(160);
+	hudmessage(s:"[Jason]\n\cjI had to leave to hide somewhere else.";
+	HUDMSG_FADEINOUT, 0, CR_Green, 3.0, 0.7, 3.0);
+	AmbientSound("quote/C1M1Q12", 127);
+	delay(140);
+	fadeto(255, 255, 255, 1.0, 2.0);
+	GiveActorInventory(1337, "Mission_Confirmation", 1);
+	delay(150);
+	SetActorProperty(1337, APROP_Invulnerable, OFF);
+	ChangeLevel("map27", 0, CHANGELEVEL_NOINTERMISSION, -1);
+	}
+	
+	Script 987 (void)
+	{
+ int buttons;
+
+ while (TRUE)
+ {
+   buttons = GetPlayerInput(-1, INPUT_BUTTONS);
+
+   if (buttons & BT_ATTACK)
+   {
+     ACS_Terminate(994,0);
+	 GiveActorInventory(1337, "Mission_Confirmation", 1);
+	fadeto(255, 255, 255, 1.0, 2.0);
+	delay(150);
+	ChangeLevel("map27", 0, CHANGELEVEL_NOINTERMISSION, -1);
+   }
+
+   delay(1);
+ }
+}
+
+
+//Tell the player their controls along the way/tips
+script 993 (void)
+{
+	SetFont("DIETLOGFONT");
+	hudmessage(s:"Press '",k:"+attack", s:"' To fire weapon\nPress '", k:"+altattack", s:"' To Aim Down Sights";
+HUDMSG_Fadeinout, 11, CR_WHITE, 3.0, 0.80, 5.4);
+}
+
+script 992 (void)
+{
+	SetFont("DIETLOGFONT");
+	hudmessage(s:"Hold '",k:"+forward", s:"' against ladders to climb them";
+HUDMSG_Fadeinout, 11, CR_WHITE, 3.0, 0.80, 5.4);
+}
+
+script 991 (void)
+{
+	SetFont("DIETLOGFONT");
+	hudmessage(s:"Press '",k:"+jump", s:"' To jump";
+HUDMSG_Fadeinout, 11, CR_WHITE, 3.0, 0.80, 5.4);
+}
+
+script 990 (void)
+{
+	SetFont("DIETLOGFONT");
+	hudmessage(s:"Hold '",k:"+crouch", s:"' To crouch";
+HUDMSG_Fadeinout, 11, CR_WHITE, 3.0, 0.80, 5.4);
+delay(50);
+	hudmessage(s:"You can crouch behind objects to take cover";
+HUDMSG_Fadeinout, 12, CR_WHITE, 3.0, 0.90, 5.4);
+}
+
+script 989 (void)
+{
+	SetFont("DIETLOGFONT");
+	hudmessage(s:"Press '",k:"invuse", s:"' To Use PowerGum";
+HUDMSG_Fadeinout, 11, CR_WHITE, 3.0, 0.80, 5.4);
+}
+
+//Additional Quotes
+Script 988 (void)
+{
+	SetFont("DIETLOGFONT");
+	hudmessage(s:"[Jason]\n\cjI needed to find a different way out. It was guaranteed that more Red Division troops were up ahead.";
+	HUDMSG_FADEINOUT, 0, CR_Green, 3.0, 0.7, 5.0);
+	AmbientSound("quote/C1M1Q6", 127);
+	delay(260);
+		hudmessage(s:"[Jason]\n\cjI didn't know why they were after me for this necklace. From my eyes, it looked very valuable.";
+	HUDMSG_FADEINOUT, 0, CR_Green, 3.0, 0.7, 5.0);
+	AmbientSound("quote/C1M1Q7", 127);
+}
+
+Script 200 (void)
+{
+	GiveInventory("CP_MaxAmmo", 1);
+	AmbientSound("sound/REAMMO", 127);
+}
+
+Script 201 (void)
+{
+	SetFont("DIETLOGFONT");
+hudmessage(s:"Press '",k:"+use", s:"' To Refill Ammo";
+HUDMSG_Fadeinout, 11, CR_WHITE, 3.0, 0.80, 5.4);
+}

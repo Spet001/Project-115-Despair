@@ -1,0 +1,618 @@
+		StatusBar Fullscreen, FullscreenOffsets
+{
+  InInventory HUD_ON {Drawimage "HUD115", -450,-110; }
+  InInventory HUD_ON {DrawString bigfont, Green ,"HEALTH - ",-80,-70; }
+  InInventory HUD_ON {Drawnumber 10, bigfont, Green, health, -50, -70; }
+  InInventory HUD_ON {Drawnumber 10, BIGFONT, Gray, ammo1, -50, -40;}
+  
+//Perk Icons (1st Slot)//
+		 InInventory QuickRevive_S1 { drawimage "QRV1A0", 25, -240; }
+		 InInventory Juggernog_Icon_S1 { drawimage "JUG1A0", 25, -240; }
+		 InInventory SwiftHands_S1 { drawimage "SFT1A0", 25, -240; } 
+		 InInventory DeadShot_S1 { drawimage "DST1A0", 25, -240; }
+		 InInventory ShockTop_S1 { drawimage "STP1A0", 25, -240; }
+		 InInventory Flak_S1 { drawimage "FLK1A0", 25, -240; }
+		 InInventory Blood_S1 { drawimage "TEQ1A0", 25, -240; }
+//Perk Icons (2nd Slot)//
+		 InInventory QuickRevive_S2 { drawimage "QRV1A0", 100, -240; }
+		 InInventory Juggernog_Icon_S2 { drawimage "JUG1A0", 100, -240; }
+		 InInventory SwiftHands_S2 { drawimage "SFT1A0", 100, -240; } 
+		 InInventory DeadShot_S2 { drawimage "DST1A0", 100, -240; }
+		 InInventory ShockTop_S2 { drawimage "STP1A0", 100, -240; }
+		 InInventory Flak_S2 { drawimage "FLK1A0", 100, -240; }
+		 InInventory Blood_S2 { drawimage "TEQ1A0", 100, -240; }
+//Perk Icons (3rd Slot)//
+		 InInventory QuickRevive_S3 { drawimage "QRV1A0", 175, -240; }
+		 InInventory Juggernog_Icon_S3 { drawimage "JUG1A0", 175, -240; }
+		 InInventory SwiftHands_S3 { drawimage "SFT1A0", 175, -240; } 
+		 InInventory DeadShot_S3 { drawimage "DST1A0", 175, -240; }
+		 InInventory ShockTop_S3 { drawimage "STP1A0", 175, -240; }
+		 InInventory Flak_S3 { drawimage "FLK1A0", 175, -240; }
+		 InInventory Blood_S3 { drawimage "TEQ1A0", 175, -240; }
+//Perk Icons (4th Slot)//
+		 InInventory QuickRevive_S4 { drawimage "QRV1A0", 250, -240; }
+		 InInventory Juggernog_Icon_S4 { drawimage "JUG1A0", 250, -240; }
+		 InInventory SwiftHands_S4 { drawimage "SFT1A0", 250, -240; } 
+		 InInventory DeadShot_S4 { drawimage "DST1A0", 250, -240; }
+		 InInventory ShockTop_S4 { drawimage "STP1A0", 250, -240; }
+		 InInventory Flak_S4 { drawimage "FLK1A0", 250, -240; }
+		 InInventory Blood_S4 { drawimage "TEQ1A0", 250, -240; }
+//PowerGum Icons//
+		 InInventory ConcealedFighter { drawimage "GUM2", -190,-330; }
+		 InInventory OutOfSight { drawimage "GUM3", -190,-330; }
+		 InInventory QuickPace { drawimage "GUM6", -190,-330; }
+		 InInventory WalkingTank { drawimage "GUM8", -190,-330; }
+		 InInventory TriggerHappy { drawimage "GU10", -190,-330; }
+		 InInventory Reinstitute { drawimage "GU12", -190,-330; }
+		 InInventory Vampirism { drawimage "GU14", -190,-330; }
+		 InInventory SubZeroInterval { drawimage "GU15", -190,-330; }
+		 InInventory LimitlessClip { drawimage "GU16", -190,-330; }
+		 InInventory LightsOn { drawimage "GU17", -190,-330; }
+		 InInventory SwiftDeath { drawimage "GU18", -190,-330; }
+		 InInventory DrinksOnMe { drawimage "GU19", -190,-330; }
+		 InInventory EnchantedPurchase { drawimage "GUM7", -190,-330; }
+		 InInventory ReplenishedArsenal { drawimage "GU20", -190,-330; }
+		 InInventory DeathUponThem { drawimage "GU21", -190,-330; }
+		//Campaign PowerGums//
+		 InInventory CP_OutOfSight { drawimage "GUM3", -190,-330; }
+		 InInventory CP_ConcealedFighter { drawimage "GUM2", -190,-330; }
+		 InInventory CP_LightsOn { drawimage "GU17", -190,-330; }
+		 InInventory CP_WalkingTank { drawimage "GUM8", -190,-330; }
+		 InInventory CP_Vampirism { drawimage "GU14", -190,-330; }
+		 InInventory CP_LimitlessClip { drawimage "GU16", -190,-330; }
+		//Ascension Update PowerGums//
+		 InInventory GamblingFree { drawimage "GU23", -190,-330; }
+		 InInventory StrengthDrainage { drawimage "GU22", -190,-330; }
+		//Severance Update PowerGums//
+		 InInventory IconicDuo { drawimage "GU24", -190,-330; }
+		 InInventory ExtraCredit { drawimage "GU25", -190,-330; }
+		//EndGame Update PowerGums//
+		 InInventory MirrorTrap { drawimage "GU26", -190,-330; }
+		 InInventory AmeliorationNegotiation { drawimage "GU27", -190,-330; }
+		 InInventory InfiniteSpirit { drawimage "GU28", -190,-330; }
+		 InInventory RoundSkippin { drawimage "GU29", -190,-330; }
+		 InInventory FatalContraption { drawimage "GU30", -190,-330; }
+		 InInventory SecretShopper { drawimage "GU31", -190,-330; }
+		//Apocalypse Update PowerGums//
+		 InInventory QuantumDischarge { drawimage "GU32", -190,-330; }
+		 InInventory LockSmith { drawimage "GU33", -190,-330; }
+		 InInventory FreeLoan { drawimage "GU34", -190,-330; }
+		 InInventory RadiusMedic { drawimage "GU35", -190,-330; }
+		 InInventory CertifiedElectrician { drawimage "GU36", -190,-330; }
+		
+		//Weapon HUD//
+				 isselected "MORS"
+		{
+		DrawString bigfont, Green, "MORS", -110, -40;
+		}
+				 isselected "DeathMachine"
+		{
+		DrawString bigfont, Green, "Death Machine", -110, -40;
+		}
+				 isselected "AK-12"
+		{
+		DrawString bigfont, Green, "AK-12", -110, -40;
+		}
+				 isselected "PAPAK-12"
+		{
+		DrawString bigfont, Red, "Damnation", -110, -40;
+		}
+				 isselected "M-14"
+		{
+		DrawString bigfont, Green, "M-14", -110, -40;
+		}
+				 isselected "PAPM-14"
+		{
+		DrawString bigfont, Red, "Cataclysmic Piercer", -110, -40;
+		}
+				 isselected "Olympia"
+		{
+		DrawString bigfont, Green, "Olympia", -110, -40;
+		}
+				 isselected "PAPOlympia"
+		{
+		DrawString bigfont, Red, "Hades", -110, -40;
+		}
+				 isselected "COLTM1911"
+		{
+		DrawString bigfont, Green, "COLT M1911", -110, -40;
+		}
+				 isselected "PAPCOLTM1911"
+		{
+		DrawString bigfont, Red, "Voice Of Insanity", -110, -40;
+		}
+				 isselected "AN-94"
+		{
+		DrawString bigfont, Green, "AN-94", -110, -40;
+		}
+				 isselected "PAPAN-94"
+		{
+		DrawString bigfont, Red, "Spiteful Demise", -110, -40;
+		}
+				 isselected "G36-C"
+		{
+		DrawString bigfont, Green, "G36-C", -110, -40;
+		}
+				 isselected "PAPG36-C"
+		{
+		DrawString bigfont, Red, "Extermination", -110, -40;
+		}
+				 isselected "Galil"
+		{
+		DrawString bigfont, Green, "Galil", -110, -40;
+		}
+				 isselected "PAPGalil"
+		{
+		DrawString bigfont, Red, "Disposer ", -110, -40;
+		}
+				 isselected "GLOCK20"
+		{
+		DrawString bigfont, Green, "GLOCK 20", -110, -40;
+		}
+				 isselected "PAPGLOCK20"
+		{
+		DrawString bigfont, Red, "Bloodfury", -110, -40;
+		}
+				 isselected "KS-23"
+		{
+		DrawString bigfont, Green, "KS-23", -110, -40;
+		}
+				 isselected "PAPKS-23"
+		{
+		DrawString bigfont, Red, "Stormfury Blaster", -110, -40;
+		}
+				 isselected "M3SUPER"
+		{
+		DrawString bigfont, Green, "M3 SUPER", -110, -40;
+		}
+				 isselected "PAPM3SUPER"
+		{
+		DrawString bigfont, Red, "Blast Cannon", -110, -40;
+		}
+				 isselected "UZI"
+		{
+		DrawString bigfont, Green, "UZI", -110, -40;
+		}
+				 isselected "PAPUZI"
+		{
+		DrawString bigfont, Red, "Rapid Stinger", -110, -40;
+		}
+				 isselected "SWAT557"
+		{
+		DrawString bigfont, Green, "SWAT-557", -110, -40;
+		}
+				 isselected "PAPSWAT"
+		{
+		DrawString bigfont, Red, "Catastrophic Suppressor", -110, -40;
+		}
+				 isselected "M-24"
+		{
+		DrawString bigfont, Green, "M-24", -110, -40;
+		}
+				 isselected "PAPM-24"
+		{
+		DrawString bigfont, Red, "Longshot Devastator", -110, -40;
+		}
+				 isselected "M-82"
+		{
+		DrawString bigfont, Green, "M-82", -110, -40;
+		}
+				 isselected "PAPM-82"
+		{
+		DrawString bigfont, Red, "Dreamhunter", -110, -40;
+		}
+				 isselected "SKS"
+		{
+		DrawString bigfont, Green, "SKS", -110, -40;
+		}
+				 isselected "PAPSKS"
+		{
+		DrawString bigfont, Red, "Ghastly Serpent", -110, -40;
+		}
+				 isselected "B23R"
+		{
+		DrawString bigfont, Green, "B23R", -110, -40;
+		}
+				 isselected "PAPB23R"
+		{
+		DrawString bigfont, Red, "B34R", -110, -40;
+		}
+				 isselected "StormPRX"
+		{
+		DrawString bigfont, Green, "STORM PRX", -110, -40;
+		}
+				 isselected "PAPStormPRX"
+		{
+		DrawString bigfont, Red, "Eclipse", -110, -40;
+		}
+				 isselected "OHM"
+		{
+		DrawString bigfont, Green, "OHM", -110, -40;
+		}
+				 isselected "PAPOHM"
+		{
+		DrawString bigfont, Red, "Caustic Reaper", -110, -40;
+		}
+				 isselected "BianchiFA-6"
+		{
+		DrawString bigfont, Green, "Bianchi FA-6", -110, -40;
+		}
+				 isselected "PAPBianchiFA-6"
+		{
+		DrawString bigfont, Red, "Grieving Repeater", -110, -40;
+		}
+				 isselected "MP5"
+		{
+		DrawString bigfont, Green, "MP5", -110, -40;
+		}
+				 isselected "PAPMP5"
+		{
+		DrawString bigfont, Red, "Severance", -110, -40;
+		}
+				 isselected "Carbon-26"
+		{
+		DrawString bigfont, Green, "Carbon-26", -110, -40;
+		}
+				 isselected "PAPCarbon-26"
+		{
+		DrawString bigfont, Red, "Oblivion", -110, -40;
+		}
+				 isselected "P226"
+		{
+		DrawString bigfont, Green, "P226", -110, -40;
+		}
+				 isselected "PAPP226"
+		{
+		DrawString bigfont, Red, "SoulBurn", -110, -40;
+		}
+				 isselected "RagingBull"
+		{
+		DrawString bigfont, Green, "Raging Bull-12 Gauge ", -110, -40;
+		}
+				 isselected "PAPRagingBull"
+		{
+		DrawString bigfont, Red, "Furious Dragon-Infinity", -110, -40;
+		}
+				 isselected "M8A5"
+		{
+		DrawString bigfont, Green, "M8A5", -110, -40;
+		}
+				 isselected "PAPM8A5"
+		{
+		DrawString bigfont, Red, "Whistling Interrogator", -110, -40;
+		}
+				 isselected "RayGun"
+		{
+		DrawString bigfont, Green, "Ray Gun", -110, -40;
+		}
+				 isselected "PAPRayGun"
+		{
+		DrawString bigfont, Red, "Porters X2 Ray Gun", -110, -40;
+		}
+				 isselected "RPG"
+		{
+		DrawString bigfont, Green, "RPG", -110, -40;
+		}
+				 isselected "MX-GL"
+		{
+		DrawString bigfont, Green, "MX-GL", -110, -40;
+		}
+				 isselected "PAPMX-GL"
+		{
+		DrawString bigfont, Red, "Firehawk ", -110, -40;
+		}
+				 isselected "RideM-14"
+		{
+		DrawString bigfont, Blue, "Splash Mountain Blaster", -110, -40;
+		}
+				 isselected "FragGrenade"
+		{
+		DrawString bigfont, Green, "Frag Grenade", -110, -40;
+		}
+				 isselected "Knife"
+		{
+		DrawString bigfont, Green, "Knife", -110, -40;
+		}
+				 isselected "PlasmaGrenade"
+		{
+		DrawString bigfont, Green, "Plasma Grenade", -110, -40;
+		}
+				 isselected "Swarmers"
+		{
+		DrawString bigfont, Green, "Swarmers", -110, -40;
+		}
+				 isselected "RadiationGrenade"
+		{
+		DrawString bigfont, Green, "Radiation Grenade", -110, -40;
+		}
+				 isselected "DeployableShield"
+		{
+		DrawString bigfont, Green, "Deployable Shield", -110, -40;
+		}
+				 isselected "AssaultShield"
+		{
+		DrawString bigfont, Green, "Assault Shield", -110, -40;
+		}
+				 isselected "StaffofFire"
+		{
+		DrawString bigfont, Green, "Staff of Fire", -110, -40;
+		}
+				 isselected "StaffofIce"
+		{
+		DrawString bigfont, Green, "Staff of Ice", -110, -40;
+		}
+				 isselected "StaffofLightning"
+		{
+		DrawString bigfont, Green, "Staff of Lightning", -110, -40;
+		}
+		
+		//ADS//
+						 isselected "sightsAK-12"
+		{
+		DrawString bigfont, Green, "AK-12", -110, -40;
+		}
+				 isselected "sightsPAPAK-12"
+		{
+		DrawString bigfont, Red, "Damnation", -110, -40;
+		}
+				 isselected "sightsM-14"
+		{
+		DrawString bigfont, Green, "M-14", -110, -40;
+		}
+				 isselected "sightsPAPM-14"
+		{
+		DrawString bigfont, Red, "Cataclysmic Piercer", -110, -40;
+		}
+				 isselected "sightsAN-94"
+		{
+		DrawString bigfont, Green, "AN-94", -110, -40;
+		}
+				 isselected "sightsPAPAN-94"
+		{
+		DrawString bigfont, Red, "Spiteful Demise", -110, -40;
+		}
+				 isselected "sightsG36-C"
+		{
+		DrawString bigfont, Green, "G36-C", -110, -40;
+		}
+				 isselected "sightsPAPG36-C"
+		{
+		DrawString bigfont, Red, "Extermination", -110, -40;
+		}
+				 isselected "sightsGalil"
+		{
+		DrawString bigfont, Green, "Galil", -110, -40;
+		}
+				 isselected "sightsPAPGalil"
+		{
+		DrawString bigfont, Red, "Disposer ", -110, -40;
+		}
+				 isselected "sightsGLOCK20"
+		{
+		DrawString bigfont, Green, "GLOCK 20", -110, -40;
+		}
+				 isselected "sightsPAPGLOCK20"
+		{
+		DrawString bigfont, Red, "Bloodfury", -110, -40;
+		}
+				 isselected "sightsKS-23"
+		{
+		DrawString bigfont, Green, "KS-23", -110, -40;
+		}
+				 isselected "sightsPAPKS-23"
+		{
+		DrawString bigfont, Red, "Stormfury Blaster", -110, -40;
+		}
+				 isselected "sightsM3SUPER"
+		{
+		DrawString bigfont, Green, "M3 SUPER", -110, -40;
+		}
+				 isselected "sightsPAPM3SUPER"
+		{
+		DrawString bigfont, Red, "Blast Cannon", -110, -40;
+		}
+				 isselected "sightsUZI"
+		{
+		DrawString bigfont, Green, "UZI", -110, -40;
+		}
+				 isselected "sightsPAPUZI"
+		{
+		DrawString bigfont, Red, "Rapid Stinger", -110, -40;
+		}
+				 isselected "sightsSWAT557"
+		{
+		DrawString bigfont, Green, "SWAT-557", -110, -40;
+		}
+				 isselected "sightsPAPSWAT"
+		{
+		DrawString bigfont, Red, "Catastrophic Surppressor", -110, -40;
+		}
+				 isselected "sightsM-24"
+		{
+		DrawString bigfont, Green, "M-24", -110, -40;
+		}
+				 isselected "sightsPAPM-24"
+		{
+		DrawString bigfont, Red, "Longshot Devastator", -110, -40;
+		}
+				 isselected "sightsM-82"
+		{
+		DrawString bigfont, Green, "M-82", -110, -40;
+		}
+				 isselected "sightsPAPM-82"
+		{
+		DrawString bigfont, Red, "Dreamhunter", -110, -40;
+		}
+				 isselected "sightsSKS"
+		{
+		DrawString bigfont, Green, "SKS", -110, -40;
+		}
+				 isselected "sightsPAPSKS"
+		{
+		DrawString bigfont, Red, "Ghastly Serpent", -110, -40;
+		}
+				 isselected "sightsStormPRX"
+		{
+		DrawString bigfont, Green, "STORM PRX", -110, -40;
+		}
+				 isselected "sightsPAPStormPRX"
+		{
+		DrawString bigfont, Red, "Eclipse", -110, -40;
+		}
+				 isselected "SightsRayGun"
+		{
+		DrawString bigfont, Green, "Ray Gun", -110, -40;
+		}
+				 isselected "SightsPAPRayGun"
+		{
+		DrawString bigfont, Red, "Porters X2 Ray Gun", -110, -40;
+		}
+				 isselected "sightsOHM"
+		{
+		DrawString bigfont, Green, "OHM", -110, -40;
+		}
+				 isselected "sightsPAPOHM"
+		{
+		DrawString bigfont, Red, "Caustic Reaper", -110, -40;
+		}
+				 isselected "sightsB23R"
+		{
+		DrawString bigfont, Green, "B23R", -110, -40;
+		}
+				 isselected "sightsPAPB23R"
+		{
+		DrawString bigfont, Red, "B34R", -110, -40;
+		}
+				 isselected "sightsBianchiFA-6"
+		{
+		DrawString bigfont, Green, "Bianchi FA-6", -110, -40;
+		}
+				 isselected "sightsPAPBianchiFA-6"
+		{
+		DrawString bigfont, Red, "Grieving Repeater", -110, -40;
+		}
+				 isselected "sightsMP5"
+		{
+		DrawString bigfont, Green, "MP5", -110, -40;
+		}
+				 isselected "sightsPAPMP5"
+		{
+		DrawString bigfont, Red, "Severance", -110, -40;
+		}
+				 isselected "sightsCarbon-26"
+		{
+		DrawString bigfont, Green, "Carbon-26", -110, -40;
+		}
+				 isselected "sightsPAPCarbon-26"
+		{
+		DrawString bigfont, Red, "Oblivion", -110, -40;
+		}
+				 isselected "sightsP226"
+		{
+		DrawString bigfont, Green, "P226", -110, -40;
+		}
+				 isselected "sightsPAPP226"
+		{
+		DrawString bigfont, Red, "SoulBurn", -110, -40;
+		}
+				 isselected "sightsRagingBull"
+		{
+		DrawString bigfont, Green, "Raging Bull-12 Gauge ", -110, -40;
+		}
+				 isselected "sightsPAPRagingBull"
+		{
+		DrawString bigfont, Red, "Furious Dragon-Infinity", -110, -40;
+		}
+				 isselected "NavajoCyclerRifle"
+		{
+		DrawString bigfont, Green, "Navajo Cycler Rifle", -110, -40;
+		}
+				 isselected "PAPNavajoCyclerRifle"
+		{
+		DrawString bigfont, Red, "Chindi of Aurabelle", -110, -40;
+		}
+				 isselected "RaygunMarkII"
+		{
+		DrawString bigfont, Green, "Raygun Mark II", -110, -40;
+		}
+				 isselected "PAPRaygunMarkII"
+		{
+		DrawString bigfont, Red, "Porters Mark II Raygun", -110, -40;
+		}
+				 isselected "X4-Jasper"
+		{
+		DrawString bigfont, Green, "X4-Jasper", -110, -40;
+		}
+				 isselected "PAPX4-Jasper"
+		{
+		DrawString bigfont, Red, "Zenith", -110, -40;
+		}
+				 isselected "OS-40"
+		{
+		DrawString bigfont, Green, "OS-40", -110, -40;
+		}
+				 isselected "PAPOS-40"
+		{
+		DrawString bigfont, Red, "Maleficence", -110, -40;
+		}
+				 isselected "sightsNavajoCyclerRifle"
+		{
+		DrawString bigfont, Green, "Navajo Cycler Rifle", -110, -40;
+		}
+				 isselected "sightsPAPNavajoCyclerRifle"
+		{
+		DrawString bigfont, Red, "Chindi of Aurabelle", -110, -40;
+		}
+				 isselected "sightsRaygunMarkII"
+		{
+		DrawString bigfont, Green, "Raygun Mark II", -110, -40;
+		}
+				 isselected "sightsPAPRaygunMarkII"
+		{
+		DrawString bigfont, Red, "Porters Mark II Raygun", -110, -40;
+		}
+				 isselected "sightsX4-Jasper"
+		{
+		DrawString bigfont, Green, "X4-Jasper", -110, -40;
+		}
+				 isselected "sightsPAPX4-Jasper"
+		{
+		DrawString bigfont, Red, "Zenith", -110, -40;
+		}
+				 isselected "sightsOS-40"
+		{
+		DrawString bigfont, Green, "OS-40", -110, -40;
+		}
+				 isselected "sightsPAPOS-40"
+		{
+		DrawString bigfont, Red, "Maleficence", -110, -40;
+		}
+				 isselected "sightsRideM-14"
+		{
+		DrawString bigfont, Blue, "Splash Mountain Blaster", -110, -40;
+		}
+				 isselected "sightsOlympia"
+		{
+		DrawString bigfont, Green, "Olympia", -110, -40;
+		}
+				 isselected "sightsPAPOlympia"
+		{
+		DrawString bigfont, Red, "Hades", -110, -40;
+		}
+				 isselected "VoidSword"
+		{
+		DrawString bigfont, White, "Void Sword", -110, -40;
+		}
+				 isselected "sightsM8A5"
+		{
+		DrawString bigfont, Green, "M8A5", -110, -40;
+		}
+				 isselected "sightsPAPM8A5"
+		{
+		DrawString bigfont, Red, "Whistling Interrogator", -110, -40;
+		}
+				 isselected "PAPRPG"
+		{
+		DrawString bigfont, Red, "Hell Raiser", -110, -40;
+		}
+}

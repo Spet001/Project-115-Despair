@@ -1,0 +1,319 @@
+GameInfo
+{
+	   titlepage = "TITLEPIC"
+	   titlemusic = "TITLEMUS"
+}
+map map01 "MAIN MENU"
+{
+allowcrouch
+fallingdamage
+forcefallingdamage
+nointermission
+ClipMidTextures
+}
+
+map map02 "Tutorial/A New Journey"
+{
+allowcrouch
+fallingdamage
+forcefallingdamage
+nointermission
+ClipMidTextures
+}
+
+map map03 "Companion"
+{
+allowcrouch
+fallingdamage
+forcefallingdamage
+nointermission
+ClipMidTextures
+}
+
+map map04 "Search"
+{
+allowcrouch
+fallingdamage
+forcefallingdamage
+nointermission
+ClipMidTextures
+}
+
+map map05 "The Gateway"
+{
+allowcrouch
+fallingdamage
+forcefallingdamage
+nointermission
+ClipMidTextures
+}
+
+map map06 "Divided"
+{
+allowcrouch
+fallingdamage
+forcefallingdamage
+nointermission
+ClipMidTextures
+}
+
+map map07 "It Found Me"
+{
+allowcrouch
+fallingdamage
+forcefallingdamage
+nointermission
+ClipMidTextures
+}
+
+map map08 "Change of Plans"
+{
+allowcrouch
+fallingdamage
+forcefallingdamage
+nointermission
+ClipMidTextures
+}
+
+map map09 "Vengeance"
+{
+allowcrouch
+fallingdamage
+forcefallingdamage
+nointermission
+ClipMidTextures
+}
+
+map map10 "End Game"
+{
+allowcrouch
+fallingdamage
+forcefallingdamage
+nointermission
+ClipMidTextures
+}
+
+map map11 "Trail Shuffle"
+{
+allowcrouch
+fallingdamage
+forcefallingdamage
+nointermission
+ClipMidTextures
+}
+
+map map12 "No Man's Land"
+{
+allowcrouch
+fallingdamage
+forcefallingdamage
+nointermission
+ClipMidTextures
+}
+
+map map13 "Apocalypse Island"
+{
+allowcrouch
+fallingdamage
+forcefallingdamage
+nointermission
+ClipMidTextures
+}
+
+map map14 "Dreamventures"
+{
+allowcrouch
+fallingdamage
+forcefallingdamage
+nointermission
+ClipMidTextures
+}
+
+map map15 "Nacht Der Untoten"
+{
+allowcrouch
+fallingdamage
+forcefallingdamage
+nointermission
+ClipMidTextures
+}
+
+map map16 "The Iron Shield"
+{
+allowcrouch
+fallingdamage
+forcefallingdamage
+nointermission
+ClipMidTextures
+}
+
+map map17 "Zombie Run"
+{
+allowcrouch
+fallingdamage
+forcefallingdamage
+nointermission
+ClipMidTextures
+}
+
+map map18 "Power Mill"
+{
+allowcrouch
+fallingdamage
+forcefallingdamage
+nointermission
+ClipMidTextures
+}
+
+map map19 "Ground Zero"
+{
+allowcrouch
+fallingdamage
+forcefallingdamage
+nointermission
+ClipMidTextures
+}
+
+map map20 "EndGame"
+{
+allowcrouch
+fallingdamage
+forcefallingdamage
+nointermission
+ClipMidTextures
+}
+
+map map21 "The End"
+{
+allowcrouch
+fallingdamage
+forcefallingdamage
+nointermission
+ClipMidTextures
+}
+
+map map22 "Slaughter Flick"
+{
+allowcrouch
+fallingdamage
+forcefallingdamage
+nointermission
+ClipMidTextures
+}
+
+map map23 "Nuketown Zombies"
+{
+allowcrouch
+fallingdamage
+forcefallingdamage
+nointermission
+ClipMidTextures
+}
+
+map map24 "Der Riese"
+{
+allowcrouch
+fallingdamage
+forcefallingdamage
+nointermission
+ClipMidTextures
+}
+
+map map26 "The Darkest Hope"
+{
+allowcrouch
+fallingdamage
+forcefallingdamage
+nointermission
+ClipMidTextures
+}
+
+
+map map27 "Pre-Mission"
+{
+allowcrouch
+fallingdamage
+forcefallingdamage
+nointermission
+ClipMidTextures
+}
+
+map map28 "Pre-Mission"
+{
+allowcrouch
+fallingdamage
+forcefallingdamage
+nointermission
+ClipMidTextures
+}
+
+map map29 "Pre-Mission"
+{
+allowcrouch
+fallingdamage
+forcefallingdamage
+nointermission
+ClipMidTextures
+}
+
+clearskills
+
+skill baby
+{
+   Name = "Normal"
+   MustConfirm = "For new players to Project 115. Provides simple gameplay and goes easy on players."
+   AutoUseHealth
+   DamageFactor = 0.5
+   Aggressiveness = 0.3
+   MonsterHealth = 0.5
+   SpawnFilter = baby
+   TextColor = "Green"
+}
+
+skill easy
+{
+   Name = "Hard"
+   MustConfirm = "Recommended for all players. Provides small challenges every now and then."
+   AutoUseHealth
+   DamageFactor = 0.7
+   Aggressiveness = 0.6
+   MonsterHealth = 0.7
+   SpawnFilter = easy
+   TextColor = "Yellow"
+}
+
+skill normal
+{
+   Name = "Nightmare"
+   MustConfirm = "Your skills will be tested along the way."
+   AutoUseHealth
+   DamageFactor = 1.0
+   Aggressiveness = 0.9
+   SpawnFilter = normal
+   MonsterHealth =1.0
+   TextColor = "Red"
+}
+
+skill hard
+{
+   Name = "Insane"
+   MustConfirm = "Up for the challenge? Enemy health is doubled and agressivness is maxed out. You will take double the damage from all ememies. Are you sure you want to continue?"
+   AutoUseHealth
+   DamageFactor = 2.0
+   Aggressiveness = 1.0
+   SpawnFilter = hard
+   MonsterHealth = 2.0
+   TextColor = "DarkRed"
+}
+
+skill nightmare
+{
+   Name = "Suicidal"
+   MustConfirm = "Brutally difficult and entirely unforgiving."
+   AutoUseHealth
+   DamageFactor = 20.0
+   Aggressiveness = 1.0
+   SpawnFilter = nightmare
+   MonsterHealth = 2.0
+   TextColor = "Black"
+}

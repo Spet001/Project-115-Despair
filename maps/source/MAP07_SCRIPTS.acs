@@ -1,0 +1,146 @@
+#include"Zcommon.acs"
+script 80 ENTER
+{
+	Thing_ChangeTID (0, 1337+PlayerNumber());
+	SetMusic("");
+ClearInventory();
+	fadeto(0, 0, 0, 13.0, 0.0);
+	TakeInventory("HUD_ON", 1);
+	Thing_Deactivate(1);
+	Thing_Deactivate(6);
+	SetPlayerProperty(1, ON, PROP_TOTALLYFROZEN);
+	Thing_ChangeTID (0, 1337+PlayerNumber());
+	DELAY(150);
+	fadeto(0, 0, 0, 0, 1.0);
+		for(int j=0; j<=999; j++)
+	Sector_SetColor(j,255,255,255,100); 
+		ChangeSky("CMP_HORZ", "CMP_HORZ");
+ delay(20);
+ 	hudmessage(s:"[Jason]\n\cjMy weapons? What happened to them?";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 7.0);
+	AmbientSound("quote/C2M2Q1", 127);
+	delay(23);
+         SetPlayerProperty(1, 0, PROP_TOTALLYFROZEN);
+        SetPlayerProperty(1, 0, PROP_FROZEN);
+            SetMusic("CPN_M4", 0);
+    GiveInventory("HUD_ON", 1);
+	hudmessage(s:"Hallucinations\nLocation: Ogrodolan\nJason Milito\nDate: June 6, 2019";
+	HUDMSG_TYPEON, 0, CR_GREEN, 2, 0.8, 7.0);
+	changecamera(0, 1, 0);
+     	SetPlayerProperty(1, OFF, PROP_TOTALLYFROZEN);
+}
+
+
+script 998 ENTER
+{//HEALTH REGENERATION
+    int health = GetActorProperty(1337, APROP_Health);
+
+    While(True)
+    {
+        {
+            //Constantly work while health is under 100
+            While(GetActorProperty(1337,APROP_Health)<100 && GetActorProperty(1337,APROP_Health)>=1)
+            {
+                //After each hit you take, wait for regeneration
+                If(GetActorProperty(1337,APROP_Health)<health)
+                {
+                HudMessage(s:"";HUDMSG_FADEOUT, 101, CR_RED, 240.0, 180.0, 0.1, 0.1);
+                }
+                health = GetActorProperty(1337, APROP_Health);
+                SetActorProperty(1337, APROP_Health, health + 1);
+                Delay(3);
+            }
+        }
+    Delay(1);
+    }
+}
+
+script 997 ENTER
+{//Indicate critial health level
+    While(True)
+	{
+            //Constantly work while health is under 30
+            if(GetActorProperty(1337,APROP_Health)<40 && GetActorProperty(1337,APROP_Health)>=1)
+                {
+                HudMessage(s:"Critical Health Level!";HUDMSG_FADEOUT, 1, CR_RED, 3.0, 0.2, 0.5);
+            }
+			 Delay(1);
+
+        }
+	}
+	
+script 996 ENTER
+{//Critical Health Sound
+    While(True)
+	{
+            //Constantly work while health is under 30
+            if(GetActorProperty(1337,APROP_Health)<40 && GetActorProperty(1337,APROP_Health)>=1)
+                {
+				ThingSound(1337, "sound/HLTHCRIT", 127);
+            }
+			 Delay(6);
+
+        }
+	}
+		
+
+script 995 death
+
+{
+
+If(GetActorProperty(1337,APROP_Health)<=0)
+
+    {
+    TakeInventory("HUD_ON", 1);
+setmusic("ZM_DEATH", 0, 0);
+AmbientSound("sound/SUITDIE", 127);
+fadeto(0, 0, 0, 1.0, 6.9);
+DELAY(380);
+setmusic("BOTKIL8", 0, 0);
+}
+}
+
+
+Script 200 (void)
+{
+	GiveInventory("CP_MaxAmmo", 1);
+	AmbientSound("sound/REAMMO", 127);
+}
+
+Script 201 (void)
+{
+hudmessage(s:"Press '",k:"+use", s:"' To Refill Ammo";
+HUDMSG_Fadeinout, 11, CR_WHITE, 3.0, 0.80, 5.4);
+}
+
+script 1 (void)
+{
+	SetMusic("CHASE1", 0);
+	Thing_Activate(1);
+	Thing_Remove(7);
+}
+
+script 2 (void)
+{
+	SetMusic("MEMORY1", 0);
+	Thing_Remove(6);
+	delay(24);
+	hudmessage(s:"Home\nLocation: Rockford, Illinois\nJason Milito\nDate: May 6, 1999";
+	HUDMSG_TYPEON, 0, CR_GREEN, 2, 0.8, 7.0);
+}
+
+SCRIPT 3 (void)
+{
+	SetPlayerProperty(1, ON, PROP_TOTALLYFROZEN);
+	Teleport(11, 0, 1);
+	delay(24);
+	 	hudmessage(s:"[The Source]\n\cjJoin me. I can give you everything.";
+	HUDMSG_FADEINOUT, 100, CR_Red, 3.0, 0.7, 4.0);
+	AmbientSound("quote/C2M2Q2", 127);
+	delay(50);
+	FadeTo(0, 0, 0, 1.0, 2.3);
+	GiveInventory("Mission_COnfirmation", 2);
+	delay(300);
+	SetPlayerProperty(1, OFF, PROP_TOTALLYFROZEN);
+	ChangeLevel("Map28",0,CHANGELEVEL_NOINTERMISSION, -1);
+}

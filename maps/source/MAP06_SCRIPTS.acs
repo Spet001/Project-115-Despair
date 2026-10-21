@@ -1,0 +1,432 @@
+#include"Zcommon.acs"
+
+script 993 (void)
+
+{//Tell the player that the Danny Kain has died 
+
+		hudmessage(s:"The Danny Kain was killed.";
+	HUDMSG_FADEINOUT, 0, CR_Red, 3.0, 0.4, 6.0);
+	    TakeActorInventory(1337, "HUD_ON", 1);
+setmusic("ZM_DEATH", 0, 0);
+fadeto(0, 0, 0, 1.0, 6.9);
+DELAY(380);
+setmusic("BOTKIL8", 0, 0);
+GiveActorInventory(1337, "HUD_ON", 1);
+	}
+
+
+
+script 14 (void)//PLAYERS CURSOR MOVE LIMIT//
+{
+
+    SetPlayerProperty(1, 1, PROP_FROZEN);
+    
+    while (True)
+    {
+        If(GetActorAngle(1337)>0.5 && GetActorAngle(1337)<0.8)
+        {
+            SetActorAngle(1337,0.5);
+        }
+        Else If(GetActorAngle(1337)<0.9999 && GetActorAngle(1337)>0.8)
+        {
+            SetActorAngle(1337,0.0);
+        }
+        Delay (1);
+    }
+}
+
+script 998 ENTER
+{//HEALTH REGENERATION
+    int health = GetActorProperty(1337, APROP_Health);
+
+    While(True)
+    {
+        {
+            //Constantly work while health is under 100
+            While(GetActorProperty(1337,APROP_Health)<100 && GetActorProperty(1337,APROP_Health)>=1)
+            {
+                //After each hit you take, wait for regeneration
+                If(GetActorProperty(1337,APROP_Health)<health)
+                {
+                HudMessage(s:"";HUDMSG_FADEOUT, 101, CR_RED, 240.0, 180.0, 0.1, 0.1);
+                }
+                health = GetActorProperty(1337, APROP_Health);
+                SetActorProperty(1337, APROP_Health, health + 1);
+                Delay(3);
+            }
+        }
+    Delay(1);
+    }
+}
+
+script 997 ENTER
+{//Indicate critial health level
+    While(True)
+	{
+            //Constantly work while health is under 30
+            if(GetActorProperty(1337,APROP_Health)<40 && GetActorProperty(1337,APROP_Health)>=1)
+                {
+                HudMessage(s:"Critical Health Level!";HUDMSG_FADEOUT, 1, CR_RED, 3.0, 0.2, 0.5);
+            }
+			 Delay(1);
+
+        }
+	}
+	
+script 996 ENTER
+{//Critical Health Sound
+    While(True)
+	{
+            //Constantly work while health is under 30
+            if(GetActorProperty(1337,APROP_Health)<40 && GetActorProperty(1337,APROP_Health)>=1)
+                {
+				ThingSound(1337, "sound/HLTHCRIT", 127);
+            }
+			 Delay(6);
+
+        }
+	}
+		
+
+script 995 death
+
+{
+
+If(GetActorProperty(1337,APROP_Health)<=0)
+
+    {
+    TakeActorInventory(1337, "HUD_ON", 1);
+setmusic("ZM_DEATH", 0, 0);
+AmbientSound("sound/SUITDIE", 127);
+fadeto(0, 0, 0, 1.0, 6.9);
+DELAY(380);
+setmusic("BOTKIL8", 0, 0);
+}
+}
+
+script 1 ENTER
+{
+	Thing_ChangeTID (0, 1337+PlayerNumber());
+		SetActorPitch(1337, 0);
+	SetActorAngle(1337, 0.25);
+ Thing_Activate(25);
+ Thing_SetGoal(25, 1, 0, 0);
+ delay(20);
+ 	hudmessage(s:"[Jason]\n\cjDanny was in a hurry. A little more quicker than before.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 7.0);
+	AmbientSound("quote/C2M1Q1", 127);
+         SetPlayerProperty(1, 0, PROP_TOTALLYFROZEN);
+        SetPlayerProperty(1, 0, PROP_FROZEN);
+            SetMusic("CPN_M4", 0);
+			
+    GiveActorInventory(1337, "HUD_ON", 1);
+	hudmessage(s:"Divided\nLocation: Ogrodolan\nJason Milito\nDate: June 5, 2019";
+	HUDMSG_TYPEON, 0, CR_GREEN, 2, 0.8, 7.0);
+	changecamera(0, 1, 0);
+     	SetPlayerProperty(1, OFF, PROP_TOTALLYFROZEN);
+}
+
+script 2 (void)
+{
+	delay(20);
+	Floor_LowerToLowest(2, 50);
+	Radius_Quake(20, 5, 0, 2, 0);
+delay(100);
+	hudmessageBold(s:"[Jason]\n\cjA chunk of the bridge broke and Danny fell with it. There was something ahead as well. The scarecrow; a demon like Phoenix. Not just one, but multiple.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 9.0);
+	AmbientSound("quote/C2M1Q2", 127);
+ Thing_Remove(25);
+ delay(100);
+ Autosave();
+SetLineBlocking(3, BLOCK_NOTHING);
+	SpawnSpotForced("Scarecrow", 26, 27, 0);
+	delay(1);
+	Thing_Hate(26, 1337, 0);
+	ACS_Execute(4,0,0,0,0);
+	setmusic("ACTION5", 0, 0);
+}
+
+script 4 (void)
+{	
+	While(TRUE)
+		{
+		if(ThingCountName("Scarecrow", 27) == 0)
+		{
+		ACS_Execute(5,0,0,0,0);
+		}
+		delay(1);
+	}
+}
+
+Script 5 (void)
+{
+	delay(1);
+	Autosave();
+	ACS_Terminate(4,0);
+	delay(20);
+	SpawnSpotForced("Waypoint", 28, 29, 0);
+	SetLineBlocking(1, BLOCK_NOTHING);
+	setmusic("CPM_OGR", 0, 0);
+	ACS_Execute(7,0,0,0,0);
+	hudmessageBold(s:"[Jason]\n\cjI was surprised to not see any Red Division Troops down here. From there, I was fighting creatures not seen on earth.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 7.0);
+	AmbientSound("quote/C2M1Q3", 127);
+	delay(300);
+		hudmessageBold(s:"[Savion]\n\cjWhat about Danny?";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 3.0);
+	AmbientSound("quote/C2M1Q4", 127);
+	delay(120);
+	hudmessageBold(s:"[Jason]\n\cjI wouldn't be able to jump down there to find him. I had to continue on. With or without Danny.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 4.0);
+	AmbientSound("quote/C2M1Q5", 127);
+		delay(230);
+	hudmessageBold(s:"[Jason]\n\cjAs we were exiting the portal, he said to find a weapon called the Void Sword. I wasn't told where to go. I was lost.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 6.0);
+	AmbientSound("quote/C2M1Q6", 127);
+
+}
+
+script 6 (void)
+{
+		SetPlayerProperty(1, 1, PROP_TOTALLYFROZEN);
+	SetPlayerProperty(1, 1, PROP_FROZEN);
+	 SetActorPitch(1337, 0);
+	SetActorAngle(1337, 0.25);
+	
+}
+
+script 7 (void)
+{
+	While(True)
+	{
+		If(ThingCountName("CP_SlowZombie1", 101) == 0 && ThingCountName("CP_SlowZombie2", 101) == 0)
+		{
+	Delay(40);
+	SpawnSpotFacingForced("CP_SlowZombie1", Random(30, 35), 101);
+	delay(40);
+	SpawnSpotFacingForced("CP_SlowZombie2", Random(30, 35), 101);
+		}
+	If(ThingCountName("CP_SlowZombie1", 101) == 5 && ThingCountName("CP_SlowZombie2", 101) == 5)
+	{
+		print(s:"");
+	}
+		Delay(1);
+	}
+}
+int Sapphire = 0;
+int Ruby = 0;
+int Diamond = 0;
+//Trials (Get the Elemenatal Gems!)
+//Ice Trial (Platforming)
+script 8 (void)
+
+{
+HudMessage(s:"\cuPress \ck", k:"+use", s:" \cu To Start Ice Trial";
+HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+}
+
+script 9 (void)
+{
+	If(Sapphire == 1)
+	{
+HudMessage(s:"\cuYou already finished the Ice Trial";
+HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+}
+	else 
+	Thing_Move(0, 37, 1);
+}
+
+script 10 (void)
+{
+	AmbientSound("sound/ESTR_STP", 127);
+	SpawnSpotForced("Sapphire", 38, 0, 0);
+	Thing_Move(0, 36, 1);
+	Sapphire ++;
+	AutoSave();
+}
+
+//Fire Trial (Survival)
+script 11 (void)
+
+{
+HudMessage(s:"\cuPress \ck", k:"+use", s:" \cu To Start Fire Trial";
+HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+}
+
+script 12 (void)
+{
+	If(Ruby == 1)
+	{
+HudMessage(s:"\cuYou already finished the Fire Trial";
+HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+}
+	else 
+	Thing_Move(0, 39, 1);
+	delay(35*6);
+	SpawnSpotFacingForced("CP_SprintingZombie1", Random(42, 45), 205);
+	delay(35*2);
+	SpawnSpotFacingForced("CP_SprintingZombie2", Random(42, 45), 205);
+	delay(35*2);
+	SpawnSpotFacingForced("CP_SprintingZombie1", Random(42, 45), 205);
+	delay(35*2);
+	SpawnSpotFacingForced("CP_SprintingZombie2", Random(42, 45), 205);
+	delay(35*2);
+	SpawnSpotFacingForced("CP_SprintingZombie1", Random(42, 45), 205);
+	delay(35*2);
+	SpawnSpotFacingForced("CP_SprintingZombie2", Random(42, 45), 205);
+	delay(35*2);
+	SpawnSpotFacingForced("CP_SprintingZombie1", Random(42, 45), 205);
+	delay(35*2);
+	SpawnSpotFacingForced("CP_SprintingZombie2", Random(42, 45), 205);
+	delay(35*2);
+	SpawnSpotFacingForced("CP_SprintingZombie1", Random(42, 45), 205);
+	delay(35*2);
+	SpawnSpotFacingForced("CP_SprintingZombie2", Random(42, 45), 205);
+	delay(35*2);
+	SpawnSpotFacingForced("CP_SprintingZombie1", Random(42, 45), 205);
+	delay(35*2);
+	SpawnSpotFacingForced("CP_SprintingZombie2", Random(42, 45), 205);
+	delay(35*2);
+	SpawnSpotFacingForced("CP_SprintingZombie1", Random(42, 45), 205);
+	delay(35*2);
+	SpawnSpotFacingForced("CP_SprintingZombie2", Random(42, 45), 205);
+	delay(35*2);
+	SpawnSpotFacingForced("CP_SprintingZombie1", Random(42, 45), 205);
+	delay(35*2);
+	SpawnSpotFacingForced("CP_SprintingZombie2", Random(42, 45), 205);
+	delay(35*2);
+	SpawnSpotFacingForced("CP_SprintingZombie1", Random(42, 45), 205);
+	delay(35*2);
+	SpawnSpotFacingForced("CP_SprintingZombie2", Random(42, 45), 205);
+	delay(35*2);
+	SpawnSpotFacingForced("CP_SprintingZombie1", Random(42, 45), 205);
+	delay(35*2);
+	SpawnSpotFacingForced("CP_SprintingZombie2", Random(42, 45), 205);
+	delay(35*10);
+	AmbientSound("sound/ESTR_STP", 127);
+	SpawnSpotForced("Ruby", 41, 0, 0);
+	Thing_Move(0, 40, 1);
+	Ruby ++;
+	AutoSave();
+}
+
+script 61 (void)
+{
+	
+		If(Ruby == 1 && Sapphire == 1 && Diamond == 1)
+	{
+	AmbientSound("sound/ESTR_STP", 127);
+	delay(10);
+	hudmessageBold(s:"[Jason]\n\cjI got the three gems in their place.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 4.0);
+	AmbientSound("quote/C2M1Q8", 127);
+	delay(130);
+	hudmessageBold(s:"[Jason]\n\cjI decided to take a rest. The lack of sleep I got left me exhausted.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 7.0);
+	AmbientSound("quote/C2M1Q9", 127);
+	delay(190);
+	hudmessageBold(s:"[Jason]\n\cjI went to sit down against a wall.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 4.0);
+	AmbientSound("quote/C2M1Q10", 127);
+	FadeTo(0,0,0,1.0,7.0);
+	SetPlayerProperty(1, 1, PROP_FROZEN);
+	delay(35*8);
+	ChangeCamera(30, 1, 0);
+	delay(40);
+	SetPlayerProperty(1, 0, PROP_FROZEN);
+	ACS_Execute(67,0,0,0,0);
+}
+	else 
+HudMessage(s:"\cuLightning Trial Is Located Elsewhere..";
+HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+}
+
+
+Script 62 (void)
+{
+	Autosave();
+	hudmessageBold(s:"[Jason]\n\cjMy only assumption to getting the Void Sword was to find different gems and place them on these altars.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 4.0);
+	AmbientSound("quote/C2M1Q7", 127);
+}
+
+script 63 enter
+{
+	While(TRUE)
+	{
+		If(Ruby == 1 && Sapphire == 1)
+		{
+		SetLineBlocking(2, BLOCK_NOTHING);
+		}
+		Delay(1);
+	}
+}
+
+script 64 (void)
+{
+	print(s:"Ice and Fire Trials need to be complete to enter");
+}
+
+script 65 (void)
+{
+	AmbientSound("sound/ESTR_STP", 127);
+	Thing_Remove(48);
+	Diamond ++;
+	SpawnSpotForced("Diamond", 49, 0, 0);
+}
+
+//The Flashback//
+script 67 (void)
+{
+	TakeActorInventory(1337, "HUD_ON", 1);
+	FadeTo(255, 255, 255, 1.0, 0.3);
+	delay(10);
+	FadeTo(0, 0, 0, 0, 0.3);
+	hudmessageBold(s:"[Jason]\n\cj No..Iris..NO!";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 4.0);
+	AmbientSound("quote/C2M1Q19", 127);
+	AmbientSound("sound/RUNNREV", 80);
+	delay(70);
+	FadeTo(255, 255, 255, 1.0, 0.3);
+	delay(10);
+	FadeTo(0, 0, 0, 0, 0.3);
+	SetLineTexture(4, SIDE_FRONT, TEXTURE_MIDDLE, "COMIC2");
+	AmbientSound("sound/M14REV", 80);
+	AmbientSound("sound/RUNNREV", 80);
+	AmbientSound("sound/ATTCKREV", 80);
+	delay(70);
+	FadeTo(255, 255, 255, 1.0, 0.3);
+	delay(10);
+	FadeTo(0, 0, 0, 0, 0.3);
+	SetLineTexture(4, SIDE_FRONT, TEXTURE_MIDDLE, "COMIC3");
+	AmbientSound("sound/PAINREV", 80);
+	AmbientSound("sound/RUNNREV", 80);
+	AmbientSound("sound/ATTCKREV", 80);
+	delay(70);
+	FadeTo(255, 255, 255, 1.0, 0.3);
+	delay(10);
+	FadeTo(0, 0, 0, 0, 0.3);
+	SetLineTexture(4, SIDE_FRONT, TEXTURE_MIDDLE, "COMIC5");
+	AmbientSound("sound/RUNNREV", 80);
+	delay(70);
+	FadeTo(255, 255, 255, 1.0, 0.3);
+	delay(10);
+	FadeTo(0, 0, 0, 0, 2.3);
+	ChangeCamera(52,1,0);
+	GiveInventory("Mission_Confirmation", 1);
+	delay(300);
+	ChangeLevel("Map27",0,CHANGELEVEL_NOINTERMISSION, -1);
+}
+
+
+Script 200 (void)
+{
+	GiveInventory("CP_MaxAmmo", 1);
+	AmbientSound("sound/REAMMO", 127);
+}
+
+Script 201 (void)
+{
+hudmessage(s:"Press '",k:"+use", s:"' To Refill Ammo";
+HUDMSG_Fadeinout, 11, CR_WHITE, 3.0, 0.80, 5.4);
+}

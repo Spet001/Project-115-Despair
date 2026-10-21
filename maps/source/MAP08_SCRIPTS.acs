@@ -1,0 +1,251 @@
+#include"Zcommon.acs"
+script 80 ENTER
+{
+	Thing_ChangeTID (0, 1337+PlayerNumber());
+	GiveActorInventory(1337, "HUD_ON", 1);
+	ChangeSky("CMP_DSRT", "CMP_DSRT");
+	fadeto(0, 0, 0, 0, 1.0);
+}
+
+script 998 ENTER
+{//HEALTH REGENERATION
+    int health = GetActorProperty(1337, APROP_Health);
+
+    While(True)
+    {
+        {
+            //Constantly work while health is under 100
+            While(GetActorProperty(1337,APROP_Health)<100 && GetActorProperty(1337,APROP_Health)>=1)
+            {
+                //After each hit you take, wait for regeneration
+                If(GetActorProperty(1337,APROP_Health)<health)
+                {
+                HudMessage(s:"";HUDMSG_FADEOUT, 101, CR_RED, 240.0, 180.0, 0.1, 0.1);
+                }
+                health = GetActorProperty(1337, APROP_Health);
+                SetActorProperty(1337, APROP_Health, health + 1);
+                Delay(3);
+            }
+        }
+    Delay(1);
+    }
+}
+
+script 997 ENTER
+{//Indicate critial health level
+    While(True)
+	{
+            //Constantly work while health is under 30
+            if(GetActorProperty(1337,APROP_Health)<40 && GetActorProperty(1337,APROP_Health)>=1)
+                {
+                HudMessage(s:"Critical Health Level!";HUDMSG_FADEOUT, 1, CR_RED, 3.0, 0.2, 0.5);
+            }
+			 Delay(1);
+
+        }
+	}
+	
+script 996 ENTER
+{//Critical Health Sound
+    While(True)
+	{
+            //Constantly work while health is under 30
+            if(GetActorProperty(1337,APROP_Health)<40 && GetActorProperty(1337,APROP_Health)>=1)
+                {
+				ThingSound(1337, "sound/HLTHCRIT", 127);
+            }
+			 Delay(6);
+
+        }
+	}
+		
+
+script 995 death
+
+{
+
+If(GetActorProperty(1337,APROP_Health)<=0)
+
+    {
+    TakeActorInventory(1337, "HUD_ON", 1);
+setmusic("ZM_DEATH", 0, 0);
+AmbientSound("sound/SUITDIE", 127);
+fadeto(0, 0, 0, 1.0, 6.9);
+DELAY(380);
+setmusic("BOTKIL8", 0, 0);
+}
+}
+
+script 1 enter//Spawning into the map//
+{
+	SetActorPitch(1337, 0);
+	SetActorAngle(1337, 0.5);
+ delay(20);
+ 	hudmessage(s:"[Jason]\n\cjThe Source got me hallucinating. Running from zombies, visiting my old home, and now I'm back in Ogrodolan.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 5.4);
+	AmbientSound("quote/C2M3Q1", 127);
+         SetPlayerProperty(1, 0, PROP_TOTALLYFROZEN);
+        SetPlayerProperty(1, 0, PROP_FROZEN);
+            SetMusic("CPN_M4", 0);
+    	GiveActorInventory(1337, "HUD_ON", 1);
+	hudmessage(s:"Change of Plans\nLocation: Ogrodolan\nJason Milito\nDate: June 7, 2019";
+	HUDMSG_TYPEON, 0, CR_GREEN, 2, 0.8, 7.0);
+	changecamera(0, 1, 0);
+     	SetPlayerProperty(1, OFF, PROP_TOTALLYFROZEN);
+}
+
+script 2 (void)
+{
+	SetPlayerProperty(1, 0, PROP_FROZEN);
+	hudmessage(s:"[Jason]\n\cjI heard something emerge from the distance. SOmething bigger than the Inferno Seeker.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 5.0);
+	AmbientSound("quote/C2M3Q2", 127);
+	delay(250);
+	Autosave();
+		hudmessage(s:"[The Source]\n\cjYour bullets are no match for the thick body of the Agarthan Tank.";
+	HUDMSG_FADEINOUT, 100, CR_Red, 3.0, 0.7, 6.0);
+	AmbientSound("quote/C2M3Q3", 127);
+	delay(280);
+	SetMusic("BOSS2MUS");
+	SpawnSpotFacingForced("AgarthanTank", 22, 500);
+	SetActorProperty(500, APROP_Health, 10000);
+	ACS_Execute(5,0,0,0,0);
+	ACS_Execute(7,0,0,0,0);
+	ACS_Execute(6,0,0,0,0);
+}
+
+
+script 5 (void)
+
+{
+	HudMessage(s:"Agarthan Tank";
+	HUDMSG_PLAIN, 401, CR_ORANGE, 3.0, 0.14, 1.0);
+	HudMessage(d: GetActorProperty(500, APROP_Health);
+	HUDMSG_PLAIN, 400, CR_DARKRED, 3.0, 0.19, 1.0);
+	delay(1);
+	Restart;
+}
+
+script 6 (void)
+{
+	While(True)
+	{
+		If(GetActorProperty(500, APROP_Health) <= 0)
+		{
+			Thing_Destroy(400, 0, 0);
+			Thing_Destroy(101, 0, 0);
+			ACS_Execute(8,0,0,0,0);
+		}
+		Delay(1);
+	}
+}
+
+
+script 7 (void)
+{
+	While(True)
+	{
+		If(ThingCountName("CP_SprintingZombie1", 101) == 0 && ThingCountName("CP_SprintingZombie2", 101) == 0)
+		{
+	Delay(40);
+	SpawnSpotFacingForced("CP_SprintingZombie1", Random(30, 35), 101);
+	delay(40);
+	SpawnSpotFacingForced("CP_SprintingZombie2", Random(30, 35), 101);
+		}
+	If(ThingCountName("CP_SprintingZombie1", 101) == 5 && ThingCountName("CP_SprintingZombie2", 101) == 5)
+	{
+		print(s:"");
+	}
+		Delay(1);
+	}
+}
+
+Script 8 (void)//After defeating the Agarthan Tank//
+{
+	ACS_Terminate(7,0);
+	ACS_Terminate(6,0);
+	ACS_Terminate(5,0);
+	delay(100);
+	SetMusic("END2");
+	Autosave();
+	hudmessage(s:"[Jason]\n\cjThe Agarthan Tank was taken down. Danny opened the door to enter Agartha.";
+	HUDMSG_FADEINOUT, 100, CR_GREEN, 3.0, 0.7, 5.0);
+	AmbientSound("quote/C2M3Q4", 127);
+	delay(180);
+	hudmessage(s:"[Savion]\n\cjOnly moments ahead was the source.";
+	HUDMSG_FADEINOUT, 100, CR_GREEN, 3.0, 0.7, 3.0);
+	AmbientSound("quote/C2M3Q5", 127);
+	delay(140);
+	hudmessage(s:"[Jason]\n\cjIt sure was. Only to be stopped..";
+	HUDMSG_FADEINOUT, 100, CR_GREEN, 3.0, 0.7, 5.0);
+	AmbientSound("quote/C2M3Q6", 127);
+	delay(123);
+	Door_Open(24, 30, 0);
+}
+
+Script 9 (void)
+
+{
+	SetPlayerProperty(1, ON, PROP_TOTALLYFROZEN);
+	SetActorProperty(1337, APROP_Invulnerable, ON);
+	Teleport_NoFog(1, 2, 0);
+	SetActorPitch(1337, 0);
+	SetActorAngle(1337, 0.25);
+	delay(30);
+	SetActorState(23, "Talking", TRUE);
+	hudmessage(s:"[Danny]\n\cjI'm sorry, but there has been a change of plans.";
+	HUDMSG_FADEINOUT, 100, CR_WHITE, 3.0, 0.7, 5.0);
+	AmbientSound("quote/C2M3Q7", 127);
+	delay(100);
+	SetActorState(23, "NoTalk", TRUE);
+	delay(47);
+	TakeActorInventory(1337, "HUD_ON", 1);
+	AmbientSound("sound/SUITDIE", 127);
+	setmusic("BOTKIL8", 0, 0);
+	Thing_Move(1337, 25, 1);
+	SetActorState(23, "Missile", TRUE);
+	AmbientSound("weapon/MORS", 90);
+	ChangeCamera(26, 1, 0);
+	Thing_Activate(26);
+	SetActorAngle(23, 0.75);
+	SpawnSpotForced("VoidSword", 42, 43, 0);
+	Delay(10);
+	SetActorPitch(1337, 0);
+	SetActorState(23, "NoTalk", TRUE);
+	Thing_Deactivate(23);
+	Delay(80);
+	AmbientSound("sound/REAMMO", 127);
+	Thing_Remove(43);
+	delay(9);
+	SetActorState(23, "See", TRUE);
+	delay(1);
+	Thing_Activate(23);
+	Thing_SetGoal(23, 40, 0, 1);
+	delay(40);
+	fadeto(0,0,0, 1.0, 5.0);
+	delay(230);
+	hudmessage(s:"[Jason]\n\cjLike I said when I first encountered him, I didn't know if I could trust him.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 5.0);
+	AmbientSound("quote/C2M3Q8", 127);
+	Delay(250);
+	SetFont("BigFont");
+	HudMessage(s:"Chapter 2 ends here";
+	HUDMSG_FADEINOUT, 997, CR_ORANGE, 3.0, 0.21, 7.0);
+	delay(400);
+	SetActorProperty(1337, APROP_Invulnerable, OFF);
+	SetPlayerProperty(1, OFF, PROP_TOTALLYFROZEN);
+	Delay(1);
+	ChangeLevel("Map01", 0, CHANGELEVEL_NOINTERMISSION, -1);
+}
+
+Script 200 (void)
+{
+	GiveInventory("CP_MaxAmmo", 1);
+	AmbientSound("sound/REAMMO", 127);
+}
+
+Script 201 (void)
+{
+hudmessage(s:"Press '",k:"+use", s:"' To Refill Ammo";
+HUDMSG_Fadeinout, 11, CR_WHITE, 3.0, 0.80, 5.4);
+}

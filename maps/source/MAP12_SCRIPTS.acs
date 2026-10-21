@@ -1,0 +1,179 @@
+#include "zcommon.acs"
+
+Script 999 ENTER
+{
+	FadeTo(0,0,0,1.0,0);
+	  //Set up player IDs
+    Thing_ChangeTID (0, 1337+PlayerNumber());
+	ACS_Execute(5,0,0,0,0);
+	delay(1);
+	ChangeSky("CMP_HORZ", "CMP_HORZ");
+	SetMusic("", 0);
+	GiveInventory("Money", 500);
+	GiveInventory("ColtM1911", 999);
+	GiveInventory("Knife", 999);
+	GiveInventory("FragGrenade", 999);
+	GiveInventory("PlasmaGrenade", 999);
+	GiveInventory("Swarmers", 999);
+	GiveInventory("MaxWeapons", 1);
+	GiveInventory("HUD_ON", 1);
+	TakeInventory("Pistol", 999);
+	TakeInventory("Fist", 999);
+	TakeInventory("Cursor", 999);
+	delay(50);
+	FadeTo(0,0,0,0,1.5);
+	SetMusic("ARC_MUS4", 0);
+	Delay(100);
+	SetFont("BigFont");
+	hudmessage(s:"Slaughter them all";
+	HUDMSG_FADEINOUT, 0, CR_Red, 3.0, 0.30, 7.0);
+	delay(35);
+	SetFont("SmallFont");
+	hudmessage(s:"Survive as long as you can!";
+	HUDMSG_FADEINOUT, 0, CR_White, 3.0, 0.45, 6.0);
+	delay(300);
+	ACS_Execute(10,0,0,0,0);
+	ACS_Execute(11,0,0,0,0);
+}
+
+//Player 1 Money/Dead
+script 998 ENTER
+{
+	if(PlayerNumber()==0)
+	{
+		HudMessageBold(n:1, s:" $", d: CheckactorInventory(1337, "money");
+		HUDMSG_PLAIN, 999, CR_WHITE, 0.0, -0.60, 1.0);
+		{
+			delay(1);
+			{
+				restart;
+			}
+		}
+	}
+}
+
+//Pack-A-Punch!
+Script 220 (void)
+{
+	HudMessage(s:"\cuPress \ck", k:"+use", s:" \cu to Upgrade Weapon\n\ck[cost:5000]";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+}
+
+Script 221 (void)
+{
+	if(checkweapon("ColtM1911") && checkinventory("money") >= 5000)
+	{
+		takeinventory("ColtM1911",999);
+		giveinventory("PAPColtM1911",999);
+		setweapon("PAPColtM1911");
+		takeinventory("ColtM1911",999);
+		takeinventory("money", 5000);
+	}
+}
+
+int t;
+script 5 (void)
+{
+	while(TRUE)
+	{
+		t = Timer() / 35;
+		SetFont("BigFont");
+		HudMessage(d:t/60, s:":", d:(t%60)/10, d:t%10;
+			HUDMSG_PLAIN, 1, CR_White, 0.95, 0.80, 2.0);
+	HudMessage(s:"Kills";
+   HUDMSG_PLAIN,10,CR_RED,0.95, 0.65,2.0);
+   HudMessage(s:"Points";
+   HUDMSG_PLAIN,11,CR_RED,0.80, 0.65,2.0);
+   HudMessage(d: CheckactorInventory(1337, "Kills");HUDMSG_PLAIN,12,CR_WHITE,0.95, 0.70,2.0);
+   HudMessage(d: CheckactorInventory(1337, "Points");HUDMSG_PLAIN,13,CR_WHITE,0.80, 0.70,2.0);
+		Delay(35);
+	}
+}
+
+script 10 (void)
+{
+	While(True)
+	{
+		If(ThingCountName("ARC_SprintingZombie3", 101) < 25)
+		{
+			Delay(40);
+			SpawnSpotFacingForced("ARC_SprintingZombie3", Random(1, 4), 101);
+		}
+		If(ThingCountName("ARC_SprintingZombie3", 101) == 25)
+		{
+			
+		}
+		Delay(1);
+	}
+}
+
+int ZM_Health = 50;
+Script 11 (void)
+{
+	While(True)
+	{
+		SetActorProperty(101, APROP_Health, ZM_Health);
+		delay(700);
+		ZM_Health += 50;
+		AmbientSound("sound/NUKEALRM", 127);
+	}
+}
+
+
+script 12 death
+
+{
+		setActorProperty(1337, APROP_Health,0);
+		setActorProperty(1337, APROP_Invulnerable,OFF);
+		Thing_ChangeTID(1337, 0);
+		ACS_Terminate(5,0);
+      SetFont("BIGFONT");
+  HUDMessageBold(s:"Game over";
+             HUDMSG_PLAIN, 0, CR_white, 3.0, 0.2, 9999.9999);
+             SETFONT("SMALLFONT");
+		HudMessageBold(s:"You Survived For ", d:t/60, s:":", d:(t%60)/10, d:t%10;
+		HUDMSG_FADEINOUT, 0, CR_RED, 3.0, 0.25,999.999);
+		SetFont("SmallFont");
+		   HudMessage(s:"Kills";
+   HUDMSG_FADEINOUT,10,CR_RED,1.35, 0.4,999.999);
+   HudMessage(s:"Points";
+   HUDMSG_FADEINOUT,11,CR_RED,1.65, 0.4,999.999);
+   HudMessage(d: CheckInventory("Kills");HUDMSG_FADEINOUT,12,CR_WHITE,1.35, 0.46,999.999);
+   HudMessage(d: CheckInventory("Points");HUDMSG_FADEINOUT,13,CR_WHITE,1.65, 0.46,999.999);
+			  setmusic("ZM_PARKG", 0, 0);
+delay(250);
+fadeto(0, 0, 0, 1.0, 6.9);
+delay(240);
+changelevel("map01", 0, changelevel_nointermission, -1);
+}
+
+script 13 ENTER
+{//HEALTH REGENERATION
+    int health = GetActorProperty(1337, APROP_Health);
+
+    While(True)
+    {
+        {
+            //Constantly work while health is under 100
+            While(GetActorProperty(1337,APROP_Health)<100 && GetActorProperty(1337,APROP_Health)>=1)
+            {
+                //After each hit you take, wait for regeneration
+                If(GetActorProperty(1337,APROP_Health)<health)
+                {
+                HudMessage(s:"";HUDMSG_FADEOUT, 101, CR_RED, 240.0, 180.0, 0.1, 2.0);
+                }
+                health = GetActorProperty(1337, APROP_Health);
+                SetActorProperty(1337, APROP_Health, health + 1);
+                Delay(3);
+            }
+        }
+    Delay(1);
+    }
+}
+
+Script 14 Enter
+{
+	AmbientSound("sound/CHEERING", 90);
+	delay(35*20);
+	restart;
+}

@@ -1,0 +1,4266 @@
+#include "zcommon.acs"
+Script 999 ENTER
+{
+		for(int j=0; j<=999; j++)
+        Sector_SetColor(j,255,255,255,150);
+	FadeTo(0,0,0,1.0,0);
+	  //Set up player IDs
+    Thing_ChangeTID (0, 1337+PlayerNumber());
+	GiveInventory("MaxWeapons", 1);
+	delay(1);
+	setlineblocking(1, BLOCK_PLAYERS);
+	setlineblocking(1, BLOCK_CREATURES);
+	setlineblocking(2, BLOCK_PLAYERS);
+	setlineblocking(3, BLOCK_PLAYERS);
+	setlineblocking(3, BLOCK_CREATURES);
+	setlineblocking(4, BLOCK_PLAYERS);
+	setlineblocking(5, BLOCK_PLAYERS);
+	setlineblocking(6, BLOCK_PLAYERS);
+	setlineblocking(7, BLOCK_CREATURES);
+	setlineblocking(9, BLOCK_CREATURES);
+	setlineblocking(105, BLOCK_CREATURES);
+	ChangeSky("ZM_PARKS", "ZM_PARKS");
+	SetMusic("", 0);
+	GiveInventory("Money", 500);
+	GiveInventory("ColtM1911", 999);
+	GiveInventory("Knife", 999);
+	GiveInventory("FragGrenade", 999);
+	GiveInventory("HUD_ON", 1);
+	TakeInventory("Pistol", 999);
+	TakeInventory("Fist", 999);
+	TakeInventory("Cursor", 999);
+	delay(50);
+	FadeTo(0,0,0,0,1.5);
+	SetMusic("ZM_NACHT", 0);
+Delay(100);
+ACS_Execute(334,0,0,0,0);
+	hudmessage(s:"Ramstein Air Base\nLocation: Ramstein-Miesenbach, Germany\nDate: October 26, 2017";
+	HUDMSG_TYPEON, 0, CR_GREEN, 2, 0.8, 7.0);
+}
+
+//Player 1 Money/Dead
+    script 998 ENTER
+    
+    {
+        if(PlayerNumber()==0)
+        {
+                HudMessageBold(n:1, s:" $", d: CheckactorInventory(1337, "money");
+                           HUDMSG_PLAIN, 999, CR_WHITE, 0.0, -0.60, 1.0);
+                           {
+                        delay(1);
+                        {
+                        restart;
+                        }
+                        }
+        }
+        }
+    //Player 2 Money/Dead
+            script 997 ENTER
+            {
+              if(PlayerNumber()==1)
+        {
+                HudMessageBold(n:2, s:" $", d: CheckActorInventory(1338, "money");
+                           HUDMSG_PLAIN, 998, CR_lightblue, 0.0, -0.64, 1.0);
+                           {
+                        delay(1);
+                        {
+                        restart;
+                        }
+                        }
+        }
+        }
+          //Player 3 Money/Dead
+        script 996 ENTER
+            {
+              if(PlayerNumber()==2)
+        {
+                HudMessageBold(n:3, s:" $", d: CheckActorInventory(1339, "money");
+                           HUDMSG_PLAIN, 997, CR_yellow, 0., -0.68, 1.0);
+                           {
+                        delay(1);
+                        {
+                        restart;
+                        }
+                        }
+        }
+        }
+        
+  //Player 4 Money/Dead
+        script 995 ENTER
+            {
+              if(PlayerNumber()==3)
+        {
+                HudMessageBold(n:4, s:" $", d: CheckActorInventory(1340, "money");
+                           HUDMSG_PLAIN, 996, CR_Green, 0., -0.72, 1.0);
+                           {
+                        delay(1);
+                        {
+                        restart;
+                        }
+                        }
+        }
+        }
+		
+
+
+Int ZHealth = 50;
+int RoundNumber = 0;
+bool RoundActive;
+Script 333 (void)//Zombies Spawning
+{
+	RoundActive = TRUE;
+	RoundNumber ++;
+	GiveActorInventory(1337, "FragGrenade", 2);
+	GiveActorInventory(1338, "FragGrenade", 2);
+	GiveActorInventory(1339, "FragGrenade", 2);
+	GiveActorInventory(1340, "FragGrenade", 2);
+	If (RoundNumber == 1 )
+	{
+		SetFont("BigFont");
+				hudmessageBold(s:"Round\n1";
+		HUDMSG_FADEINOUT, 0, CR_Red, 3.0, 0.40, 5.0);
+		setlineblocking(8, BLOCK_PLAYERS);
+	AmbientSound("SOUND/NACHT_ST", 127);	
+	SpawnSpotForced("Slowzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Slowzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Slowzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Slowzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Slowzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Slowzombie1",Random(90, 96), 100, 0);
+	Acs_execute(334,0,0,0,0);
+	}
+		Else If (RoundNumber == 2)
+	{
+				
+	AmbientSound("SOUND/NACHT_ST", 127);
+	Delay(60);
+	SpawnSpotForced("Slowzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Slowzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Slowzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Slowzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Slowzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Slowzombie2",Random(90, 96), 100, 0);
+	Acs_execute(334,0,0,0,0);
+	}
+	Else If (RoundNumber == 3)
+	{
+				
+	AmbientSound("SOUND/NACHT_ST", 127);
+	SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Slowzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Slowzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Slowzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Slowzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Slowzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Slowzombie2",Random(90, 96), 100, 0);
+	Acs_execute(334,0,0,0,0);
+	}
+		Else If (RoundNumber == 4)
+	{
+				
+	AmbientSound("SOUND/NACHT_ST", 127);
+	SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Slowzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Slowzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Slowzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Slowzombie2",Random(90, 96), 100, 0);
+	Acs_execute(334,0,0,0,0);
+	}
+		Else If (RoundNumber == 5)
+	{
+				
+	AmbientSound("SOUND/NACHT_ST", 127);
+	SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Slowzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Slowzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Slowzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Slowzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Acs_execute(334,0,0,0,0);
+	}
+	Else If (RoundNumber == 6)
+	{
+				
+	AmbientSound("SOUND/NACHT_ST", 127);
+	SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Slowzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Slowzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Slowzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Slowzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Acs_execute(334,0,0,0,0);
+	}
+		Else If (RoundNumber == 7)
+	{
+				
+	AmbientSound("SOUND/NACHT_ST", 127);
+	SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	delay(60);
+	SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Acs_execute(334,0,0,0,0);
+	}
+		Else If (RoundNumber == 8)
+	{
+				
+	AmbientSound("SOUND/NACHT_ST", 127);
+	SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Acs_execute(334,0,0,0,0);
+	}
+	Else If (RoundNumber == 9)
+	{
+				
+	AmbientSound("SOUND/NACHT_ST", 127);
+	SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Acs_execute(334,0,0,0,0);
+	}
+			Else If (RoundNumber == 10)
+	{
+				
+	AmbientSound("SOUND/NACHT_ST", 127);
+	SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Acs_execute(334,0,0,0,0);
+	}
+			Else If (RoundNumber == 11)
+	{
+				
+	AmbientSound("SOUND/NACHT_ST", 127);
+	SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Acs_execute(334,0,0,0,0);
+	}
+		Else If (RoundNumber == 12)
+	{
+				
+	AmbientSound("SOUND/NACHT_ST", 127);
+	SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Acs_execute(334,0,0,0,0);
+	}
+			Else If (RoundNumber == 13)
+	{
+				
+	AmbientSound("SOUND/NACHT_ST", 127);
+	SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Acs_execute(334,0,0,0,0);
+	}
+			Else If (RoundNumber == 14)
+	{
+				
+	AmbientSound("SOUND/NACHT_ST", 127);
+	SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Acs_execute(334,0,0,0,0);
+	}
+			Else If (RoundNumber == 15)
+	{
+				
+	AmbientSound("SOUND/NACHT_ST", 127);
+	SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	delay(60);
+	SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Normalzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Normalzombie2",Random(90, 96), 100, 0);
+	Acs_execute(334,0,0,0,0);
+	}
+					Else If (RoundNumber == 16)
+	{
+				
+	AmbientSound("SOUND/NACHT_ST", 127);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Acs_execute(334,0,0,0,0);
+	}
+					Else If (RoundNumber == 17)
+	{
+				
+	AmbientSound("SOUND/NACHT_ST", 127);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Acs_execute(334,0,0,0,0);
+	}
+				Else If (RoundNumber == 18)
+	{
+				
+	AmbientSound("SOUND/NACHT_ST", 127);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Acs_execute(334,0,0,0,0);
+	}
+	Else If (RoundNumber == 19)
+	{
+				
+	AmbientSound("SOUND/NACHT_ST", 127);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	delay(60);
+		SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Acs_execute(334,0,0,0,0);
+	}
+	Else If (RoundNumber == 20)
+	{
+				
+	AmbientSound("SOUND/NACHT_ST", 127);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Acs_execute(334,0,0,0,0);
+	}
+	Else If (RoundNumber == 21)
+	{
+				
+	AmbientSound("SOUND/NACHT_ST", 127);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+		
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Acs_execute(334,0,0,0,0);
+	}
+	Else If (RoundNumber == 22)
+	{
+				
+	AmbientSound("SOUND/NACHT_ST", 127);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Acs_execute(334,0,0,0,0);
+	}
+Else If (RoundNumber == 23)
+	{
+				
+	AmbientSound("SOUND/NACHT_ST", 127);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Acs_execute(334,0,0,0,0);
+	}
+	Else If (RoundNumber == 24)
+	{
+				
+	AmbientSound("SOUND/NACHT_ST", 127);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Fastzombie2",Random(90, 96), 100, 0);
+	Acs_execute(334,0,0,0,0);
+	}
+		Else If (RoundNumber == 25)
+	{
+				
+	AmbientSound("SOUND/NACHT_ST", 127);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+		
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Acs_execute(334,0,0,0,0);
+	}
+		Else If (RoundNumber == 26)
+	{
+				
+	AmbientSound("SOUND/NACHT_ST", 127);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Acs_execute(334,0,0,0,0);
+	}
+		Else If (RoundNumber == 27)
+	{
+				
+	AmbientSound("SOUND/NACHT_ST", 127);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Acs_execute(334,0,0,0,0);
+	}
+			Else If (RoundNumber >= 28)//MAX ZOMBIE SPAWN
+	{
+				
+	AmbientSound("SOUND/NACHT_ST", 127);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	
+    SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie2",Random(90, 96), 100, 0);
+	Delay(60);
+    SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Delay(60);
+	SpawnSpotForced("Sprintingzombie1",Random(90, 96), 100, 0);
+	Acs_execute(334,0,0,0,0);
+	}
+	delay(5);
+}
+
+
+
+Script 334 (void)
+{
+While (true)
+{
+	If (ThingCountName("SlowZombie1", 102) == 0 && ThingCountName("SlowZombie2", 102) == 0 && 
+	ThingCountName("NormalZombie1", 102) == 0 && ThingCountName("NormalZombie2", 102) == 0 && 
+	ThingCountName("FastZombie1", 102) == 0 && ThingCountName("FastZombie2", 102) == 0 && 
+	ThingCountName("SprintingZombie1", 102) == 0 && ThingCountName("SprintingZombie2", 102) == 0)
+	{
+		RoundActive = FALSE;
+		AmbientSound("SOUND/NACHT_EN", 127);
+		ACS_Terminate(301,0);
+		ACS_Execute(804,0,0,0,0);
+		ACS_Execute(805,0,0,0,0);
+		ACS_Execute(806,0,0,0,0);
+		ACS_Execute(807,0,0,0,0);
+		Delay(300);
+		ZHealth ++;
+		ZHealth ++;
+		ZHealth ++;
+		ZHealth ++;
+		ZHealth ++;
+		ZHealth ++;
+		ZHealth ++;
+		ZHealth ++;
+		ZHealth ++;
+		ZHealth ++;
+	    ZHealth ++;
+		ZHealth ++;
+		ZHealth ++;
+		ZHealth ++;
+		ACS_Execute(333,0,0,0,0);
+		ACS_Execute(301,0,0,0,0);
+		Break;
+		}
+	Delay(1);
+}
+}
+
+
+script 302 enter//DISPLAY SOUND NUMBER
+{
+      SetFont("BIGFONT");
+              HUDMessage(d:RoundNumber;
+              HUDMSG_PLAIN, 99, CR_Red, 0.11, 0.94, 0);
+			Delay(1);
+			  RESTART;
+}
+
+Script 301 (void)
+{
+
+	SetActorProperty(100, APROP_Health, ZHealth);
+	Thing_ChangeTID(100, 102);
+	delay(59);
+	restart;
+}
+
+Script 300 (void)
+
+{
+Thing_Destroy(102, 99999999, 0);
+}
+
+//PREVENT THE PLAYER FROM RESPAWNING AFTER THEY DIED
+bool Player1_Dead;
+bool Player2_Dead;
+bool Player3_Dead;
+bool Player4_Dead;
+//Score Board Ints//
+int Player1_Kills = 0;
+int Player2_Kills = 0;
+int Player3_Kills = 0;
+int Player4_Kills = 0;
+int Player1_Points = 500;
+int Player2_Points = 500;
+int Player3_Points = 500;
+int Player4_Points = 500;
+int Player1_Deaths = 0;
+int Player2_Deaths = 0;
+int Player3_Deaths = 0;
+int Player4_Deaths = 0;
+
+Script 800 DEATH
+{
+	ClearInventory();
+	delay(10);
+	ACS_Execute(803,0,0,0,0);
+}
+
+//Move the player in a black box//
+script 801 respawn
+{
+	If (RoundActive == True && PlayerNumber()==0)
+	{
+		Player1_Deaths ++;
+		Thing_ChangeTid(1337,0);
+		Thing_ChangeTid(0,1337);
+		ClearInventory();
+		delay(1);
+		Thing_Move(1337,400,1);
+		Player1_Dead = TRUE;
+	}
+	else If (RoundActive == True && PlayerNumber()==1)
+	{
+		Player2_Deaths ++;
+		Thing_ChangeTid(1338,0);
+		Thing_ChangeTid(0,1338);
+		ClearInventory();
+		delay(1);
+		Thing_Move(1338,401,1);
+		Player2_Dead = TRUE;
+	}
+	else If (RoundActive == True && PlayerNumber()==2)
+	{
+		Player3_Deaths ++;
+		Thing_ChangeTid(1339,0);
+		Thing_ChangeTid(0,1339);
+		ClearInventory();
+		delay(1);
+		Thing_Move(1339,402,1);
+		Player3_Dead = TRUE;
+	}
+	else If (RoundActive == True && PlayerNumber()==3)
+	{
+		Player4_Deaths ++;
+		Thing_ChangeTid(1340,0);
+		Thing_ChangeTid(0,1340);
+		ClearInventory();
+		delay(1);
+		Thing_Move(1340,403,1);
+		Player4_Dead = TRUE;
+	}
+}
+
+//Put the player back into the game!//
+script 804 (void)
+{
+	If(Player1_Dead == True)
+	{
+	Thing_Move(1337,404,1);
+	//Reset inventory
+	delay(1);
+	GiveActorInventory(1337,"ColtM1911", 255);
+	GiveActorInventory(1337,"MaxWeapons", 1);
+	GiveActorInventory(1337,"ColtM1911ammo", 255);
+	GiveActorInventory(1337,"Knife", 255);
+	GiveActorInventory(1337,"FragGrenade", 255);
+	GiveActorInventory(1337,"money", 1500);
+	//Reset speed and jump height
+	SetActorProperty(1337, APROP_Speed, 0.67);
+	Player1_Dead = FALSE;
+	}
+}
+
+script 805 (void)
+{
+	If(Player2_Dead == True)
+	{
+	Thing_Move(1338,405,1);
+	//Reset inventory
+	delay(1);
+	GiveActorInventory(1338,"ColtM1911", 255);
+	GiveActorInventory(1338,"MaxWeapons", 1);
+	GiveActorInventory(1338,"ColtM1911ammo", 255);
+	GiveActorInventory(1338,"Knife", 255);
+	GiveActorInventory(1338,"FragGrenade", 255);
+	GiveActorInventory(1338,"money", 1500);
+	//Reset speed and jump height
+	SetActorProperty(1338, APROP_Speed, 0.67);
+	Player2_Dead = FALSE;
+	}
+}
+
+script 806 (void)
+{
+	If(Player3_Dead == True)
+	{
+	Thing_Move(1339,406,1);
+	//Reset inventory
+	delay(1);
+	GiveActorInventory(1339,"ColtM1911", 255);
+	GiveActorInventory(1339,"MaxWeapons", 1);
+	GiveActorInventory(1339,"ColtM1911ammo", 255);
+	GiveActorInventory(1339,"Knife", 255);
+	GiveActorInventory(1339,"FragGrenade", 255);
+	GiveActorInventory(1339,"money", 1500);
+	//Reset speed and jump height
+	SetActorProperty(1339, APROP_Speed, 0.67);
+	Player3_Dead = FALSE;
+	}
+}
+
+script 807 (void)
+{
+	If(Player4_Dead == True)
+	{
+	Thing_Move(1340,407,1);
+	//Reset inventory
+	delay(1);
+	GiveActorInventory(1340,"ColtM1911", 255);
+	GiveActorInventory(1340,"MaxWeapons", 1);
+	GiveActorInventory(1340,"ColtM1911ammo", 255);
+	GiveActorInventory(1340,"Knife", 255);
+	GiveActorInventory(1340,"FragGrenade", 255);
+	GiveActorInventory(1340,"money", 1500);
+	//Reset speed and jump height
+	SetActorProperty(1340, APROP_Speed, 0.67);
+	Player4_Dead = FALSE;
+	}
+}
+
+script 803 (void)
+
+{
+	If(CheckActorInventory(1337, "Money") == 0 && CheckActorInventory(1338, "Money") == 0 &&
+	CheckActorInventory(1339, "Money") == 0 && CheckActorInventory(1340, "Money") == 0)
+{
+		setActorProperty(1337, APROP_Health,0);
+		setActorProperty(1338, APROP_Health,0);
+		setActorProperty(1339, APROP_Health,0);
+		setActorProperty(1340, APROP_Health,0);
+      SetFont("BIGFONT");
+  HUDMessageBold(s:"Game over";
+             HUDMSG_PLAIN, 0, CR_white, 3.0, 0.2, 9999.9999);
+             SETFONT("SMALLFONT");
+              HUDMessageBold(s:"You survived ", d:RoundNumber, s:" ROUNDs!";
+              HUDMSG_PLAIN, 0, CR_white, 3.0, 0.3, 9999.9999);
+			  setmusic("ZM_BUNKG", 0, 0);
+			  Thing_Activate(67);
+			  Thing_Activate(68);
+			  Thing_Activate(69);
+fadeto(0, 0, 0, 1.0, 5.0);
+DELAY(200);
+   delay(1);
+   clearinventory();
+   delay(1);
+fadeto(0, 0, 0, 0, 5.0);
+ChangeCamera(Random(67, 69),1,0);
+delay(250);
+fadeto(0, 0, 0, 1.0, 6.9);
+delay(240);
+changelevel("map01", 0, changelevel_nointermission, -1);
+}
+}
+
+script 756 ENTER
+{//HEALTH REGENERATION
+    int health = GetActorProperty(1337, APROP_Health);
+
+    While(True)
+    {
+        {
+            //Constantly work while health is under 100
+            While(GetActorProperty(1337,APROP_Health)<100 && GetActorProperty(1337,APROP_Health)>=1)
+            {
+                //After each hit you take, wait for regeneration
+                If(GetActorProperty(1337,APROP_Health)<health)
+                {
+                HudMessage(s:"";HUDMSG_FADEOUT, 101, CR_RED, 240.0, 180.0, 0.1, 2.0);
+                }
+                health = GetActorProperty(1337, APROP_Health);
+                SetActorProperty(1337, APROP_Health, health + 1);
+                Delay(3);
+            }
+        }
+    Delay(1);
+    }
+}
+
+script 757 ENTER
+{//HEALTH REGENERATION
+    int health = GetActorProperty(1338, APROP_Health);
+
+    While(True)
+    {
+        {
+            //Constantly work while health is under 100
+            While(GetActorProperty(1338,APROP_Health)<100 && GetActorProperty(1338,APROP_Health)>=1)
+            {
+                //After each hit you take, wait for regeneration
+                If(GetActorProperty(1338,APROP_Health)<health)
+                {
+                HudMessage(s:"";HUDMSG_FADEOUT, 101, CR_RED, 240.0, 180.0, 0.1, 2.0);
+                }
+                health = GetActorProperty(1338, APROP_Health);
+                SetActorProperty(1338, APROP_Health, health + 1);
+                Delay(3);
+            }
+        }
+    Delay(1);
+    }
+}
+
+script 758 ENTER
+{//HEALTH REGENERATION
+    int health = GetActorProperty(1339, APROP_Health);
+
+    While(True)
+    {
+        {
+            //Constantly work while health is under 100
+            While(GetActorProperty(1339,APROP_Health)<100 && GetActorProperty(1339,APROP_Health)>=1)
+            {
+                //After each hit you take, wait for regeneration
+                If(GetActorProperty(1339,APROP_Health)<health)
+                {
+                HudMessage(s:"";HUDMSG_FADEOUT, 101, CR_RED, 240.0, 180.0, 0.1, 2.0);
+                }
+                health = GetActorProperty(1339, APROP_Health);
+                SetActorProperty(1339, APROP_Health, health + 1);
+                Delay(3);
+            }
+        }
+    Delay(1);
+    }
+}
+
+script 759 ENTER
+{//HEALTH REGENERATION
+    int health = GetActorProperty(1340, APROP_Health);
+
+    While(True)
+    {
+        {
+            //Constantly work while health is under 100
+            While(GetActorProperty(1340,APROP_Health)<100 && GetActorProperty(1340,APROP_Health)>=1)
+            {
+                //After each hit you take, wait for regeneration
+                If(GetActorProperty(1340,APROP_Health)<health)
+                {
+                HudMessage(s:"";HUDMSG_FADEOUT, 101, CR_RED, 240.0, 180.0, 0.1, 2.0);
+                }
+                health = GetActorProperty(1340, APROP_Health);
+                SetActorProperty(1340, APROP_Health, health + 1);
+                Delay(3);
+            }
+        }
+    Delay(1);
+    }
+}
+
+script 760 ENTER
+{//HEALTH REGENERATION
+    int health = GetActorProperty(1341, APROP_Health);
+
+    While(True)
+    {
+        {
+            //Constantly work while health is under 100
+            While(GetActorProperty(1341,APROP_Health)<100 && GetActorProperty(1341,APROP_Health)>=1)
+            {
+                //After each hit you take, wait for regeneration
+                If(GetActorProperty(1341,APROP_Health)<health)
+                {
+                HudMessage(s:"";HUDMSG_FADEOUT, 101, CR_RED, 240.0, 180.0, 0.1, 2.0);
+                }
+                health = GetActorProperty(1341, APROP_Health);
+                SetActorProperty(1341, APROP_Health, health + 1);
+                Delay(3);
+            }
+        }
+    Delay(1);
+    }
+}
+
+script 761 ENTER
+{//HEALTH REGENERATION
+    int health = GetActorProperty(1342, APROP_Health);
+
+    While(True)
+    {
+        {
+            //Constantly work while health is under 100
+            While(GetActorProperty(1342,APROP_Health)<100 && GetActorProperty(1342,APROP_Health)>=1)
+            {
+                //After each hit you take, wait for regeneration
+                If(GetActorProperty(1342,APROP_Health)<health)
+                {
+                HudMessage(s:"";HUDMSG_FADEOUT, 101, CR_RED, 240.0, 180.0, 0.1, 2.0);
+                }
+                health = GetActorProperty(1342, APROP_Health);
+                SetActorProperty(1342, APROP_Health, health + 1);
+                Delay(3);
+            }
+        }
+    Delay(1);
+    }
+}
+
+script 762 ENTER
+{//HEALTH REGENERATION
+    int health = GetActorProperty(1343, APROP_Health);
+
+    While(True)
+    {
+        {
+            //Constantly work while health is under 100
+            While(GetActorProperty(1343,APROP_Health)<100 && GetActorProperty(1343,APROP_Health)>=1)
+            {
+                //After each hit you take, wait for regeneration
+                If(GetActorProperty(1343,APROP_Health)<health)
+                {
+                HudMessage(s:"";HUDMSG_FADEOUT, 101, CR_RED, 240.0, 180.0, 0.1, 2.0);
+                }
+                health = GetActorProperty(1343, APROP_Health);
+                SetActorProperty(1343, APROP_Health, health + 1);
+                Delay(3);
+            }
+        }
+    Delay(1);
+    }
+}
+
+script 763 ENTER
+{//HEALTH REGENERATION
+    int health = GetActorProperty(1344, APROP_Health);
+
+    While(True)
+    {
+        {
+            //Constantly work while health is under 100
+            While(GetActorProperty(1344,APROP_Health)<100 && GetActorProperty(1344,APROP_Health)>=1)
+            {
+                //After each hit you take, wait for regeneration
+                If(GetActorProperty(1344,APROP_Health)<health)
+                {
+                HudMessage(s:"";HUDMSG_FADEOUT, 101, CR_RED, 240.0, 180.0, 0.1, 2.0);
+                }
+                health = GetActorProperty(1344, APROP_Health);
+                SetActorProperty(1344, APROP_Health, health + 1);
+                Delay(3);
+            }
+        }
+    Delay(1);
+    }
+}
+
+//Extra Points Found: Gained 'x' points//
+
+ script 710 (Void)
+	 {
+	 HudMessage(s:"Extra Points Found";
+HUDMSG_FADEINOUT, 0, CR_ORANGE, 3.0, 0.25, 5.0);
+GiveInventory("Money", 1000);
+	 HudMessage(s:"Gained 1000 Points";
+HUDMSG_FADEINOUT, 0, CR_WHITE, 3.0, 0.28, 5.0);
+	 }
+	 	 script 711 (Void)
+	 {
+	 HudMessage(s:"Extra Points Found";
+HUDMSG_FADEINOUT, 0, CR_ORANGE, 3.0, 0.25, 5.0);
+GiveInventory("Money", 500);
+	 HudMessage(s:"Gained 500 Points";
+HUDMSG_FADEINOUT, 0, CR_WHITE, 3.0, 0.28, 5.0);
+	 }
+		script 712 (Void)
+	 {
+	 HudMessage(s:"Extra Points Found";
+HUDMSG_FADEINOUT, 0, CR_ORANGE, 3.0, 0.25, 5.0);
+GiveInventory("Money", 250);
+	 HudMessage(s:"Gained 250 Points";
+HUDMSG_FADEINOUT, 0, CR_WHITE, 3.0, 0.28, 5.0);
+	 }
+	 	 	 script 713 (Void)
+	 {
+	 HudMessage(s:"";
+HUDMSG_FADEINOUT, 0, CR_WHITE, 3.0, 0.28, 5.0);
+	 }
+		script 714 (Void)
+	 {
+	 HudMessage(s:"";
+HUDMSG_FADEINOUT, 0, CR_WHITE, 3.0, 0.28, 5.0);
+	 }
+	 	 	 script 715 (Void)
+	 {
+	 HudMessage(s:"";
+HUDMSG_FADEINOUT, 0, CR_WHITE, 3.0, 0.28, 5.0);
+	 }
+		script 716 (Void)
+	 {
+	 HudMessage(s:"";
+HUDMSG_FADEINOUT, 0, CR_WHITE, 3.0, 0.28, 5.0);
+	 }
+	 	 	 script 717 (Void)
+	 {
+	 HudMessage(s:"";
+HUDMSG_FADEINOUT, 0, CR_WHITE, 3.0, 0.28, 5.0);
+	 }
+		script 718 (Void)
+	 {
+	 HudMessage(s:"";
+HUDMSG_FADEINOUT, 0, CR_WHITE, 3.0, 0.28, 5.0);
+	 }
+	 	 	 script 719 (Void)
+	 {
+	 HudMessage(s:"";
+HUDMSG_FADEINOUT, 0, CR_WHITE, 3.0, 0.28, 5.0);
+	 }
+		script 720 (Void)
+	 {
+	 HudMessage(s:"";
+HUDMSG_FADEINOUT, 0, CR_WHITE, 3.0, 0.28, 5.0);
+	 }
+	 	 	 script 721 (Void)
+	 {
+	 HudMessage(s:"";
+HUDMSG_FADEINOUT, 0, CR_WHITE, 3.0, 0.28, 5.0);
+	 }
+		script 722 (Void)
+	 {
+	 HudMessage(s:"";
+HUDMSG_FADEINOUT, 0, CR_WHITE, 3.0, 0.28, 5.0);
+	 }
+	 		script 723 (Void)
+	 {
+	 HudMessage(s:"";
+HUDMSG_FADEINOUT, 0, CR_WHITE, 3.0, 0.28, 5.0);
+	 }
+	 	 	 script 724 (Void)
+	 {
+	 HudMessage(s:"";
+HUDMSG_FADEINOUT, 0, CR_WHITE, 3.0, 0.28, 5.0);
+	 }
+		script 725 (Void)
+	 {
+	 HudMessage(s:"";
+HUDMSG_FADEINOUT, 0, CR_WHITE, 3.0, 0.28, 5.0);
+	 }
+	 	 	 script 726 (Void)
+	 {
+	 HudMessage(s:"";
+HUDMSG_FADEINOUT, 0, CR_WHITE, 3.0, 0.28, 5.0);
+	 }
+		script 727 (Void)
+	 {
+	 HudMessage(s:"";
+HUDMSG_FADEINOUT, 0, CR_WHITE, 3.0, 0.28, 5.0);
+	 }
+	 	 	 script 728 (Void)
+	 {
+	 HudMessage(s:"";
+HUDMSG_FADEINOUT, 0, CR_WHITE, 3.0, 0.28, 5.0);
+	 }
+		script 729 (Void)
+	 {
+	 HudMessage(s:"";
+HUDMSG_FADEINOUT, 0, CR_WHITE, 3.0, 0.28, 5.0);
+	 }
+	 		script 730 (Void)
+	 {
+	 HudMessage(s:"";
+HUDMSG_FADEINOUT, 0, CR_WHITE, 3.0, 0.28, 5.0);
+	 }
+	 	 	 script 731 (Void)
+	 {
+	 HudMessage(s:"";
+HUDMSG_FADEINOUT, 0, CR_WHITE, 3.0, 0.28, 5.0);
+	 }
+		script 732 (Void)
+	 {
+	 HudMessage(s:"";
+HUDMSG_FADEINOUT, 0, CR_WHITE, 3.0, 0.28, 5.0);
+	 }
+	 		script 733 (Void)
+	 {
+	 HudMessage(s:"";
+HUDMSG_FADEINOUT, 0, CR_WHITE, 3.0, 0.28, 5.0);
+	 }
+	 	 	 script 734 (Void)
+	 {
+	 HudMessage(s:"";
+HUDMSG_FADEINOUT, 0, CR_WHITE, 3.0, 0.28, 5.0);
+	 }
+		script 735 (Void)
+	 {
+	 HudMessage(s:"";
+HUDMSG_FADEINOUT, 0, CR_WHITE, 3.0, 0.28, 5.0);
+	 }
+	 	 	 script 736 (Void)
+	 {
+	 HudMessage(s:"";
+HUDMSG_FADEINOUT, 0, CR_WHITE, 3.0, 0.28, 5.0);
+	 }
+		script 737 (Void)
+	 {
+	 HudMessage(s:"";
+HUDMSG_FADEINOUT, 0, CR_WHITE, 3.0, 0.28, 5.0);
+	 }
+	 	 	 script 738 (Void)
+	 {
+	 HudMessage(s:"";
+HUDMSG_FADEINOUT, 0, CR_WHITE, 3.0, 0.28, 5.0);
+	 }
+		script 739 (Void)
+	 {
+	 HudMessage(s:"";
+HUDMSG_FADEINOUT, 0, CR_WHITE, 3.0, 0.28, 5.0);
+	 }
+	 		script 740 (Void)
+	 {
+	 HudMessage(s:"";
+HUDMSG_FADEINOUT, 0, CR_WHITE, 3.0, 0.28, 5.0);
+	 }
+	 
+//Off The Wall Weapons
+
+ script 100 (void)
+ 
+{
+if (CheckInventory("SecretShopper") > 0)
+	{
+	SetFont("DIETLOGFONT");
+	HudMessage(s:"\cuPress \ck", k:"+use", s:" \cu to refill ammo\n\ck[cost:2500]";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else if (!CheckInventory("M-14"))
+	{
+	SetFont("DIETLOGFONT");
+	HudMessage(s:"\cuPress \ck", k:"+use", s:" \cu to buy the M-14 Assault Rifle \n\ck[cost:800]";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else if (CheckInventory("M-14"))
+	{
+	SetFont("DIETLOGFONT");
+	HudMessage(s:"\cuPress \ck", k:"+use", s:" \cu to buy Ammo \n\ck[cost:400]";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else if (CheckInventory("PAPM-14"))
+	{
+	SetFont("DIETLOGFONT");
+	HudMessage(s:"\cuPress \ck", k:"+use", s:" \cu to buy Ammo \n\ck[cost:4200]";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+}
+
+script 101 (void)
+ 
+{
+		If (CheckWeapon("Knife"))
+	{
+	SetFont("DIETLOGFONT");
+	HudMessage(s:"\cuYou can not trade this weapon";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else If (CheckWeapon("FragGrenade"))
+	{
+	SetFont("DIETLOGFONT");
+	HudMessage(s:"\cuYou can not trade this weapon";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else If (CheckWeapon("PlasmaGrenade"))
+	{
+	HudMessage(s:"\cuYou can not trade this weapon";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else If (CheckWeapon("RadiationGrenade"))
+	{
+	HudMessage(s:"\cuYou can not trade this weapon";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else If (CheckWeapon("QuickRevive_Drink"))
+	{
+	HudMessage(s:"";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else If (CheckWeapon("SwiftHands_Drink"))
+	{
+	HudMessage(s:"";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else If (CheckWeapon("DeadShot_Drink"))
+	{
+	HudMessage(s:"";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else If (CheckWeapon("ShockTop_Drink"))
+	{
+	HudMessage(s:"";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else If (CheckWeapon("Flak_Drink"))
+	{
+	HudMessage(s:"";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else If (CheckWeapon("Blood_Drink"))
+	{
+	HudMessage(s:"";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else If (CheckWeapon("DeathMachine"))
+	{
+	HudMessage(s:"";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+		else If (CheckInventory("MaxWeapons") < 2 && CheckWeapon("AssaultShield"))
+	{
+	HudMessage(s:"\cuYou can not trade this weapon";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else If (CheckInventory("MaxWeapons") == 2 && CheckWeapon("AssaultShield"))
+	{
+	HudMessage(s:"\cuYou can not trade this weapon";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else if (CheckInventory("SecretShopper") > 0 && CheckInventory("money") >= 2500)
+	{
+	thingsound(9, "sound/buy", 120);
+	TakeInventory("money",2500);
+	ACS_Execute(120,0,0,0,0);
+	ACS_Execute(Random(710, 740), 0,0,0,0);
+	}
+else if(CheckInventory("PAPM-14") && CheckInventory("money") >= 4200)
+                {
+                        GiveInventory("PAPM-14AMMO", 255);
+                        GiveInventory("PAPM-14AMMO", 255);
+                        GiveInventory("PAPM-14AMMO", 255);
+                        thingsound(9, "sound/buy", 120);
+                        TakeInventory("money",4200);
+						ACS_Execute(Random(710, 740), 0,0,0,0);
+                }
+  
+ else if(CheckInventory("M-14") && CheckInventory("money") >= 400)
+                {
+                        GiveInventory("M-14", 255);
+                        GiveInventory("M-14AMMO", 255);
+                        GiveInventory("M-14AMMO", 255);
+                        GiveInventory("M-14AMMO", 255);
+                        thingsound(9, "sound/buy", 120);
+                        TakeInventory("money",400);
+						ACS_Execute(Random(710, 740), 0,0,0,0);
+                }
+	else if(!CheckInventory("M-14")  && CheckInventory("EnchantedPurchase") && CheckInventory("MaxWeapons") == 2 && CheckInventory("money") >= 800)
+                {
+                        GiveInventory("PAPM-14", 255);
+                        GiveInventory("PAPM-14AMMO", 255);
+                        GiveInventory("PAPM-14AMMO", 255);
+                        GiveInventory("PAPM-14AMMO", 255);
+                    TakeInventory("money",800);
+		TakeInventory(ACS_ExecuteWithResult(53,0,0,0), 999);
+		TakeInventory("EnchantedPurchase",999);
+                    thingsound(9, "sound/buy", 120);
+                    thingsound(9, "sound/PAPbuy", 120);
+                    SetWeapon("PAPM-14");
+					ACS_Execute(Random(710, 740), 0,0,0,0);
+			
+                }
+	else if(!CheckInventory("M-14")  && CheckInventory("EnchantedPurchase") && CheckInventory("MaxWeapons") < 2 && CheckInventory("money") >= 800)
+                {
+                        GiveInventory("MaxWeapons", 1);
+                        GiveInventory("PAPM-14", 255);
+                        GiveInventory("PAPM-14AMMO", 255);
+                        GiveInventory("PAPM-14AMMO", 255);
+                        GiveInventory("PAPM-14AMMO", 255);
+                    TakeInventory("money",800);
+		TakeInventory("EnchantedPurchase",999);
+                    thingsound(9, "sound/buy", 120);
+                    thingsound(9, "sound/PAPbuy", 120);
+                    SetWeapon("PAPM-14");
+		ACS_Execute(Random(710, 740), 0,0,0,0);
+
+                }
+                else if(!CheckInventory("M-14")  && !CheckInventory("PAPM-14") && CheckInventory("MaxWeapons") == 2 && CheckInventory("money") >= 800)
+                {
+                        GiveInventory("M-14", 255);
+                        GiveInventory("M-14AMMO", 255);
+                        GiveInventory("M-14AMMO", 255);
+                        GiveInventory("M-14AMMO", 255);
+		TakeInventory(ACS_ExecuteWithResult(53,0,0,0), 999);
+                    TakeInventory("money",800);
+                    thingsound(9, "sound/buy", 120);
+                    thingsound(9, "sound/newbuy", 120);
+                    SetWeapon("M-14");
+		ACS_Execute(Random(710, 740), 0,0,0,0);
+
+                }
+                else if(!CheckInventory("M-14")  && !CheckInventory("PAPM-14") && CheckInventory("MaxWeapons") < 2 && CheckInventory("money") >= 800)
+                {
+                        GiveInventory("MaxWeapons", 1);
+                        GiveInventory("M-14", 255);
+                        GiveInventory("M-14AMMO", 255);
+                        GiveInventory("M-14AMMO", 255);
+                        GiveInventory("M-14AMMO", 255);
+                    TakeInventory("money",800);
+                    thingsound(9, "sound/buy", 120);
+                    thingsound(9, "sound/newbuy", 120);
+                    SetWeapon("M-14");
+		ACS_Execute(Random(710, 740), 0,0,0,0);
+
+                }
+
+
+     }
+	 	 
+script 102 (void)
+ 
+{
+if (CheckInventory("SecretShopper") > 0)
+	{
+	HudMessage(s:"\cuPress \ck", k:"+use", s:" \cu to refill ammo\n\ck[cost:2500]";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else if (!CheckInventory("Glock20"))
+	{
+	SetFont("DIETLOGFONT");
+	HudMessage(s:"\cuPress \ck", k:"+use", s:" \cu to buy the Glock 20 Pistol \n\ck[cost:800]";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else if (CheckInventory("Glock20"))
+	{
+	SetFont("DIETLOGFONT");
+	HudMessage(s:"\cuPress \ck", k:"+use", s:" \cu to buy Ammo \n\ck[cost:400]";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else if (CheckInventory("PAPGlock20"))
+	{
+	SetFont("DIETLOGFONT");
+	HudMessage(s:"\cuPress \ck", k:"+use", s:" \cu to buy Ammo \n\ck[cost:4200]";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+}
+
+script 103 (void)
+ 
+{
+		If (CheckWeapon("Knife"))
+	{
+	HudMessage(s:"\cuYou can not trade this weapon";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else If (CheckWeapon("FragGrenade"))
+	{
+	HudMessage(s:"\cuYou can not trade this weapon";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else If (CheckWeapon("PlasmaGrenade"))
+	{
+	HudMessage(s:"\cuYou can not trade this weapon";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else If (CheckWeapon("RadiationGrenade"))
+	{
+	HudMessage(s:"\cuYou can not trade this weapon";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else If (CheckWeapon("QuickRevive_Drink"))
+	{
+	HudMessage(s:"";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else If (CheckWeapon("SwiftHands_Drink"))
+	{
+	HudMessage(s:"";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else If (CheckWeapon("DeadShot_Drink"))
+	{
+	HudMessage(s:"";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else If (CheckWeapon("ShockTop_Drink"))
+	{
+	HudMessage(s:"";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else If (CheckWeapon("Flak_Drink"))
+	{
+	HudMessage(s:"";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else If (CheckWeapon("Blood_Drink"))
+	{
+	HudMessage(s:"";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else If (CheckWeapon("DeathMachine"))
+	{
+	HudMessage(s:"";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+		else If (CheckInventory("MaxWeapons") < 2 && CheckWeapon("AssaultShield"))
+	{
+	HudMessage(s:"\cuYou can not trade this weapon";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else If (CheckInventory("MaxWeapons") == 2 && CheckWeapon("AssaultShield"))
+	{
+	HudMessage(s:"\cuYou can not trade this weapon";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else if (CheckInventory("SecretShopper") > 0 && CheckInventory("money") >= 2500)
+	{
+	thingsound(10, "sound/buy", 120);
+	TakeInventory("money",2500);
+	ACS_Execute(120,0,0,0,0);
+	ACS_Execute(Random(710, 740), 0,0,0,0);
+	}
+else if(CheckInventory("PAPGlock20") && CheckInventory("money") >= 4200)
+                {
+                        GiveInventory("PAPGlock20AMMO", 255);
+                        GiveInventory("PAPGlock20AMMO", 255);
+                        GiveInventory("PAPGlock20AMMO", 255);
+                        thingsound(10, "sound/buy", 120);
+                        TakeInventory("money",4200);
+						ACS_Execute(Random(710, 740), 0,0,0,0);
+                }
+  
+ else if(CheckInventory("Glock20") && CheckInventory("money") >= 250)
+                {
+                        GiveInventory("Glock20", 255);
+                        GiveInventory("Glock20AMMO", 255);
+                        GiveInventory("Glock20AMMO", 255);
+                        GiveInventory("Glock20AMMO", 255);
+                        thingsound(10, "sound/buy", 120);
+                        TakeInventory("money",250);
+						ACS_Execute(Random(710, 740), 0,0,0,0);
+                }
+	else if(!CheckInventory("Glock20")  && CheckInventory("EnchantedPurchase") && CheckInventory("MaxWeapons") == 2 && CheckInventory("money") >= 500)
+                {
+                        GiveInventory("PAPGlock20", 255);
+                        GiveInventory("PAPGlock20AMMO", 255);
+                        GiveInventory("PAPGlock20AMMO", 255);
+                        GiveInventory("PAPGlock20AMMO", 255);
+                    TakeInventory("money",500);
+		TakeInventory(ACS_ExecuteWithResult(53,0,0,0), 999);
+		TakeInventory("EnchantedPurchase",999);
+                    thingsound(10, "sound/buy", 120);
+                    thingsound(10, "sound/PAPbuy", 120);
+                    SetWeapon("PAPGlock20");
+					ACS_Execute(Random(710, 740), 0,0,0,0);
+			
+                }
+	else if(!CheckInventory("Glock20")  && CheckInventory("EnchantedPurchase") && CheckInventory("MaxWeapons") < 2 && CheckInventory("money") >= 500)
+                {
+                        GiveInventory("MaxWeapons", 1);
+                        GiveInventory("PAPGlock20", 255);
+                        GiveInventory("PAPGlock20AMMO", 255);
+                        GiveInventory("PAPGlock20AMMO", 255);
+                        GiveInventory("PAPGlock20AMMO", 255);
+                    TakeInventory("money",500);
+		TakeInventory("EnchantedPurchase",999);
+                    thingsound(10, "sound/buy", 120);
+                    thingsound(10, "sound/PAPbuy", 120);
+                    SetWeapon("PAPGlock20");
+		ACS_Execute(Random(710, 740), 0,0,0,0);
+
+                }
+                else if(!CheckInventory("Glock20")  && !CheckInventory("PAPGlock20") && CheckInventory("MaxWeapons") == 2 && CheckInventory("money") >= 500)
+                {
+                        GiveInventory("Glock20", 255);
+                        GiveInventory("Glock20AMMO", 255);
+                        GiveInventory("Glock20AMMO", 255);
+                        GiveInventory("Glock20AMMO", 255);
+		TakeInventory(ACS_ExecuteWithResult(53,0,0,0), 999);
+                    TakeInventory("money",500);
+                    thingsound(10, "sound/buy", 120);
+                    thingsound(10, "sound/newbuy", 120);
+                    SetWeapon("Glock20");
+		ACS_Execute(Random(710, 740), 0,0,0,0);
+
+                }
+                else if(!CheckInventory("Glock20")  && !CheckInventory("PAPGlock20") && CheckInventory("MaxWeapons") < 2 && CheckInventory("money") >= 500)
+                {
+                        GiveInventory("MaxWeapons", 1);
+                        GiveInventory("Glock20", 255);
+                        GiveInventory("Glock20AMMO", 255);
+                        GiveInventory("Glock20AMMO", 255);
+                        GiveInventory("Glock20AMMO", 255);
+                    TakeInventory("money",500);
+                    thingsound(10, "sound/buy", 120);
+                    thingsound(10, "sound/newbuy", 120);
+                    SetWeapon("Glock20");
+		ACS_Execute(Random(710, 740), 0,0,0,0);
+
+                }
+
+
+     }
+	 
+	  script 104 (void)
+ 
+{
+if (CheckInventory("SecretShopper") > 0)
+	{
+	HudMessage(s:"\cuPress \ck", k:"+use", s:" \cu to refill ammo\n\ck[cost:2500]";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else if (!CheckInventory("KS-23"))
+	{
+	SetFont("DIETLOGFONT");
+	HudMessage(s:"\cuPress \ck", k:"+use", s:" \cu to buy the KS-23 Shotgun \n\ck[cost:800]";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else if (CheckInventory("KS-23"))
+	{
+	SetFont("DIETLOGFONT");
+	HudMessage(s:"\cuPress \ck", k:"+use", s:" \cu to buy Ammo \n\ck[cost:400]";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else if (CheckInventory("PAPKS-23"))
+	{
+	SetFont("DIETLOGFONT");
+	HudMessage(s:"\cuPress \ck", k:"+use", s:" \cu to buy Ammo \n\ck[cost:4200]";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+}
+
+script 105 (void)
+ 
+{
+		If (CheckWeapon("Knife"))
+	{
+	HudMessage(s:"\cuYou can not trade this weapon";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else If (CheckWeapon("FragGrenade"))
+	{
+	HudMessage(s:"\cuYou can not trade this weapon";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else If (CheckWeapon("PlasmaGrenade"))
+	{
+	HudMessage(s:"\cuYou can not trade this weapon";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else If (CheckWeapon("RadiationGrenade"))
+	{
+	HudMessage(s:"\cuYou can not trade this weapon";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else If (CheckWeapon("QuickRevive_Drink"))
+	{
+	HudMessage(s:"";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else If (CheckWeapon("SwiftHands_Drink"))
+	{
+	HudMessage(s:"";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else If (CheckWeapon("DeadShot_Drink"))
+	{
+	HudMessage(s:"";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else If (CheckWeapon("ShockTop_Drink"))
+	{
+	HudMessage(s:"";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else If (CheckWeapon("Flak_Drink"))
+	{
+	HudMessage(s:"";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else If (CheckWeapon("Blood_Drink"))
+	{
+	HudMessage(s:"";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else If (CheckWeapon("DeathMachine"))
+	{
+	HudMessage(s:"";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+		else If (CheckInventory("MaxWeapons") < 2 && CheckWeapon("AssaultShield"))
+	{
+	HudMessage(s:"\cuYou can not trade this weapon";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else If (CheckInventory("MaxWeapons") == 2 && CheckWeapon("AssaultShield"))
+	{
+	HudMessage(s:"\cuYou can not trade this weapon";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else if (CheckInventory("SecretShopper") > 0 && CheckInventory("money") >= 2500)
+	{
+	thingsound(11, "sound/buy", 120);
+	TakeInventory("money",2500);
+	ACS_Execute(120,0,0,0,0);
+	ACS_Execute(Random(710, 740), 0,0,0,0);
+	}
+else if(CheckInventory("PAPKS-23") && CheckInventory("money") >= 4200)
+                {
+                        GiveInventory("PAPKS-23AMMO", 255);
+                        GiveInventory("PAPKS-23AMMO", 255);
+                        GiveInventory("PAPKS-23AMMO", 255);
+                        thingsound(11, "sound/buy", 120);
+                        TakeInventory("money",4200);
+						ACS_Execute(Random(710, 740), 0,0,0,0);
+                }
+  
+ else if(CheckInventory("KS-23") && CheckInventory("money") >= 680)
+                {
+                        GiveInventory("KS-23", 255);
+                        GiveInventory("KS-23AMMO", 255);
+                        GiveInventory("KS-23AMMO", 255);
+                        GiveInventory("KS-23AMMO", 255);
+                        thingsound(11, "sound/buy", 120);
+                        TakeInventory("money",680);
+						ACS_Execute(Random(710, 740), 0,0,0,0);
+                }
+	else if(!CheckInventory("KS-23")  && CheckInventory("EnchantedPurchase") && CheckInventory("MaxWeapons") == 2 && CheckInventory("money") >= 1360)
+                {
+                        GiveInventory("PAPKS-23", 255);
+                        GiveInventory("PAPKS-23AMMO", 255);
+                        GiveInventory("PAPKS-23AMMO", 255);
+                        GiveInventory("PAPKS-23AMMO", 255);
+                    TakeInventory("money",1360);
+		TakeInventory(ACS_ExecuteWithResult(53,0,0,0), 999);
+		TakeInventory("EnchantedPurchase",999);
+                    thingsound(11, "sound/buy", 120);
+                    thingsound(11, "sound/PAPbuy", 120);
+                    SetWeapon("PAPKS-23");
+					ACS_Execute(Random(710, 740), 0,0,0,0);
+			
+                }
+	else if(!CheckInventory("KS-23")  && CheckInventory("EnchantedPurchase") && CheckInventory("MaxWeapons") < 2 && CheckInventory("money") >= 1360)
+                {
+                        GiveInventory("MaxWeapons", 1);
+                        GiveInventory("PAPKS-23", 255);
+                        GiveInventory("PAPKS-23AMMO", 255);
+                        GiveInventory("PAPKS-23AMMO", 255);
+                        GiveInventory("PAPKS-23AMMO", 255);
+                    TakeInventory("money",1360);
+		TakeInventory("EnchantedPurchase",999);
+                    thingsound(11, "sound/buy", 120);
+                    thingsound(11, "sound/PAPbuy", 120);
+                    SetWeapon("PAPKS-23");
+		ACS_Execute(Random(710, 740), 0,0,0,0);
+
+                }
+                else if(!CheckInventory("KS-23")  && !CheckInventory("PAPKS-23") && CheckInventory("MaxWeapons") == 2 && CheckInventory("money") >= 1360)
+                {
+                        GiveInventory("KS-23", 255);
+                        GiveInventory("KS-23AMMO", 255);
+                        GiveInventory("KS-23AMMO", 255);
+                        GiveInventory("KS-23AMMO", 255);
+		TakeInventory(ACS_ExecuteWithResult(53,0,0,0), 999);
+                    TakeInventory("money",1360);
+                    thingsound(11, "sound/buy", 120);
+                    thingsound(11, "sound/newbuy", 120);
+                    SetWeapon("KS-23");
+		ACS_Execute(Random(710, 740), 0,0,0,0);
+
+                }
+                else if(!CheckInventory("KS-23")  && !CheckInventory("PAPKS-23") && CheckInventory("MaxWeapons") < 2 && CheckInventory("money") >= 1360)
+                {
+                        GiveInventory("MaxWeapons", 1);
+                        GiveInventory("KS-23", 255);
+                        GiveInventory("KS-23AMMO", 255);
+                        GiveInventory("KS-23AMMO", 255);
+                        GiveInventory("KS-23AMMO", 255);
+                    TakeInventory("money",1360);
+                    thingsound(11, "sound/buy", 120);
+                    thingsound(11, "sound/newbuy", 120);
+                    SetWeapon("KS-23");
+		ACS_Execute(Random(710, 740), 0,0,0,0);
+
+                }
+
+
+     }
+	 
+ script 106 (void)
+ 
+{
+if (CheckInventory("SecretShopper") > 0)
+	{
+	HudMessage(s:"\cuPress \ck", k:"+use", s:" \cu to refill ammo\n\ck[cost:2500]";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else if (!CheckInventory("AK-12"))
+	{
+	SetFont("DIETLOGFONT");
+	HudMessage(s:"\cuPress \ck", k:"+use", s:" \cu to buy the AK-12 Assault Rifle \n\ck[cost:800]";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else if (CheckInventory("AK-12"))
+	{
+	SetFont("DIETLOGFONT");
+	HudMessage(s:"\cuPress \ck", k:"+use", s:" \cu to buy Ammo \n\ck[cost:400]";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else if (CheckInventory("PAPAK-12"))
+	{
+	SetFont("DIETLOGFONT");
+	HudMessage(s:"\cuPress \ck", k:"+use", s:" \cu to buy Ammo \n\ck[cost:4200]";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+}
+
+script 107 (void)
+ 
+{
+		If (CheckWeapon("Knife"))
+	{
+	HudMessage(s:"\cuYou can not trade this weapon";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else If (CheckWeapon("FragGrenade"))
+	{
+	HudMessage(s:"\cuYou can not trade this weapon";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else If (CheckWeapon("PlasmaGrenade"))
+	{
+	HudMessage(s:"\cuYou can not trade this weapon";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else If (CheckWeapon("RadiationGrenade"))
+	{
+	HudMessage(s:"\cuYou can not trade this weapon";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else If (CheckWeapon("QuickRevive_Drink"))
+	{
+	HudMessage(s:"";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else If (CheckWeapon("SwiftHands_Drink"))
+	{
+	HudMessage(s:"";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else If (CheckWeapon("DeadShot_Drink"))
+	{
+	HudMessage(s:"";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else If (CheckWeapon("ShockTop_Drink"))
+	{
+	HudMessage(s:"";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else If (CheckWeapon("Flak_Drink"))
+	{
+	HudMessage(s:"";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else If (CheckWeapon("Blood_Drink"))
+	{
+	HudMessage(s:"";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else If (CheckWeapon("DeathMachine"))
+	{
+	HudMessage(s:"";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+		else If (CheckInventory("MaxWeapons") < 2 && CheckWeapon("AssaultShield"))
+	{
+	HudMessage(s:"\cuYou can not trade this weapon";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else If (CheckInventory("MaxWeapons") == 2 && CheckWeapon("AssaultShield"))
+	{
+	HudMessage(s:"\cuYou can not trade this weapon";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else if (CheckInventory("SecretShopper") > 0 && CheckInventory("money") >= 2500)
+	{
+	thingsound(12, "sound/buy", 120);
+	TakeInventory("money",2500);
+	ACS_Execute(120,0,0,0,0);
+	ACS_Execute(Random(710, 740), 0,0,0,0);
+	}
+else if(CheckInventory("PAPAK-12") && CheckInventory("money") >= 4200)
+                {
+                        GiveInventory("PAPAK-12AMMO", 255);
+                        GiveInventory("PAPAK-12AMMO", 255);
+                        GiveInventory("PAPAK-12AMMO", 255);
+                        thingsound(12, "sound/buy", 120);
+                        TakeInventory("money",4200);
+						ACS_Execute(Random(710, 740), 0,0,0,0);
+                }
+  
+ else if(CheckInventory("AK-12") && CheckInventory("money") >= 750)
+                {
+                        GiveInventory("AK-12", 255);
+                        GiveInventory("AK-12AMMO", 255);
+                        GiveInventory("AK-12AMMO", 255);
+                        GiveInventory("AK-12AMMO", 255);
+                        thingsound(12, "sound/buy", 120);
+                        TakeInventory("money",750);
+						ACS_Execute(Random(710, 740), 0,0,0,0);
+                }
+	else if(!CheckInventory("AK-12")  && CheckInventory("EnchantedPurchase") && CheckInventory("MaxWeapons") == 2 && CheckInventory("money") >= 1500)
+                {
+                        GiveInventory("PAPAK-12", 255);
+                        GiveInventory("PAPAK-12AMMO", 255);
+                        GiveInventory("PAPAK-12AMMO", 255);
+                        GiveInventory("PAPAK-12AMMO", 255);
+                    TakeInventory("money",1500);
+		TakeInventory(ACS_ExecuteWithResult(53,0,0,0), 999);
+		TakeInventory("EnchantedPurchase",999);
+                    thingsound(12, "sound/buy", 120);
+                    thingsound(12, "sound/PAPbuy", 120);
+                    SetWeapon("PAPAK-12");
+					ACS_Execute(Random(710, 740), 0,0,0,0);
+			
+                }
+	else if(!CheckInventory("AK-12")  && CheckInventory("EnchantedPurchase") && CheckInventory("MaxWeapons") < 2 && CheckInventory("money") >= 1500)
+                {
+                        GiveInventory("MaxWeapons", 1);
+                        GiveInventory("PAPAK-12", 255);
+                        GiveInventory("PAPAK-12AMMO", 255);
+                        GiveInventory("PAPAK-12AMMO", 255);
+                        GiveInventory("PAPAK-12AMMO", 255);
+                    TakeInventory("money",1500);
+		TakeInventory("EnchantedPurchase",999);
+                    thingsound(12, "sound/buy", 120);
+                    thingsound(12, "sound/PAPbuy", 120);
+                    SetWeapon("PAPAK-12");
+		ACS_Execute(Random(710, 740), 0,0,0,0);
+
+                }
+                else if(!CheckInventory("AK-12")  && !CheckInventory("PAPAK-12") && CheckInventory("MaxWeapons") == 2 && CheckInventory("money") >= 1500)
+                {
+                        GiveInventory("AK-12", 255);
+                        GiveInventory("AK-12AMMO", 255);
+                        GiveInventory("AK-12AMMO", 255);
+                        GiveInventory("AK-12AMMO", 255);
+		TakeInventory(ACS_ExecuteWithResult(53,0,0,0), 999);
+                    TakeInventory("money",1500);
+                    thingsound(12, "sound/buy", 120);
+                    thingsound(12, "sound/newbuy", 120);
+                    SetWeapon("AK-12");
+		ACS_Execute(Random(710, 740), 0,0,0,0);
+
+                }
+                else if(!CheckInventory("AK-12")  && !CheckInventory("PAPAK-12") && CheckInventory("MaxWeapons") < 2 && CheckInventory("money") >= 1500)
+                {
+                        GiveInventory("MaxWeapons", 1);
+                        GiveInventory("AK-12", 255);
+                        GiveInventory("AK-12AMMO", 255);
+                        GiveInventory("AK-12AMMO", 255);
+                        GiveInventory("AK-12AMMO", 255);
+                    TakeInventory("money",1500);
+                    thingsound(12, "sound/buy", 120);
+                    thingsound(12, "sound/newbuy", 120);
+                    SetWeapon("AK-12");
+		ACS_Execute(Random(710, 740), 0,0,0,0);
+
+                }
+
+
+     }
+	 
+	 script 108 (void)
+ 
+{
+if (CheckInventory("SecretShopper") > 0)
+	{
+	HudMessage(s:"\cuPress \ck", k:"+use", s:" \cu to refill ammo\n\ck[cost:2500]";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else if (!CheckInventory("UZI"))
+	{
+	SetFont("DIETLOGFONT");
+	HudMessage(s:"\cuPress \ck", k:"+use", s:" \cu to buy the UZI Sub-Machinegun \n\ck[cost:800]";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else if (CheckInventory("UZI"))
+	{
+	SetFont("DIETLOGFONT");
+	HudMessage(s:"\cuPress \ck", k:"+use", s:" \cu to buy Ammo \n\ck[cost:400]";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else if (CheckInventory("PAPUZI"))
+	{
+	SetFont("DIETLOGFONT");
+	HudMessage(s:"\cuPress \ck", k:"+use", s:" \cu to buy Ammo \n\ck[cost:4200]";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+}
+
+script 109 (void)
+ 
+{
+	If (CheckWeapon("Knife"))
+	{
+	HudMessage(s:"\cuYou can not trade this weapon";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else If (CheckWeapon("FragGrenade"))
+	{
+	HudMessage(s:"\cuYou can not trade this weapon";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else If (CheckWeapon("PlasmaGrenade"))
+	{
+	HudMessage(s:"\cuYou can not trade this weapon";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else If (CheckWeapon("RadiationGrenade"))
+	{
+	HudMessage(s:"\cuYou can not trade this weapon";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else If (CheckWeapon("QuickRevive_Drink"))
+	{
+	HudMessage(s:"";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else If (CheckWeapon("SwiftHands_Drink"))
+	{
+	HudMessage(s:"";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else If (CheckWeapon("DeadShot_Drink"))
+	{
+	HudMessage(s:"";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else If (CheckWeapon("ShockTop_Drink"))
+	{
+	HudMessage(s:"";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else If (CheckWeapon("Flak_Drink"))
+	{
+	HudMessage(s:"";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else If (CheckWeapon("Blood_Drink"))
+	{
+	HudMessage(s:"";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else If (CheckWeapon("DeathMachine"))
+	{
+	HudMessage(s:"";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+		else If (CheckInventory("MaxWeapons") < 2 && CheckWeapon("AssaultShield"))
+	{
+	HudMessage(s:"\cuYou can not trade this weapon";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else If (CheckInventory("MaxWeapons") == 2 && CheckWeapon("AssaultShield"))
+	{
+	HudMessage(s:"\cuYou can not trade this weapon";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else if (CheckInventory("SecretShopper") > 0 && CheckInventory("money") >= 2500)
+	{
+    thingsound(13, "sound/buy", 120);
+	TakeInventory("money",2500);
+	ACS_Execute(120,0,0,0,0);
+	ACS_Execute(Random(710, 740), 0,0,0,0);
+	}
+else if(CheckInventory("PAPUZI") && CheckInventory("money") >= 4200)
+                {
+                        GiveInventory("PAPUZIAMMO", 255);
+                        GiveInventory("PAPUZIAMMO", 255);
+                        GiveInventory("PAPUZIAMMO", 255);
+                        thingsound(13, "sound/buy", 120);
+                        TakeInventory("money",4200);
+						ACS_Execute(Random(710, 740), 0,0,0,0);
+                }
+  
+ else if(CheckInventory("UZI") && CheckInventory("money") >= 500)
+                {
+                        GiveInventory("UZI", 255);
+                        GiveInventory("UZIAMMO", 255);
+                        GiveInventory("UZIAMMO", 255);
+                        GiveInventory("UZIAMMO", 255);
+                        thingsound(13, "sound/buy", 120);
+                        TakeInventory("money",500);
+						ACS_Execute(Random(710, 740), 0,0,0,0);
+                }
+	else if(!CheckInventory("UZI")  && CheckInventory("EnchantedPurchase") && CheckInventory("MaxWeapons") == 2 && CheckInventory("money") >= 1000)
+                {
+                        GiveInventory("PAPUZI", 255);
+                        GiveInventory("PAPUZIAMMO", 255);
+                        GiveInventory("PAPUZIAMMO", 255);
+                        GiveInventory("PAPUZIAMMO", 255);
+                    TakeInventory("money",1000);
+		TakeInventory(ACS_ExecuteWithResult(53,0,0,0), 999);
+		TakeInventory("EnchantedPurchase",999);
+                    thingsound(13, "sound/buy", 120);
+                    thingsound(13, "sound/PAPbuy", 120);
+                    SetWeapon("PAPUZI");
+					ACS_Execute(Random(710, 740), 0,0,0,0);
+			
+                }
+	else if(!CheckInventory("UZI")  && CheckInventory("EnchantedPurchase") && CheckInventory("MaxWeapons") < 2 && CheckInventory("money") >= 1000)
+                {
+                        GiveInventory("MaxWeapons", 1);
+                        GiveInventory("PAPUZI", 255);
+                        GiveInventory("PAPUZIAMMO", 255);
+                        GiveInventory("PAPUZIAMMO", 255);
+                        GiveInventory("PAPUZIAMMO", 255);
+                    TakeInventory("money",1000);
+		TakeInventory("EnchantedPurchase",999);
+                    thingsound(13, "sound/buy", 120);
+                    thingsound(13, "sound/PAPbuy", 120);
+                    SetWeapon("PAPUZI");
+		ACS_Execute(Random(710, 740), 0,0,0,0);
+
+                }
+                else if(!CheckInventory("UZI")  && !CheckInventory("PAPUZI") && CheckInventory("MaxWeapons") == 2 && CheckInventory("money") >= 1000)
+                {
+                        GiveInventory("UZI", 255);
+                        GiveInventory("UZIAMMO", 255);
+                        GiveInventory("UZIAMMO", 255);
+                        GiveInventory("UZIAMMO", 255);
+		TakeInventory(ACS_ExecuteWithResult(53,0,0,0), 999);
+                    TakeInventory("money",1000);
+                    thingsound(13, "sound/buy", 120);
+                    thingsound(13, "sound/newbuy", 120);
+                    SetWeapon("UZI");
+		ACS_Execute(Random(710, 740), 0,0,0,0);
+
+                }
+                else if(!CheckInventory("UZI")  && !CheckInventory("PAPUZI") && CheckInventory("MaxWeapons") < 2 && CheckInventory("money") >= 1000)
+                {
+                        GiveInventory("MaxWeapons", 1);
+                        GiveInventory("UZI", 255);
+                        GiveInventory("UZIAMMO", 255);
+                        GiveInventory("UZIAMMO", 255);
+                        GiveInventory("UZIAMMO", 255);
+                    TakeInventory("money",1000);
+                    thingsound(13, "sound/buy", 120);
+                    thingsound(13, "sound/newbuy", 120);
+                    SetWeapon("UZI");
+		ACS_Execute(Random(710, 740), 0,0,0,0);
+
+                }
+
+
+     }
+	 
+	 script 110 (void)
+ 
+{
+if (CheckInventory("SecretShopper") > 0)
+	{
+	HudMessage(s:"\cuPress \ck", k:"+use", s:" \cu to refill ammo\n\ck[cost:2500]";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else if (!CheckInventory("Olympia"))
+	{
+	SetFont("DIETLOGFONT");
+	HudMessage(s:"\cuPress \ck", k:"+use", s:" \cu to buy the Olympia Shotgun \n\ck[cost:800]";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else if (CheckInventory("Olympia"))
+	{
+	SetFont("DIETLOGFONT");
+	HudMessage(s:"\cuPress \ck", k:"+use", s:" \cu to buy Ammo \n\ck[cost:400]";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else if (CheckInventory("PAPOlympia"))
+	{
+	SetFont("DIETLOGFONT");
+	HudMessage(s:"\cuPress \ck", k:"+use", s:" \cu to buy Ammo \n\ck[cost:4200]";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+}
+
+script 111 (void)
+ 
+{
+		If (CheckWeapon("Knife"))
+	{
+	HudMessage(s:"\cuYou can not trade this weapon";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else If (CheckWeapon("FragGrenade"))
+	{
+	HudMessage(s:"\cuYou can not trade this weapon";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else If (CheckWeapon("PlasmaGrenade"))
+	{
+	HudMessage(s:"\cuYou can not trade this weapon";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else If (CheckWeapon("RadiationGrenade"))
+	{
+	HudMessage(s:"\cuYou can not trade this weapon";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else If (CheckWeapon("QuickRevive_Drink"))
+	{
+	HudMessage(s:"";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else If (CheckWeapon("SwiftHands_Drink"))
+	{
+	HudMessage(s:"";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else If (CheckWeapon("DeadShot_Drink"))
+	{
+	HudMessage(s:"";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else If (CheckWeapon("ShockTop_Drink"))
+	{
+	HudMessage(s:"";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else If (CheckWeapon("Flak_Drink"))
+	{
+	HudMessage(s:"";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else If (CheckWeapon("Blood_Drink"))
+	{
+	HudMessage(s:"";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else If (CheckWeapon("DeathMachine"))
+	{
+	HudMessage(s:"";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+		else If (CheckInventory("MaxWeapons") < 2 && CheckWeapon("AssaultShield"))
+	{
+	HudMessage(s:"\cuYou can not trade this weapon";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else If (CheckInventory("MaxWeapons") == 2 && CheckWeapon("AssaultShield"))
+	{
+	HudMessage(s:"\cuYou can not trade this weapon";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else if (CheckInventory("SecretShopper") > 0 && CheckInventory("money") >= 2500)
+	{
+    thingsound(5, "sound/buy", 120);
+	TakeInventory("money",2500);
+	ACS_Execute(120,0,0,0,0);
+	ACS_Execute(Random(710, 740), 0,0,0,0);
+	}
+else if(CheckInventory("PAPOlympia") && CheckInventory("money") >= 4200)
+                {
+                        GiveInventory("PAPOlympiaAMMO", 255);
+                        GiveInventory("PAPOlympiaAMMO", 255);
+                        GiveInventory("PAPOlympiaAMMO", 255);
+                        thingsound(5, "sound/buy", 120);
+                        TakeInventory("money",4200);
+						ACS_Execute(Random(710, 740), 0,0,0,0);
+                }
+  
+ else if(CheckInventory("Olympia") && CheckInventory("money") >= 400)
+                {
+                        GiveInventory("Olympia", 255);
+                        GiveInventory("OlympiaAMMO", 255);
+                        GiveInventory("OlympiaAMMO", 255);
+                        GiveInventory("OlympiaAMMO", 255);
+                        thingsound(5, "sound/buy", 120);
+                        TakeInventory("money",400);
+						ACS_Execute(Random(710, 740), 0,0,0,0);
+                }
+	else if(!CheckInventory("Olympia")  && CheckInventory("EnchantedPurchase") && CheckInventory("MaxWeapons") == 2 && CheckInventory("money") >= 800)
+                {
+                        GiveInventory("PAPOlympia", 255);
+                        GiveInventory("PAPOlympiaAMMO", 255);
+                        GiveInventory("PAPOlympiaAMMO", 255);
+                        GiveInventory("PAPOlympiaAMMO", 255);
+                    TakeInventory("money",800);
+		TakeInventory(ACS_ExecuteWithResult(53,0,0,0), 999);
+		TakeInventory("EnchantedPurchase",999);
+                    thingsound(5, "sound/buy", 120);
+                    thingsound(5, "sound/PAPbuy", 120);
+                    SetWeapon("PAPOlympia");
+					ACS_Execute(Random(710, 740), 0,0,0,0);
+			
+                }
+	else if(!CheckInventory("Olympia")  && CheckInventory("EnchantedPurchase") && CheckInventory("MaxWeapons") < 2 && CheckInventory("money") >= 800)
+                {
+                        GiveInventory("MaxWeapons", 1);
+                        GiveInventory("PAPOlympia", 255);
+                        GiveInventory("PAPOlympiaAMMO", 255);
+                        GiveInventory("PAPOlympiaAMMO", 255);
+                        GiveInventory("PAPOlympiaAMMO", 255);
+                    TakeInventory("money",800);
+		TakeInventory("EnchantedPurchase",999);
+                    thingsound(5, "sound/buy", 120);
+                    thingsound(5, "sound/PAPbuy", 120);
+                    SetWeapon("PAPOlympia");
+		ACS_Execute(Random(710, 740), 0,0,0,0);
+
+                }
+                else if(!CheckInventory("Olympia")  && !CheckInventory("PAPOlympia") && CheckInventory("MaxWeapons") == 2 && CheckInventory("money") >= 800)
+                {
+                        GiveInventory("Olympia", 255);
+                        GiveInventory("OlympiaAMMO", 255);
+                        GiveInventory("OlympiaAMMO", 255);
+                        GiveInventory("OlympiaAMMO", 255);
+		TakeInventory(ACS_ExecuteWithResult(53,0,0,0), 999);
+                    TakeInventory("money",800);
+                    thingsound(5, "sound/buy", 120);
+                    thingsound(5, "sound/newbuy", 120);
+                    SetWeapon("Olympia");
+		ACS_Execute(Random(710, 740), 0,0,0,0);
+
+                }
+                else if(!CheckInventory("Olympia")  && !CheckInventory("PAPOlympia") && CheckInventory("MaxWeapons") < 2 && CheckInventory("money") >= 800)
+                {
+                        GiveInventory("MaxWeapons", 1);
+                        GiveInventory("Olympia", 255);
+                        GiveInventory("OlympiaAMMO", 255);
+                        GiveInventory("OlympiaAMMO", 255);
+                        GiveInventory("OlympiaAMMO", 255);
+                    TakeInventory("money",800);
+                    thingsound(5, "sound/buy", 120);
+                    thingsound(5, "sound/newbuy", 120);
+                    SetWeapon("Olympia");
+		ACS_Execute(Random(710, 740), 0,0,0,0);
+
+                }
+
+
+     }
+	 
+script 114 (void)
+ 
+{
+if (CheckInventory("SecretShopper") > 0)
+	{
+	HudMessage(s:"\cuPress \ck", k:"+use", s:" \cu to refill ammo\n\ck[cost:2500]";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else if (!CheckInventory("B23R"))
+	{
+	SetFont("DIETLOGFONT");
+	HudMessage(s:"\cuPress \ck", k:"+use", s:" \cu to buy the B23R Pistol \n\ck[cost:800]";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else if (CheckInventory("B23R"))
+	{
+	SetFont("DIETLOGFONT");
+	HudMessage(s:"\cuPress \ck", k:"+use", s:" \cu to buy Ammo \n\ck[cost:400]";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else if (CheckInventory("PAPB23R"))
+	{
+	SetFont("DIETLOGFONT");
+	HudMessage(s:"\cuPress \ck", k:"+use", s:" \cu to buy Ammo \n\ck[cost:4200]";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+}
+
+script 115 (void)
+ 
+{
+		If (CheckWeapon("Knife"))
+	{
+	HudMessage(s:"\cuYou can not trade this weapon";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else If (CheckWeapon("FragGrenade"))
+	{
+	HudMessage(s:"\cuYou can not trade this weapon";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else If (CheckWeapon("PlasmaGrenade"))
+	{
+	HudMessage(s:"\cuYou can not trade this weapon";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else If (CheckWeapon("RadiationGrenade"))
+	{
+	HudMessage(s:"\cuYou can not trade this weapon";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else If (CheckWeapon("QuickRevive_Drink"))
+	{
+	HudMessage(s:"";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else If (CheckWeapon("SwiftHands_Drink"))
+	{
+	HudMessage(s:"";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else If (CheckWeapon("DeadShot_Drink"))
+	{
+	HudMessage(s:"";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else If (CheckWeapon("ShockTop_Drink"))
+	{
+	HudMessage(s:"";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else If (CheckWeapon("Flak_Drink"))
+	{
+	HudMessage(s:"";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else If (CheckWeapon("Blood_Drink"))
+	{
+	HudMessage(s:"";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else If (CheckWeapon("DeathMachine"))
+	{
+	HudMessage(s:"";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+		else If (CheckInventory("MaxWeapons") < 2 && CheckWeapon("AssaultShield"))
+	{
+	HudMessage(s:"\cuYou can not trade this weapon";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else If (CheckInventory("MaxWeapons") == 2 && CheckWeapon("AssaultShield"))
+	{
+	HudMessage(s:"\cuYou can not trade this weapon";
+	HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+	}
+	else if (CheckInventory("SecretShopper") > 0 && CheckInventory("money") >= 2500)
+	{
+    thingsound(5, "sound/buy", 120);
+	TakeInventory("money",2500);
+	ACS_Execute(120,0,0,0,0);
+	ACS_Execute(Random(710, 740), 0,0,0,0);
+	}
+else if(CheckInventory("PAPB23R") && CheckInventory("money") >= 4200)
+                {
+                        GiveInventory("PAPB23RAMMO", 255);
+                        GiveInventory("PAPB23RAMMO", 255);
+                        GiveInventory("PAPB23RAMMO", 255);
+                        thingsound(63, "sound/buy", 120);
+                        TakeInventory("money",4200);
+		ACS_Execute(Random(710, 740), 0,0,0,0);
+                }
+  
+ else if(CheckInventory("B23R") && CheckInventory("money") >= 400)
+                {
+                        GiveInventory("B23R", 255);
+                        GiveInventory("B23RAMMO", 255);
+                        GiveInventory("B23RAMMO", 255);
+                        GiveInventory("B23RAMMO", 255);
+                        thingsound(63, "sound/buy", 120);
+                        TakeInventory("money",400);
+						ACS_Execute(Random(710, 740), 0,0,0,0);
+                }
+	else if(!CheckInventory("B23R")  && CheckInventory("EnchantedPurchase") && CheckInventory("MaxWeapons") == 2 && CheckInventory("money") >= 800)
+                {
+                        GiveInventory("PAPB23R", 255);
+                        GiveInventory("PAPB23RAMMO", 255);
+                        GiveInventory("PAPB23RAMMO", 255);
+                        GiveInventory("PAPB23RAMMO", 255);
+                    TakeInventory("money",800);
+		TakeInventory(ACS_ExecuteWithResult(53,0,0,0), 999);
+		TakeInventory("EnchantedPurchase",999);
+                    thingsound(63, "sound/buy", 120);
+                    thingsound(63, "sound/PAPbuy", 120);
+                    SetWeapon("PAPB23R");
+					ACS_Execute(Random(710, 740), 0,0,0,0);
+			
+                }
+	else if(!CheckInventory("B23R")  && CheckInventory("EnchantedPurchase") && CheckInventory("MaxWeapons") < 2 && CheckInventory("money") >= 800)
+                {
+                        GiveInventory("MaxWeapons", 1);
+                        GiveInventory("PAPB23R", 255);
+                        GiveInventory("PAPB23RAMMO", 255);
+                        GiveInventory("PAPB23RAMMO", 255);
+                        GiveInventory("PAPB23RAMMO", 255);
+                    TakeInventory("money",800);
+		TakeInventory("EnchantedPurchase",999);
+                    thingsound(63, "sound/buy", 120);
+                    thingsound(63, "sound/PAPbuy", 120);
+                    SetWeapon("PAPB23R");
+		ACS_Execute(Random(710, 740), 0,0,0,0);
+
+                }
+                else if(!CheckInventory("B23R")  && !CheckInventory("PAPB23R") && CheckInventory("MaxWeapons") == 2 && CheckInventory("money") >= 800)
+                {
+                        GiveInventory("B23R", 255);
+                        GiveInventory("B23RAMMO", 255);
+                        GiveInventory("B23RAMMO", 255);
+                        GiveInventory("B23RAMMO", 255);
+		TakeInventory(ACS_ExecuteWithResult(53,0,0,0), 999);
+                    TakeInventory("money",800);
+                    thingsound(63, "sound/buy", 120);
+                    thingsound(63, "sound/newbuy", 120);
+                    SetWeapon("B23R");
+		ACS_Execute(Random(710, 740), 0,0,0,0);
+
+                }
+                else if(!CheckInventory("B23R")  && !CheckInventory("PAPB23R") && CheckInventory("MaxWeapons") < 2 && CheckInventory("money") >= 800)
+                {
+                        GiveInventory("MaxWeapons", 1);
+                        GiveInventory("B23R", 255);
+                        GiveInventory("B23RAMMO", 255);
+                        GiveInventory("B23RAMMO", 255);
+                        GiveInventory("B23RAMMO", 255);
+                    TakeInventory("money",800);
+                    thingsound(63, "sound/buy", 120);
+                    thingsound(63, "sound/newbuy", 120);
+                    SetWeapon("B23R");
+		ACS_Execute(Random(710, 740), 0,0,0,0);
+
+                }
+
+
+     }
+
+script 112 (void)
+ 
+{
+ HudMessage(s:"\cuPress \ck", k:"+use", s:" \cu to buy Radiation Grenades\n\ck[cost:4000]";
+HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+}
+
+script 113 (void)
+ 
+{
+	if(CheckInventory("RadiationGrenade") && CheckInventory("money") >= 4000)
+	{
+		GiveInventory("RadiationGrenadeAmmo", 3);
+		TakeInventory("money",4000);
+		Thingsound(14, "sound/buy", 120);
+		ACS_Execute(Random(710, 740), 0,0,0,0);
+	}
+	else if(!CheckInventory("RadiationGrenade") && CheckInventory("money") >= 4000)
+	{
+		GiveInventory("RadiationGrenade", 1);
+		GiveInventory("RadiationGrenadeAmmo", 3);
+		TakeInventory("money",4000);
+		Thingsound(14, "sound/buy", 120);
+		Thingsound(14, "sound/newbuy", 120);
+		ACS_Execute(Random(710, 740), 0,0,0,0);
+	}
+}
+
+	
+SCRIPT 53 (void)
+{
+ if(CheckWeapon("ColtM1911")) {SetResultValue("ColtM1911");}
+ else if(CheckWeapon("M-14")) {SetResultValue("M-14");}
+ else if(CheckWeapon("Olympia")) {SetResultValue("Olympia");}
+ else if(CheckWeapon("AK-12")) {SetResultValue("AK-12");}
+ else if(CheckWeapon("AN-94")) {SetResultValue("AN-94");}
+ else if(CheckWeapon("Galil")) {SetResultValue("Galil");}
+ else if(CheckWeapon("Glock20")) {SetResultValue("Glock20");}
+ else if(CheckWeapon("KS-23")) {SetResultValue("KS-23");} 
+ else if(CheckWeapon("P226")) {SetResultValue("P226");} 
+ else if(CheckWeapon("UZI")) {SetResultValue("UZI");}
+ else if(CheckWeapon("G36-C")) {SetResultValue("G36-C");}
+ else if(CheckWeapon("RagingBull")) {SetResultValue("RagingBull");}
+ else if(CheckWeapon("MP5")) {SetResultValue("MP5");}
+ else if(CheckWeapon("G36-C")) {SetResultValue("G36-C");}
+ else if(CheckWeapon("OS-40")) {SetResultValue("OS-40");}
+ else if(CheckWeapon("M3Super")) {SetResultValue("M3Super");}
+ else if(CheckWeapon("SWAT557")) {SetResultValue("SWAT557");}
+ else if(CheckWeapon("Carbon-26")) {SetResultValue("Carbon-26");}
+ else if(CheckWeapon("M-24")) {SetResultValue("M-24");}
+ else if(CheckWeapon("M-82")) {SetResultValue("M-82");}
+ else if(CheckWeapon("SKS")) {SetResultValue("SKS");}
+ else if(CheckWeapon("STORMPRX")) {SetResultValue("STORMPRX");}
+ else if(CheckWeapon("OHM")) {SetResultValue("OHM");}
+ else if(CheckWeapon("BianchiFA-6")) {SetResultValue("BianchiFA-6");}
+ else if(CheckWeapon("RaygunMarkII")) {SetResultValue("RaygunMarkII");}
+ else if(CheckWeapon("X4-Jasper")) {SetResultValue("X4-Jasper");}
+ else if(CheckWeapon("NavajoCyclerRifle")) {SetResultValue("NavajoCyclerRifle");}
+ else if(CheckWeapon("sightsColtM1911")) {SetResultValue("ColtM1911");}
+ else if(CheckWeapon("sightsM-14")) {SetResultValue("M-14");}
+ else if(CheckWeapon("SightsOlympia")) {SetResultValue("Olympia");}
+ else if(CheckWeapon("sightsAK-12")) {SetResultValue("AK-12");}
+ else if(CheckWeapon("sightsAN-94")) {SetResultValue("AN-94");}
+ else if(CheckWeapon("sightsGalil")) {SetResultValue("Galil");}
+ else if(CheckWeapon("sightsGlock20")) {SetResultValue("Glock20");}
+ else if(CheckWeapon("sightsKS-23")) {SetResultValue("KS-23");} 
+ else if(CheckWeapon("sightsP226")) {SetResultValue("P226");} 
+ else if(CheckWeapon("sightsUZI")) {SetResultValue("UZI");}
+ else if(CheckWeapon("sightsG36-C")) {SetResultValue("G36-C");}
+ else if(CheckWeapon("sightsRagingBull")) {SetResultValue("RagingBull");}
+ else if(CheckWeapon("sightsMP5")) {SetResultValue("MP5");}
+ else if(CheckWeapon("sightsG36-C")) {SetResultValue("G36-C");}
+ else if(CheckWeapon("sightsOS-40")) {SetResultValue("OS-40");}
+ else if(CheckWeapon("sightsM3Super")) {SetResultValue("M3Super");}
+ else if(CheckWeapon("sightsSWAT557")) {SetResultValue("SWAT557");}
+ else if(CheckWeapon("sightsCarbon-26")) {SetResultValue("Carbon-26");}
+ else if(CheckWeapon("sightsM-24")) {SetResultValue("M-24");}
+ else if(CheckWeapon("sightsM-82")) {SetResultValue("M-82");}
+ else if(CheckWeapon("sightsSKS")) {SetResultValue("SKS");}
+ else if(CheckWeapon("sightsSTORMPRX")) {SetResultValue("STORMPRX");}
+ else if(CheckWeapon("sightsOHM")) {SetResultValue("OHM");}
+ else if(CheckWeapon("sightsBianchiFA-6")) {SetResultValue("BianchiFA-6");}
+ else if(CheckWeapon("sightsRaygunMarkII")) {SetResultValue("RaygunMarkII");}
+ else if(CheckWeapon("sightsX4-Jasper")) {SetResultValue("X4-Jasper");}
+ else if(CheckWeapon("sightsNavajoCyclerRifle")) {SetResultValue("NavajoCyclerRifle");}
+ else if(CheckWeapon("PAPColtM1911")) {SetResultValue("PAPColtM1911");}
+ else if(CheckWeapon("PAPM-14")) {SetResultValue("PAPM-14");}
+ else if(CheckWeapon("PAPOlympia")) {SetResultValue("PAPOlympia");}
+ else if(CheckWeapon("PAPAK-12")) {SetResultValue("PAPAK-12");}
+ else if(CheckWeapon("PAPAN-94")) {SetResultValue("PAPAN-94");}
+ else if(CheckWeapon("PAPGalil")) {SetResultValue("PAPGalil");}
+ else if(CheckWeapon("PAPGlock20")) {SetResultValue("PAPGlock20");}
+ else if(CheckWeapon("PAPKS-23")) {SetResultValue("PAPKS-23");} 
+ else if(CheckWeapon("PAPP226")) {SetResultValue("PAPP226");} 
+ else if(CheckWeapon("PAPUZI")) {SetResultValue("PAPUZI");}
+ else if(CheckWeapon("PAPG36-C")) {SetResultValue("PAPG36-C");}
+ else if(CheckWeapon("PAPRagingBull")) {SetResultValue("PAPRagingBull");}
+ else if(CheckWeapon("PAPMP5")) {SetResultValue("PAPMP5");}
+ else if(CheckWeapon("PAPG36-C")) {SetResultValue("PAPG36-C");}
+ else if(CheckWeapon("PAPOS-40")) {SetResultValue("PAPOS-40");}
+ else if(CheckWeapon("PAPM3Super")) {SetResultValue("PAPM3Super");}
+ else if(CheckWeapon("PAPSWAT557")) {SetResultValue("PAPSWAT557");}
+ else if(CheckWeapon("PAPCarbon-26")) {SetResultValue("PAPCarbon-26");}
+ else if(CheckWeapon("PAPM-24")) {SetResultValue("PAPM-24");}
+ else if(CheckWeapon("PAPM-82")) {SetResultValue("PAPM-82");}
+ else if(CheckWeapon("PAPSKS")) {SetResultValue("PAPSKS");}
+ else if(CheckWeapon("PAPSTORMPRX")) {SetResultValue("PAPSTORMPRX");}
+ else if(CheckWeapon("PAPOHM")) {SetResultValue("PAPOHM");}
+ else if(CheckWeapon("PAPBianchiFA-6")) {SetResultValue("PAPBianchiFA-6");}
+ else if(CheckWeapon("PAPRaygunMarkII")) {SetResultValue("PAPRaygunMarkII");}
+ else if(CheckWeapon("PAPX4-Jasper")) {SetResultValue("PAPX4-Jasper");}
+ else if(CheckWeapon("PAPNavajoCyclerRifle")) {SetResultValue("PAPNavajoCyclerRifle");}
+ else if(CheckWeapon("sightsPAPColtM1911")) {SetResultValue("PAPColtM1911");}
+ else if(CheckWeapon("sightsPAPM-14")) {SetResultValue("PAPM-14");}
+ else if(CheckWeapon("sightsPAPOlympia")) {SetResultValue("PAPOlympia");}
+ else if(CheckWeapon("sightsPAPAK-12")) {SetResultValue("PAPAK-12");}
+ else if(CheckWeapon("sightsPAPAN-94")) {SetResultValue("PAPAN-94");}
+ else if(CheckWeapon("sightsPAPGalil")) {SetResultValue("PAPGalil");}
+ else if(CheckWeapon("sightsPAPGlock20")) {SetResultValue("PAPGlock20");}
+ else if(CheckWeapon("sightsPAPKS-23")) {SetResultValue("PAPKS-23");} 
+ else if(CheckWeapon("sightsPAPP226")) {SetResultValue("PAPP226");} 
+ else if(CheckWeapon("sightsPAPUZI")) {SetResultValue("PAPUZI");}
+ else if(CheckWeapon("sightsPAPG36-C")) {SetResultValue("PAPG36-C");}
+ else if(CheckWeapon("sightsPAPRagingBull")) {SetResultValue("PAPRagingBull");}
+ else if(CheckWeapon("sightsPAPMP5")) {SetResultValue("PAPMP5");}
+ else if(CheckWeapon("sightsPAPG36-C")) {SetResultValue("PAPG36-C");}
+ else if(CheckWeapon("sightsPAPOS-40")) {SetResultValue("PAPOS-40");}
+ else if(CheckWeapon("sightsPAPM3Super")) {SetResultValue("PAPM3Super");}
+ else if(CheckWeapon("sightsPAPSWAT557")) {SetResultValue("PAPSWAT557");}
+ else if(CheckWeapon("sightsPAPCarbon-26")) {SetResultValue("PAPCarbon-26");}
+ else if(CheckWeapon("sightsPAPM-24")) {SetResultValue("PAPM-24");}
+ else if(CheckWeapon("sightsPAPM-82")) {SetResultValue("PAPM-82");}
+ else if(CheckWeapon("sightsPAPSKS")) {SetResultValue("PAPSKS");}
+ else if(CheckWeapon("sightsPAPSTORMPRX")) {SetResultValue("PAPSTORMPRX");}
+ else if(CheckWeapon("sightsPAPOHM")) {SetResultValue("PAPOHM");}
+ else if(CheckWeapon("sightsPAPBianchiFA-6")) {SetResultValue("PAPBianchiFA-6");}
+ else if(CheckWeapon("sightsPAPRaygunMarkII")) {SetResultValue("PAPRaygunMarkII");}
+ else if(CheckWeapon("sightsPAPX4-Jasper")) {SetResultValue("PAPX4-Jasper");}
+ else if(CheckWeapon("sightsPAPNavajoCyclerRifle")) {SetResultValue("PAPNavajoCyclerRifle");}
+ }
+
+//Doors//
+Script 410 (void)
+{
+ HudMessage(s:"\cuPress \ck", k:"+use", s:" \cu To Enter This Area\n\ck[cost:1000]";
+HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+}
+
+Script 411 (void)
+{
+	
+    if(GetSectorFloorZ(3,0,0)==80.0)
+    {
+        if(ActivatorTID()==1337 && checkactorinventory(1337,"money") >= 1000)
+        {
+			ACS_Execute(Random(710, 740), 0,0,0,0);
+            Floor_LowerToNearest(3,30);
+			Thing_Move(93, 7, 1);
+            takeACTORinventory(1337,"money", 1000);
+            setlineblocking(1, BLOCK_NOTHING);
+        }
+        else if(ActivatorTID()==1338 && checkactorinventory(1338,"money") >= 1000)
+        {
+			ACS_Execute(Random(710, 740), 0,0,0,0);
+            Floor_LowerToNearest(3,30);
+			Thing_Move(93, 7, 1);
+            takeACTORinventory(1338,"money", 1000);
+            setlineblocking(1, BLOCK_NOTHING);
+                    }
+        else if(ActivatorTID()==1339 && checkactorinventory(1339,"money") >= 1000)
+        {
+			ACS_Execute(Random(710, 740), 0,0,0,0);
+            Floor_LowerToNearest(3,30);
+			Thing_Move(93, 7, 1);
+            takeACTORinventory(1339,"money", 1000);
+            setlineblocking(1, BLOCK_NOTHING);
+        }
+        else if(ActivatorTID()==1340 && checkactorinventory(1340,"money") >= 1000)
+        {
+			ACS_Execute(Random(710, 740), 0,0,0,0);
+            Floor_LowerToNearest(3,30);
+			Thing_Move(93, 7, 1);
+            takeACTORinventory(1340,"money", 1000);
+            setlineblocking(1, BLOCK_NOTHING);
+        }
+
+    }
+}
+
+
+Script 412 (void)
+{
+ HudMessage(s:"\cuPress \ck", k:"+use", s:" \cu To Enter This Area\n\ck[cost:1250]";
+HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+}
+
+Script 413 (void)
+{
+	
+    if(GetSectorFloorZ(4,0,0)==168.0)
+    {
+        if(ActivatorTID()==1337 && checkactorinventory(1337,"money") >= 1250)
+        {
+			ACS_Execute(Random(710, 740), 0,0,0,0);
+            Floor_LowerToNearest(4,30);
+			Thing_Move(93, 7, 1);
+            takeACTORinventory(1337,"money", 1250);
+            setlineblocking(3, BLOCK_NOTHING);
+        }
+        else if(ActivatorTID()==1338 && checkactorinventory(1338,"money") >= 1250)
+        {
+			ACS_Execute(Random(710, 740), 0,0,0,0);
+            Floor_LowerToNearest(4,30);
+			Thing_Move(93, 7, 1);
+            takeACTORinventory(1338,"money", 1250);
+            setlineblocking(3, BLOCK_NOTHING);
+                    }
+        else if(ActivatorTID()==1339 && checkactorinventory(1339,"money") >= 1250)
+        {
+			ACS_Execute(Random(710, 740), 0,0,0,0);
+            Floor_LowerToNearest(4,30);
+			Thing_Move(93, 7, 1);
+            takeACTORinventory(1339,"money", 1250);
+            setlineblocking(3, BLOCK_NOTHING);
+        }
+        else if(ActivatorTID()==1340 && checkactorinventory(1340,"money") >= 1250)
+        {
+			ACS_Execute(Random(710, 740), 0,0,0,0);
+            Floor_LowerToNearest(4,30);
+			Thing_Move(93, 7, 1);
+            takeACTORinventory(1340,"money", 1250);
+            setlineblocking(3, BLOCK_NOTHING);
+        }
+
+    }
+}
+
+Script 414 (void)
+{
+ HudMessage(s:"\cuPress \ck", k:"+use", s:" \cu To Enter This Area\n\ck[cost:1250]";
+HUDMSG_FADEINOUT, 6, CR_Gold, 3.0, 0.7, 5.0);
+}
+
+Script 415 (void)
+{
+	
+    if(GetSectorFloorZ(5,0,0)==184.0)
+    {
+        if(ActivatorTID()==1337 && checkactorinventory(1337,"money") >= 1250)
+        {
+			ACS_Execute(Random(710, 740), 0,0,0,0);
+            Floor_LowerToNearest(5,30);
+            takeACTORinventory(1337,"money", 1250);
+			setlineblocking(3, BLOCK_NOTHING);
+			setlineblocking(1, BLOCK_NOTHING);
+        }
+        else if(ActivatorTID()==1338 && checkactorinventory(1338,"money") >= 1250)
+        {
+			ACS_Execute(Random(710, 740), 0,0,0,0);
+            Floor_LowerToNearest(5,30);
+            takeACTORinventory(1338,"money", 1250);
+            setlineblocking(3, BLOCK_NOTHING);
+			setlineblocking(1, BLOCK_NOTHING);
+                    }
+        else if(ActivatorTID()==1339 && checkactorinventory(1339,"money") >= 1250)
+        {
+			ACS_Execute(Random(710, 740), 0,0,0,0);
+            Floor_LowerToNearest(5,30);
+            takeACTORinventory(1339,"money", 1250);
+            setlineblocking(3, BLOCK_NOTHING);
+			setlineblocking(1, BLOCK_NOTHING);
+        }
+        else if(ActivatorTID()==1340 && checkactorinventory(1340,"money") >= 1250)
+        {
+			ACS_Execute(Random(710, 740), 0,0,0,0);
+            Floor_LowerToNearest(5,30);
+            takeACTORinventory(1340,"money", 1250);
+            setlineblocking(3, BLOCK_NOTHING);
+			setlineblocking(1, BLOCK_NOTHING);
+        }
+
+    }
+}
+
+script 416 enter
+{
+	if(GetSectorFloorZ(3,0,0)==0)
+	{
+		setlineblocking(1, BLOCK_NOTHING);
+	}
+	delay(1);
+	restart;
+}
+
+script 417 enter
+{
+	if(GetSectorFloorZ(4,0,0)==0)
+	{
+		setlineblocking(3, BLOCK_NOTHING);
+	}
+	delay(1);
+	restart;
+}
+
+script 418 enter
+{
+	if(GetSectorFloorZ(5,0,0)==0)
+	{
+		setlineblocking(1, BLOCK_NOTHING);
+		setlineblocking(3, BLOCK_NOTHING);
+	}
+	delay(1);
+	restart;
+}
+
+int DeathMachine_Time_Player1 = 30;
+int DeathMachine_Time_Player2 = 30;
+int DeathMachine_Time_Player3 = 30;
+int DeathMachine_Time_Player4 = 30;
+//Death Machine//
+
+Script 303 (void)
+{
+	if(ActivatorTID()==1337)
+	{
+	ACS_Execute(304,0,0,0,0);
+	}
+	else if(ActivatorTID()==1338)
+	{
+	ACS_Execute(305,0,0,0,0);
+	}
+	else if(ActivatorTID()==1339)
+	{
+	ACS_Execute(306,0,0,0,0);
+	}
+	else if(ActivatorTID()==1340)
+	{
+	ACS_Execute(307,0,0,0,0);
+	}
+}
+
+Script 304 (void)//Player 1
+{
+	While(TRUE)
+	{
+		If(DeathMachine_Time_Player1 == 0)
+		{
+			TakeActorInventory(1337, "DeathMachine", 9999);
+			DeathMachine_Time_Player1 = 30;
+			delay(1);
+			Terminate;
+		}
+		Else If (DeathMachine_Time_Player1 > 0)
+		{
+			HUDMessage(s:"\cuDeath Machine: ", d: DeathMachine_Time_Player1;
+			HUDMSG_FADEOUT, 7, CR_Gold, 3.0, 0.80, 2.0);
+			DeathMachine_Time_Player1 --;
+		}
+	Delay(35);
+	}
+}
+
+Script 305 (void)//Player 2
+{
+	While(TRUE)
+	{
+		If(DeathMachine_Time_Player2 == 0)
+		{
+			TakeActorInventory(1338, "DeathMachine", 9999);
+			DeathMachine_Time_Player2 = 30;
+			delay(1);
+			Terminate;
+		}
+		Else If (DeathMachine_Time_Player2 > 0)
+		{
+			HUDMessage(s:"\cuDeath Machine: ", d: DeathMachine_Time_Player2;
+			HUDMSG_FADEOUT, 7, CR_Gold, 3.0, 0.80, 2.0);
+			DeathMachine_Time_Player2 --;
+		}
+	Delay(35);
+	}
+}
+
+Script 306 (void)//Player 3
+{
+	While(TRUE)
+	{
+		If(DeathMachine_Time_Player3 == 0)
+		{
+			TakeActorInventory(1339, "DeathMachine", 9999);
+			DeathMachine_Time_Player3 = 30;
+			delay(1);
+			Terminate;
+		}
+		Else If (DeathMachine_Time_Player3 > 0)
+		{
+			HUDMessage(s:"\cuDeath Machine: ", d: DeathMachine_Time_Player3;
+			HUDMSG_FADEOUT, 7, CR_Gold, 3.0, 0.80, 2.0);
+			DeathMachine_Time_Player3 --;
+		}
+	Delay(35);
+	}
+}
+
+Script 307 (void)//Player 4
+{
+	While(TRUE)
+	{
+		If(DeathMachine_Time_Player4 == 0)
+		{
+			TakeActorInventory(1340, "DeathMachine", 9999);
+			DeathMachine_Time_Player4 = 30;
+			delay(1);
+			Terminate;
+		}
+		Else If (DeathMachine_Time_Player4 > 0)
+		{
+			HUDMessage(s:"\cuDeath Machine: ", d: DeathMachine_Time_Player4;
+			HUDMSG_FADEOUT, 7, CR_Gold, 3.0, 0.80, 2.0);
+			DeathMachine_Time_Player4 --;
+		}
+	Delay(35);
+	}
+}
+
+script 308 (void)
+{
+	Thing_Remove(301);
+	delay(1);
+	SpawnSpotForced("Plasmaball", 300, 301, 0);
+}

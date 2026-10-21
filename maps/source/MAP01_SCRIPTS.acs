@@ -1,0 +1,1591 @@
+#include"zcommon.acs"
+
+int Count = 0;
+bool campaign;
+
+script 996 (void)//PLAYERS CURSOR MOVE LIMIT//
+{
+
+    SetPlayerProperty(1, 1, PROP_FROZEN);
+    
+    while (True)
+    {
+        If(GetActorAngle(1337)>0.5 && GetActorAngle(1337)<0.8)
+        {
+            SetActorAngle(1337,0.5);
+        }
+        Else If(GetActorAngle(1337)<0.9999 && GetActorAngle(1337)>0.8)
+        {
+            SetActorAngle(1337,0.0);
+        }
+        Delay (1);
+    }
+}
+Script 995 Enter
+{
+	ThingSound(10, "zombie/idle", 70);
+	delay(random(60, 160));
+	restart;
+}
+
+Script 997 Enter
+{
+	ThingSound(14, "sound/ARCFIRE", 10);
+	delay(random(2, 30));
+	ThingSound(14, "sound/ARCDEAD", 10);
+	delay(random(4, 40));
+	restart;
+}
+
+script 993 enter
+{
+Scroll_Texture_Both(1, 0, 96, 0, 0);
+}
+
+script 994 enter
+
+{
+TakeInventory("HUD_ON", 1);
+        SetFont("DIETLOGFONT");
+hudmessage(s:"V4.0";
+HUDMSG_PLAIN, 90, CR_WHITE, 0, 0.96, 0);
+HudMessageBold(s:"(4 Players Max)";
+HUDMSG_PLAIN, 0, CR_WHITE, 2.0, 0.0, 0);
+sector_setfade(16, 20, 10, 0);
+}
+
+script 1 enter
+{
+//SETUP
+//Make Sure that the player does not have any inventory from campaign, survival, or arcade mode//
+	{
+	if (PlayerNumber() > 1)
+		{
+		ChangeCamera(48, 0, 1);
+ClearInventory();
+	hudmessage(s:"Please Wait For The Host To Choose Game Mode";
+HUDMSG_PLAIN, 0, CR_WHITE, 3.0, 0.7, 0);
+		}
+			if (PlayerNumber() == 0)
+		{
+ClearInventory();
+changecamera(7, 1, 0);
+fadeto(0, 0, 0, 10.3, 0);
+ACS_Execute(996,0,0,0,0);
+Scroll_Ceiling(1, 0, 5, 0);
+   Thing_ChangeTID (0, 1337+PlayerNumber());
+   SetPlayerProperty(1, 1, PROP_TOTALLYFROZEN);
+        delay(1);
+		TakeInventory("Pistol", 999);
+		TakeInventory("FIST", 999);
+		GiveInventory("Cursor", 999);
+setmusic("MAINMUS", 0, 0);
+	DELAY(100);
+	fadeto(0, 0, 0, 0, 4.0);
+	delay(120);
+	 SetPlayerProperty(1, 0, PROP_TOTALLYFROZEN);
+	SetPlayerProperty(1, 1, PROP_FROZEN);
+       SetFont("DIETLOGFONT");
+        HUDMessage(k:"+attack",s:" To Start";
+                HUDMSG_FADEINOUT,11,CR_ORANGE,0.5,0.97,99999999);
+}
+}
+}
+
+script 2 (void)
+{
+	SetFont("DIETLOGFONT");
+	        HUDMessage(s:"Loading...";
+                HUDMSG_FADEOUT,11,CR_ORANGE,0.5,0.97,1.1);
+	FadeTo(0,0,0,1.0,0);
+	delay(1);
+	changecamera(4, 1, 0);
+	FadeTo(0,0,0,0,2.0);
+	Thing_move(1337, 9, 1);
+	delay(50);
+		SetPlayerProperty(1, 0, PROP_TOTALLYFROZEN);
+	SetPlayerProperty(1, 1, PROP_FROZEN);
+}
+
+
+//////////////
+//MAIN MENU//
+/////////////
+
+script 10 (void) //INITIATES CAMPAIGN MENU//
+{
+	AmbientSound("sound/SELECT", 127);
+	SetPlayerProperty(1, 0, PROP_FROZEN);
+	SetPlayerProperty(1, 1, PROP_TOTALLYFROZEN);
+	changecamera(6, 1, 0);
+	delay(3);
+	Thing_move(1337, 5, 1);
+	SetPlayerProperty(1, 0, PROP_TOTALLYFROZEN);
+	SetPlayerProperty(1, 1, PROP_FROZEN);
+}
+
+
+script 11 (void)  //INITIATES SURVIVAL MENU//
+{
+	AmbientSound("sound/SELECT", 127);
+	SetPlayerProperty(1, 0, PROP_FROZEN);
+	SetPlayerProperty(1, 1, PROP_TOTALLYFROZEN);
+	changecamera(3, 1, 0);
+	delay(3);
+	Thing_move(1337, 2, 1);
+	SetPlayerProperty(1, 0, PROP_TOTALLYFROZEN);
+	SetPlayerProperty(1, 1, PROP_FROZEN);
+}
+
+Script 27 (void)
+{
+	AmbientSound("sound/SELECT", 127);
+	SetPlayerProperty(1, 0, PROP_FROZEN);
+	SetPlayerProperty(1, 1, PROP_TOTALLYFROZEN);
+	changecamera(30, 1, 0);
+	delay(3);
+	Thing_move(1337, 31, 1);
+	SetPlayerProperty(1, 0, PROP_TOTALLYFROZEN);
+	SetPlayerProperty(1, 1, PROP_FROZEN);
+}
+
+script 13 (void) //INITIATES QUIT MENU//
+{
+ConsoleCommand("MENU_Quit");
+}
+
+
+//////////////////
+//CAMPAIGN MENU//
+////////////////
+
+Script 14 (void) //Starts Chapter 1
+
+{
+			if (PlayerCount() >= 2) 
+		{
+	hudmessage(s:"Can Not Continue. Campaign Is Not Available For Multiplayer";
+HUDMSG_FADEINOUT, 100, CR_WHITE, 3.0, 0.7, 2.0);
+		}
+		else if (PlayerCount() == 1)
+		{
+			SetFont("DIETLOGFONT");
+			ACS_Execute(109,0,0,0,0);
+	TranslucentLine (25, 0, 0);
+	AmbientSound("sound/SELECT", 127);
+	FadeTo(0,0,0,1.0,4.0);
+	SetPlayerProperty(1, 0, PROP_FROZEN);
+	SetPlayerProperty(1, 1, PROP_TOTALLYFROZEN);
+	delay(200);
+	changecamera(1, 1, 0);
+	Thing_Activate(1);
+	delay(4);
+	FadeTo(0,0,0,0,4.0);
+	SetMusic("SHACK_MU", 0);
+	HudMessage(s:"[Jason]\n\cjHello Savion. It's been a while.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 3.0);
+	AmbientSound("quote/PSTQ1", 127);
+	delay(110);
+	FadeTo(0,0,0,1.0,2.0);
+	Delay(110);
+	FadeTo(0,0,0,0.0,2.0);
+	changecamera(11, 1, 0);
+	Thing_Activate(11);
+	HudMessage(s:"[Savion]\n\cjGlad to see you Jason. My mechanical voice box isn't functioning properly. I apologize for my odd voice.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 5.4);
+	AmbientSound("quote/PSTQ2", 127);
+	Delay(265);
+	HudMessage(s:"[Jason]\n\cjI understand. Unfortunate that you've only seen me as a person a few times when you were younger. When you were with my sister.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 6.3);
+	AmbientSound("quote/PSTQ3", 127);
+	Delay(275);
+	changecamera(33, 1, 0);
+	Thing_Activate(33);
+	HudMessage(s:"[Savion]\n\cjI remember Iris taking care of me. She was like a mother. What happened to her?";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 4.4);
+	AmbientSound("quote/PSTQ4", 127);
+	Delay(210);
+	changecamera(36, 1, 0);
+	Thing_Activate(36);
+	HudMessage(s:"[Jason]\n\cjIt's been..tough..not being able to see Iris. Witnessing her last stand against the hoard was...tragic.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 7.0);
+	AmbientSound("quote/PSTQ5", 127);
+	Delay(280);
+	HudMessage(s:"[Savion]\n\cjI'm sorry to hear that..";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 2.8);
+	AmbientSound("quote/PSTQ6", 127);
+	changecamera(39, 1, 0);
+	Thing_Activate(39);
+	Delay(90);
+	HudMessage(s:"[Jason]\n\cjSurprised that the fact I'm still alive.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 3.0);
+	AmbientSound("quote/PSTQ7", 127);
+	changecamera(42, 1, 0);
+	Thing_Activate(42);
+	Delay(150);
+	HudMessage(s:"[Jason]\n\cjNow I sit here in a jar of what's left of me.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 3.0);
+	AmbientSound("quote/PSTQ8", 127);
+	Delay(150);
+	HudMessage(s:"[Jason]\n\cjEverything I have experienced.. Gun fights, zombies, the Red Division..The wretched Source.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 6.6);
+	AmbientSound("quote/PSTQ9", 127);
+	Delay(260);
+	HudMessage(s:"[Jason]\n\cjSo many survivors of the Cannibalism Strike left in despair. I was one of them.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 4.5);
+	AmbientSound("quote/PSTQ10", 127);
+	Delay(220);
+	HudMessage(s:"[Savion]\n\cjHow did you end up in there?";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 3.0);
+	AmbientSound("quote/PSTQ11", 127);
+	changecamera(33, 1, 0);
+	Thing_Activate(33);
+	Delay(120);
+	HudMessage(s:"[Jason]\n\cjCurious to hear how I got here? Sit back and relax.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 3.0);
+	AmbientSound("quote/PSTQ12", 127);
+		changecamera(45, 1, 0);
+	Thing_Activate(45);
+	DELAY(70);
+	FadeTo(0,0,0,1.0,3.0);
+	DELAY(120);
+	TakeActorInventory(1337, "Cursor", 999);
+	SetPlayerProperty(1, 0, PROP_TOTALLYFROZEN);
+	SetPlayerProperty(1, 0, PROP_FROZEN);
+	ChangeLevel("MAP02", 0, CHANGELEVEL_NOINTERMISSION, -1);
+}
+}
+
+Script 32 (void) //Starts Chapter 2
+
+{
+			if (PlayerCount() >= 2) 
+		{
+	hudmessage(s:"Can Not Continue. Campaign Is Not Available For Multiplayer";
+HUDMSG_FADEINOUT, 100, CR_WHITE, 3.0, 0.7, 2.0);
+		}
+		else if (PlayerCount() == 1)
+		{
+			SetFont("DIETLOGFONT");
+			ACS_Execute(109,0,0,0,0);
+	AmbientSound("sound/SELECT", 127);
+	FadeTo(0,0,0,1.0,4.0);
+	SetPlayerProperty(1, 0, PROP_FROZEN);
+	SetPlayerProperty(1, 1, PROP_TOTALLYFROZEN);
+	delay(200);
+	changecamera(1, 1, 0);
+	Thing_Activate(1);
+	Delay(10);
+	SetMusic("SHACK_MU", 0);
+	HudMessage(s:"Previously on Despair";
+	HUDMSG_FADEINOUT, 100, CR_Orange, 3.0, 0.7, 3.0);
+	Delay(120);
+	FadeTo(255,255,255,1.0,1.5);
+	delay(30);
+	SetLineTexture(18, SIDE_FRONT, TEXTURE_MIDDLE, "PREVCOM1");
+	FadeTo(0,0,0,0,1.5);
+	hudmessage(s:"[Jason]\n\cjI didn't know why they were after me for this necklace. From my eyes, it looked very valuable.";
+	HUDMSG_FADEINOUT, 0, CR_Green, 3.0, 0.7, 5.0);
+	AmbientSound("quote/C1M1Q7", 127);
+	changecamera(19, 1, 0);
+	Delay(200);
+	FadeTo(255,255,255,1.0,1.5);
+	delay(30);
+	SetLineTexture(18, SIDE_FRONT, TEXTURE_MIDDLE, "PREVCOM2");
+	FadeTo(0,0,0,0,1.5);
+	hudmessage(s:"[Jason]\n\cjI had a strange feeling in my gut. I didn't know if I could trust him. I just met the guy.";
+	HUDMSG_FADEINOUT, 100, CR_GREEN, 3.0, 0.7, 4.3);
+	AmbientSound("quote/C1M2Q27", 127);
+	Delay(200);
+	FadeTo(255,255,255,1.0,1.5);
+	delay(30);
+	SetLineTexture(18, SIDE_FRONT, TEXTURE_MIDDLE, "PREVCOM3");
+	FadeTo(0,0,0,0,1.5);
+	hudmessage(s:"[Jason]\n\cjThere was tram that lead us further underground. The further we went the more the necklace was glowing.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 7.0);
+	AmbientSound("quote/C1M3Q11", 127);
+	Delay(100);
+	FadeTo(255,255,255,1.0,1.5);
+	delay(30);
+	SetLineTexture(18, SIDE_FRONT, TEXTURE_MIDDLE, "PREVCOM4");
+	FadeTo(0,0,0,0,1.5);
+	Delay(100);
+	FadeTo(255,255,255,1.0,1.5);
+	delay(30);
+	FadeTo(0,0,0,0,1.5);
+	SetLineTexture(18, SIDE_FRONT, TEXTURE_MIDDLE, "PREVCOM5");
+	hudmessage(s:"[Jason]\n\cjThe Inferno Seeker was defeated. We entered the portal. Ogrodolan looked to be empty.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 4.0);
+	AmbientSound("quote/C1M4Q8", 127);
+	DELAY(70);
+	GiveActorInventory(1337, "Mission_Confirmation", 1);
+	FadeTo(0,0,0,1.0,3.0);
+	DELAY(120);
+	TakeActorInventory(1337, "Cursor", 999);
+	SetPlayerProperty(1, 0, PROP_TOTALLYFROZEN);
+	SetPlayerProperty(1, 0, PROP_FROZEN);
+	ChangeLevel("MAP28", 0, CHANGELEVEL_NOINTERMISSION, -1);
+}
+}
+
+Script 35 (void) //Starts Chapter 3
+
+{
+			if (PlayerCount() >= 2) 
+		{
+	hudmessage(s:"Can Not Continue. Campaign Is Not Available For Multiplayer";
+HUDMSG_FADEINOUT, 100, CR_WHITE, 3.0, 0.7, 2.0);
+		}
+		else if (PlayerCount() == 1)
+		{
+			SetFont("DIETLOGFONT");
+			ACS_Execute(109,0,0,0,0);
+	AmbientSound("sound/SELECT", 127);
+	FadeTo(0,0,0,1.0,4.0);
+	SetPlayerProperty(1, 0, PROP_FROZEN);
+	SetPlayerProperty(1, 1, PROP_TOTALLYFROZEN);
+	delay(200);
+	changecamera(1, 1, 0);
+	Thing_Activate(1);
+	Delay(10);
+	SetMusic("SHACK_MU", 0);
+	HudMessage(s:"Previously on Despair";
+	HUDMSG_FADEINOUT, 100, CR_Orange, 3.0, 0.7, 3.0);
+	Delay(120);
+	FadeTo(255,255,255,1.0,1.5);
+	delay(30);
+	SetLineTexture(18, SIDE_FRONT, TEXTURE_MIDDLE, "PREVCOM6");
+	FadeTo(0,0,0,0,1.5);
+	hudmessageBold(s:"[Jason]\n\cjAs we were exiting the portal, he said to find a weapon called the Void Sword. I wasn't told where to go. I was lost.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 6.0);
+	AmbientSound("quote/C2M1Q6", 127);
+	changecamera(19, 1, 0);
+	Delay(220);
+	FadeTo(255,255,255,1.0,1.5);
+	delay(30);
+	SetLineTexture(18, SIDE_FRONT, TEXTURE_MIDDLE, "PREVCOM7");
+	FadeTo(0,0,0,0,1.5);
+ 	hudmessage(s:"[Jason]\n\cjThe Source got me hallucinating. Running from zombies, visiting my old home, and now I'm back in Ogrodolan.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 5.4);
+	AmbientSound("quote/C2M3Q1", 127);
+	Delay(230);
+	FadeTo(255,255,255,1.0,1.5);
+	delay(30);
+	SetLineTexture(18, SIDE_FRONT, TEXTURE_MIDDLE, "PREVCOM8");
+	FadeTo(0,0,0,0,1.5);
+		hudmessage(s:"[The Source]\n\cjYour bullets are no match for the thick body of the Agarthan Tank.";
+	HUDMSG_FADEINOUT, 100, CR_Red, 3.0, 0.7, 6.0);
+	AmbientSound("quote/C2M3Q3", 127);
+	Delay(240);
+	FadeTo(255,255,255,1.0,1.5);
+	delay(30);
+	SetLineTexture(18, SIDE_FRONT, TEXTURE_MIDDLE, "PREVCOM9");
+	FadeTo(0,0,0,0,1.5);
+	hudmessage(s:"[Danny]\n\cjI'm sorry, but there has been a change of plans.";
+	HUDMSG_FADEINOUT, 100, CR_RED, 3.0, 0.7, 5.0);
+	AmbientSound("quote/C2M3Q7", 127);
+	Delay(200);
+	FadeTo(255,255,255,1.0,1.5);
+	delay(30);
+	FadeTo(0,0,0,0,1.5);
+	SetLineTexture(18, SIDE_FRONT, TEXTURE_MIDDLE, "PREVCOM");
+	AmbientSound("sound/SUITDIE", 127);
+	AmbientSound("weapon/MORS", 90);
+	DELAY(70);
+	GiveActorInventory(1337, "Mission_Confirmation", 1);
+	FadeTo(0,0,0,1.0,3.0);
+	DELAY(120);
+	TakeActorInventory(1337, "Cursor", 999);
+	SetPlayerProperty(1, 0, PROP_TOTALLYFROZEN);
+	SetPlayerProperty(1, 0, PROP_FROZEN);
+	ChangeLevel("MAP29", 0, CHANGELEVEL_NOINTERMISSION, -1);
+}
+}
+
+
+Script 15 (void) //Continue
+
+{
+ConsoleCommand("MENU_Load");
+}
+
+Script 16 (void) //Back To Main Menu
+
+{
+	AmbientSound("sound/SELECT", 127);
+	SetPlayerProperty(1, 0, PROP_FROZEN);
+	SetPlayerProperty(1, 1, PROP_TOTALLYFROZEN);
+	changecamera(4, 1, 0);
+	delay(3);
+	SetPlayerProperty(1, 0, PROP_TOTALLYFROZEN);
+	SetPlayerProperty(1, 1, PROP_FROZEN);
+	Thing_move(1337, 9, 1);
+}
+
+Script 17 (void) //Select Chapter
+
+{
+	
+	AmbientSound("sound/SELECT", 127);
+	SetPlayerProperty(1, 0, PROP_FROZEN);
+	SetPlayerProperty(1, 1, PROP_TOTALLYFROZEN);
+	changecamera(13, 1, 0);
+	delay(3);
+	SetPlayerProperty(1, 0, PROP_TOTALLYFROZEN);
+	SetPlayerProperty(1, 1, PROP_FROZEN);
+	Thing_move(1337, 12, 1);
+}
+
+
+//CHAPTER 2
+Script 19 (void)
+{
+				if (PlayerCount() >= 2) 
+		{
+			SetFont("DIETLOGFONT");
+	hudmessage(s:"Can Not Continue. Campaign Is Not Available For Multiplayer";
+HUDMSG_FADEINOUT, 100, CR_WHITE, 3.0, 0.7, 2.0);
+		}
+		else if (PlayerCount() == 1)
+		{
+			SetFont("DIETLOGFONT");
+		AmbientSound("sound/SELECT", 127);
+	HudMessage(s:"Locked";
+	HUDMSG_TYPEON, 1, CR_RED, 3.0, 0.6, 5.0);
+}
+}
+
+//CHAPTER 3
+Script 20 (void)
+{
+				if (PlayerCount() >= 2) 
+		{
+			SetFont("DIETLOGFONT");
+	hudmessage(s:"Can Not Continue. Campaign Is Not Available For Multiplayer";
+HUDMSG_FADEINOUT, 100, CR_WHITE, 3.0, 0.7, 2.0);
+		}
+		else if (PlayerCount() == 1)
+		{
+			SetFont("DIETLOGFONT");
+		AmbientSound("sound/SELECT", 127);
+	HudMessage(s:"Locked";
+	HUDMSG_TYPEON, 1, CR_RED, 3.0, 0.6, 5.0);
+}
+}
+
+Script 30 (void)//Maps That Are Not Available//
+{
+
+		AmbientSound("sound/SELECT", 127);
+		SetFont("DIETLOGFONT");
+	HudMessage(s:"Locked";
+	HUDMSG_TYPEON, 1, CR_RED, 3.0, 0.6, 5.0);
+}
+
+
+//BACK TO CAMPAIGN MENU
+Script 21 (void)
+{
+	AmbientSound("sound/SELECT", 127);
+	SetPlayerProperty(1, 0, PROP_FROZEN);
+	SetPlayerProperty(1, 1, PROP_TOTALLYFROZEN);
+	changecamera(6, 1, 0);
+	delay(3);
+	Thing_move(1337, 5, 1);
+	SetPlayerProperty(1, 0, PROP_TOTALLYFROZEN);
+	SetPlayerProperty(1, 1, PROP_FROZEN);
+}
+
+//Survival Menu//
+
+Script 24 (void)//Select Map
+{
+	AmbientSound("sound/SELECT", 127);
+	SetPlayerProperty(1, 0, PROP_FROZEN);
+	SetPlayerProperty(1, 1, PROP_TOTALLYFROZEN);
+	changecamera(21, 1, 0);
+	delay(3);
+	Thing_move(1337, 22, 1);
+	SetPlayerProperty(1, 0, PROP_TOTALLYFROZEN);
+	SetPlayerProperty(1, 1, PROP_FROZEN);
+}
+
+Script 25 (void)//Classic Maps
+{
+	AmbientSound("sound/SELECT", 127);
+	SetPlayerProperty(1, 0, PROP_FROZEN);
+	SetPlayerProperty(1, 1, PROP_TOTALLYFROZEN);
+	changecamera(23, 1, 0);
+	delay(3);
+	Thing_move(1337, 24, 1);
+	SetPlayerProperty(1, 0, PROP_TOTALLYFROZEN);
+	SetPlayerProperty(1, 1, PROP_FROZEN);
+}
+
+Script 40 (void)//Remastered Maps
+{
+	AmbientSound("sound/SELECT", 127);
+	SetPlayerProperty(1, 0, PROP_FROZEN);
+	SetPlayerProperty(1, 1, PROP_TOTALLYFROZEN);
+	changecamera(16, 1, 0);
+	delay(3);
+	Thing_move(1337, 15, 1);
+	SetPlayerProperty(1, 0, PROP_TOTALLYFROZEN);
+	SetPlayerProperty(1, 1, PROP_FROZEN);
+}
+
+script 3 (void) //PowerGum WorkShop//
+{
+	AmbientSound("sound/SELECT", 127);
+	SetPlayerProperty(1, 0, PROP_FROZEN);
+	SetPlayerProperty(1, 1, PROP_TOTALLYFROZEN);
+	changecamera(26, 1, 0);
+	delay(3);
+	Thing_move(1337, 27, 1);
+	SetPlayerProperty(1, 0, PROP_TOTALLYFROZEN);
+	SetPlayerProperty(1, 1, PROP_FROZEN);
+}
+
+script 26 (void)
+{
+	SetPlayerProperty(1, 1, PROP_TOTALLYFROZEN);
+	AmbientSound("sound/SELECT", 127);
+FadeTo(0,0,0,1.0,3.0);
+	DELAY(120);
+	SetPlayerProperty(1, 0, PROP_TOTALLYFROZEN);
+	SetPlayerProperty(1, 0, PROP_FROZEN);
+	ChangeLevel("MAP14", 0, CHANGELEVEL_NOINTERMISSION, -1);
+}
+
+script 22 (void) 
+{
+	SetPlayerProperty(1, 1, PROP_TOTALLYFROZEN);
+	AmbientSound("sound/SELECT", 127);
+FadeTo(0,0,0,1.0,3.0);
+	DELAY(120);
+	SetPlayerProperty(1, 0, PROP_TOTALLYFROZEN);
+	SetPlayerProperty(1, 0, PROP_FROZEN);
+	ChangeLevel("MAP17", 0, CHANGELEVEL_NOINTERMISSION, -1);
+}
+
+script 28 (void)
+{
+	SetPlayerProperty(1, 1, PROP_TOTALLYFROZEN);
+	AmbientSound("sound/SELECT", 127);
+FadeTo(0,0,0,1.0,3.0);
+	DELAY(120);
+	SetPlayerProperty(1, 0, PROP_TOTALLYFROZEN);
+	SetPlayerProperty(1, 0, PROP_FROZEN);
+	ChangeLevel("MAP13", 0, CHANGELEVEL_NOINTERMISSION, -1);
+}
+
+script 29 (void)
+{
+	SetPlayerProperty(1, 1, PROP_TOTALLYFROZEN);
+	AmbientSound("sound/SELECT", 127);
+FadeTo(0,0,0,1.0,3.0);
+	DELAY(120);
+	SetPlayerProperty(1, 0, PROP_TOTALLYFROZEN);
+	SetPlayerProperty(1, 0, PROP_FROZEN);
+	ChangeLevel("MAP15", 0, CHANGELEVEL_NOINTERMISSION, -1);
+}
+
+script 41 (void)
+{
+	SetPlayerProperty(1, 1, PROP_TOTALLYFROZEN);
+	AmbientSound("sound/SELECT", 127);
+FadeTo(0,0,0,1.0,3.0);
+	DELAY(120);
+	SetPlayerProperty(1, 0, PROP_TOTALLYFROZEN);
+	SetPlayerProperty(1, 0, PROP_FROZEN);
+	ChangeLevel("MAP24", 0, CHANGELEVEL_NOINTERMISSION, -1);
+}
+
+script 42 (void)
+{
+	SetPlayerProperty(1, 1, PROP_TOTALLYFROZEN);
+	AmbientSound("sound/SELECT", 127);
+FadeTo(0,0,0,1.0,3.0);
+	DELAY(120);
+	SetPlayerProperty(1, 0, PROP_TOTALLYFROZEN);
+	SetPlayerProperty(1, 0, PROP_FROZEN);
+	ChangeLevel("MAP23", 0, CHANGELEVEL_NOINTERMISSION, -1);
+}
+
+script 43 (void)
+{
+	SetPlayerProperty(1, 1, PROP_TOTALLYFROZEN);
+	AmbientSound("sound/SELECT", 127);
+FadeTo(0,0,0,1.0,3.0);
+	DELAY(120);
+	SetPlayerProperty(1, 0, PROP_TOTALLYFROZEN);
+	SetPlayerProperty(1, 0, PROP_FROZEN);
+	ChangeLevel("MAP12", 0, CHANGELEVEL_NOINTERMISSION, -1);
+}
+
+script 31 (void)
+{
+	SetFont("DIETLOGFONT");
+	AmbientSound("sound/SELECT", 127);
+	FadeTo(0,0,0,1.0,4.0);
+	SetPlayerProperty(1, 0, PROP_FROZEN);
+	SetPlayerProperty(1, 1, PROP_TOTALLYFROZEN);
+	delay(210);
+	SetMusic("IRONINTR", 0);
+	Delay(150);
+	Acs_Execute(110,0,0,0,0);
+	delay(5);
+	hudmessage(s:"Press '", k:"+attack", s:"' to Skip";
+	HUDMSG_FADEINOUT, 101, CR_White, 2, 0.9, 999.999);
+	SetLineTexture(18, SIDE_FRONT, TEXTURE_MIDDLE, "IRON1");
+	FadeTo(0,0,0,0,1.5);
+	changecamera(19, 1, 0);
+	Delay(55);
+	SetLineTexture(18, SIDE_FRONT, TEXTURE_MIDDLE, "IRON2");
+	hudmessage(s:"[Pilot 1]\n\cjWere almost to The Iron Shield. You four almost got overran by zombies!";
+	HUDMSG_FADEINOUT, 100, CR_GREEN, 3.0, 0.7, 4.0);
+	Delay(170);
+	SetLineTexture(18, SIDE_FRONT, TEXTURE_MIDDLE, "IRON3");
+	hudmessage(s:"[Pilot 2]\n\cjOtekah, we have a problem; there is no signal to the Iron Shields com channel.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 4.4);
+	delay(180);
+	hudmessage(s:"[Pilot 2]\n\cjIt appears to be defective on their end.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 2.0);
+	Delay(80);
+	SetLineTexture(18, SIDE_FRONT, TEXTURE_MIDDLE, "IRON4");
+	hudmessage(s:"[Otekah]\n\cjDefective?";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 2.0);
+	Delay(50);
+	SetLineTexture(18, SIDE_FRONT, TEXTURE_MIDDLE, "IRON5");
+	hudmessage(s:"[Pilot 1]\n\cjThe Iron Shield was under attack?";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 4.0);
+	delay(50);
+	hudmessage(s:"[Otekah]\n\cjOh no!";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 1.0);
+	Delay(40);
+	SetLineTexture(18, SIDE_FRONT, TEXTURE_MIDDLE, "IRON6");
+	hudmessage(s:"[Evan]\n\cjOh no, oh no, oh, what's happening!?";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 3.0);
+	Delay(120);
+	SetLineTexture(18, SIDE_FRONT, TEXTURE_MIDDLE, "IRON7");
+	hudmessage(s:"[Zachery]\n\cjGrrahh!\n[Faith]\n\cjAHHHAOW!\n[Darwin]\n\cjYikes!";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 3.0);
+	Radius_Quake(20, 500, 0, 4, 19);
+	Delay(40);
+	SetLineTexture(18, SIDE_FRONT, TEXTURE_MIDDLE, "IRON8");
+	hudmessage(s:"[Evan]\n\cjAAAAAGGHH!";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 3.0);
+	Delay(40);
+	SetLineTexture(18, SIDE_FRONT, TEXTURE_MIDDLE, "IRON9");
+	Delay(60);
+	SetLineTexture(18, SIDE_FRONT, TEXTURE_MIDDLE, "IRON10");
+	hudmessage(s:"[Evan]\n\cjAAARRGGHHH!";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 3.0);
+	Delay(50);
+	SetLineTexture(18, SIDE_FRONT, TEXTURE_MIDDLE, "IRON11");
+	hudmessage(s:"[Otekah]\n\cjOh my God!";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 2.0);
+	Delay(60);
+	FadeTo(255,255,255,1.0,0.1);
+	DELAY(120);
+	FadeTo(0,0,0,1.0,6.0);
+	Delay(220);
+	TakeActorInventory(1337, "Cursor", 999);
+	SetPlayerProperty(1, 0, PROP_TOTALLYFROZEN);
+	SetPlayerProperty(1, 0, PROP_FROZEN);
+	ChangeLevel("MAP16", 0, CHANGELEVEL_NOINTERMISSION, -1);
+}
+
+script 33 (void)
+{
+	AmbientSound("sound/SELECT", 127);
+	FadeTo(0,0,0,1.0,4.0);
+	SetPlayerProperty(1, 0, PROP_FROZEN);
+	SetPlayerProperty(1, 1, PROP_TOTALLYFROZEN);
+	delay(120);
+	TakeActorInventory(1337, "Cursor", 999);
+	SetPlayerProperty(1, 0, PROP_TOTALLYFROZEN);
+	SetPlayerProperty(1, 0, PROP_FROZEN);
+	ChangeLevel("MAP18", 0, CHANGELEVEL_NOINTERMISSION, -1);
+}
+
+script 38 (void)
+{
+	AmbientSound("sound/SELECT", 127);
+	FadeTo(0,0,0,1.0,4.0);
+	SetPlayerProperty(1, 0, PROP_FROZEN);
+	SetPlayerProperty(1, 1, PROP_TOTALLYFROZEN);
+	delay(120);
+	TakeActorInventory(1337, "Cursor", 999);
+	SetPlayerProperty(1, 0, PROP_TOTALLYFROZEN);
+	SetPlayerProperty(1, 0, PROP_FROZEN);
+	ChangeLevel("MAP22", 0, CHANGELEVEL_NOINTERMISSION, -1);
+}
+
+script 39 (void)
+{
+	AmbientSound("sound/SELECT", 127);
+	FadeTo(0,0,0,1.0,4.0);
+	SetPlayerProperty(1, 0, PROP_FROZEN);
+	SetPlayerProperty(1, 1, PROP_TOTALLYFROZEN);
+	delay(120);
+	TakeActorInventory(1337, "Cursor", 999);
+	SetPlayerProperty(1, 0, PROP_TOTALLYFROZEN);
+	SetPlayerProperty(1, 0, PROP_FROZEN);
+	ChangeLevel("MAP26", 0, CHANGELEVEL_NOINTERMISSION, -1);
+}
+
+script 34 (void)
+{
+	SetFont("DIETLOGFONT");
+	AmbientSound("sound/SELECT", 127);
+	FadeTo(0,0,0,1.0,4.0);
+	SetPlayerProperty(1, 0, PROP_FROZEN);
+	SetPlayerProperty(1, 1, PROP_TOTALLYFROZEN);
+	delay(210);
+	Acs_Execute(111,0,0,0,0);
+	delay(5);
+	hudmessage(s:"Press '", k:"+attack", s:"' to Skip";
+	HUDMSG_FADEINOUT, 101, CR_White, 2, 0.9, 999.999);
+	SetMusic("ZEROINTR", 0);
+	SetLineTexture(18, SIDE_FRONT, TEXTURE_MIDDLE, "ZERO1");
+	FadeTo(0,0,0,0,1.5);
+	changecamera(19, 1, 0);
+	Delay(80);
+	SetLineTexture(18, SIDE_FRONT, TEXTURE_MIDDLE, "ZERO2");
+	hudmessage(s:"[Zachery]\n\cjWe need to regroup. That was awful!";
+	HUDMSG_FADEINOUT, 100, CR_GREEN, 3.0, 0.7, 3.0);
+	Delay(105);
+	hudmessage(s:"[Otekah]\n\cjNo!";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 1.0);
+	delay(70);
+	SetLineTexture(18, SIDE_FRONT, TEXTURE_MIDDLE, "ZERO3");
+	hudmessage(s:"[Darwin]\n\cjI wanna go home.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 2.0);
+	Delay(50);
+	hudmessage(s:"[Faith]\n\cjI wanna go home too.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 2.0);
+	Delay(45);
+	SetLineTexture(18, SIDE_FRONT, TEXTURE_MIDDLE, "ZERO4");
+	hudmessage(s:"[Darwin]\n\cjRight?";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 1.0);
+	delay(50);
+	hudmessage(s:"[Darwin]\n\cjI hope we find our way home.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 2.0);
+	Delay(60);
+	SetLineTexture(18, SIDE_FRONT, TEXTURE_MIDDLE, "ZERO5");
+	hudmessage(s:"[Zachery]\n\cjIf I get my hands on you, Im gonna ring your neck!";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 2.7);
+	Delay(90);
+	SetLineTexture(18, SIDE_FRONT, TEXTURE_MIDDLE, "ZERO6");
+	hudmessage(s:"[Otekah]\n\cjFreak!";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 1.0);
+	Delay(70);
+	SetLineTexture(18, SIDE_FRONT, TEXTURE_MIDDLE, "ZERO7");
+	hudmessage(s:"[Otekah]\n\cjLook at me!";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 1.0);
+	Delay(20);
+	SetLineTexture(18, SIDE_FRONT, TEXTURE_MIDDLE, "ZERO8");
+	Delay(20);
+	SetLineTexture(18, SIDE_FRONT, TEXTURE_MIDDLE, "ZERO9");
+	delay(43);
+	SetLineTexture(18, SIDE_FRONT, TEXTURE_MIDDLE, "ZERO10");
+	hudmessage(s:"[Otekah]\n\cjHey, I dont wanna fight.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 1.7);
+	Delay(50);
+	SetLineTexture(18, SIDE_FRONT, TEXTURE_MIDDLE, "ZERO11");
+	hudmessage(s:"[Zachery]\n\cjWhat? Du..No..";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 1.0);
+	Delay(48);
+	SetLineTexture(18, SIDE_FRONT, TEXTURE_MIDDLE, "ZERO12");
+	hudmessage(s:"[Otekah]\n\cjI dont need your fat ass getting in the way!";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 3.0);
+	Delay(90);
+	SetLineTexture(18, SIDE_FRONT, TEXTURE_MIDDLE, "ZERO13");
+	hudmessage(s:"[Faith]\n\cjDamn..";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 3.0);
+	Delay(80);
+	SetLineTexture(18, SIDE_FRONT, TEXTURE_MIDDLE, "ZERO14");
+	hudmessage(s:"[Otekah]\n\cjSorry...";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 3.0);
+	Delay(50);
+	SetLineTexture(18, SIDE_FRONT, TEXTURE_MIDDLE, "ZERO15");
+	hudmessage(s:"[Zachery]\n\cjDont worry about it..";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 2.0);
+	Delay(60);
+	hudmessage(s:"[Zachery]\n\cjWe better figure out how to get out of here..and fast.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 3.4);
+	Delay(140);
+	SetLineTexture(18, SIDE_FRONT, TEXTURE_MIDDLE, "ZERO16");
+	Delay(140);
+	SetLineTexture(18, SIDE_FRONT, TEXTURE_MIDDLE, "ZERO17");
+	DELAY(120);
+	FadeTo(0,0,0,1.0,6.0);
+	Delay(220);
+	TakeActorInventory(1337, "Cursor", 999);
+	SetPlayerProperty(1, 0, PROP_TOTALLYFROZEN);
+	SetPlayerProperty(1, 0, PROP_FROZEN);
+	ChangeLevel("MAP19", 0, CHANGELEVEL_NOINTERMISSION, -1);
+}
+
+Script 37 (void)
+{
+	SetFont("DIETLOGFONT");
+	AmbientSound("sound/SELECT", 127);
+	FadeTo(0,0,0,1.0,4.0);
+	SetPlayerProperty(1, 0, PROP_FROZEN);
+	SetPlayerProperty(1, 1, PROP_TOTALLYFROZEN);
+	delay(210);
+	Acs_Execute(112,0,0,0,0);
+	delay(5);
+	hudmessage(s:"Press '", k:"+attack", s:"' to Skip";
+	HUDMSG_FADEINOUT, 101, CR_White, 2, 0.9, 999.999);
+	SetMusic("ENDINTRO", 0);
+	SetLineTexture(18, SIDE_FRONT, TEXTURE_MIDDLE, "END1");
+	FadeTo(0,0,0,0,1.5);
+	changecamera(19, 1, 0);
+	Delay(150);
+	SetLineTexture(18, SIDE_FRONT, TEXTURE_MIDDLE, "END2");
+	hudmessage(s:"[Faith]\n\cjWoah!";
+	HUDMSG_FADEINOUT, 100, CR_GREEN, 3.0, 0.7, 1.0);
+	Delay(80);
+	hudmessage(s:"[Otekah]\n\cjSo...?";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 1.0);
+	delay(40);
+	hudmessage(s:"[Zachery]\n\cjKeep your head in the game honey.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 2.0);
+	Delay(55);
+	hudmessage(s:"[Otekah]\n\cjExcuse me?";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 1.0);
+	Delay(85);
+	SetLineTexture(18, SIDE_FRONT, TEXTURE_MIDDLE, "END3");
+	hudmessage(s:"[Zachery]\n\cjDo you guys know where all these zombies are coming from?";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 3.0);
+	delay(100);
+	SetLineTexture(18, SIDE_FRONT, TEXTURE_MIDDLE, "END4");
+	hudmessage(s:"[Darwin]\n\cjIf we continue to work together, maybe we can find out.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 3.0);
+	DELAY(220);
+	FadeTo(0,0,0,1.0,6.0);
+	Delay(220);
+	TakeActorInventory(1337, "Cursor", 999);
+	SetPlayerProperty(1, 0, PROP_TOTALLYFROZEN);
+	SetPlayerProperty(1, 0, PROP_FROZEN);
+	ChangeLevel("MAP20", 0, CHANGELEVEL_NOINTERMISSION, -1);
+}
+
+script 36 (void)
+{
+	SetPlayerProperty(1, 1, PROP_TOTALLYFROZEN);
+	AmbientSound("sound/SELECT", 127);
+FadeTo(0,0,0,1.0,3.0);
+	DELAY(120);
+	SetPlayerProperty(1, 0, PROP_TOTALLYFROZEN);
+	SetPlayerProperty(1, 0, PROP_FROZEN);
+	ChangeLevel("MAP11", 0, CHANGELEVEL_NOINTERMISSION, -1);
+}
+
+script 111 (void)
+{
+ int buttons;
+
+ while (TRUE)
+ {
+   buttons = GetPlayerInput(-1, INPUT_BUTTONS);
+
+   if (buttons & BT_ATTACK)
+   {
+	hudmessage(s:"";
+	HUDMSG_FADEINOUT, 101, CR_White, 2, 0.9, 999.999);
+	AmbientSound("sound/SELECT", 127);
+	ACS_Terminate(31,0);
+	SetMusic("BOTKIL8");
+	FadeTo(0,0,0,1.0,0.1);
+	Delay(20);
+	TakeActorInventory(1337, "Cursor", 999);
+	SetPlayerProperty(1, 0, PROP_TOTALLYFROZEN);
+	SetPlayerProperty(1, 0, PROP_FROZEN);
+	ChangeLevel("MAP19", 0, CHANGELEVEL_NOINTERMISSION, -1);
+   }
+
+   delay(1);
+ }
+}
+
+script 112 (void)
+{
+ int buttons;
+
+ while (TRUE)
+ {
+   buttons = GetPlayerInput(-1, INPUT_BUTTONS);
+
+   if (buttons & BT_ATTACK)
+   {
+	hudmessage(s:"";
+	HUDMSG_FADEINOUT, 101, CR_White, 2, 0.9, 999.999);
+	AmbientSound("sound/SELECT", 127);
+	ACS_Terminate(31,0);
+	SetMusic("BOTKIL8");
+	FadeTo(0,0,0,1.0,0.1);
+	Delay(20);
+	TakeActorInventory(1337, "Cursor", 999);
+	SetPlayerProperty(1, 0, PROP_TOTALLYFROZEN);
+	SetPlayerProperty(1, 0, PROP_FROZEN);
+	ChangeLevel("MAP20", 0, CHANGELEVEL_NOINTERMISSION, -1);
+   }
+
+   delay(1);
+ }
+}
+
+script 12 (void)//INITIATES CREDITS SCENE//
+{
+		AmbientSound("sound/SELECT", 127);
+		changecamera(26, 1, 0);
+	delay(3);
+	Thing_move(1337, 27, 1);
+		HudMessage(k:"+attack",s:" To Skip";
+	HUDMSG_PLAIN, 100, CR_WHITE, 2.0, 0.9, 0);
+	delay(50);
+	Acs_Execute(50,0,0,0,0);
+	Delay(200);
+	Acs_Execute(51,0,0,0,0); 
+	Delay(70);
+	Acs_Execute(52,0,0,0,0);
+	Delay(200);
+	Acs_Execute(53,0,0,0,0);
+	Delay(90);
+	Acs_Execute(54,0,0,0,0);
+	Delay(70);
+	Acs_Execute(55,0,0,0,0);
+	Delay(70);
+	Acs_Execute(56,0,0,0,0);
+	Delay(70);
+	Acs_Execute(71,0,0,0,0);
+	Delay(70);
+	Acs_Execute(72,0,0,0,0);
+	Delay(70);
+	Acs_Execute(57,0,0,0,0);
+	Delay(70);
+	Acs_Execute(58,0,0,0,0);
+	Delay(120);
+	Acs_Execute(66,0,0,0,0);
+	delay(200);
+	Acs_Execute(60,0,0,0,0);
+	Delay(200);
+	Acs_Execute(61,0,0,0,0); 
+	Delay(200);
+	Acs_Execute(62,0,0,0,0);
+	Delay(200);
+	Acs_Execute(63,0,0,0,0);
+	Delay(130);
+	Acs_Execute(64,0,0,0,0);
+	Delay(120);
+	Acs_Execute(65,0,0,0,0);
+}
+
+int ScrollUp = 0.99;
+int ScrollUp1 = 0.99;
+int ScrollUp2 = 0.99;
+int ScrollUp3 = 0.99;
+int ScrollUp4 = 0.99;
+int ScrollUp5 = 0.99;
+int ScrollUp6 = 0.99;
+int ScrollUp7 = 0.99;
+int ScrollUp8 = 0.99;
+int ScrollUp9 = 0.99;
+int ScrollUp10 = 0.99;
+int ScrollUp11 = 0.99;
+int ScrollUp12 = 0.99;
+int ScrollUp13 = 0.99;
+int ScrollUp14 = 0.99;
+int ScrollUp15 = 0.99;
+int ScrollUp16 = 0.99;
+int ScrollUp17 = 0.99;
+int ScrollUp18 = 0.99;
+int ScrollUp19 = 0.99;
+int ScrollUp20 = 0.99;
+int ScrollUp21 = 0.99;
+int ScrollUp22 = 0.99;
+int ScrollUp23 = 0.99;
+int ScrollUp24 = 0.99;
+int ScrollUp25 = 0.99;
+int ScrollUp26 = 0.99;
+int ScrollUp27 = 0.99;
+
+Script 50 (void)
+{
+	SetFont("DIETLOGFONT");
+	HudMessage(s:"\ciProject 115 - Despair\n\cjCredits";
+	HUDMSG_PLAIN, 200, CR_WHITE, 3.0, Scrollup, 0.1);
+	ScrollUp -= 0.001;
+	if (ScrollUp <= 0.1)
+	{
+	HudMessage(s:"";
+	HUDMSG_PLAIN, 200, CR_WHITE, 3.0, Scrollup, 0.1);
+	}
+		delay(1);
+	restart;
+}
+
+Script 51 (void)
+{
+	SetFont("DIETLOGFONT");
+	HudMessage(s:"";
+	HUDMSG_FADEINOUT, 100, CR_WHITE, 3.0, 0.10, 0.1);
+	HudMessage(s:"\ciCreated By\n\cjFabysk";
+	HUDMSG_PLAIN, 201, CR_WHITE, 3.0, Scrollup1, 0.1);
+	ScrollUp1 -= 0.001;
+		if (ScrollUp1 <= 0.1)
+	{
+	HudMessage(s:"";
+	HUDMSG_PLAIN, 201, CR_WHITE, 3.0, Scrollup1, 0.1);
+	}
+	delay(1);
+	restart;
+}
+
+Script 52 (void)
+{
+	SetFont("DIETLOGFONT");
+	HudMessage(s:"";
+	HUDMSG_FADEINOUT, 100, CR_WHITE, 3.0, 0.10, 0.1);
+	HudMessage(s:"\ciStory By\n\cjFabysk";
+	HUDMSG_PLAIN, 202, CR_WHITE, 3.0, Scrollup2, 0.1);
+	ScrollUp2 -= 0.001;
+		if (ScrollUp2 <= 0.1)
+	{
+	HudMessage(s:"";
+	HUDMSG_PLAIN, 202, CR_WHITE, 3.0, Scrollup2, 0.1);
+	}
+	delay(1);
+	restart;
+}
+
+Script 53 (void)
+{
+	SetFont("DIETLOGFONT");
+	HudMessage(s:"";
+	HUDMSG_FADEINOUT, 100, CR_WHITE, 3.0, 0.10, 0.1);
+	HudMessage(s:"\ciWeapon Sprites and Sounds\n\cjFA:S 2.0 Alpha SWEPs - Spy\nBianchi FA-6 - Chris, Dr.Jade\nCall of Duty: Advanced Warfare - Sledgehammer Games";
+	HUDMSG_PLAIN, 203, CR_WHITE, 3.0, Scrollup3, 0.1);
+	ScrollUp3 -= 0.001;
+		if (ScrollUp3 <= 0.1)
+	{
+	HudMessage(s:"";
+	HUDMSG_PLAIN, 203, CR_WHITE, 3.0, Scrollup3, 0.1);
+	}
+	delay(1);
+	restart;
+}
+
+Script 54 (void)
+{
+	SetFont("DIETLOGFONT");
+	HudMessage(s:"";
+	HUDMSG_FADEINOUT, 100, CR_WHITE, 3.0, 0.10, 0.1);
+	HudMessage(s:"\ciRealm 667\n\cjChair - Ghastly Dragon, Id Software";
+	HUDMSG_PLAIN, 204, CR_WHITE, 3.0, Scrollup4, 0.1);
+	ScrollUp4 -= 0.001;
+		if (ScrollUp4 <= 0.1)
+	{
+	HudMessage(s:"";
+	HUDMSG_PLAIN, 204, CR_WHITE, 3.0, Scrollup4, 0.1);
+	}
+	delay(1);
+	restart;
+}
+
+Script 55 (void)
+{
+	SetFont("DIETLOGFONT");
+	HudMessage(s:"";
+	HUDMSG_FADEINOUT, 100, CR_WHITE, 3.0, 0.10, 0.1);
+	HudMessage(s:"\cjDune Warrior - Tormentor667, Ghastly Dragon, Sandypaper, Id Software, Vader, Raven Software, Neoworm";
+	HUDMSG_PLAIN, 205, CR_WHITE, 3.0, Scrollup5, 0.1);
+	ScrollUp5 -= 0.001;
+		if (ScrollUp5 <= 0.1)
+	{
+	HudMessage(s:"";
+	HUDMSG_PLAIN, 205, CR_WHITE, 3.0, Scrollup5, 0.1);
+	}
+	delay(1);
+	restart;
+}
+
+Script 56 (void)
+{
+	SetFont("DIETLOGFONT");
+	HudMessage(s:"";
+	HUDMSG_FADEINOUT, 100, CR_WHITE, 3.0, 0.10, 0.1);
+	HudMessage(s:"\cjRebels Pack - zirron the insect, Action Forms Ltd";
+	HUDMSG_PLAIN, 206, CR_WHITE, 3.0, Scrollup6, 0.1);
+	ScrollUp6 -= 0.001;
+		if (ScrollUp6 <= 0.1)
+	{
+	HudMessage(s:"";
+	HUDMSG_PLAIN, 206, CR_WHITE, 3.0, Scrollup6, 0.1);
+	}
+	delay(1);
+	restart;
+}
+
+Script 71 (void)
+{
+	SetFont("DIETLOGFONT");
+	HudMessage(s:"";
+	HUDMSG_FADEINOUT, 100, CR_WHITE, 3.0, 0.10, 0.1);
+	HudMessage(s:"\cjDiet Log Font - Jimmy, Raven Software, Origin System";
+	HUDMSG_PLAIN, 216, CR_WHITE, 3.0, Scrollup26, 0.1);
+	ScrollUp26 -= 0.001;
+		if (ScrollUp26 <= 0.1)
+	{
+	HudMessage(s:"";
+	HUDMSG_PLAIN, 216, CR_WHITE, 3.0, Scrollup26, 0.1);
+	}
+	delay(1);
+	restart;
+}
+
+Script 72 (void)
+{
+	SetFont("DIETLOGFONT");
+	HudMessage(s:"";
+	HUDMSG_FADEINOUT, 100, CR_WHITE, 3.0, 0.10, 0.1);
+	HudMessage(s:"\HAEDEXEBUS: - DeVloek, Ozymandias81, Ozymandias81, 3DRealms, FreeRadical Design, Eriance, yuraofthehairfan, zrrion the insect, Eriance";
+	HUDMSG_PLAIN, 217, CR_WHITE, 3.0, Scrollup27, 0.1);
+	ScrollUp27 -= 0.001;
+		if (ScrollUp27 <= 0.1)
+	{
+	HudMessage(s:"";
+	HUDMSG_PLAIN, 217, CR_WHITE, 3.0, Scrollup27, 0.1);
+	}
+	delay(1);
+	restart;
+}
+
+Script 57 (void)
+{
+	SetFont("DIETLOGFONT");
+	HudMessage(s:"";
+	HUDMSG_FADEINOUT, 100, CR_WHITE, 3.0, 0.10, 0.1);
+	HudMessage(s:"\cjChasm The Rift Texture Pack - TheMightyHeracross, Graf Zahl, NAM, Id Software, 3DRealms, Collin Portratz, RBCSkins, Xim\nDoom 2 HD Textures - KuriKai";
+	HUDMSG_PLAIN, 207, CR_WHITE, 3.0, Scrollup7, 0.1);
+	ScrollUp7 -= 0.001;
+		if (ScrollUp7 <= 0.1)
+	{
+	HudMessage(s:"";
+	HUDMSG_PLAIN, 207, CR_WHITE, 3.0, Scrollup7, 0.1);
+	}
+	delay(1);
+	restart;
+}
+
+Script 58 (void)
+{
+	SetFont("DIETLOGFONT");
+	HudMessage(s:"";
+	HUDMSG_FADEINOUT, 100, CR_WHITE, 3.0, 0.10, 0.1);
+	HudMessage(s:"\cjDeployable Shield - David Raven, Captain Toenail, scalliano";
+	HUDMSG_PLAIN, 208, CR_WHITE, 3.0, Scrollup8, 0.1);
+	ScrollUp8 -= 0.001;
+		if (ScrollUp8 <= 0.1)
+	{
+	HudMessage(s:"";
+	HUDMSG_PLAIN, 208, CR_WHITE, 3.0, Scrollup8, 0.1);
+	}
+	delay(1);
+	restart;
+}
+
+Script 67 (void)
+{
+	SetFont("DIETLOGFONT");
+	HudMessage(s:"";
+	HUDMSG_FADEINOUT, 100, CR_WHITE, 3.0, 0.10, 0.1);
+	HudMessage(s:"\cjHAEDEXEBUS - Ozymandias81, DeVloek, Eriance, yuraofthehairfan, zrrion the insect";
+	HUDMSG_PLAIN, 208, CR_WHITE, 3.0, ScrollUp16, 0.1);
+	ScrollUp16 -= 0.001;
+		if (ScrollUp16 <= 0.1)
+	{
+	HudMessage(s:"";
+	HUDMSG_PLAIN, 208, CR_WHITE, 3.0, ScrollUp16, 0.1);
+	}
+	delay(1);
+	restart;
+}
+
+Script 66 (void)
+{
+	SetFont("DIETLOGFONT");
+	HudMessage(s:"";
+	HUDMSG_FADEINOUT, 100, CR_WHITE, 3.0, 0.10, 0.1);
+	HudMessage(s:"\ciMusic\n\cjDeus EX Human Revolution, Call of Duty: Black Ops III, Bankai, Alex Heidern (Charon)";
+	HUDMSG_PLAIN, 209, CR_WHITE, 3.0, Scrollup9, 0.1);
+	ScrollUp9 -= 0.001;
+		if (ScrollUp9 <= 0.1)
+	{
+	HudMessage(s:"";
+	HUDMSG_PLAIN, 209, CR_WHITE, 3.0, Scrollup9, 0.1);
+	}
+	delay(1);
+	restart;
+}
+
+Script 60 (void)
+{
+	SetFont("DIETLOGFONT");
+	HudMessage(s:"";
+	HUDMSG_FADEINOUT, 100, CR_WHITE, 3.0, 0.10, 0.1);
+	HudMessage(s:"\ciSprites\n\cjZombie Sprites - Cofoleon, Captain Toenail, scalliano";
+	HUDMSG_PLAIN, 210, CR_WHITE, 3.0, Scrollup10, 0.1);
+	ScrollUp10 -= 0.001;
+		if (ScrollUp10 <= 0.1)
+	{
+	HudMessage(s:"";
+	HUDMSG_PLAIN, 210, CR_WHITE, 3.0, Scrollup10, 0.1);
+	}
+	delay(1);
+	restart;
+}
+
+Script 61 (void)
+{
+	SetFont("DIETLOGFONT");
+	HudMessage(s:"";
+	HUDMSG_FADEINOUT, 100, CR_WHITE, 3.0, 0.10, 0.1);
+	HudMessage(s:"\ciEditors\n\cjGZDoom Builder, Slade 3, Audacity";
+	HUDMSG_PLAIN, 211, CR_WHITE, 3.0, Scrollup11, 0.1);
+	ScrollUp11 -= 0.001;
+		if (ScrollUp11 <= 0.1)
+	{
+	HudMessage(s:"";
+	HUDMSG_PLAIN, 211, CR_WHITE, 3.0, Scrollup11, 0.1);
+	}
+	delay(1);
+	restart;
+}
+
+Script 62 (void)
+{
+	SetFont("DIETLOGFONT");
+	HudMessage(s:"";
+	HUDMSG_FADEINOUT, 100, CR_WHITE, 3.0, 0.10, 0.1);
+	HudMessage(s:"\ciSupporters\n\cjTehya.nna, Ramen_Noods, Alycia_1414, Manjello, and the_reil_me";
+	HUDMSG_PLAIN, 212, CR_WHITE, 3.0, Scrollup12, 0.1);
+	ScrollUp12 -= 0.001;
+		if (ScrollUp12 <= 0.1)
+	{
+	HudMessage(s:"";
+	HUDMSG_PLAIN, 212, CR_WHITE, 3.0, Scrollup12, 0.1);
+	}
+	delay(1);
+	restart;
+}
+
+Script 63 (void)
+{
+	SetFont("DIETLOGFONT");
+	HudMessage(s:"";
+	HUDMSG_FADEINOUT, 100, CR_WHITE, 3.0, 0.10, 0.1);
+	HudMessage(s:"\ciVoices\n\cjJason Milito/Savion/Danny Kain - Oddcast.com\nYoung Jason Milito - Fabysk";
+	HUDMSG_PLAIN, 213, CR_WHITE, 3.0, Scrollup13, 0.1);
+	ScrollUp13 -= 0.001;
+		if (ScrollUp13 <= 0.1)
+	{
+	HudMessage(s:"";
+	HUDMSG_PLAIN, 213, CR_WHITE, 3.0, Scrollup13, 0.1);
+	}
+	delay(1);
+	restart;
+}
+
+Script 64 (void)
+{
+	SetFont("DIETLOGFONT");
+	HudMessage(s:"";
+	HUDMSG_FADEINOUT, 100, CR_WHITE, 3.0, 0.10, 0.1);
+	HudMessage(s:"\cjFaith Ortega - Sasheer Zamata\nDarwin Potter - Seth Green\nZachary Lewis - Ike Barinholtz\nEvan Durham - Joe Pantoliano\nOtekah Shima - Michaela Dietz";
+	HUDMSG_PLAIN, 214, CR_WHITE, 3.0, Scrollup14, 0.1);
+	ScrollUp14 -= 0.001;
+		if (ScrollUp14 <= 0.1)
+	{
+	HudMessage(s:"";
+	HUDMSG_PLAIN, 214, CR_WHITE, 3.0, Scrollup14, 0.1);
+	}
+	delay(1);
+	restart;
+}
+
+Script 65 (void)
+{
+	SetFont("DIETLOGFONT");
+	HudMessage(s:"";
+	HUDMSG_FADEINOUT, 100, CR_WHITE, 3.0, 0.10, 0.1);
+	HudMessage(s:"\ciTesting\n\cjRamen_Noods, the_reil_me, daft_keene";
+	HUDMSG_PLAIN, 215, CR_WHITE, 3.0, Scrollup15, 0.1);
+	ScrollUp15 -= 0.001;
+		if (ScrollUp15 <= 0.1)
+	{
+	HudMessage(s:"";
+	HUDMSG_PLAIN, 215, CR_WHITE, 3.0, Scrollup15, 0.1);
+	ACS_Execute(70,0,0,0,0);
+	}
+	delay(1);
+	restart;
+}
+
+Script 70 (void) //Skip Credits
+
+{
+			HudMessage(s:"";
+	HUDMSG_PLAIN, 100, CR_WHITE, 2.0, 0.9, 0);
+	HudMessage(s:"";
+	HUDMSG_FADEINOUT, 200, CR_WHITE, 3.0, 0.10, 0.1);
+		HudMessage(s:"";
+	HUDMSG_FADEINOUT, 201, CR_WHITE, 3.0, 0.10, 0.1);
+		HudMessage(s:"";
+	HUDMSG_FADEINOUT, 202, CR_WHITE, 3.0, 0.10, 0.1);
+		HudMessage(s:"";
+	HUDMSG_FADEINOUT, 203, CR_WHITE, 3.0, 0.10, 0.1);
+		HudMessage(s:"";
+	HUDMSG_FADEINOUT, 204, CR_WHITE, 3.0, 0.10, 0.1);
+		HudMessage(s:"";
+	HUDMSG_FADEINOUT, 205, CR_WHITE, 3.0, 0.10, 0.1);
+		HudMessage(s:"";
+	HUDMSG_FADEINOUT, 206, CR_WHITE, 3.0, 0.10, 0.1);
+		HudMessage(s:"";
+	HUDMSG_FADEINOUT, 207, CR_WHITE, 3.0, 0.10, 0.1);
+		HudMessage(s:"";
+	HUDMSG_FADEINOUT, 208, CR_WHITE, 3.0, 0.10, 0.1);
+		HudMessage(s:"";
+	HUDMSG_FADEINOUT, 209, CR_WHITE, 3.0, 0.10, 0.1);
+		HudMessage(s:"";
+	HUDMSG_FADEINOUT, 210, CR_WHITE, 3.0, 0.10, 0.1);
+			HudMessage(s:"";
+	HUDMSG_FADEINOUT, 211, CR_WHITE, 3.0, 0.10, 0.1);
+			HudMessage(s:"";
+	HUDMSG_FADEINOUT, 212, CR_WHITE, 3.0, 0.10, 0.1);
+			HudMessage(s:"";
+	HUDMSG_FADEINOUT, 213, CR_WHITE, 3.0, 0.10, 0.1);
+			HudMessage(s:"";
+	HUDMSG_FADEINOUT, 214, CR_WHITE, 3.0, 0.10, 0.1);
+	HudMessage(s:"";
+	HUDMSG_FADEINOUT, 215, CR_WHITE, 3.0, 0.10, 0.1);
+			HudMessage(s:"";
+	HUDMSG_FADEINOUT, 216, CR_WHITE, 3.0, 0.10, 0.1);
+	HudMessage(s:"";
+	HUDMSG_FADEINOUT, 217, CR_WHITE, 3.0, 0.10, 0.1);
+	Delay(1);
+	ScrollUp = 0.99;
+ScrollUp1 = 0.99;
+ScrollUp2 = 0.99;
+ScrollUp3 = 0.99;
+ScrollUp4 = 0.99;
+ScrollUp5 = 0.99;
+ScrollUp6 = 0.99;
+ScrollUp7 = 0.99;
+ScrollUp8 = 0.99;
+ScrollUp9 = 0.99;
+ScrollUp10 = 0.99;
+ScrollUp11 = 0.99;
+ScrollUp12 = 0.99;
+ScrollUp13 = 0.99;
+ScrollUp14 = 0.99;
+ScrollUp15 = 0.99;
+ScrollUp16 = 0.99;
+ScrollUp17 = 0.99;
+	Acs_Terminate(12,0);
+	Acs_Terminate(50,0);
+	Acs_Terminate(51,0);
+	Acs_Terminate(52,0);
+	Acs_Terminate(53,0);
+	Acs_Terminate(54,0);
+	Acs_Terminate(55,0);
+	Acs_Terminate(56,0);
+	Acs_Terminate(57,0);
+	Acs_Terminate(58,0);
+	Acs_Terminate(59,0);
+	Acs_Terminate(60,0);
+	Acs_Terminate(61,0);
+	Acs_Terminate(62,0);
+	Acs_Terminate(63,0);
+	Acs_Terminate(64,0);
+	Acs_Terminate(65,0);
+	Acs_Terminate(66,0);
+	Acs_Terminate(70,0);
+	Acs_Terminate(71,0);
+	Delay(10);
+	SetFont("DIETLOGFONT");
+		HudMessage(s:"Thank You For Playing\n\ciProject 115 - Despair";
+	HUDMSG_FADEINOUT, 0, CR_WHITE, 3.0, 0.5, 3.0);
+	Delay(150);
+	SetPlayerProperty(1, 0, PROP_FROZEN);
+	SetPlayerProperty(1, 1, PROP_TOTALLYFROZEN);
+	changecamera(4, 1, 0);
+	delay(3);
+	SetPlayerProperty(1, 0, PROP_TOTALLYFROZEN);
+	SetPlayerProperty(1, 1, PROP_FROZEN);
+	Thing_move(1337, 9, 1);
+	
+}
+
+
+//Multiplayer Perspective//
+Script 501 enter
+{
+	while(true)
+	{
+	if (PlayerNumber() > 0)
+		{
+			SetFont("DIETLOGFONT");
+		ChangeCamera(48, 0, 1);
+ClearInventory();
+	hudmessage(s:"Please Wait For The Host To Choose Game Mode";
+HUDMSG_PLAIN, 0, CR_WHITE, 3.0, 0.7, 0);
+
+		}
+				delay(1);
+	}
+}
+
+Script 502 (void)
+{
+	While(True)
+	{
+	if (PlayerCount() >= 2)
+		{
+	Acs_terminate(14,0);
+	ACS_Execute(2,0,0,0,0);
+	delay(1);
+Acs_terminate(502,0);
+}
+delay(1);
+}
+}
+
+//CHECK FOR PLAYERS IN YOUR SERVER
+    script 100 ENTER
+    
+    {
+            SetFont("DIETLOGFONT");
+        if(PlayerNumber () ==0)
+        {
+                HudMessageBold(n:1, s:"";
+                           HUDMSG_PLAIN, 2, CR_WHITE, 2.0, 0.1, 1.0);
+
+                           
+                        delay(1);
+                        {
+                        restart;
+                        }
+                        }
+        }
+        
+
+    script 101 ENTER
+    
+    {
+            SetFont("DIETLOGFONT");
+        if(PlayerNumber () ==1)
+        {
+                HudMessageBold(n:2, s:"";
+                           HUDMSG_PLAIN, 3, CR_WHITE, 2.0, -0.2, 1.0);
+
+                           
+                        delay(1);
+                        {
+                        restart;
+                        }
+                        }
+        }
+            
+    script 102 ENTER
+    
+    {
+            SetFont("DIETLOGFONT");
+        if(PlayerNumber () ==2)
+        {
+                HudMessageBold(n:3, s:"";
+                           HUDMSG_PLAIN, 4, CR_WHITE, 2.0, -0.3, 1.0);
+
+                           
+                        delay(1);
+                        {
+                        restart;
+                        }
+                        }
+        }
+
+    script 103 ENTER
+    
+    {
+            SetFont("DIETLOGFONT");
+        if(PlayerNumber () ==3)
+        {
+  
+                HudMessageBold(n:4, s:"";
+                           HUDMSG_PLAIN, 5, CR_WHITE, 2.0, -0.4, 1.0);
+
+                        delay(1);
+                        {
+                        restart;
+                        }
+                        }
+        }
+		
+		script 109 (void)
+{
+	While(true)
+	{
+		if (PlayerCount() >= 2) 
+		{
+			FadeTo(0,0,0,0,1.0);
+	setmusic("MAINMUS", 0, 0);
+	SetFont("DIETLOGFONT");
+	HUDMessage(s:"Error: Can Not Continue Campaign\n 'PlayerCount()' Found More Than 1 Player In The Game";
+	HUDMSG_FADEOUT,100,CR_ORANGE,3.0,0.70,4.0);
+	ACS_Terminate(14,0);
+	ACS_Terminate(32,0);
+	delay(1);
+	changecamera(4, 1, 0);
+	FadeTo(0,0,0,0,2.0);
+	Thing_move(1337, 9, 1);
+	delay(50);
+	FadeTo(0,0,0,0,1.0);
+	SetPlayerProperty(1, 0, PROP_TOTALLYFROZEN);
+	SetPlayerProperty(1, 1, PROP_FROZEN);
+	delay(10);
+	ACS_Terminate(109,0);
+	}
+	delay(1);
+}
+}
+
+script 110 (void)
+{
+ int buttons;
+
+ while (TRUE)
+ {
+   buttons = GetPlayerInput(-1, INPUT_BUTTONS);
+
+   if (buttons & BT_ATTACK)
+   {
+	hudmessage(s:"";
+	HUDMSG_FADEINOUT, 101, CR_White, 2, 0.9, 999.999);
+	AmbientSound("sound/SELECT", 127);
+	ACS_Terminate(31,0);
+	SetMusic("BOTKIL8");
+	FadeTo(0,0,0,1.0,0.1);
+	Delay(20);
+	TakeActorInventory(1337, "Cursor", 999);
+	SetPlayerProperty(1, 0, PROP_TOTALLYFROZEN);
+	SetPlayerProperty(1, 0, PROP_FROZEN);
+	ChangeLevel("MAP16", 0, CHANGELEVEL_NOINTERMISSION, -1);
+   }
+
+   delay(1);
+ }
+}

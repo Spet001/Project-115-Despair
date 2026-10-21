@@ -1,0 +1,827 @@
+#include"Zcommon.acs"
+
+Script 1 ENTER
+{
+	Thing_ChangeTID(0, 1337+PlayerNumber());
+	GiveActorInventory(1337, "HUD_ON", 1);
+	ChangeSky("CMP_DSRT", "CMP_DSRT");
+	fadeto(0, 0, 0, 0, 1.0);
+	SetMusic("CPN_M2", 0);
+	hudmessage(s:"Companion\nLocation: Whispering Borderlands (3 Miles From Home)\nJason Milito\nDate: June 4, 2019";
+	HUDMSG_TYPEON, 0, CR_GREEN, 2, 0.8, 7.0);	
+}
+
+script 993 (void)
+
+{//Tell the player that the stranger has died 
+TakeActorInventory(1337, "HUD_ON", 1);
+		hudmessage(s:"The Danny Kain was killed.";
+	HUDMSG_FADEINOUT, 0, CR_Red, 3.0, 0.4, 6.0);
+setmusic("ZM_DEATH", 0, 0);
+fadeto(0, 0, 0, 1.0, 6.9);
+DELAY(380);
+setmusic("BOTKIL8", 0, 0);
+	}
+
+
+script 998 ENTER
+{//HEALTH REGENERATION
+    int health = GetActorProperty(1337, APROP_Health);
+
+    While(True)
+    {
+        {
+            //Constantly work while health is under 100
+            While(GetActorProperty(1337,APROP_Health)<100 && GetActorProperty(1337,APROP_Health)>=1)
+            {
+                //After each hit you take, wait for regeneration
+                If(GetActorProperty(1337,APROP_Health)<health)
+                {
+                HudMessage(s:"";HUDMSG_FADEOUT, 101, CR_RED, 240.0, 180.0, 0.1, 0.1);
+                }
+                health = GetActorProperty(1337, APROP_Health);
+                SetActorProperty(1337, APROP_Health, health + 1);
+                Delay(3);
+            }
+        }
+    Delay(1);
+    }
+}
+
+script 997 ENTER
+{//Indicate critial health level
+    While(True)
+	{
+            //Constantly work while health is under 30
+            if(GetActorProperty(1337,APROP_Health)<40 && GetActorProperty(1337,APROP_Health)>=1)
+                {
+                HudMessage(s:"Critical Health Level!";HUDMSG_FADEOUT, 1, CR_RED, 3.0, 0.2, 0.5);
+            }
+			 Delay(1);
+
+        }
+	}
+	
+script 996 ENTER
+{//Critical Health Sound
+    While(True)
+	{
+            //Constantly work while health is under 30
+            if(GetActorProperty(1337,APROP_Health)<40 && GetActorProperty(1337,APROP_Health)>=1)
+                {
+				ThingSound(1337, "sound/HLTHCRIT", 127);
+            }
+			 Delay(6);
+
+        }
+	}
+		
+
+script 995 death
+
+{
+
+If(GetActorProperty(1337,APROP_Health)<=0)
+    {
+setmusic("ZM_DEATH", 0, 0);
+AmbientSound("sound/SUITDIE", 127);
+fadeto(0, 0, 0, 1.0, 6.9);
+DELAY(380);
+setmusic("BOTKIL8", 0, 0);
+}
+}
+
+
+script 5 (void)
+{
+	SetPlayerProperty(1, OFF, PROP_TOTALLYFROZEN);
+	ACS_Terminate(4,0);
+	Floor_LowerByValue(5,50,176);
+	Ceiling_LowerByValue(5,50,176);
+}
+
+int Climb = 0;
+Script 6 (void)
+{
+	SetPlayerProperty(1, ON, PROP_TOTALLYFROZEN);
+			Radius_Quake(4, 2, 0, 3, 0);
+            AmbientSound("weapon/MORS", 70);
+	SetLineBlocking(42, BLOCK_PLAYERS);
+	delay(3);
+		AmbientSound("sound/METALFL", 127);
+        delay(7);
+				   GiveInventory("Fall", 1);
+				  SetWeapon("Fall");
+				  delay(4);
+        Acs_Execute(7,0,0,0,0);
+		Acs_Execute(90,0,0,0,0);
+    delay(40);
+    Radius_Quake(4, 2, 0, 3, 0);
+    Delay(60);
+    Acs_Execute(8,0,0,0,0);
+	Acs_Terminate(90,0);
+	Climb ++;
+	Climb ++;
+	Climb ++;
+	Climb ++;
+	Climb ++;
+	Climb ++;
+	Climb ++;
+	Climb ++;
+	Climb ++;
+	Climb ++;
+	Climb ++;
+	Climb ++;
+	Climb ++;
+}
+
+script 7 (void)
+
+{
+SetActorAngle(1337, 0.5);
+SetActorPitch(1337, -5536);
+ThrustThingZ(1337, 2, 0 ,0);
+Thing_Move(1337, 23, 1);
+delay(1);
+restart;
+}
+
+Script 8 (void)
+{
+
+	SetLineBlocking(42, BLOCK_PLAYERS);
+	SetPlayerProperty(1, OFF, PROP_TOTALLYFROZEN);
+	SetActorProperty(1337, APROP_Invulnerable, On);
+    Acs_Terminate(7,0);
+	delay(4);
+	TakeInventory("Fall", 999);
+	delay(60);
+	SetActorProperty(1337, APROP_Invulnerable, OFF);
+	Autosave();
+	delay(20);
+	hudmessage(s:"[Jason]\n\cjI lost grip of the edge. Luckily there was another way around.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 4.0);
+	AmbientSound("quote/C1M2Q2", 127);
+	delay(130);
+	hudmessage(s:"[Jason]\n\cjAt that point, I knew I was not the only one in there.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 6.0);
+	AmbientSound("quote/C1M2Q4", 127);
+}
+
+script 9 (void)
+
+{
+		if(climb <= 9)
+		{
+			Radius_Quake(4, 2, 0, 3, 0);
+			climb ++;
+		}
+		else if(climb == 10)
+        {
+    Acs_Terminate(6,0);
+    Acs_Terminate(7,0);
+	Acs_Terminate(90,0);
+        THing_Remove(40);
+        Acs_execute(10,0,0,0,0);
+      ThrustThingZ(1337, 50, 0 ,0);
+	  TakeInventory("Fall", 999);
+	  SetLineBlocking(42, BLOCK_NOTHING);
+    delay(10);
+    ThrustThing(128, 10, 0 ,1337);
+	Delay(10);
+	SetLineBlocking(42, BLOCK_PLAYERS);
+	Delay(20);
+	Autosave();
+	hudmessage(s:"[Jason]\n\cjI almost lost grip of the edge.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 4.0);
+	AmbientSound("quote/C1M2Q3", 127);
+    delay(130);
+	hudmessage(s:"[Jason]\n\cjAt that point, I knew I was not the only one in there.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 6.0);
+	AmbientSound("quote/C1M2Q4", 127);
+}
+}
+
+script 90 (void)
+{
+	SetFont("BigFont");
+		hudmessage(k:"+use";
+	HUDMSG_FADEOUT, 101, CR_White, 3.0, 0.5, 0.1);
+	delay(20);
+	restart;
+}
+script 10 (void)
+
+{
+THing_Remove(40);
+	SetPlayerProperty(1, OFF, PROP_TOTALLYFROZEN);
+    Acs_Terminate(6,0);
+    Acs_Terminate(7,0);
+}
+Script 11 (void)
+{
+	SetActorPitch(1337, 0);
+	SetActorAngle(1337, 0.5);
+	Door_Open(48, 32, 0);
+	Thing_Move(1337, 50, 1);
+	SetPlayerProperty(1, ON, PROP_TOTALLYFROZEN);
+	delay(12);
+			SetWeapon("Knife");
+	//QTE (Knife)
+			for(int j=0; j<=999; j++)
+	Sector_SetColor(j,255,255,255,255);
+	delay(12);
+		ACS_Execute(90,0,0,0,0);
+	ACS_Execute(12,0,0,0,0);
+	Delay(100);
+		 ACS_Terminate(90,0);
+	SetActorState(52, "Missile", TRUE);
+	AmbientSound("weapon/MORS", 127);
+	Thing_Damage(1337, 999, MOD_UNKNOWN);
+	SetPlayerProperty(1, OFF, PROP_TOTALLYFROZEN);
+}
+Script 12 (void)
+{
+	 int buttons;
+
+ while (TRUE)
+ {
+   buttons = GetPlayerInput(-1, INPUT_BUTTONS);
+
+   if (buttons & BT_USE)
+   {
+	   SetPlayerProperty(1, OFF, PROP_TOTALLYFROZEN);
+	   Delay(1);
+	 		for(int j=0; j<=999; j++)
+	Sector_SetColor(j,255,255,255,100);
+	 delay(1);
+	 SetPlayerProperty(1, ON, PROP_TOTALLYFROZEN);
+	 ThrustThing(128, 5, 0, 1337);
+	 ACS_Terminate(11,0);
+	 ACS_Terminate(90,0);
+	 delay(4);
+	 AmbientSound("weapons/SLASH", 127);
+	 Thing_Remove(52);
+	 SpawnSpotFacingForced("Danny_Kain_Injured_Kick", 51, 52);
+	 ThrustThing(128, 5, 0, 52);
+	 delay(1);
+	 ACS_Execute(13,0,0,0,0);
+   }
+
+   delay(1);
+ }
+}
+
+Script 13 (void)//First Choice (Knife the stranger)
+
+{
+	ACS_Terminate(12,0);
+delay(2);
+SetActorPitch(1337, 0);
+delay(1);
+SetPlayerProperty(1, ON, PROP_TOTALLYFROZEN);
+delay(15);
+		hudmessage(s:"[Jason]\n\cjHe almost pulled the trigger. The quick stinging pain caused him to drop to the floor.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 4.0);
+	AmbientSound("quote/C1M2Q5", 127);
+    delay(190);
+	Thing_Remove(52);
+    SpawnSpotFacingForced("Danny_Kain", 22, 53);
+			hudmessage(s:"[Savion]\n\cjWas he a part of the Red Division?";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 4.0);
+	AmbientSound("quote/C1M2Q7", 127);
+	Acs_Execute(300,0,0,0,0);
+    delay(90);
+    		hudmessage(s:"[Jason]\n\cjHe wasn't. Funny how he asked me the same thing.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 4.0);
+	AmbientSound("quote/C1M2Q8", 127);
+        delay(135);
+    		hudmessage(s:"[Jason]\n\cjI told him that I was hiding from the Red Division. Turns out that he was too.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 4.0);
+	AmbientSound("quote/C1M2Q9", 127);
+        delay(160);
+		hudmessage(s:"[Jason]\n\cjI showed him the necklace. He was shocked to see a key to enter Ogrodolon.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 4.0);
+	AmbientSound("quote/C1M2Q10", 127);
+	GiveInventory("Gateway_Necklace_Portal",1);
+	SetWeapon("Gateway_Necklace_Portal");
+        delay(150);
+    		hudmessage(s:"[Savion]\n\cjWhat's...Ogrodolon?";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 4.0);
+	AmbientSound("quote/C1M2Q11", 127);
+ delay(90);
+        		hudmessage(s:"[Jason]\n\cjIt's a realm linking between the Earth and Agartha. The place looked bizarre. Named the Crazy Place when it was first discovered.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 7.0);
+	AmbientSound("quote/C1M2Q12", 127);
+        delay(250);
+        hudmessage(s:"[Savion]\n\cjAnything else on the stranger?";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 4.0);
+	AmbientSound("quote/C1M2Q13", 127);
+	TakeInventory("Gateway_Necklace_Portal",1);
+    delay(150);
+    fadeto(0,0,0,1.0, 1.0);
+    delay(60);
+    GiveInventory("Quest_Danny_Kain_IsHurt", 1);
+    Thing_Move(1337, 66, 1);
+	Thing_Activate(1);
+	Thing_SetGoal (1, 67, 0, 1);
+    SetPlayerProperty(1, off, PROP_TOTALLYFROZEN);
+    delay(10);
+    fadeto(0,0,0,0, 1.0);
+	ACS_Execute(64,0,0,0,0);
+}
+
+Script 62 (void)//The Stranger Is Not Hurt By The Player
+
+{
+	SetPlayerProperty(1, ON, PROP_TOTALLYFROZEN);
+	SpawnSpotForced("Danny_Kain", 146, 150, 128);
+	Thing_Deactivate(150);
+	THing_Move(1337, 30, 1);
+	SetActorPitch(1337, 0);
+	SetActorAngle(1337, 0.75);
+	Door_Open(144, 35, 0);
+	delay(1);
+	THing_Move(1337, 30, 1);
+	delay(35);
+	THing_Move(1337, 30, 1);
+	delay(1);
+	SetPlayerProperty(1, ON, PROP_TOTALLYFROZEN);
+	ThrustThing(192, 23, 0, 1337);
+	delay(13);
+	SetActorAngle(1337, 1.0);
+SetActorPitch(1337, -6060);
+delay(15);
+		hudmessage(s:"[Jason]\n\cjWe almost fired our weapons. Luckily he didn't. My life could have ended right then and there.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 4.0);
+	AmbientSound("quote/C1M2Q6", 127);
+    delay(130);
+	Acs_Execute(300,0,0,0,0);
+	delay(60);
+			hudmessage(s:"[Savion]\n\cjWas he a part of the Red Division?";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 4.0);
+	AmbientSound("quote/C1M2Q7", 127);
+    delay(90);
+    		hudmessage(s:"[Jason]\n\cjHe wasn't. Funny how he asked me the same thing.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 4.0);
+	AmbientSound("quote/C1M2Q8", 127);
+        delay(135);
+    		hudmessage(s:"[Jason]\n\cjI told him that I was hiding from the Red Division. Turns out that he was too.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 4.0);
+	AmbientSound("quote/C1M2Q9", 127);
+        delay(160);
+		hudmessage(s:"[Jason]\n\cjI showed him the necklace. He was shocked to see a key to enter Ogrodolon.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 4.0);
+	AmbientSound("quote/C1M2Q10", 127);
+	GiveInventory("Gateway_Necklace_Portal",1);
+	SetWeapon("Gateway_Necklace_Portal");
+        delay(150);
+    		hudmessage(s:"[Savion]\n\cjWhat's...Ogrodolon?";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 4.0);
+	AmbientSound("quote/C1M2Q11", 127);
+ delay(90);
+        		hudmessage(s:"[Jason]\n\cjIt's a realm linking between the Earth and Agartha. The place looked bizarre. Named the Crazy Place when it was first discovered.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 7.0);
+	AmbientSound("quote/C1M2Q12", 127);
+        delay(250);
+        hudmessage(s:"[Savion]\n\cjAnything else on the stranger?";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 4.0);
+	AmbientSound("quote/C1M2Q13", 127);
+	TakeInventory("Gateway_Necklace_Portal",1);
+    delay(90);
+    fadeto(0,0,0,1.0, 1.0);
+    delay(60);
+    GiveInventory("Quest_Danny_Kain_IsNOTHurt", 1);
+    Thing_Move(1337, 66, 1);
+	Thing_Activate(1);
+	Thing_SetGoal (1, 67, 0, 1);
+    SetPlayerProperty(1, off, PROP_TOTALLYFROZEN);
+    delay(10);
+    fadeto(0,0,0,0, 1.0);
+	ACS_Execute(64,0,0,0,0);
+}
+
+script 63 (void)//Used to check the players current pitch
+
+{
+print(d: GetActorPitch(1337));
+delay(1);
+restart;
+}
+
+script 64 (void)
+
+{
+	Acs_Terminate(300,0);
+	delay(2);
+	GiveInventory("CP_MaxAmmo", 1);
+	SetPlayerProperty(1, off, PROP_TOTALLYFROZEN);
+	Thing_Move(1337, 66, 1);
+		Thing_Activate(1);
+		SetActorState(1, "See", TRUE);
+	Thing_SetGoal (1, 67, 0, 1);
+	delay(10);
+	Autosave();
+	hudmessage(s:"[Jason]\n\cjHis name is Danny Kain. Former member of the Walking Flesh Organization.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 3.0);
+	AmbientSound("quote/C1M2Q14", 127);
+        delay(180);
+	hudmessage(s:"[Jason]\n\cjWith the formation of the Red Division, they wanted marksmen like him.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 3.0);
+	AmbientSound("quote/C1M2Q15", 127);
+        delay(140);
+	hudmessage(s:"[Jason]\n\cjSkillful in killing anyone that is running.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 3.0);
+	AmbientSound("quote/C1M2Q16", 127);
+        delay(140);
+	hudmessage(s:"[Jason]\n\cjHe never told how he broke free from The Source's control. His only objective was to destroy The Source.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 5.0);
+	AmbientSound("quote/C1M2Q17", 127);
+        delay(200);
+	hudmessage(s:"[Savion]\n\cjDid you ally with Danny?";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 3.0);
+	AmbientSound("quote/C1M2Q18", 127);
+        delay(100);
+	hudmessage(s:"[Jason]\n\cjWhat other choice did I have? It was either escape with Danny or The Red Division would kill me.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 4.0);
+	AmbientSound("quote/C1M2Q19", 127);
+	delay(130);
+	SetLineBlocking(2, BLOCK_NOTHING);
+}
+
+script 81 (void)
+{
+	Autosave();
+	delay(10);
+		hudmessageBold(s:"[Jason]\n\cjExiting the sewers, Red Division troops were ahead.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 3.0);
+	AmbientSound("quote/C1M2Q20", 127);
+        delay(30);
+		SetMusic("ACTION1", 0);
+		SetLineBlocking(1, BLOCK_NOTHING);
+}
+script 65 (void)
+
+{
+	ThrustThing(0, 20, 0, 1);
+	ThrustThingZ(1, 40, 0, 0);
+}
+script 66 (void)
+
+{
+	ThrustThingZ(1, 50, 0, 0);
+	delay(3);
+	ThrustThing(64, 8, 0, 1);
+}
+
+script 67 (void)//Whether or not the player get's to play as the Stranger
+
+{
+	GiveInventory("CP_MaxAmmo", 1);
+    If(ChecKInventory("Quest_Danny_Kain_IsHurt") == 1)
+	{
+		SetPlayerProperty(1, On, PROP_TOTALLYFROZEN);
+		ACS_Execute(68,0,0,0,0);
+	}
+	    else If(ChecKInventory("Quest_Danny_Kain_IsNotHurt") == 1)
+	{
+		SetPlayerProperty(1, On, PROP_TOTALLYFROZEN);
+		ACS_Execute(69,0,0,0,0);
+	}
+	
+}
+
+script 68 (void)//If the Stranger was hurt by the player
+{
+    fadeto(0,0,0,1.0, 1.0);
+    delay(60);
+    Thing_Move(1337, 127, 1);
+	Thing_Move(1, 128, 1);
+	SetActorAngle(1, 0.5);
+	Thing_Deactivate(1);
+	SetActorAngle(1337, 1.0);
+    delay(10);
+    fadeto(0,0,0,0, 1.0);
+	delay(10);
+	hudmessage(s:"[Jason]\n\cjWe entered a library. Danny came through the back. But we had company.";
+	HUDMSG_FADEINOUT, 100, CR_GREEN, 3.0, 0.7, 3.0);
+	AmbientSound("quote/C1M2Q21", 127);
+	DELAY(160);
+	AmbientSound("zombie/running", 60);
+	delay(15);
+	AmbientSound("zombie/running", 40);
+	SetActorAngle(1, 1.0);
+	delay(15);
+	AmbientSound("zombie/running", 70);
+	delay(15);
+	AmbientSound("zombie/running", 50);
+	delay(15);
+	AmbientSound("zombie/running", 60);
+	delay(10);
+hudmessage(s:"[Jason]\n\cjzombies where coming from the back as well.";
+	HUDMSG_FADEINOUT, 100, CR_GREEN, 3.0, 0.7, 3.0);
+	AmbientSound("quote/C1M2Q22", 127);
+	delay(130);
+	SetActorAngle(1, 0.5);
+	hudmessage(s:"[Savion]\n\cjWhat about the Red Division?";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 4.0);
+	AmbientSound("quote/C1M2Q23", 127);
+	delay(100);
+hudmessage(s:"[Jason]\n\cjThey were here too. We could have escaped, but it would be better to have a clear escape due to Danny's pain.";
+	HUDMSG_FADEINOUT, 100, CR_GREEN, 3.0, 0.7, 3.0);
+	AmbientSound("quote/C1M2Q24", 127);
+	Delay(160);
+	fadeto(0,0,0,1.0, 1.0);
+    delay(60);
+    Thing_Move(1337, 127, 1);
+	Thing_Move(1, 129, 1);
+	Thing_Activate(1);
+    delay(10);
+    fadeto(0,0,0,0, 1.0);
+	delay(10);
+	Autosave();
+	SetPlayerProperty(1, OFF, PROP_TOTALLYFROZEN);
+	SetActorAngle(1337, 0.5);
+	ACS_Execute(70,0,0,0,0);
+	Autosave();
+	DELAY(100);
+	ACS_Execute(71,0,0,0,0);
+}
+
+script 69 (void)//If the Stranger was not hurt by the player
+{
+	fadeto(0,0,0,1.0, 1.0);
+    delay(60);
+    Thing_Move(1337, 127, 1);
+	Thing_Move(1, 128, 1);
+	Thing_Deactivate(1);
+	SetActorAngle(1, 0.5);
+	SetActorAngle(1337, 1.0);
+    delay(10);
+    fadeto(0,0,0,0, 1.0);
+	delay(10);
+	hudmessage(s:"[Jason]\n\cjWe entered a library. Danny came through the back. But we had company.";
+	HUDMSG_FADEINOUT, 100, CR_GREEN, 3.0, 0.7, 3.0);
+	AmbientSound("quote/C1M2Q21", 127);
+	DELAY(160);
+	AmbientSound("zombie/running", 60);
+	delay(15);
+	AmbientSound("zombie/running", 40);
+	SetActorAngle(1, 1.0);
+	delay(15);
+	AmbientSound("zombie/running", 70);
+	delay(15);
+	AmbientSound("zombie/running", 50);
+	delay(15);
+	AmbientSound("zombie/running", 60);
+	delay(10);
+hudmessage(s:"[Jason]\n\cjzombies where coming from the back as well.";
+	HUDMSG_FADEINOUT, 100, CR_GREEN, 3.0, 0.7, 3.0);
+	AmbientSound("quote/C1M2Q22", 127);
+	delay(130);
+	SetActorAngle(1, 0.5);
+	hudmessage(s:"[Savion]\n\cjWhat about the Red Division?";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 2.0);
+	AmbientSound("quote/C1M2Q23", 127);
+	delay(100);
+hudmessage(s:"[Jason]\n\cjThey were here too. We could have escaped, but it would be better to have a clear escape.";
+	HUDMSG_FADEINOUT, 100, CR_GREEN, 3.0, 0.7, 3.0);
+	AmbientSound("quote/C1M2Q25", 127);
+	delay(160);
+	fadeto(0,0,0,1.0, 1.0);
+    delay(60);
+	Thing_Remove(1);
+    Thing_Move(1337, 129, 1);
+	delay(3);
+	Thing_Activate(1);
+	SpawnSpotForced("Jason_NPC", 138, 31, 64);
+	Thing_SetGoal(1, 133, 0, 1);
+	GiveInventory("MORS", 999);
+	DELAY(1);
+	SetWeapon("MORS");
+    delay(10);
+    fadeto(0,0,0,0, 1.0);
+	delay(10);
+	Autosave();
+	SetPlayerProperty(1, OFF, PROP_TOTALLYFROZEN);
+	SetActorAngle(1337, 0.5);
+	ACS_Execute(70,0,0,0,0);
+	Autosave();
+	DELAY(100);
+	ACS_Execute(71,0,0,0,0);
+}
+
+script 70 (void)//Start The Red Division Zombie Spawn
+
+{
+	SpawnSpotForced("CP_NormalZombie1", Random(139, 140), 30, 64);
+	delay(Random(40, 50));
+	SpawnSpotForced("AssaultScavenger", Random(141, 143), 30, 64);
+	delay(Random(40, 50));
+	SpawnSpotForced("CP_NormalZombie2", Random(139, 140), 30, 64);
+	delay(Random(40, 50));
+	SpawnSpotForced("RangerScavenger", Random(141, 143), 30, 64);
+	delay(Random(40, 50));
+	SpawnSpotForced("CP_NormalZombie1", Random(139, 140), 30, 64);
+	delay(Random(40, 50));
+	SpawnSpotForced("EliteScavenger", Random(141, 143), 30, 64);
+	delay(Random(40, 50));
+	SpawnSpotForced("CP_NormalZombie2", Random(139, 140), 30, 64);
+	delay(Random(40, 50));
+	SpawnSpotForced("CP_NormalZombie1", Random(139, 140), 30, 64);
+	delay(Random(40, 50));
+	SpawnSpotForced("AssaultScavenger", Random(141, 143), 30, 64);
+	delay(Random(40, 50));
+	SpawnSpotForced("CP_NormalZombie2", Random(139, 140), 30, 64);
+	delay(Random(40, 50));
+	SpawnSpotForced("RangerScavenger", Random(141, 143), 30, 64);
+	delay(Random(40, 50));
+	SpawnSpotForced("CP_NormalZombie1", Random(139, 140), 30, 64);
+	delay(Random(40, 50));
+	SpawnSpotForced("EliteScavenger", Random(141, 143), 30, 64);
+	delay(Random(40, 50));
+	SpawnSpotForced("CP_NormalZombie2", Random(139, 140), 30, 64);
+	delay(Random(40, 50));
+	SpawnSpotForced("CP_NormalZombie1", Random(139, 140), 30, 64);
+	delay(Random(40, 50));
+	SpawnSpotForced("AssaultScavenger", Random(141, 143), 30, 64);
+	delay(Random(40, 50));
+	SpawnSpotForced("CP_NormalZombie2", Random(139, 140), 30, 64);
+	delay(Random(40, 50));
+	SpawnSpotForced("RangerScavenger", Random(141, 143), 30, 64);
+	delay(Random(40, 50));
+	SpawnSpotForced("CP_NormalZombie1", Random(139, 140), 30, 64);
+	delay(Random(40, 50));
+	SpawnSpotForced("EliteScavenger", Random(141, 143), 30, 64);
+	delay(Random(40, 50));
+	SpawnSpotForced("CP_NormalZombie2", Random(139, 140), 30, 64);
+	delay(Random(40, 50));
+	SpawnSpotForced("CP_NormalZombie1", Random(139, 140), 30, 64);
+	delay(Random(40, 50));
+	SpawnSpotForced("AssaultScavenger", Random(141, 143), 30, 64);
+	delay(Random(40, 50));
+	SpawnSpotForced("CP_NormalZombie2", Random(139, 140), 30, 64);
+	delay(Random(40, 50));
+	SpawnSpotForced("RangerScavenger", Random(141, 143), 30, 64);
+	delay(Random(40, 50));
+	SpawnSpotForced("CP_NormalZombie1", Random(139, 140), 30, 64);
+	delay(Random(40, 50));
+	SpawnSpotForced("EliteScavenger", Random(141, 143), 30, 64);
+	delay(Random(40, 50));
+	SpawnSpotForced("CP_NormalZombie2", Random(139, 140), 30, 64);
+	delay(Random(40, 50));
+	
+}
+
+script 71 (void)
+
+{
+	While(TRUE)
+	{
+			If (ThingCountName("CP_NormalZombie1", 30) == 0 && ThingCountName("CP_NormalZombie2", 30) == 0 && 
+	ThingCountName("AssaultScavenger", 30) == 0 && ThingCountName("RangerScavenger", 30) == 0 && 
+	ThingCountName("FastZombie1", 30) == 0 && ThingCountName("FastZombie2", 30) == 0 && 
+	ThingCountName("EliteScavenger", 30) == 0)
+	{
+	delay(3);
+	hudmessage(s:"[Jason]\n\cjThe area was secure. We were safe to leave.";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 4.0);
+	AmbientSound("quote/C1M2Q26", 127);
+	delay(160);
+	ACS_Execute(72,0,0,0,0);
+}
+delay(1);
+}
+}
+
+//Finishing The Level
+
+SCRIPT 72 (void)
+{
+	TakeActorInventory(1337, "HUD_ON", 1);
+ACS_Terminate(71,0);
+	ACS_Terminate(23,0);
+	Thing_Deactivate(102);
+	SetMusic("CMC_MUS", 0);
+	SetPlayerProperty(1, ON, PROP_TOTALLYFROZEN);
+	fadeto(0, 0, 0, 1.0, 3.0);
+	delay(200);
+	changecamera(27, 1, 0);
+	Thing_Activate(27);
+	delay(10);
+	fadeto(0, 0, 0, 0,3.0);
+	delay(100);
+	ACS_Execute(73,0,0,0,0);
+			hudmessage(s:"Press '", k:"+attack", s:"' to Skip";
+	HUDMSG_FADEINOUT, 101, CR_White, 2, 0.9, 999.999);
+	hudmessage(s:"[Jason]\n\cjI had a strange feeling in my gut. I didn't know if I could trust him. I just met the guy.";
+	HUDMSG_FADEINOUT, 100, CR_GREEN, 3.0, 0.7, 4.3);
+	AmbientSound("quote/C1M2Q27", 127);
+	delay(200);
+	hudmessage(s:"[Savion]\n\cjAnd you still believed him?";
+	HUDMSG_FADEINOUT, 100, CR_GREEN, 3.0, 0.7, 3.0);
+	AmbientSound("quote/C1M2Q28", 127);
+		changecamera(26, 1, 0);
+	Thing_Activate(26);
+	delay(100);
+	hudmessage(s:"[Jason]\n\cjI did anyway. If I never encounted him, I wouldn't be here right now.";
+	HUDMSG_FADEINOUT, 100, CR_GREEN, 3.0, 0.7, 4.0);
+	AmbientSound("quote/C1M2Q29", 127);
+	delay(140);
+	fadeto(255, 255, 255, 1.0, 2.0);
+	GiveActorInventory(1337, "Mission_Confirmation", 1);
+	delay(150);
+	ChangeLevel("map27", 0, CHANGELEVEL_NOINTERMISSION, -1);
+}
+
+script 73 (void)
+{
+ int buttons;
+
+ while (TRUE)
+ {
+   buttons = GetPlayerInput(-1, INPUT_BUTTONS);
+
+   if (buttons & BT_ATTACK)
+   {
+	hudmessage(s:"";
+	HUDMSG_FADEINOUT, 101, CR_White, 2, 0.9, 999.999);
+	   ACS_Terminate(72,0);
+	fadeto(255, 255, 255, 1.0, 2.0);
+	GiveInventory("Mission_Confirmation", 1);
+	delay(150);
+	ChangeLevel("map27", 0, CHANGELEVEL_NOINTERMISSION, -1);
+   }
+
+   delay(1);
+ }
+}
+//Dialouge along the way
+script 100 (void)
+
+{
+		hudmessage(s:"[Jason]\n\cjI decided to hide in the sewers. Such a great choice right?";
+	HUDMSG_FADEINOUT, 100, CR_Green, 3.0, 0.7, 4.0);
+	AmbientSound("quote/C1M2Q1", 127);
+}
+
+//Stranger Talking Animation//
+Script 300 (void)
+{
+	SetActorState(53, "Talking", TRUE);
+	SetActorState(1, "Talking", TRUE);
+	SetActorState(150, "Talking", TRUE);
+	Thing_Activate(53);
+	Thing_Activate(1);
+	Thing_Activate(150);
+	delay(100);
+	Thing_Deactivate(53);
+	Thing_Deactivate(1);
+	Thing_Deactivate(150);
+	delay(40);
+	Thing_Activate(53);
+	Thing_Activate(1);
+	Thing_Activate(150);
+	delay(80);
+	Thing_Deactivate(53);
+	Thing_Activate(53);
+	Thing_Deactivate(150);
+	delay(40);
+	Thing_Activate(53);
+	Thing_Activate(1);
+	Thing_Activate(150);
+	delay(80);
+	Thing_Deactivate(53);
+	Thing_Activate(53);
+	Thing_Deactivate(150);
+	delay(40);
+	Thing_Activate(53);
+	Thing_Activate(1);
+	Thing_Activate(150);
+	delay(80);
+	Thing_Deactivate(53);
+	Thing_Activate(53);
+	Thing_Deactivate(150);
+	delay(40);
+	Thing_Activate(53);
+	Thing_Activate(1);
+	Thing_Activate(150);
+	delay(80);
+	Thing_Deactivate(53);
+	Thing_Activate(53);
+	Thing_Deactivate(150);
+	delay(40);
+	Restart;
+}
+
+Script 200 (void)
+{
+	GiveInventory("CP_MaxAmmo", 1);
+	AmbientSound("sound/REAMMO", 127);
+}
+
+Script 201 (void)
+{
+hudmessage(s:"Press '",k:"+use", s:"' To Refill Ammo";
+HUDMSG_Fadeinout, 11, CR_WHITE, 3.0, 0.80, 5.4);
+}
